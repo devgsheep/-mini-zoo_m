@@ -1,6 +1,10 @@
 import React from "react";
+// window
 
 function FirstForm() {
+    //js
+
+  //jsx
   return (
     <div>
       <h1>로그인</h1>
@@ -22,6 +26,7 @@ function FirstForm() {
       </div>
     </div>
   );
+
 }
 
 export default FirstForm;

@@ -18,38 +18,47 @@ const GlobalStyles = () => (
     styles={css`
       @font-face {
         font-family: "Black";
+        font-weight: 900;
         src: url(${PretendardBlack});
       }
       @font-face {
-        font-family: "Bold";
-        src: url(${PretendardBold});
-      }
-      @font-face {
         font-family: "ExtraBold";
+        font-weight: 800;
         src: url(${PretendardExtraBold});
       }
       @font-face {
-        font-family: "ExtraLight";
-        src: url(${PretendardExtraLight});
+        font-family: "Bold";
+        font-weight: 700;
+        src: url(${PretendardBold});
       }
       @font-face {
-        font-family: "Light";
-        src: url(${PretendardLight});
+        font-family: "SemiBold";
+        font-weight: 600;
+        src: url(${PretendardSemiBold});
       }
       @font-face {
         font-family: "Medium";
+        font-weight: 500;
         src: url(${PretendardMedium});
       }
       @font-face {
         font-family: "Regular";
+        font-weight: 400;
         src: url(${PretendardRegular});
       }
       @font-face {
-        font-family: "SemiBold";
-        src: url(${PretendardSemiBold});
+        font-family: "Light";
+        font-weight: 300;
+        src: url(${PretendardLight});
+      }
+      @font-face {
+        font-family: "ExtraLight";
+        font-weight: 200;
+        src: url(${PretendardExtraLight});
       }
       @font-face {
         font-family: "Thin";
+        font-weight: 100;
         src: url(${PretendardThin});
       }
 

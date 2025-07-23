@@ -173,7 +173,7 @@ function HistoryDaily() {
       </Header>
       <HomeTop>
         <TopImageWrapper>
-          <HomeTopImg src="./images/호랑이분노.png" alt="#" />
+          <HomeTopImg src="./images/호랑이화남.png" alt="#" />
         </TopImageWrapper>
         <HomeTopSpan>지금 기분은 어떠신가요?</HomeTopSpan>
       </HomeTop>

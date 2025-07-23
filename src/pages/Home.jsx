@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import colors from "../styles/colors";
+
 const Header = styled.div`
   max-height: 47px;
   height: 100vw;
@@ -191,7 +192,7 @@ function Home() {
   return (
     <div style={{ backgroundColor: "#F0F6FF" }}>
       <Header>
-        <img src="./images/logo.png" alt="logo" />
+        <img src="./images/logowrite.png" alt="logo" />
       </Header>
       <div>
         <HomeTop>
@@ -206,7 +207,7 @@ function Home() {
             </HomeTopButton>
           </TopButtonWrapper>
           <TopImageWrapper>
-            <HomeTopImg src="./images/강아지기쁨.png" alt="#" />
+            <HomeTopImg src="./images/happydog 1.png" alt="#" />
           </TopImageWrapper>
         </HomeTop>
         <HomeBottomSection>
@@ -229,7 +230,7 @@ function Home() {
             <RecordList>
               <RecordListItem>
                 <RecordInfoWrapper>
-                  <RecordImage src="./images/dogsky.png" alt="#" />
+                  <RecordImage src="./images/Untitled-1.png" alt="#" />
                   <RecordTextContainer>
                     <RecordTextTitle>행복한 하루</RecordTextTitle>
                     <RecordTextDate>12월 15일</RecordTextDate>

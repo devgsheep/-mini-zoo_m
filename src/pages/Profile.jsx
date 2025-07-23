@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import React from "react";
 import { fonts } from "../styles/fonts";
 
 const Contaier = styled.div`

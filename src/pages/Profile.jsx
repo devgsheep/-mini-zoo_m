@@ -132,7 +132,7 @@ const ProfileFeelAvg = styled.div`
   margin-top: 25px;
   font-size: 14px;
 `;
-const EnotionP = styled.div`
+const EmotionP = styled.div`
   padding: 10px;
   letter-spacing: 1.5px;
 `;
@@ -353,10 +353,10 @@ function Profile() {
             나의 감정 성향
           </ProfileFeelDiv>
           <ProfileFeelAvg>
-            <EnotionP>
+            <EmotionP>
               평균적으로 불안하고 지친 감정이 많아요. 에너지 소비가 많아
               지치시는 편이에요.
-            </EnotionP>
+            </EmotionP>
           </ProfileFeelAvg>
         </ProfileFeel>
         <ButtonWrap>

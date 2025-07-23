@@ -1,49 +1,42 @@
 /* 글꼴 설정 */
+/* 글꼴 설정*/
 @font-face {
   font-family: "Black";
-  font-weight: 900;
   src: url("./assets/Pretendard-Black.otf");
 }
 @font-face {
-  font-family: "ExtraBold";
-  font-weight: 800;
-  src: url("./assets/Pretendard-ExtraBold.otf");
-}
-@font-face {
   font-family: "Bold";
-  font-weight: 700;
   src: url("./assets/Pretendard-Bold.otf");
 }
 @font-face {
-  font-family: "SemiBold";
-  font-weight: 600;
-  src: url("./assets/Pretendard-SemiBold.otf");
+  font-family: "ExtraBold";
+  src: url("./assets/Pretendard-ExtraBold.otf");
+}
+@font-face {
+  font-family: "ExtraLight";
+  src: url("./assets/Pretendard-ExtraLight.otf");
+}
+@font-face {
+  font-family: "Light";
+  src: url("./assets/Pretendard-Light.otf");
 }
 @font-face {
   font-family: "Medium";
-  font-weight: 500;
   src: url("./assets/Pretendard-Medium.otf");
 }
 @font-face {
   font-family: "Regular";
-  font-weight: 400;
   src: url("./assets/Pretendard-Regular.otf");
 }
 @font-face {
-  font-family: "Light";
-  font-weight: 300;
-  src: url("./assets/Pretendard-Light.otf");
-}
-@font-face {
-  font-family: "ExtraLight";
-  font-weight: 200;
-  src: url("./assets/Pretendard-ExtraLight.otf");
+  font-family: "SemiBold";
+  src: url("./assets/Pretendard-SemiBold.otf");
 }
 @font-face {
   font-family: "Thin";
-  font-weight: 100;
   src: url("./assets/Pretendard-Thin.otf");
 }
+
 * {
   margin: 0;
   padding: 0;

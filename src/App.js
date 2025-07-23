@@ -10,6 +10,7 @@ import Historymonth from "./pages/Historymonth";
 import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
 import Historyweek from "./pages/Historyweek";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -37,6 +38,8 @@ function App() {
           path={"/profile/edit"}
           element={<ProfileEdit>프로필편집</ProfileEdit>}
         />
+        {/* 잘못된 경로 접근 처리 */}
+        <Route path="*" element={<NotFound />} />;
       </Routes>
     </Router>
   );

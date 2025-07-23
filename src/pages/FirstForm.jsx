@@ -2,7 +2,7 @@ import React from "react";
 // window
 
 function FirstForm() {
-    //js
+  //js
 
   //jsx
   return (

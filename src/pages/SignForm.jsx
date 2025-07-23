@@ -1,15 +1,16 @@
 import styled from "@emotion/styled";
 import React from "react";
 import { fonts } from "../styles/fonts";
+import colors from "../styles/colors";
 
 const Container = styled.div`
-  width: 393px;
-  height: 700px;
+  height: 852px;
   background-color: #f0f6ff;
+  text-align: center;
 `;
 
 const TopContainer = styled.div`
-  width: 393px;
+  width: 394px;
   height: 47px;
   position: relative;
   background-color: #fff;
@@ -44,11 +45,200 @@ const SignDiv = styled.div`
   align-items: center;
 `;
 
-const Title = styled.div``;
+const Title = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  row-gap: 4px;
+`;
 
-const Main = styled.div``;
+const ImageEdit = styled.div`
+  padding-top: 16px;
+  padding-left: 150px;
+  padding-right: 150px;
+`;
 
-const Footer = styled.div``;
+const TitleP1 = styled.p`
+  font-size: 20px;
+  font-weight: 600;
+`;
+const TitleP2 = styled.p`
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+  color: ${colors.gray[500]};
+`;
+
+const Main = styled.div`
+  padding-top: 29px;
+`;
+
+const TitleSpan = styled.div`
+  display: flex;
+  gap: 3px;
+`;
+
+const MainP = styled.p`
+  padding-left: 20px;
+  padding-bottom: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #5c5c5c;
+`;
+
+const Span = styled.span`
+  font-size: 13px;
+  font-weight: 500;
+  color: #f87182;
+`;
+
+const InputWrap = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 18px;
+`;
+
+const Input = styled.input`
+  width: 350px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 10px;
+  border: 1px solid #c6ddff;
+  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
+    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
+  padding-left: 10px;
+  font-size: 13px;
+  color: #c2c2c2;
+  &::placeholder {
+    font-size: 11px;
+    color: #999;
+  }
+`;
+
+const Svg = styled.svg`
+  position: absolute;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  transform: translateX(-150%);
+`;
+
+const InputCheckBoxWrap = styled.div`
+  display: flex;
+  align-items: center;
+  padding-left: 32px;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #5c5c5c;
+  letter-spacing: 0.52px;
+  padding-bottom: 14px;
+`;
+
+const InputCheckBox = styled.input`
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+  border: 1px solid #c6ddff;
+  background-color: #fff;
+`;
+
+const Button = styled.button`
+  display: inline-flex;
+  padding: 15px 68px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  background-color: #8ab9ff;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f5f5f5;
+  letter-spacing: 1.6px;
+  line-height: normal;
+`;
+const HaveLogin = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  gap: 7px;
+`;
+const HaveP = styled.p`
+  font-size: 13px;
+  font-weight: 500;
+  color: #757575;
+`;
+
+const SpanLogin = styled.span`
+  color: #ec48b3;
+  font-size: 13px;
+  font-weight: 500;
+`;
+
+const Divider = styled.div`
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+  margin: 0px 20px 20px 20px;
+`;
+
+const DividerLine = styled.span`
+  flex: 1;
+  height: 1px;
+  background-color: #ddd;
+`;
+
+const DividerText = styled.span`
+  color: #757575;
+  font-weight: 500;
+  font-size: 10px;
+  padding: 0 10px;
+  white-space: nowrap;
+`;
+
+const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 11px;
+`;
+
+const GoogleButton = styled.button`
+  display: flex;
+  width: 355px;
+  height: 43px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #dbdbdb;
+  background: #fff;
+  gap: 10px;
+`;
+
+const KakaoButton = styled.button`
+  display: flex;
+  width: 355px;
+  height: 43px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  background: #facc15;
+  border: 1px solid #facc15;
+  gap: 10px;
+`;
 
 function SignForm() {
   return (
@@ -62,49 +252,150 @@ function SignForm() {
         <SignDiv>가입하기</SignDiv>
       </TopContainer>
       <Title>
-        <img src="" alt="로고" />
+        <ImageEdit>
+          <img src="/images/logo.png" alt="로고" />
+        </ImageEdit>
         <div>
-          <p>ZOO:M에 오신 것을 환영합니다!</p>
-          <p>동물 친구들과 함께 감정 여행을 시작하세요</p>
+          <TitleP1>ZOO:M에 오신 것을 환영합니다!</TitleP1>
+          <TitleP2>동물 친구들과 함께 감정 여행을 시작하세요</TitleP2>
         </div>
       </Title>
       <Main>
         <div>
-          <p>별명</p>
-          <input
-            type="text"
-            placeholder="당신의 동물 친구들이 부를 이름을 선택하세요"
-          />
+          <TitleSpan>
+            <MainP>별명</MainP>
+            <Span>*</Span>
+          </TitleSpan>
+          <InputWrap>
+            <Input
+              type="text"
+              placeholder="당신의 동물 친구들이 부를 이름을 선택하세요"
+            />
+            <Svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+            >
+              <path
+                d="M6.83333 12.6667C10.055 12.6667 12.6667 10.055 12.6667 6.83333C12.6667 3.61167 10.055 1 6.83333 1C3.61167 1 1 3.61167 1 6.83333C1 10.055 3.61167 12.6667 6.83333 12.6667Z"
+                stroke="#8AB9FF"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M4.5 8.5835C4.77168 8.94573 5.12397 9.23974 5.52896 9.44224C5.93396 9.64474 6.38054 9.75016 6.83333 9.75016C7.28613 9.75016 7.73271 9.64474 8.13771 9.44224C8.5427 9.23974 8.89499 8.94573 9.16667 8.5835M4.50525 5.0835H4.5M9.16667 5.0835H9.16142"
+                stroke="#8AB9FF"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </Svg>
+          </InputWrap>
         </div>
         <div>
-          <p>이메일</p>
-          <input type="email" placeholder="example@email.com" />
+          <TitleSpan>
+            <MainP>이메일</MainP>
+            <Span>*</Span>
+          </TitleSpan>
+          <InputWrap>
+            <Input type="email" placeholder="example@email.com" />
+            <Svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="11"
+              viewBox="0 0 14 11"
+              fill="none"
+            >
+              <path
+                d="M11.5 1H2.5C1.67157 1 1 1.67157 1 2.5V8.5C1 9.32843 1.67157 10 2.5 10H11.5C12.3284 10 13 9.32843 13 8.5V2.5C13 1.67157 12.3284 1 11.5 1Z"
+                stroke="#8AB9FF"
+                strokeWidth="2"
+              />
+              <path
+                d="M1 3.25L6.3295 5.91475C6.5377 6.01879 6.76725 6.07295 7 6.07295C7.23275 6.07295 7.4623 6.01879 7.6705 5.91475L13 3.25"
+                stroke="#8AB9FF"
+                strokeWidth="2"
+              />
+            </Svg>
+          </InputWrap>
         </div>
         <div>
-          <p>비밀번호</p>
-          <input type="password" placeholder="최소 8자 이상 입력하세요" />
+          <TitleSpan>
+            <MainP>비밀번호</MainP>
+            <Span>*</Span>
+          </TitleSpan>
+          <InputWrap>
+            <Input type="password" placeholder="최소 8자 이상 입력하세요" />
+            <Svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <g clipPath="url(#clip0_119_1191)">
+                <path
+                  d="M11.9221 12.8645C10.7494 13.6083 9.3888 14.0022 8.00009 13.9999C4.40542 13.9999 1.41475 11.4132 0.788086 7.99987C1.07536 6.44771 1.85581 5.02968 3.01342 3.95653L0.929419 1.87187L1.87209 0.929199L15.0714 14.1279L14.1288 15.0712L11.9221 12.8645ZM3.95742 4.89987C3.05135 5.72364 2.42002 6.80572 2.14875 7.99987C2.35695 8.91084 2.77493 9.76063 3.36942 10.4816C3.96391 11.2026 4.7185 11.7748 5.57312 12.1527C6.42774 12.5307 7.35878 12.7039 8.29215 12.6586C9.22551 12.6133 10.1354 12.3508 10.9494 11.8919L9.59742 10.5399C9.02188 10.9024 8.34022 11.0586 7.66424 10.9828C6.98827 10.907 6.35811 10.6038 5.87713 10.1228C5.39615 9.64184 5.0929 9.01168 5.01713 8.33571C4.94135 7.65973 5.09754 6.97807 5.46009 6.40253L3.95742 4.89987ZM8.60942 9.55187L6.44809 7.3912C6.32946 7.69316 6.30154 8.02317 6.36776 8.34076C6.43397 8.65836 6.59143 8.94972 6.82083 9.17912C7.05023 9.40852 7.3416 9.56598 7.65919 9.6322C7.97678 9.69841 8.30746 9.67049 8.60942 9.55187ZM13.8708 11.0619L12.9168 10.1079C13.3634 9.47314 13.6812 8.75694 13.8521 7.99987C13.6709 7.20628 13.3303 6.45782 12.8508 5.8C12.3713 5.14218 11.7631 4.58873 11.0631 4.17331C10.3631 3.75788 9.58588 3.48916 8.77876 3.38347C7.97165 3.27779 7.15147 3.33735 6.36809 3.55853L5.31609 2.50653C6.14742 2.17987 7.05342 1.99987 8.00009 1.99987C11.5948 1.99987 14.5854 4.58653 15.2128 7.99987C15.0085 9.11054 14.5487 10.1587 13.8708 11.0619ZM7.81542 5.00587C7.87631 5.00187 7.93786 4.99987 8.00009 4.99987C8.4097 4.99981 8.81498 5.08364 9.19096 5.24618C9.56693 5.40872 9.90564 5.64654 10.1862 5.94497C10.4668 6.2434 10.6833 6.59613 10.8223 6.98141C10.9614 7.36669 11.0201 7.77637 10.9948 8.1852L7.81542 5.00587Z"
+                  fill="#8AB9FF"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_119_1191">
+                  <rect width="16" height="16" fill="white" />
+                </clipPath>
+              </defs>
+            </Svg>
+          </InputWrap>
         </div>
         <div>
-          <p>비밀번호 확인</p>
-          <input type="password" placeholder="비밀번호를 다시 입력하세요" />
+          <TitleSpan>
+            <MainP>비밀번호 확인</MainP>
+            <Span>*</Span>
+          </TitleSpan>
+          <InputWrap>
+            <Input type="password" placeholder="비밀번호를 다시 입력하세요" />
+            <Svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <g clipPath="url(#clip0_119_1191)">
+                <path
+                  d="M11.9221 12.8645C10.7494 13.6083 9.3888 14.0022 8.00009 13.9999C4.40542 13.9999 1.41475 11.4132 0.788086 7.99987C1.07536 6.44771 1.85581 5.02968 3.01342 3.95653L0.929419 1.87187L1.87209 0.929199L15.0714 14.1279L14.1288 15.0712L11.9221 12.8645ZM3.95742 4.89987C3.05135 5.72364 2.42002 6.80572 2.14875 7.99987C2.35695 8.91084 2.77493 9.76063 3.36942 10.4816C3.96391 11.2026 4.7185 11.7748 5.57312 12.1527C6.42774 12.5307 7.35878 12.7039 8.29215 12.6586C9.22551 12.6133 10.1354 12.3508 10.9494 11.8919L9.59742 10.5399C9.02188 10.9024 8.34022 11.0586 7.66424 10.9828C6.98827 10.907 6.35811 10.6038 5.87713 10.1228C5.39615 9.64184 5.0929 9.01168 5.01713 8.33571C4.94135 7.65973 5.09754 6.97807 5.46009 6.40253L3.95742 4.89987ZM8.60942 9.55187L6.44809 7.3912C6.32946 7.69316 6.30154 8.02317 6.36776 8.34076C6.43397 8.65836 6.59143 8.94972 6.82083 9.17912C7.05023 9.40852 7.3416 9.56598 7.65919 9.6322C7.97678 9.69841 8.30746 9.67049 8.60942 9.55187ZM13.8708 11.0619L12.9168 10.1079C13.3634 9.47314 13.6812 8.75694 13.8521 7.99987C13.6709 7.20628 13.3303 6.45782 12.8508 5.8C12.3713 5.14218 11.7631 4.58873 11.0631 4.17331C10.3631 3.75788 9.58588 3.48916 8.77876 3.38347C7.97165 3.27779 7.15147 3.33735 6.36809 3.55853L5.31609 2.50653C6.14742 2.17987 7.05342 1.99987 8.00009 1.99987C11.5948 1.99987 14.5854 4.58653 15.2128 7.99987C15.0085 9.11054 14.5487 10.1587 13.8708 11.0619ZM7.81542 5.00587C7.87631 5.00187 7.93786 4.99987 8.00009 4.99987C8.4097 4.99981 8.81498 5.08364 9.19096 5.24618C9.56693 5.40872 9.90564 5.64654 10.1862 5.94497C10.4668 6.2434 10.6833 6.59613 10.8223 6.98141C10.9614 7.36669 11.0201 7.77637 10.9948 8.1852L7.81542 5.00587Z"
+                  fill="#8AB9FF"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_119_1191">
+                  <rect width="16" height="16" fill="white" />
+                </clipPath>
+              </defs>
+            </Svg>
+          </InputWrap>
         </div>
-        <div>
-          <input type="checkbox" />
+        <InputCheckBoxWrap>
+          <InputCheckBox type="checkbox" />
+          <Span>*</Span>
           서비스 이용약관 및 개인정보처리방침에 동의합니다.
-        </div>
-        <button>ZOO:M 패밀리에 가입하세요.</button>
-        <div>
-          <p>이미 계정이 있으신가요?</p>
-          <p>로그인하세요</p>
-        </div>
+        </InputCheckBoxWrap>
+        <Button>ZOO:M 패밀리에 가입하세요.</Button>
+        <HaveLogin>
+          <HaveP>이미 계정이 있으신가요?</HaveP>
+          <SpanLogin>로그인하세요</SpanLogin>
+        </HaveLogin>
       </Main>
-      <div className="divider">
-        <span className="divider-line" />
-        <span className="divider-text">또는</span>
-        <span className="divider-line" />
-      </div>
+      <Divider>
+        <DividerLine />
+        <DividerText>또는</DividerText>
+        <DividerLine />
+      </Divider>
       <Footer>
-        <button>
+        <GoogleButton>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -146,8 +437,8 @@ function SignForm() {
             </defs>
           </svg>
           Google로 계속하기
-        </button>
-        <button>
+        </GoogleButton>
+        <KakaoButton>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -161,7 +452,7 @@ function SignForm() {
             />
           </svg>
           카카오로 계속하기
-        </button>
+        </KakaoButton>
       </Footer>
     </Container>
   );

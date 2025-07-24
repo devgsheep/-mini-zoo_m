@@ -185,8 +185,9 @@ const Circle = styled.div`
 const EmotionTextBox = styled.div`
   display: block;
   padding-left: 16px;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
+  text-align: left;
 `;
 const EmotionTitle = styled.div`
   display: flex;

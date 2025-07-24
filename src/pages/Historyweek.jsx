@@ -2,6 +2,11 @@ import styled from "@emotion/styled";
 import React from "react";
 import colors from "../styles/colors";
 import { fonts } from "../styles/fonts";
+import {
+  HappyIconCircle,
+  SadIconCircle,
+  TiredIconCircle,
+} from "../components/icons/emotionicon";
 
 const Container = styled.div`
   background-color: #f0f6ff;
@@ -141,6 +146,102 @@ const Emotion = styled.div`
   background-color: ${({ emotion }) => colors.emotion[emotion]?.base || "#000"};
 `;
 
+const BoxWrap = styled.div`
+  padding-top: 13px;
+`;
+
+const ImgBoxStyle = styled.div`
+  position: relative;
+  width: 366px;
+  display: inline-flex;
+  padding: 15px 0px 8px 0px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
+    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
+`;
+
+const BoxStyle = styled.div`
+  position: relative;
+  width: 366px;
+  display: inline-flex;
+  padding: 15px 0px 35px 12px;
+  align-items: center;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
+    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
+`;
+
+const DailyDate = styled.div`
+  position: absolute;
+  color: ${colors.gray[300]};
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 9px */
+  right: 0;
+  top: 0;
+  transform: translateX(-30%) translateY(100%);
+`;
+
+const Circle = styled.div`
+  display: flex;
+  width: 32px;
+  height: 32px;
+  padding: 11px 12px;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  /* background: #fa6b6b; */
+  background-color: ${({ emotion }) => colors.emotion[emotion]?.base || "#000"};
+`;
+
+const EmotionTextBox = styled.div`
+  display: block;
+  padding-left: 16px;
+  text-align: left;
+`;
+const EmotionTitle = styled.div`
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  padding-bottom: 7px;
+`;
+
+const EmotionFill = styled.p`
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 12px */
+`;
+
+const Span = styled.span`
+  display: flex;
+  width: 31px;
+  height: 14px;
+  padding: 3px 5px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: ${({ emotion }) => colors.emotion[emotion]?.base || "#000"};
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 8px */
+  color: #fff;
+`;
+
+const Text = styled.p`
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 10px */
+`;
+
 const Footer = styled.div`
   padding-top: 30px;
 `;
@@ -176,7 +277,7 @@ const NavItem = styled.li`
   cursor: pointer;
 `;
 
-function Historymonth() {
+function Historyweek() {
   return (
     <Container>
       <TopContainer>
@@ -237,6 +338,126 @@ function Historymonth() {
           </div>
         </EmotionBoxStyle>
       </div>
+      <BoxWrap>
+        <ImgBoxStyle>
+          <div>
+            <Title>감정 변화 차트</Title>
+            <img src="/images/chart.png" alt="" />
+          </div>
+        </ImgBoxStyle>
+      </BoxWrap>
+      <BoxWrap>
+        <BoxStyle>
+          <DailyDate>7/15(화)</DailyDate>
+          <HappyIconCircle emotion="happy">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="9"
+              height="12"
+              viewBox="0 0 9 12"
+              fill="none"
+            >
+              <path
+                d="M4.75 11C6.80875 11 8.5 9.3685 8.5 7.2745C8.5 6.7605 8.47375 6.2095 8.18875 5.353C7.90375 4.4965 7.8465 4.386 7.54525 3.857C7.4165 4.93625 6.72775 5.38625 6.55275 5.52075C6.55275 5.38075 6.13625 3.834 5.5045 2.90825C4.88425 2 4.04075 1.40425 3.54625 1C3.54625 1.7675 3.3305 2.9085 3.02125 3.49C2.71225 4.07125 2.65425 4.0925 2.268 4.525C1.88175 4.9575 1.70475 5.09125 1.38175 5.61625C1.05875 6.14125 1 6.8405 1 7.3545C1 9.4485 2.69125 11 4.75 11Z"
+                fill="white"
+                stroke="white"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </HappyIconCircle>
+          <EmotionTextBox>
+            <EmotionTitle>
+              <EmotionFill>기쁨</EmotionFill>
+              <Span emotion="happy">강도 5</Span>
+            </EmotionTitle>
+            <Text>일찍 집에 갈 수 있어서 기뻐요</Text>
+          </EmotionTextBox>
+        </BoxStyle>
+      </BoxWrap>
+      <BoxWrap>
+        <BoxStyle>
+          <DailyDate>7/16(수)</DailyDate>
+          <SadIconCircle emotion="sad">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="9"
+              height="12"
+              viewBox="0 0 9 12"
+              fill="none"
+            >
+              <path
+                d="M4.75 11C6.80875 11 8.5 9.3685 8.5 7.2745C8.5 6.7605 8.47375 6.2095 8.18875 5.353C7.90375 4.4965 7.8465 4.386 7.54525 3.857C7.4165 4.93625 6.72775 5.38625 6.55275 5.52075C6.55275 5.38075 6.13625 3.834 5.5045 2.90825C4.88425 2 4.04075 1.40425 3.54625 1C3.54625 1.7675 3.3305 2.9085 3.02125 3.49C2.71225 4.07125 2.65425 4.0925 2.268 4.525C1.88175 4.9575 1.70475 5.09125 1.38175 5.61625C1.05875 6.14125 1 6.8405 1 7.3545C1 9.4485 2.69125 11 4.75 11Z"
+                fill="white"
+                stroke="white"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </SadIconCircle>
+          <EmotionTextBox>
+            <EmotionTitle>
+              <EmotionFill>슬픔</EmotionFill>
+              <Span emotion="sad">강도 3</Span>
+            </EmotionTitle>
+            <Text>늦게가요</Text>
+          </EmotionTextBox>
+        </BoxStyle>
+      </BoxWrap>
+      <BoxWrap>
+        <BoxStyle>
+          <DailyDate>7/17(목)</DailyDate>
+          <TiredIconCircle emotion="angry">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="9"
+              height="12"
+              viewBox="0 0 9 12"
+              fill="none"
+            >
+              <path
+                d="M4.75 11C6.80875 11 8.5 9.3685 8.5 7.2745C8.5 6.7605 8.47375 6.2095 8.18875 5.353C7.90375 4.4965 7.8465 4.386 7.54525 3.857C7.4165 4.93625 6.72775 5.38625 6.55275 5.52075C6.55275 5.38075 6.13625 3.834 5.5045 2.90825C4.88425 2 4.04075 1.40425 3.54625 1C3.54625 1.7675 3.3305 2.9085 3.02125 3.49C2.71225 4.07125 2.65425 4.0925 2.268 4.525C1.88175 4.9575 1.70475 5.09125 1.38175 5.61625C1.05875 6.14125 1 6.8405 1 7.3545C1 9.4485 2.69125 11 4.75 11Z"
+                fill="white"
+                stroke="white"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </TiredIconCircle>
+          <EmotionTextBox>
+            <EmotionTitle>
+              <EmotionFill>피곤</EmotionFill>
+              <Span emotion="tired">강도 8</Span>
+            </EmotionTitle>
+            <Text>월화수목 너무 힘들었어요</Text>
+          </EmotionTextBox>
+        </BoxStyle>
+      </BoxWrap>
+      <BoxWrap>
+        <BoxStyle>
+          <DailyDate>7/18(금)</DailyDate>
+          <Circle emotion="angry">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="9"
+              height="12"
+              viewBox="0 0 9 12"
+              fill="none"
+            >
+              <path
+                d="M4.75 11C6.80875 11 8.5 9.3685 8.5 7.2745C8.5 6.7605 8.47375 6.2095 8.18875 5.353C7.90375 4.4965 7.8465 4.386 7.54525 3.857C7.4165 4.93625 6.72775 5.38625 6.55275 5.52075C6.55275 5.38075 6.13625 3.834 5.5045 2.90825C4.88425 2 4.04075 1.40425 3.54625 1C3.54625 1.7675 3.3305 2.9085 3.02125 3.49C2.71225 4.07125 2.65425 4.0925 2.268 4.525C1.88175 4.9575 1.70475 5.09125 1.38175 5.61625C1.05875 6.14125 1 6.8405 1 7.3545C1 9.4485 2.69125 11 4.75 11Z"
+                fill="white"
+                stroke="white"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Circle>
+          <EmotionTextBox>
+            <EmotionTitle>
+              <EmotionFill>화남</EmotionFill>
+              <Span emotion="angry">강도 8</Span>
+            </EmotionTitle>
+            <Text>형편없이 졌어요</Text>
+          </EmotionTextBox>
+        </BoxStyle>
+      </BoxWrap>
       <Footer>
         <NavigationBar>
           <NavItem>
@@ -305,4 +526,4 @@ function Historymonth() {
   );
 }
 
-export default Historymonth;
+export default Historyweek;

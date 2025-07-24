@@ -78,7 +78,7 @@ function HistoryDaily() {
   `;
   const Header = styled.div`
     max-height: 47px;
-    height: 100vw;
+    height: 47px;
     background-color: #fff;
     display: flex;
     justify-content: center;
@@ -117,15 +117,22 @@ function HistoryDaily() {
     color: ${colors.gray[400]};
     cursor: pointer;
   `;
-  const Main = styled.div`
-    height: 500px;
-  `;
+  const Main = styled.div``;
   const TodayEmotionUl = styled.ul`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 8px;
   `;
+  const SliderWrap = styled.div``;
+  const SliderTitle = styled.span`
+    display: "flex";
+    justify-content: "center";
+    margin-top: "27px";
+    font-size: 13px;
+    color: ${colors.gray[700]};
+  `;
+
   const SliderCircleUl = styled.ul`
     display: flex;
     justify-content: space-between;
@@ -150,6 +157,95 @@ function HistoryDaily() {
   const SliderCircletxt = styled.p`
     color: ${colors.gray[700]};
     font-size: 8px;
+  `;
+  const TodayText = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: 41px;
+    gap: 15px;
+    span {
+      margin-left: 35px;
+      font-size: 13px;
+      color: ${colors.gray[700]};
+    }
+  `;
+  const TextWrap = styled.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 18px;
+  `;
+  const TextArea = styled.textarea`
+    width: 344px;
+    height: 67px;
+    border-radius: 10px;
+    border: 1px solid #c6ddff;
+    box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
+      var(--sds-size-depth-100) var(--sds-size-depth-0)
+      var(--sds-color-black-100);
+    padding: 5px;
+    font-size: 13px;
+    color: ${colors.gray[800]};
+    resize: none;
+    &::placeholder {
+      font-size: 10px;
+      color: ${colors.gray[300]};
+    }
+  `;
+  const TodayPotoWrap = styled.div`
+    margin-top: 33px;
+    span {
+      margin-left: 17px;
+      font-size: 13px;
+      color: ${colors.gray[700]};
+      display: flex;
+      margin-bottom: 6px;
+    }
+  `;
+  const TodayImgWrap = styled.div`
+    width: 362px;
+    height: 313px;
+    background-color: ${colors.white};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    border-radius: 16px;
+  `;
+  const TodayImg = styled.img`
+    width: 90%;
+    cursor: pointer;
+  `;
+  const TodayButtonWrap = styled.div`
+    margin: 44px auto;
+  `;
+  const TodayAddButton = styled.button`
+    display: flex;
+    width: 250px;
+    padding: 8px 0 9px 0;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    border: 1px solid ${colors.blue[300]};
+    background: ${colors.blue[300]};
+    color: ${colors.gray[100]};
+    /* Drop Shadow/100 */
+    box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
+      var(--sds-size-depth-100) var(--sds-size-depth-0)
+      var(--sds-color-black-100);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1.6px;
+    margin: 0 auto;
+    margin-top: 30px;
+    cursor: pointer;
+    :hover {
+      background: ${colors.blue[500]};
+    }
   `;
 
   return (
@@ -214,8 +310,8 @@ function HistoryDaily() {
             </li>
           </TodayEmotionUl>
         </div>
-        <div>
-          <span
+        <SliderWrap>
+          <SliderTitle
             style={{
               display: "flex",
               justifyContent: "center",
@@ -223,7 +319,7 @@ function HistoryDaily() {
             }}
           >
             감정의 강도는 어느 정도인가요?
-          </span>
+          </SliderTitle>
           <div
             className="slide_wrap"
             style={{ display: "flex", justifyContent: "center", marginTop: 20 }}
@@ -274,15 +370,26 @@ function HistoryDaily() {
                 <SliderCircletxt>10</SliderCircletxt>
               </SliderCircleli>
             </SliderCircleUl>
-          </div>  
-        </div>
-        <div style={{ flexDirection: "column" }}>
+          </div>
+        </SliderWrap>
+        <TodayText>
           <span>더 자세히 표현하고 싶다면? (선택사항)</span>
-          <input type="text" />
-        </div>
-        <div></div>
-        <div></div>
-        <div></div>
+          <TextWrap>
+            <TextArea
+              type="text"
+              placeholder="오늘 하루는 어떠셨나요? 자유롭게 기록해보세요.."
+            />
+          </TextWrap>
+        </TodayText>
+        <TodayPotoWrap>
+          <span>사진 (선택사항)</span>
+          <TodayImgWrap>
+            <TodayImg src="./images/noimg_icon.svg" alt="" />
+          </TodayImgWrap>
+        </TodayPotoWrap>
+        <TodayButtonWrap>
+          <TodayAddButton>기록하기</TodayAddButton>
+        </TodayButtonWrap>
       </Main>
       <NavigationBar>
         <NavItem>

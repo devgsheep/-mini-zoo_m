@@ -259,6 +259,10 @@ const Button = styled.button`
   letter-spacing: 1.6px;
   margin: 0 auto;
   margin-top: 30px;
+  cursor: pointer;
+  :hover {
+    background: ${colors.blue[500]};
+  }
 `;
 
 const Footer = styled.div`

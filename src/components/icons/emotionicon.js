@@ -17,6 +17,7 @@ const TodayEmotionButton = styled.button`
     background-color: ${({ emotion }) =>
       colors.emotion[emotion]?.hover || "#000"};
   }
+  cursor: pointer;
 `;
 export const HappyIcon = () => (
   <TodayEmotionButton emotion="happy">

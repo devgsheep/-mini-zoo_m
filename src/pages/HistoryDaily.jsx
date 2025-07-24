@@ -105,7 +105,7 @@ const EmotionBoxStyle = styled.div`
 const Title = styled.p`
   display: flex;
   align-items: flex-start;
-  padding-top: 5px;
+  padding-top: 0px;
   padding-left: 5px;
   padding-bottom: 15px;
   font-size: 12px;
@@ -149,7 +149,7 @@ const BoxStyle = styled.div`
   position: relative;
   width: 366px;
   display: inline-flex;
-  padding: 15px 0px 36px 12px;
+  padding: 15px 0px 35px 12px;
   align-items: center;
   border-radius: 10px;
   background: #fff;
@@ -223,6 +223,42 @@ const Text = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 100%; /* 10px */
+`;
+
+const ImgBoxStyle = styled.div`
+  position: relative;
+  width: 366px;
+  display: inline-flex;
+  padding: 15px 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
+    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
+`;
+
+const Button = styled.button`
+  display: flex;
+  width: 250px;
+  padding: 8px 0 9px 0;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid ${colors.blue[300]};
+  background: ${colors.blue[300]};
+  color: ${colors.gray[100]};
+  /* Drop Shadow/100 */
+  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
+    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 1.6px;
+  margin: 0 auto;
+  margin-top: 30px;
 `;
 
 const Footer = styled.div`
@@ -350,14 +386,17 @@ function HistoryDaily() {
         </BoxStyle>
       </BoxWrap>
       <BoxWrap>
-        <BoxStyle>
-          <Title>사진</Title>
-          스켈레톤 들어갈 자리
-        </BoxStyle>
+        <ImgBoxStyle>
+          <div>
+            <Title>사진</Title>
+            <img src="/images/noimg_icon.svg" alt="빈이미지" />
+          </div>
+        </ImgBoxStyle>
       </BoxWrap>
+      <Button>수정하기</Button>
       <Footer>
         <NavigationBar>
-          <NavItemFocus>
+          <NavItem>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -367,11 +406,11 @@ function HistoryDaily() {
             >
               <path
                 d="M6 19H9.692V13.923C9.692 13.6943 9.76967 13.5027 9.925 13.348C10.0797 13.1927 10.2713 13.115 10.5 13.115H13.5C13.7287 13.115 13.9207 13.1927 14.076 13.348C14.2307 13.5027 14.308 13.6943 14.308 13.923V19H18V10.308C18 10.2053 17.9777 10.112 17.933 10.028C17.8883 9.94399 17.8273 9.87066 17.75 9.80799L12.366 5.74999C12.2633 5.66066 12.1413 5.61599 12 5.61599C11.8587 5.61599 11.737 5.66066 11.635 5.74999L6.25 9.80799C6.17333 9.87199 6.11233 9.94532 6.067 10.028C6.02167 10.1107 5.99933 10.204 6 10.308V19ZM5 19V10.308C5 10.052 5.05733 9.80966 5.172 9.58099C5.28667 9.35232 5.44467 9.16399 5.646 9.01599L11.031 4.93799C11.313 4.72266 11.635 4.61499 11.997 4.61499C12.359 4.61499 12.683 4.72266 12.969 4.93799L18.354 9.01499C18.556 9.16299 18.714 9.35166 18.828 9.58099C18.9427 9.80966 19 10.052 19 10.308V19C19 19.268 18.9003 19.5017 18.701 19.701C18.5017 19.9003 18.268 20 18 20H14.116C13.8867 20 13.6947 19.9227 13.54 19.768C13.3853 19.6127 13.308 19.4207 13.308 19.192V14.116H10.692V19.192C10.692 19.4213 10.6147 19.6133 10.46 19.768C10.3053 19.9227 10.1137 20 9.885 20H6C5.732 20 5.49833 19.9003 5.299 19.701C5.09967 19.5017 5 19.268 5 19Z"
-                fill="#579AFF"
+                fill="#A8A8A8"
               />
             </svg>
             <span>홈</span>
-          </NavItemFocus>
+          </NavItem>
           <NavItem>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -387,7 +426,7 @@ function HistoryDaily() {
             </svg>
             <span>추가</span>
           </NavItem>
-          <NavItem>
+          <NavItemFocus>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -397,11 +436,11 @@ function HistoryDaily() {
             >
               <path
                 d="M5.616 21C5.15533 21 4.771 20.846 4.463 20.538C4.155 20.23 4.00067 19.8457 4 19.385V6.61505C4 6.15505 4.15433 5.77105 4.463 5.46305C4.77167 5.15505 5.156 5.00072 5.616 5.00005H7.385V3.30805C7.385 3.15272 7.436 3.02405 7.538 2.92205C7.64 2.82005 7.76833 2.76905 7.923 2.76905C8.07767 2.76905 8.20633 2.82005 8.309 2.92205C8.41167 3.02405 8.46267 3.15272 8.462 3.30805V5.00005H15.616V3.27005C15.616 3.12738 15.6637 3.00805 15.759 2.91205C15.8543 2.81605 15.9733 2.76838 16.116 2.76905C16.2587 2.76972 16.3773 2.81738 16.472 2.91205C16.5667 3.00672 16.6147 3.12572 16.616 3.26905V5.00005H18.385C18.845 5.00005 19.2293 5.15438 19.538 5.46305C19.8467 5.77172 20.0007 6.15605 20 6.61605V19.385C20 19.845 19.846 20.2294 19.538 20.538C19.23 20.8467 18.8453 21.0007 18.384 21H5.616ZM5.616 20H18.385C18.5383 20 18.6793 19.9361 18.808 19.8081C18.9367 19.6801 19.0007 19.5387 19 19.3841V10.616H5V19.385C5 19.5384 5.064 19.6794 5.192 19.8081C5.32 19.9367 5.461 20.0007 5.615 20"
-                fill="#A8A8A8"
+                fill="#579AFF"
               />
             </svg>
             <span>히스토리</span>
-          </NavItem>
+          </NavItemFocus>
           <NavItem>
             <svg
               xmlns="http://www.w3.org/2000/svg"

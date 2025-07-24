@@ -11,6 +11,17 @@ import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
 import Historyweek from "./pages/Historyweek";
 import NotFound from "./pages/NotFound";
+import Alart from "./pages/popup/profile/Alart";
+import Ask from "./pages/popup/profile/Ask";
+import PersonalInfo from "./pages/popup/profile/PersonalInfo";
+import Theme from "./pages/popup/profile/Theme";
+import Info from "./pages/popup/profile/Info";
+import Logout from "./pages/popup/profile/Logout";
+import NicknameEdit from "./pages/popup/edit/NicknameEdit";
+import ReSign from "./pages/popup/edit/ReSign";
+import Language from "./pages/popup/edit/Language";
+import ProfileImage from "./pages/popup/edit/ProfileImage";
+import PasswordChange from "./pages/popup/edit/PasswordChange";
 
 function App() {
   return (
@@ -38,6 +49,34 @@ function App() {
           path={"/profile/edit"}
           element={<ProfileEdit>프로필편집</ProfileEdit>}
         />
+
+        {/* 팝업임시작업 */}
+        <Route path={"/alart"} element={<Alart>알람</Alart>}></Route>
+        <Route path={"/theme"} element={<Theme>테마</Theme>}></Route>
+        <Route
+          path={"/personalinfo"}
+          element={<PersonalInfo>개인정보처리방침</PersonalInfo>}
+        ></Route>
+        <Route path={"/ask"} element={<Ask>문의하기</Ask>}></Route>
+        <Route path={"/info"} element={<Info>정보</Info>}></Route>
+        <Route path={"/logout"} element={<Logout>로그아웃</Logout>}></Route>
+        <Route
+          path={"/nicknameedit"}
+          element={<NicknameEdit>프로필편집 및 한줄자기소개 수정</NicknameEdit>}
+        ></Route>
+        <Route
+          path={"/passwordchange"}
+          element={<PasswordChange>비밀번호수정</PasswordChange>}
+        ></Route>
+        <Route
+          path={"/profileimage"}
+          element={<ProfileImage>프로필 이미지 변경</ProfileImage>}
+        ></Route>
+        <Route
+          path={"/language"}
+          element={<Language>언어변경</Language>}
+        ></Route>
+        <Route path={"/resign"} element={<ReSign>회원탈퇴</ReSign>}></Route>
         {/* 잘못된 경로 접근 처리 */}
         <Route path="*" element={<NotFound />} />;
       </Routes>

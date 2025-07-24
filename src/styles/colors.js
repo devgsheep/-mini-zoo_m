@@ -77,6 +77,8 @@ export const colors = {
       hover: "#45cab7", // 어두운 민트
     },
   },
+  black: "#000000",
+  white: "#ffffff",
 };
 
 export default colors;

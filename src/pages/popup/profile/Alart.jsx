@@ -62,6 +62,8 @@ const DaysButton = styled.button`
   border: ${({ state }) => (state ? `none` : `1px solid ${colors.gray[200]}`)};
   cursor: pointer;
   color: ${({ state }) => (state ? colors.white : colors.black)};
+  font-size: 13px;
+  font-weight: 400;
 `;
 
 const DaysButtonWrap = styled.div`

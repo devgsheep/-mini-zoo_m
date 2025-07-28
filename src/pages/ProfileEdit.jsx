@@ -209,8 +209,8 @@ const IconCircleLogout = styled.div`
 `;
 
 const LogOutImage = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 `;
 
 const ReSign = styled.div`

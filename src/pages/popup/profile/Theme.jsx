@@ -35,7 +35,7 @@ const RadioWrapper = styled.label`
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  margin-bottom: 12px;
+  margin-bottom: 30px;
   position: relative;
 `;
 
@@ -52,7 +52,7 @@ const CustomRadio = styled.span`
   height: 20px;
   background-color: #fff;
   border: 1px solid #e5e5e5;
-  border-radius: 10px;
+  border-radius: 50%;
   position: relative;
 
   ::after {

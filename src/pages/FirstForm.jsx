@@ -17,12 +17,12 @@ const TopContainer = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  margin-top: 66px;
 `;
 const LogoImageWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 66px;
   width: 136px;
   height: 136px;
   margin-bottom: 9px;
@@ -144,10 +144,10 @@ function FirstForm() {
     <Container>
       <TopContainer>
         <LogoImageWrap>
-          <LogoImage src="./images/logo.png" alt="로고이미지" />
+          <LogoImage src="./images/logo.svg" alt="로고이미지" />
         </LogoImageWrap>
         <LogoWrap>
-          <Logo src="./images/logowrite.png" alt="로고" />
+          <Logo src="./images/logotxt.svg" alt="로고" />
         </LogoWrap>
         <TitleWrap>
           <MainTitle>감정의 여정을 시작하세요</MainTitle>

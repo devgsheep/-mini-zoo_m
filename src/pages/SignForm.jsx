@@ -51,13 +51,18 @@ const Title = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding-top: 16px;
   row-gap: 4px;
 `;
 
 const ImageEdit = styled.div`
-  padding-top: 16px;
-  padding-left: 150px;
-  padding-right: 150px;
+  display: flex;
+  width: 100px;
+  height: 100px;
+`;
+const LogoImg = styled.img`
+  width: 100%;
+  height: 100%;
 `;
 
 const TitleP1 = styled.p`
@@ -253,7 +258,7 @@ function SignForm() {
       </TopContainer>
       <Title>
         <ImageEdit>
-          <img src="/images/logo.png" alt="로고" />
+          <LogoImg src="/images/logo.svg" alt="로고" />
         </ImageEdit>
         <div>
           <TitleP1>ZOO:M에 오신 것을 환영합니다!</TitleP1>

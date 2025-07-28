@@ -52,12 +52,18 @@ const Title = styled.div`
   align-items: center;
   text-align: center;
   row-gap: 4px;
+  padding-top: 31px;
 `;
 
 const ImageEdit = styled.div`
-  padding-top: 31px;
-  padding-left: 150px;
-  padding-right: 150px;
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+`;
+const LogoImg = styled.img`
+  width: 100%;
+  height: 100%;
 `;
 
 const TitleP1 = styled.p`
@@ -272,7 +278,7 @@ function LoginForm() {
       </TopContainer>
       <Title>
         <ImageEdit>
-          <img src="/images/logo.png" alt="로고" />
+          <LogoImg src="/images/logo.svg" alt="로고" />
         </ImageEdit>
         <div>
           <TitleP1>환영합니다!</TitleP1>

@@ -192,7 +192,7 @@ function Home() {
   return (
     <div style={{ backgroundColor: "#F0F6FF" }}>
       <Header>
-        <img src="./images/logowrite.png" alt="logo" />
+        <img src="./images/logotxt.svg" alt="logo" />
       </Header>
       <div>
         <HomeTop>

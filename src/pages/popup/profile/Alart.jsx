@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import colors from "../../../styles/colors";
-import { useState } from "react";
 import {
   TogleButton,
   TogleButtonCircle,
 } from "../../../components/icons/button";
+import { useState } from "react";
 
 const Container = styled.div`
   width: 394px;
@@ -28,7 +28,10 @@ const AlertPopUpBox = styled.div`
   height: 359px;
   background-color: ${colors.white};
   border-radius: 16px;
-  padding: 30px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
 `;
 const AlertButtonWrap = styled.div`
   display: flex;
@@ -40,51 +43,48 @@ const AlertButtonWrap = styled.div`
     font-weight: 700;
   }
 `;
-const Wrapper = styled.div`
-  padding: 16px;
-`;
-
-const Title = styled.div`
-  font-weight: 700;
-  font-size: 18px;
-  margin-bottom: 12px;
-`;
-
-const ButtonWrap = styled.div`
+const DaysWrap = styled.div`
+  margin-bottom: 5px;
+  span {
+    font-size: 16px;
+    color: ${colors.black};
+    font-weight: 700;
+  }
   display: flex;
+  flex-direction: column;
   gap: 10px;
 `;
-const DayButton = styled.button`
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid ${({ selected }) => (selected ? "#339DFF" : "#ddd")};
-  background-color: ${({ selected }) => (selected ? "#339DFF" : "white")};
-  color: ${({ selected }) => (selected ? "white" : "#000")};
-  font-weight: 500;
+const DaysButton = styled.button`
+  background-color: ${({ state }) => (state ? colors.blue[500] : colors.white)};
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  border: ${({ state }) => (state ? `none` : `1px solid ${colors.gray[200]}`)};
   cursor: pointer;
-  outline: none;
-  transition: all 0.2s ease;
-
-  &:hover {
-    border-color: #339dff;
-  }
+  color: ${({ state }) => (state ? colors.white : colors.black)};
 `;
+
+const DaysButtonWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const days = ["일", "월", "화", "수", "목", "금", "토"];
+
 function Alart() {
   //js
+
+  const [isOn, setIsOn] = useState(false);
+  const handleToggle = () => {
+    setIsOn(state => !state);
+  };
+
   const [selectedDays, setSelectedDays] = useState([]);
 
-  const toggleDay = day => {
+  const handleDayToggle = day => {
     setSelectedDays(prev =>
       prev.includes(day) ? prev.filter(d => d !== day) : [...prev, day],
     );
-  };
-
-  const [isOn, setIsOn] = useState(false);
-
-  const handleToggle = () => {
-    setIsOn(state => !state);
   };
 
   //jsx
@@ -92,36 +92,29 @@ function Alart() {
     <Container>
       <AlertPopUp>
         <AlertPopUpBox>
-          <div>
-            <AlertButtonWrap>
-              <span>알림설정</span>
-              <TogleButton state={isOn} onClick={handleToggle}>
-                <TogleButtonCircle state={isOn}></TogleButtonCircle>
-              </TogleButton>
-            </AlertButtonWrap>
-            <div>소리 / 진동 / 무음</div>
-          </div>
-          <div>
+          <AlertButtonWrap>
+            <span>알림 설정</span>
+            <TogleButton state={isOn} onClick={handleToggle}>
+              <TogleButtonCircle state={isOn}></TogleButtonCircle>
+            </TogleButton>
+          </AlertButtonWrap>
+          <div>소리 / 진동 / 무음</div>
+          <DaysWrap>
             <span>요일</span>
-            <div>
-              <ul>
-                <Wrapper>
-                  <Title>요일</Title>
-                  <ButtonWrap>
-                    {days.map(day => (
-                      <DayButton
-                        key={day}
-                        selected={selectedDays.includes(day)}
-                        onClick={() => toggleDay(day)}
-                      >
-                        {day}
-                      </DayButton>
-                    ))}
-                  </ButtonWrap>
-                </Wrapper>
-              </ul>
-            </div>
-          </div>
+            <DaysButtonWrap>
+              {days.map(item => {
+                return (
+                  <DaysButton
+                    key={item}
+                    state={selectedDays.includes(item)}
+                    onClick={() => handleDayToggle(item)}
+                  >
+                    {item}
+                  </DaysButton>
+                );
+              })}
+            </DaysButtonWrap>
+          </DaysWrap>
           <div>확인/취소</div>
         </AlertPopUpBox>
       </AlertPopUp>

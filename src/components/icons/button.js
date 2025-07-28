@@ -24,3 +24,14 @@ export const TogleButtonCircle = styled.div`
   display: flex;
   left: ${({ state }) => (state ? "25px" : "0px")};
 `;
+export const DaysButton = styled.button`
+  background-color: ${({ state }) => (state ? colors.blue[500] : colors.white)};
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid ${colors.gray[200]};
+  cursor: pointer;
+  :hover {
+    background-color: ${colors.gray[400]};
+  }
+`;

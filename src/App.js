@@ -49,7 +49,6 @@ function App() {
           path={"/profile/edit"}
           element={<ProfileEdit>프로필편집</ProfileEdit>}
         />
-
         {/* 팝업임시작업 */}
         <Route path={"/alart"} element={<Alart>알람</Alart>}></Route>
         <Route path={"/theme"} element={<Theme>테마</Theme>}></Route>

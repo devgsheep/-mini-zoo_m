@@ -288,14 +288,13 @@ const AlertPopUp = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.6);
-  display: none;
 `;
 const AlertPopUpBox = styled.div`
   width: 286px;
   height: 359px;
   background-color: ${colors.white};
   border-radius: 16px;
-  padding: 40px;
+  padding: 30px;
 `;
 
 function Profile() {

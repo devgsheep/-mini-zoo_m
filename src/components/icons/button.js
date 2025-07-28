@@ -29,9 +29,9 @@ export const DaysButton = styled.button`
   width: 30px;
   height: 30px;
   border-radius: 15px;
-  border: 1px solid ${colors.gray[200]};
+  border: ${({ state }) => (state ? `none` : `1px solid ${colors.gray[200]}`)};
   cursor: pointer;
-  :hover {
-    background-color: ${colors.gray[400]};
-  }
+  color: ${({ state }) => (state ? colors.white : colors.black)};
+  font-size: 13px;
+  font-weight: 400;
 `;

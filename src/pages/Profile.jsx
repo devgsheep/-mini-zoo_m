@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { fonts } from "../styles/fonts";
-import colors from "../styles/colors";
+import Alart from "./popup/profile/Alart";
 
 const Container = styled.div`
   width: 394px;
@@ -279,40 +279,11 @@ const NavItem = styled.li`
   color: #a8a8a8;
   cursor: pointer;
 `;
-const AlertPopUp = styled.div`
-  display: flex;
-  position: fixed;
-  z-index: 99999;
-  width: 394px;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
-`;
-const AlertPopUpBox = styled.div`
-  width: 286px;
-  height: 359px;
-  background-color: ${colors.white};
-  border-radius: 16px;
-  padding: 30px;
-`;
 
 function Profile() {
   return (
     <Container>
-      <AlertPopUp>
-        <AlertPopUpBox>
-          <div>
-            <div>
-              <span>알림설정</span>
-              <button>토글버튼</button>
-            </div>
-            <div>소리 / 진동 / 무음</div>
-          </div>
-          <div>요일</div>
-          <div>확인/취소</div>
-        </AlertPopUpBox>
-      </AlertPopUp>
+      <Alart />
       <TopContainer>
         <SignWrap>
           <div>

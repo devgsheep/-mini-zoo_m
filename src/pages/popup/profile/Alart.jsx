@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import colors from "../../../styles/colors";
 import {
+  DaysButton,
   TogleButton,
   TogleButtonCircle,
 } from "../../../components/icons/button";
@@ -25,7 +26,7 @@ const AlertPopUp = styled.div`
 `;
 const AlertPopUpBox = styled.div`
   width: 286px;
-  height: 359px;
+  height: auto;
   background-color: ${colors.white};
   border-radius: 16px;
   padding: 20px;
@@ -43,6 +44,46 @@ const AlertButtonWrap = styled.div`
     font-weight: 700;
   }
 `;
+// 추후 삭제예정
+const SoundSelectWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+`;
+
+const HiddenRadio = styled.input`
+  display: none;
+`;
+
+const StyledRadioLabel = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: ${colors.black};
+
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid ${colors.gray[300]};
+    border-radius: 50%;
+    background-color: white;
+    box-sizing: border-box;
+  }
+
+  ${({ checked }) =>
+    checked &&
+    `
+    &::before {
+      border: 5px solid ${colors.blue[500]};
+      background-color: white;
+    }
+  `}
+`;
 const DaysWrap = styled.div`
   margin-bottom: 5px;
   span {
@@ -54,24 +95,60 @@ const DaysWrap = styled.div`
   flex-direction: column;
   gap: 10px;
 `;
-const DaysButton = styled.button`
-  background-color: ${({ state }) => (state ? colors.blue[500] : colors.white)};
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  border: ${({ state }) => (state ? `none` : `1px solid ${colors.gray[200]}`)};
-  cursor: pointer;
-  color: ${({ state }) => (state ? colors.white : colors.black)};
-  font-size: 13px;
-  font-weight: 400;
-`;
 
 const DaysButtonWrap = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+const ButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ButtonWrap = styled.div`
+  display: flex;
+  width: 203px;
+  height: 21px;
+  justify-content: center;
+  align-items: center;
+  gap: 38px;
+`;
+
+const ButtonOK = styled.button`
+  border: none;
+  background: none;
+  color: ${colors.blue[500]};
+  text-align: center;
+  font-size: 16px;
+`;
+const ButtonCC = styled.button`
+  border: none;
+  background: none;
+  text-align: center;
+  font-size: 16px;
+`;
+
+const Span = styled.span`
+  width: 1px;
+  height: 21px;
+  background: ${colors.gray[400]};
+`;
+const Select = styled.select`
+  width: 50px;
+  font-size: 16px;
+  border: none;
+`;
+const TimeWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+`;
 
 const days = ["일", "월", "화", "수", "목", "금", "토"];
+const sounds = ["sound", "vibration", "silent"];
 
 function Alart() {
   //js
@@ -81,8 +158,18 @@ function Alart() {
     setIsOn(state => !state);
   };
 
-  const [selectedDays, setSelectedDays] = useState([]);
+  // 추후 삭제예정
+  const [selectedSound, setSelectedSound] = useState("sound");
+  const handleSoundChange = e => {
+    setSelectedSound(e.target.value);
+  };
+  const labelMap = {
+    sound: "소리",
+    vibration: "진동",
+    silent: "무음",
+  };
 
+  const [selectedDays, setSelectedDays] = useState([]);
   const handleDayToggle = day => {
     setSelectedDays(prev =>
       prev.includes(day) ? prev.filter(d => d !== day) : [...prev, day],
@@ -100,7 +187,29 @@ function Alart() {
               <TogleButtonCircle state={isOn}></TogleButtonCircle>
             </TogleButton>
           </AlertButtonWrap>
-          <div>소리 / 진동 / 무음</div>
+          {/* 추후 안트디자인 수업이후 넣을예정 */}
+          <SoundSelectWrap>
+            {sounds.map(item => {
+              return (
+                <div key={item}>
+                  <HiddenRadio
+                    type="radio"
+                    id={item}
+                    name="sounds"
+                    value={item}
+                    checked={selectedSound === item}
+                    onChange={handleSoundChange}
+                  />
+                  <StyledRadioLabel
+                    htmlFor={item}
+                    checked={selectedSound === item}
+                  >
+                    {labelMap[item]}
+                  </StyledRadioLabel>
+                </div>
+              );
+            })}
+          </SoundSelectWrap>
           <DaysWrap>
             <span>요일</span>
             <DaysButtonWrap>
@@ -117,7 +226,30 @@ function Alart() {
               })}
             </DaysButtonWrap>
           </DaysWrap>
-          <div>확인/취소</div>
+          {/* 시계부분 */}
+          <TimeWrapper>
+            <Select id="ampm" name="timer">
+              <option value="am">오전</option>
+              <option value="pm">오후</option>
+            </Select>
+            <Select>
+              <option value="hour">01</option>
+              <option value="hour">02</option>
+              <option value="hour">03</option>
+              <option value="hour">04</option>
+            </Select>
+            <Select>
+              <option value="minite">00</option>
+              <option value="minite">05</option>
+            </Select>
+          </TimeWrapper>
+          <ButtonContainer>
+            <ButtonWrap>
+              <ButtonOK>확인</ButtonOK>
+              <Span />
+              <ButtonCC>취소</ButtonCC>
+            </ButtonWrap>
+          </ButtonContainer>
         </AlertPopUpBox>
       </AlertPopUp>
     </Container>

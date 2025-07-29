@@ -12,7 +12,6 @@ import {
   SadIcon,
   TiredIcon,
 } from "../components/icons/emotionicon";
-import colors from "../styles/colors";
 import Calendar from "react-calendar";
 import "../css/today_calendar.css";
 
@@ -162,7 +161,7 @@ const TodayImgWrap = styled.div`
   border-radius: 16px;
 `;
 const TodayImg = styled.img`
-  width: 90%;
+  width: 100%;
   cursor: pointer;
 `;
 const TodayButtonWrap = styled.div`
@@ -204,6 +203,16 @@ const DateStyle = styled.div`
   font-weight: 500;
 `;
 
+const CalendarWrap = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 250px;
+  background-color: aqua;
+  display: none;
+`;
+
 const TopImageWrapper = styled.div`
   max-height: 228px;
   max-width: 152px;
@@ -232,22 +241,7 @@ const HomeTopSpan = styled.span`
 `;
 
 function HistoryDaily() {
-  const hiddenInputRef = useRef(null);
-  const [selectedDate, setSelectedDate] = useState(() =>
-    formatDateToKorean(new Date().toISOString()),
-  );
-  
-  const handleIconClick = () => {
-    hiddenInputRef.current.showPicker?.(); // 크롬에서만 작동
-    hiddenInputRef.current.click(); // 폴백
-  };
-
-  const handleDateChange = e => {
-    setSelectedDate(formatDateToKorean(e.target.value));
-  };
-  
-  
-   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageChange = e => {
     const file = e.target.files[0];

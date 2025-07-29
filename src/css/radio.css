@@ -1,0 +1,14 @@
+.custom-radio {
+  appearance: none;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #c2c2c2;
+  border-radius: 50%;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.custom-radio:checked {
+  border: 5px solid #007bff;
+}

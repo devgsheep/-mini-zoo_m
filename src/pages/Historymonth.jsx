@@ -2,6 +2,9 @@ import React from "react";
 import colors from "../styles/colors";
 import { fonts } from "../styles/fonts";
 import styled from "@emotion/styled";
+import Calendar from "react-calendar";
+import "../css/calendar.css";
+import moment from "moment";
 
 const Container = styled.div`
   background-color: #f0f6ff;
@@ -194,6 +197,24 @@ const NavItem = styled.li`
 `;
 
 function Historymonth() {
+  // js
+  const historyWrap = {
+    width: "338px",
+    margin: "0 auto",
+    background: "yellowgreen",
+  };
+
+  // 1. 날짜를 US 방식으로 변경
+  const weekName = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+  const formatShortWeekday = (locale, date) => {
+    const idx = date.getDay();
+    moment.locale("en");
+    // Date 객체에서 getDay 는 날짜가 0:일, 1:월, 2:화 ... 6:토
+    console.log(idx);
+    return weekName[idx];
+  };
+
+  // jsx
   return (
     <Container>
       <TopContainer>
@@ -263,8 +284,12 @@ function Historymonth() {
       </BoxWrap>
       <BoxWrap>
         <ImgBoxStyle>
-          <div>
-            <img src="/images/calender.png" alt="" />
+          <div style={historyWrap}>
+            <Calendar
+              calendarType="gregory"
+              formatShortWeekday={formatShortWeekday}
+              formatDay={(locale, date) => moment(date).format("D")}
+            />
           </div>
         </ImgBoxStyle>
       </BoxWrap>

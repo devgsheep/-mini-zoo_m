@@ -74,7 +74,7 @@ const ButtonCancel = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 12px;
-  background: #fff;
+  background: #fafafa;
   border: none;
   font-size: 16px;
   text-align: center;

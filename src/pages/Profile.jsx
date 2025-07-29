@@ -32,6 +32,7 @@ const SignWrap = styled.div`
 const Image = styled.img`
   width: 100%;
   height: auto;
+  cursor: pointer;
 `;
 
 const SignDiv = styled.div`

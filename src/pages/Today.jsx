@@ -218,7 +218,7 @@ function HistoryDaily() {
     border-radius: 16px;
   `;
   const TodayImg = styled.img`
-    width: 90%;
+    width: 100%;
     cursor: pointer;
   `;
   const TodayButtonWrap = styled.div`
@@ -251,6 +251,16 @@ function HistoryDaily() {
       background: ${colors.blue[500]};
     }
   `;
+
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageChange = e => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageURL = URL.createObjectURL(file);
+      setSelectedImage(imageURL);
+    }
+  };
 
   return (
     <Container>
@@ -388,7 +398,21 @@ function HistoryDaily() {
         <TodayPotoWrap>
           <span>사진 (선택사항)</span>
           <TodayImgWrap>
-            <TodayImg src="./images/noimg_icon.svg" alt="" />
+            <input
+              type="file"
+              accept="image/*"
+              id="photo-upload"
+              style={{ display: "none" }}
+              onChange={handleImageChange}
+            />
+
+            <label htmlFor="photo-upload">
+              <TodayImg
+                src={selectedImage || "./images/noimg_icon.svg"}
+                alt="사진 추가"
+                style={{ cursor: "pointer" }}
+              />
+            </label>
           </TodayImgWrap>
         </TodayPotoWrap>
         <TodayButtonWrap>

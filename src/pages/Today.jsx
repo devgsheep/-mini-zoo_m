@@ -167,39 +167,40 @@ const TextArea = styled.textarea`
   color: ${colors.gray[800]};
   resize: none;
   line-height: 1.5;
-  &::placeholder {
-    font-size: 10px;
-    color: ${colors.gray[300]};
-    line-height: 1.5;
-  }
-`;
-const TodayPotoWrap = styled.div`
-  margin-top: 33px;
-  span {
-    margin-left: 17px;
-    font-size: 13px;
-    color: ${colors.gray[700]};
+    &::placeholder {
+      font-size: 10px;
+      color: ${colors.gray[300]};
+      line-height: 1.5;
+    }
+  `;
+  const TodayPotoWrap = styled.div`
+    margin-top: 33px;
+    span {
+      margin-left: 17px;
+      font-size: 13px;
+      color: ${colors.gray[700]};
+      display: flex;
+      margin-bottom: 6px;
+    }
+  `;
+  const TodayImgWrap = styled.div`
+    width: 362px;
+    height: 313px;
+    background-color: ${colors.white};
     display: flex;
-    margin-bottom: 6px;
-  }
-`;
-const TodayImgWrap = styled.div`
-  width: 362px;
-  height: 313px;
-  background-color: ${colors.white};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  border-radius: 16px;
-`;
-const TodayImg = styled.img`
-  width: 90%;
-  cursor: pointer;
-`;
-const TodayButtonWrap = styled.div`
-  margin: 44px auto;
-`;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    border-radius: 16px;
+  `;
+  const TodayImg = styled.img`
+    width: 100%;
+    cursor: pointer;
+  `;
+  const TodayButtonWrap = styled.div`
+    margin: 44px auto;
+  `;
+
 const TodayAddButton = styled.button`
   display: flex;
   width: 250px;
@@ -238,7 +239,15 @@ const CalendarWrap = styled.div`
 
 function HistoryDaily() {
   //js
+  const [selectedImage, setSelectedImage] = useState(null);
 
+  const handleImageChange = e => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageURL = URL.createObjectURL(file);
+      setSelectedImage(imageURL);
+    }
+  };
   //jsx
   return (
     <Container>
@@ -372,7 +381,21 @@ function HistoryDaily() {
         <TodayPotoWrap>
           <span>사진 (선택사항)</span>
           <TodayImgWrap>
-            <TodayImg src="./images/noimg_icon.svg" alt="" />
+            <input
+              type="file"
+              accept="image/*"
+              id="photo-upload"
+              style={{ display: "none" }}
+              onChange={handleImageChange}
+            />
+
+            <label htmlFor="photo-upload">
+              <TodayImg
+                src={selectedImage || "./images/noimg_icon.svg"}
+                alt="사진 추가"
+                style={{ cursor: "pointer" }}
+              />
+            </label>
           </TodayImgWrap>
         </TodayPotoWrap>
         <TodayButtonWrap>

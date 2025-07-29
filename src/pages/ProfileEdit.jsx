@@ -33,6 +33,7 @@ const SignWrap = styled.div`
 const Image = styled.img`
   width: 100%;
   height: auto;
+  cursor: pointer;
 `;
 
 const SignDiv = styled.div`
@@ -196,6 +197,7 @@ const LogOutButton = styled.div`
   font-weight: 600;
   font-size: 20px;
   margin-bottom: 20px;
+  cursor: pointer;
 `;
 
 const IconCircleLogout = styled.div`

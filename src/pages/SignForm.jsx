@@ -34,6 +34,7 @@ const SignWrap = styled.div`
 const Image = styled.img`
   width: 100%;
   height: auto;
+  cursor: pointer;
 `;
 
 const SignDiv = styled.div`
@@ -151,6 +152,7 @@ const InputCheckBox = styled.input`
   border-radius: 2px;
   border: 1px solid #c6ddff;
   background-color: #fff;
+  cursor: pointer;
 `;
 
 const Button = styled.button`
@@ -167,6 +169,7 @@ const Button = styled.button`
   color: #f5f5f5;
   letter-spacing: 1.6px;
   line-height: normal;
+  cursor: pointer;
 `;
 const HaveLogin = styled.div`
   display: flex;
@@ -186,6 +189,7 @@ const SpanLogin = styled.span`
   color: #ec48b3;
   font-size: 13px;
   font-weight: 500;
+  cursor: pointer;
 `;
 
 const Divider = styled.div`
@@ -230,6 +234,7 @@ const GoogleButton = styled.button`
   border: 1px solid #dbdbdb;
   background: #fff;
   gap: 10px;
+  cursor: pointer;
 `;
 
 const KakaoButton = styled.button`
@@ -243,6 +248,7 @@ const KakaoButton = styled.button`
   background: #facc15;
   border: 1px solid #facc15;
   gap: 10px;
+  cursor: pointer;
 `;
 
 function SignForm() {

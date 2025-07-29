@@ -22,15 +22,13 @@ const InfoPopup = styled.div`
   /* display: none; */
 `;
 const InfoPopupBox = styled.div`
-  height: 311px;
+  height: auto;
   width: 286px;
   background-color: ${colors.white};
   border-radius: 16px;
 `;
 const InfoPopupWrap = styled.div`
-  padding-top: 20px;
-  padding-left: 18px;
-  padding-bottom: 30px;
+  padding: 20px;
 `;
 const InfoPopupTitle = styled.div`
   font-size: 16px;
@@ -103,6 +101,7 @@ const AccountInfoBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-bottom: 44px;
 `;
 const AccountInfoTitle = styled.div`
   font-size: 14px;
@@ -174,14 +173,14 @@ function Info() {
               </AccountInfoDate>
             </AccountWrap>
           </AccountInfoBox>
+          <ButtonContainer>
+            <ButtonWrap>
+              <ButtonOK>확인</ButtonOK>
+              <Span />
+              <ButtonCC>취소</ButtonCC>
+            </ButtonWrap>
+          </ButtonContainer>
         </InfoPopupWrap>
-        <ButtonContainer>
-          <ButtonWrap>
-            <ButtonOK>확인</ButtonOK>
-            <Span />
-            <ButtonCC>취소</ButtonCC>
-          </ButtonWrap>
-        </ButtonContainer>
       </InfoPopupBox>
     </InfoPopup>
   );

@@ -73,13 +73,15 @@ const ItemList = styled.div`
 `;
 
 const Button = styled.div`
-  width: 68px;
-  height: 40px;
   background-color: #247cff;
-  padding: 10px 20px;
-  font-size: 16px;
+  width: 60px;
+  padding: 10px;
+  font-size: 13px;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: center;
   color: #fff;
-  font-weight: 700;
+  font-weight: 500;
   border-radius: 8px;
   cursor: pointer;
   margin-left: auto;

@@ -61,7 +61,6 @@ export const ButtonContainer = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
 `;
 
 export const ButtonWrap = styled.div`
@@ -70,7 +69,6 @@ export const ButtonWrap = styled.div`
   height: 21px;
   justify-content: center;
   align-items: center;
-  gap: 38px;
 `;
 
 export const ButtonOK = styled.button`
@@ -79,12 +77,16 @@ export const ButtonOK = styled.button`
   color: ${colors.blue[500]};
   text-align: center;
   font-size: 16px;
+  cursor: pointer;
+  width: 101px;
 `;
 export const ButtonCC = styled.button`
   border: none;
   background: none;
   text-align: center;
   font-size: 16px;
+  cursor: pointer;
+  width: 101px;
 `;
 
 export const Span = styled.span`

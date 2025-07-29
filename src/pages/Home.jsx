@@ -95,6 +95,7 @@ const RecordListItem = styled.li`
   margin: 0 22px;
   border: 1px solid #bdd7ff;
   border-radius: 8px;
+  cursor: pointer;
 `;
 
 const RecordInfoWrapper = styled.div`

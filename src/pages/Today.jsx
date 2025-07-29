@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import colors from "../styles/colors";
 import {
   AngryIcon,
   AnxiousIcon,
@@ -12,6 +13,8 @@ import {
   TiredIcon,
 } from "../components/icons/emotionicon";
 import colors from "../styles/colors";
+import Calendar from "react-calendar";
+import "../css/today_calendar.css";
 
 const Container = styled.div`
   width: 394px;
@@ -228,21 +231,12 @@ const HomeTopSpan = styled.span`
   padding-bottom: 25px;
 `;
 
-const formatDateToKorean = dateStr => {
-  if (!dateStr) return "";
-
-  const date = new Date(dateStr);
-  const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
-
-  return `${date.getMonth() + 1}월 ${date.getDate()}일 ${dayNames[date.getDay()]}요일`;
-};
-
 function HistoryDaily() {
   const hiddenInputRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState(() =>
     formatDateToKorean(new Date().toISOString()),
   );
-
+  
   const handleIconClick = () => {
     hiddenInputRef.current.showPicker?.(); // 크롬에서만 작동
     hiddenInputRef.current.click(); // 폴백
@@ -250,6 +244,17 @@ function HistoryDaily() {
 
   const handleDateChange = e => {
     setSelectedDate(formatDateToKorean(e.target.value));
+  };
+  
+  
+   const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageChange = e => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageURL = URL.createObjectURL(file);
+      setSelectedImage(imageURL);
+    }
   };
 
   // 네비게이터
@@ -264,15 +269,8 @@ function HistoryDaily() {
       <Header>
         <div>오늘의 감정</div>
         <DateStyle>
-          <div>{selectedDate}</div>
-          <input
-            type="date"
-            ref={hiddenInputRef}
-            style={{ display: "none" }}
-            onChange={handleDateChange}
-          />
+          <div>7월 15일 화요일</div>
           <svg
-            onClick={handleIconClick}
             xmlns="http://www.w3.org/2000/svg"
             width="10"
             height="10"
@@ -284,11 +282,14 @@ function HistoryDaily() {
               fill="#A8A8A8"
             />
           </svg>
+          <CalendarWrap>
+            <Calendar />
+          </CalendarWrap>
         </DateStyle>
       </Header>
       <HomeTop>
         <TopImageWrapper>
-          <HomeTopImg src="./images/호랑이화남.png" alt="#" />
+          <HomeTopImg src="./images/angry_tiger.svg" alt="#" />
         </TopImageWrapper>
         <HomeTopSpan>지금 기분은 어떠신가요?</HomeTopSpan>
       </HomeTop>
@@ -395,7 +396,21 @@ function HistoryDaily() {
         <TodayPotoWrap>
           <span>사진 (선택사항)</span>
           <TodayImgWrap>
-            <TodayImg src="./images/noimg_icon.svg" alt="" />
+            <input
+              type="file"
+              accept="image/*"
+              id="photo-upload"
+              style={{ display: "none" }}
+              onChange={handleImageChange}
+            />
+
+            <label htmlFor="photo-upload">
+              <TodayImg
+                src={selectedImage || "./images/noimg_icon.svg"}
+                alt="사진 추가"
+                style={{ cursor: "pointer" }}
+              />
+            </label>
           </TodayImgWrap>
         </TodayPotoWrap>
         <TodayButtonWrap>

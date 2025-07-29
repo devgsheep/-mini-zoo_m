@@ -40,6 +40,7 @@ const SignWrap = styled.div`
 const Image = styled.img`
   width: 100%;
   height: auto;
+  cursor: pointer;
 `;
 
 const SignDiv = styled.div`
@@ -77,6 +78,7 @@ const Daily = styled.div`
   font-style: normal;
   font-weight: 400;
   color: ${colors.gray[700]};
+  cursor: pointer;
 `;
 const Week = styled.div`
   flex: 1;
@@ -87,6 +89,7 @@ const Week = styled.div`
   background-color: ${colors.blue[200]};
   border-radius: 6px;
   color: ${colors.gray[700]};
+  cursor: pointer;
 `;
 const Month = styled.div`
   flex: 1;
@@ -95,6 +98,7 @@ const Month = styled.div`
   font-style: normal;
   font-weight: 400;
   color: ${colors.gray[700]};
+  cursor: pointer;
 `;
 
 const EmotionBoxStyle = styled.div`
@@ -174,6 +178,7 @@ const BoxStyle = styled.div`
   background: #fff;
   box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
     var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
+  cursor: pointer;
 `;
 
 const DailyDate = styled.div`

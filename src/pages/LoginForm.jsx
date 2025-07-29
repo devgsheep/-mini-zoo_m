@@ -35,6 +35,7 @@ const SignWrap = styled.div`
 const Image = styled.img`
   width: 100%;
   height: auto;
+  cursor: pointer;
 `;
 
 const SignDiv = styled.div`
@@ -129,6 +130,15 @@ const Svg = styled.svg`
   transform: translateX(-150%);
 `;
 
+const PassSvg = styled.svg`
+  position: absolute;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  transform: translateX(-150%);
+  cursor: pointer;
+`;
+
 const InputCheckBoxWrap = styled.div`
   display: flex;
   align-items: center;
@@ -156,6 +166,7 @@ const InputCheckBox = styled.input`
   border-radius: 2px;
   border: 1px solid #c6ddff;
   background-color: #fff;
+  cursor: pointer;
 `;
 
 const SpanLogin = styled.span`
@@ -163,6 +174,7 @@ const SpanLogin = styled.span`
   font-size: 13px;
   font-weight: 500;
   padding-right: 25px;
+  cursor: pointer;
 `;
 
 const Button = styled.button`
@@ -179,6 +191,7 @@ const Button = styled.button`
   color: #f5f5f5;
   letter-spacing: 1.6px;
   line-height: normal;
+  cursor: pointer;
 `;
 
 const HaveLogin = styled.div`
@@ -199,6 +212,7 @@ const NoHaveLogin = styled.span`
   color: #ec48b3;
   font-size: 13px;
   font-weight: 500;
+  cursor: pointer;
 `;
 
 const Divider = styled.div`
@@ -243,6 +257,7 @@ const GoogleButton = styled.button`
   border: 1px solid #dbdbdb;
   background: #fff;
   gap: 10px;
+  cursor: pointer;
 `;
 
 const KakaoButton = styled.button`
@@ -256,6 +271,7 @@ const KakaoButton = styled.button`
   background: #facc15;
   border: 1px solid #facc15;
   gap: 10px;
+  cursor: pointer;
 `;
 
 const GUESTP = styled.p`
@@ -264,6 +280,7 @@ const GUESTP = styled.p`
   font-weight: 500;
   color: ${colors.gray[600]};
   text-decoration: underline;
+  cursor: pointer;
 `;
 
 function LoginForm() {
@@ -328,7 +345,7 @@ function LoginForm() {
           </TitleSpan>
           <InputWrap>
             <Input type="password" placeholder="최소 8자 이상 입력하세요" />
-            <Svg
+            <PassSvg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
@@ -346,7 +363,7 @@ function LoginForm() {
                   <rect width="16" height="16" fill="white" />
                 </clipPath>
               </defs>
-            </Svg>
+            </PassSvg>
           </InputWrap>
         </div>
       </Main>

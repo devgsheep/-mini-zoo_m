@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
+import colors from "../styles/colors";
 export const Button = styled.button`
   font-size: 16px;
   color: #fff;
@@ -21,7 +22,7 @@ export const RadioWrapper = styled.label`
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  margin-bottom: 12px;
+  margin-bottom: 30px;
   position: relative;
 `;
 
@@ -55,7 +56,7 @@ export const CustomRadio = styled.span`
   }
 `;
 
-const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -63,7 +64,7 @@ const ButtonContainer = styled.div`
   padding: 10px;
 `;
 
-const ButtonWrap = styled.div`
+export const ButtonWrap = styled.div`
   display: flex;
   width: 203px;
   height: 21px;
@@ -72,21 +73,21 @@ const ButtonWrap = styled.div`
   gap: 38px;
 `;
 
-const ButtonOK = styled.button`
+export const ButtonOK = styled.button`
   border: none;
   background: none;
   color: ${colors.blue[500]};
   text-align: center;
   font-size: 16px;
 `;
-const ButtonCC = styled.button`
+export const ButtonCC = styled.button`
   border: none;
   background: none;
   text-align: center;
   font-size: 16px;
 `;
 
-const Span = styled.span`
+export const Span = styled.span`
   width: 1px;
   height: 21px;
   background: ${colors.gray[400]};

@@ -21,7 +21,7 @@ const PersonalInfoPopUpBox = styled.div`
 `;
 const PersonalInfoPopUpWrap = styled.div`
   display: flex;
-  width: 252px;
+  width: auto;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -52,14 +52,37 @@ const PersonalInfoContents = styled.div`
 const PersonalInfoSubTitle = styled.div`
   font-size: 13px;
   font-weight: 600;
+  color: #000;
+  ::before {
+    content: "•";
+    margin-right: 3px;
+  }
 `;
 
-const SubTitleContents = styled.div`
+const ItemList = styled.div`
+  font-size: 13px;
+  font-weight: 400;
+  padding-left: 8px;
   color: #5c5c5c;
-  list-style-type: disc;
-  padding-left: 4px;
-  line-height: 1.3;
-  color: #5c5c5c;
+  padding-left: 20px;
+  text-indent: -15px;
+  ::before {
+    content: "•";
+    margin-right: 8px;
+  }
+`;
+
+const Button = styled.div`
+  width: 68px;
+  height: 40px;
+  background-color: #247cff;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: auto;
 `;
 
 function PersonalInfo() {
@@ -68,76 +91,65 @@ function PersonalInfo() {
       <PersonalInfoPopUpBox>
         <PersonalInfoPopUpWrap>
           <PersonalInfoText>
-            <div>
-              <PersonalInfoTitle>개인정보 처리방침</PersonalInfoTitle>
-            </div>
+            <PersonalInfoTitle>개인정보 처리방침</PersonalInfoTitle>
             <PersonalInfoContents>
               <div>
                 <PersonalInfoSubTitle>
                   수집하는 개인정보 항목
                 </PersonalInfoSubTitle>
-                <SubTitleContents as="ul">
-                  <li>필수 항목: 이름, 이메일, 생년월일 등</li>
-                  <li>선택 항목: 감정 기록, 프로필 사진 등 </li>
-                  <li>자동 수집 정보: 기기 정보, 접속 로그, 쿠키 등</li>
-                </SubTitleContents>
+                <ItemList>필수 항목: 이름, 이메일, 생년월일 등</ItemList>
+                <ItemList>선택 항목: 감정 기록, 프로필 사진 등 </ItemList>
+                <ItemList>
+                  자동 수집 정보: 기기 정보, 접속 로그, 쿠키 등
+                </ItemList>
               </div>
               <div>
                 <PersonalInfoSubTitle>
                   개인정보의 수집 및 이용 목적
                 </PersonalInfoSubTitle>
-                <SubTitleContents as="ul">
-                  <li>회원 가입 및 본인 확인</li>
-                  <li>감정 다이어리 기능 제공</li>
-                  <li>사용자 통계 분석 및 맞춤형 서비스 제공</li>
-                  <li>알림 전송(쿠키 알림 등)</li>
-                </SubTitleContents>
+                <ItemList>회원 가입 및 본인 확인</ItemList>
+                <ItemList>감정 다이어리 기능 제공</ItemList>
+                <ItemList>사용자 통계 분석 및 맞춤형 서비스 제공</ItemList>
+                <ItemList>알림 전송(쿠키 알림 등)</ItemList>
               </div>
               <div>
                 <PersonalInfoSubTitle>
                   개인정보의 보유 및 이용 기간
                 </PersonalInfoSubTitle>
-                <SubTitleContents as="ul">
-                  <li>회원 탈퇴 시 즉시 파기</li>
-                  <li>감정 다이어리 기능 제공</li>
-                  <li>
-                    관련 법령에 따라 일정 기간 보존할 수 있음 예: 전자상거래법상
-                    계약 관련 기록 등
-                  </li>
-                </SubTitleContents>
+                <ItemList>회원 탈퇴 시 즉시 파기</ItemList>
+                <ItemList>감정 다이어리 기능 제공</ItemList>
+                <ItemList>
+                  관련 법령에 따라 일정 기간 보존할 수 있음 <br />
+                  예: 전자상거래법상 계약 관련 기록 등
+                </ItemList>
               </div>
               <div>
                 <PersonalInfoSubTitle>
                   개인정보의 제3자 제공
                 </PersonalInfoSubTitle>
-                <SubTitleContents as="ul">
-                  <li>원칙적으로 제공하지 않음</li>
-                  <li>
-                    단, 이용자의 동의가 있거나 법률에 특별한 규정이 있는 경우
-                    제공
-                  </li>
-                </SubTitleContents>
+                <ItemList>원칙적으로 제공하지 않음</ItemList>
+                <ItemList>
+                  단, 이용자의 동의가 있거나 법률에 특별한 규정이 있는 경우 제공
+                </ItemList>
               </div>
               <div>
                 <PersonalInfoSubTitle>
                   이용자의 권리와 행사 방법
                 </PersonalInfoSubTitle>
-                <SubTitleContents as="ul">
-                  <li>개인정보 열람, 정정, 삭제, 처리정지 요구 가능</li>
-                </SubTitleContents>
+                <ItemList>
+                  개인정보 열람, 정정, 삭제, 처리정지 요구 가능
+                </ItemList>
               </div>
               <div>
                 <PersonalInfoSubTitle>
                   개인정보의 파기 절차 및 방법
                 </PersonalInfoSubTitle>
-                <SubTitleContents as="ul">
-                  <li>전자 파일: 복구 불가능한 방법으로 삭제</li>
-                  <li>종이 문서: 분쇄하거나 소각</li>
-                </SubTitleContents>
+                <ItemList>전자 파일: 복구 불가능한 방법으로 삭제</ItemList>
+                <ItemList>종이 문서: 분쇄하거나 소각</ItemList>
               </div>
             </PersonalInfoContents>
           </PersonalInfoText>
-          <button>확인</button>
+          <Button>확인</Button>
         </PersonalInfoPopUpWrap>
       </PersonalInfoPopUpBox>
     </PersonalInfoPopUp>

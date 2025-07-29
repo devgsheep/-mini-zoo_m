@@ -7,7 +7,7 @@ export const TogleButton = styled.button`
   height: 100%;
   padding: 2px;
   background-color: ${({ state }) =>
-    state ? colors.blue[500] : colors.blue[200]};
+    state ? colors.blue[500] : colors.gray[200]};
   overflow: hidden;
   border-radius: 12px;
   align-items: center;

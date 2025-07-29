@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
+import colors from "../styles/colors";
 export const Button = styled.button`
   font-size: 16px;
   color: #fff;

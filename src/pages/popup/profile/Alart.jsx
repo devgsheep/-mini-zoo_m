@@ -6,6 +6,7 @@ import {
   TogleButtonCircle,
 } from "../../../components/icons/button";
 import { useState } from "react";
+import "../../../css/radio.css";
 
 const Container = styled.div`
   width: 394px;
@@ -44,46 +45,6 @@ const AlertButtonWrap = styled.div`
     font-weight: 700;
   }
 `;
-// 추후 삭제예정
-const SoundSelectWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-`;
-
-const HiddenRadio = styled.input`
-  display: none;
-`;
-
-const StyledRadioLabel = styled.label`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  color: ${colors.black};
-
-  &::before {
-    content: "";
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 1px solid ${colors.gray[300]};
-    border-radius: 50%;
-    background-color: white;
-    box-sizing: border-box;
-  }
-
-  ${({ checked }) =>
-    checked &&
-    `
-    &::before {
-      border: 5px solid ${colors.blue[500]};
-      background-color: white;
-    }
-  `}
-`;
 const DaysWrap = styled.div`
   margin-bottom: 5px;
   span {
@@ -113,7 +74,6 @@ const ButtonWrap = styled.div`
   height: 21px;
   justify-content: center;
   align-items: center;
-  gap: 38px;
 `;
 
 const ButtonOK = styled.button`
@@ -122,12 +82,16 @@ const ButtonOK = styled.button`
   color: ${colors.blue[500]};
   text-align: center;
   font-size: 16px;
+  cursor: pointer;
+  width: 101px;
 `;
 const ButtonCC = styled.button`
   border: none;
   background: none;
   text-align: center;
   font-size: 16px;
+  cursor: pointer;
+  width: 101px;
 `;
 
 const Span = styled.span`
@@ -146,10 +110,30 @@ const TimeWrapper = styled.div`
   align-items: center;
   gap: 20px;
 `;
+const RadioWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+const RadioBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: ${colors.black};
+`;
+const RadioLabel = styled.label`
+  display: flex;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: 500;
+`;
+const RadioInput = styled.input`
+  cursor: pointer;
+`;
 
 const days = ["일", "월", "화", "수", "목", "금", "토"];
-const sounds = ["sound", "vibration", "silent"];
-
 function Alart() {
   //js
 
@@ -158,23 +142,40 @@ function Alart() {
     setIsOn(state => !state);
   };
 
-  // 추후 삭제예정
-  const [selectedSound, setSelectedSound] = useState("sound");
-  const handleSoundChange = e => {
-    setSelectedSound(e.target.value);
-  };
-  const labelMap = {
-    sound: "소리",
-    vibration: "진동",
-    silent: "무음",
-  };
-
   const [selectedDays, setSelectedDays] = useState([]);
   const handleDayToggle = day => {
     setSelectedDays(prev =>
       prev.includes(day) ? prev.filter(d => d !== day) : [...prev, day],
     );
   };
+  // 시간 부분
+  const hours = [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+  ];
+  const minutes = [
+    "00",
+    "05",
+    "15",
+    "20",
+    "25",
+    "30",
+    "35",
+    "40",
+    "45",
+    "50",
+    "55",
+  ];
 
   //jsx
   return (
@@ -188,28 +189,45 @@ function Alart() {
             </TogleButton>
           </AlertButtonWrap>
           {/* 추후 안트디자인 수업이후 넣을예정 */}
-          <SoundSelectWrap>
-            {sounds.map(item => {
-              return (
-                <div key={item}>
-                  <HiddenRadio
-                    type="radio"
-                    id={item}
-                    name="sounds"
-                    value={item}
-                    checked={selectedSound === item}
-                    onChange={handleSoundChange}
-                  />
-                  <StyledRadioLabel
-                    htmlFor={item}
-                    checked={selectedSound === item}
-                  >
-                    {labelMap[item]}
-                  </StyledRadioLabel>
-                </div>
-              );
-            })}
-          </SoundSelectWrap>
+          <RadioWrap>
+            <RadioBox>
+              <RadioLabel htmlFor="sound">
+                <RadioInput
+                  type="radio"
+                  id="sound"
+                  value="sound"
+                  name="sound-setting"
+                  className="custom-radio"
+                />
+                소리
+              </RadioLabel>
+            </RadioBox>
+            <RadioBox>
+              <RadioLabel htmlFor="vibration">
+                <RadioInput
+                  type="radio"
+                  id="vibration"
+                  value="vibration"
+                  name="sound-setting"
+                  className="custom-radio"
+                />
+                진동
+              </RadioLabel>
+            </RadioBox>
+            <RadioBox>
+              <RadioLabel htmlFor="silent">
+                <RadioInput
+                  type="radio"
+                  id="silent"
+                  value="silent"
+                  name="sound-setting"
+                  className="custom-radio"
+                />
+                무음
+              </RadioLabel>
+            </RadioBox>
+          </RadioWrap>
+
           <DaysWrap>
             <span>요일</span>
             <DaysButtonWrap>
@@ -233,14 +251,19 @@ function Alart() {
               <option value="pm">오후</option>
             </Select>
             <Select>
-              <option value="hour">01</option>
-              <option value="hour">02</option>
-              <option value="hour">03</option>
-              <option value="hour">04</option>
+              {hours.map(hour => (
+                <option key={hour} value={hour}>
+                  {hour}
+                </option>
+              ))}
             </Select>
+
             <Select>
-              <option value="minite">00</option>
-              <option value="minite">05</option>
+              {minutes.map(minute => (
+                <option key={minute} value={minute}>
+                  {minute}
+                </option>
+              ))}
             </Select>
           </TimeWrapper>
           <ButtonContainer>

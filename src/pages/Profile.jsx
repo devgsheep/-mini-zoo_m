@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { fonts } from "../styles/fonts";
-import Alart from "./popup/profile/Alart";
 
 const Container = styled.div`
   width: 394px;
@@ -283,7 +282,6 @@ const NavItem = styled.li`
 function Profile() {
   return (
     <Container>
-      <Alart />
       <TopContainer>
         <SignWrap>
           <div>

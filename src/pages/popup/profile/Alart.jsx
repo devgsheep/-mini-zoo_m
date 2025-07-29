@@ -7,6 +7,7 @@ import {
 } from "../../../components/icons/button";
 import { useState } from "react";
 import "../../../css/radio.css";
+import { ButtonCC, ButtonContainer, ButtonOK, ButtonWrap } from "../../Ui";
 
 const Container = styled.div`
   width: 394px;
@@ -60,38 +61,6 @@ const DaysWrap = styled.div`
 const DaysButtonWrap = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-const ButtonContainer = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const ButtonWrap = styled.div`
-  display: flex;
-  width: 203px;
-  height: 21px;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ButtonOK = styled.button`
-  border: none;
-  background: none;
-  color: ${colors.blue[500]};
-  text-align: center;
-  font-size: 16px;
-  cursor: pointer;
-  width: 101px;
-`;
-const ButtonCC = styled.button`
-  border: none;
-  background: none;
-  text-align: center;
-  font-size: 16px;
-  cursor: pointer;
-  width: 101px;
 `;
 
 const Span = styled.span`

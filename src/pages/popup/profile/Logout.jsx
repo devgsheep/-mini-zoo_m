@@ -65,33 +65,27 @@ const ButtonWrapLogout = styled.div`
   align-items: center;
   gap: 10px;
   padding: 44px 0 5px 0;
+  button {
+    cursor: pointer;
+    display: flex;
+    width: 123px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    text-align: center;
+  }
 `;
 
 const ButtonCancel = styled.button`
-  display: flex;
-  width: 123px;
-  padding: 10px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 12px;
   background: #fafafa;
-  border: none;
-  font-size: 16px;
-  text-align: center;
   color: ${colors.gray[400]};
 `;
 
 const ButtonLogout = styled.button`
-  display: flex;
-  width: 123px;
-  padding: 10px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 12px;
   background: #fef2f2;
-  border: none;
-  font-size: 16px;
-  text-align: center;
   color: #ef4444;
 `;
 

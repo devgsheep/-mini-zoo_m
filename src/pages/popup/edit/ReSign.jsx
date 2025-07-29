@@ -107,6 +107,7 @@ const ResignButtonWrap = styled.div`
     border-radius: 12px;
     padding: 10px;
     border: none;
+    cursor: pointer;
   }
 `;
 const ResignCCButton = styled.button`

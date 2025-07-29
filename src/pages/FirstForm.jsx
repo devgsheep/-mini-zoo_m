@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import colors from "../styles/colors";
+import { useNavigate } from "react-router-dom";
 
 // window
 const Container = styled.div`
@@ -138,6 +139,14 @@ const BottomSpan = styled.span`
 `;
 function FirstForm() {
   //js
+  const navigate = useNavigate();
+
+  const handleClickSign = () => {
+    navigate("/sign");
+  };
+  const handleClickLogin = () => {
+    navigate("/login");
+  };
 
   //jsx
   return (
@@ -187,8 +196,12 @@ function FirstForm() {
       </MiddleContainer>
       <BottomContainer>
         <Buttonwrap>
-          <SignButton>새로운 여정을 시작하세요</SignButton>
-          <LoginButton>이미 계정이 있습니다</LoginButton>
+          <SignButton onClick={handleClickSign}>
+            새로운 여정을 시작하세요
+          </SignButton>
+          <LoginButton onClick={handleClickLogin}>
+            이미 계정이 있습니다
+          </LoginButton>
         </Buttonwrap>
         <BottomSpan>ZOO:M으로 감정을 탐험하고 키워보세요</BottomSpan>
       </BottomContainer>

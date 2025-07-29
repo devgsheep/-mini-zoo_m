@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import React from "react";
 import { fonts } from "../styles/fonts";
 import colors from "../styles/colors";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   height: 852px;
@@ -266,6 +267,15 @@ const GUESTP = styled.p`
 `;
 
 function LoginForm() {
+  const navigate = useNavigate();
+
+  const handleClickHome = () => {
+    navigate("/home");
+  };
+  const handleClickSign = () => {
+    navigate("/sign");
+  };
+
   return (
     <Container>
       <TopContainer>
@@ -347,10 +357,10 @@ function LoginForm() {
         </LeftWrap>
         <SpanLogin>비밀번호를 잊으셨나요?</SpanLogin>
       </InputCheckBoxWrap>
-      <Button>로그인</Button>
+      <Button onClick={handleClickHome}>로그인</Button>
       <HaveLogin>
         <HaveP>계정이 없으신가요?</HaveP>
-        <NoHaveLogin>가입하세요</NoHaveLogin>
+        <NoHaveLogin onClick={handleClickSign}>가입하세요</NoHaveLogin>
       </HaveLogin>
       <Divider>
         <DividerLine />

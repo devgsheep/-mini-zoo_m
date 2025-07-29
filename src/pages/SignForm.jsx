@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import React from "react";
 import { fonts } from "../styles/fonts";
 import colors from "../styles/colors";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   height: 852px;
@@ -246,6 +247,14 @@ const KakaoButton = styled.button`
 `;
 
 function SignForm() {
+  const navigate = useNavigate();
+
+  const handleClickSign = () => {
+    navigate("/login");
+  };
+  const handleClickLogin = () => {
+    navigate("/login");
+  };
   return (
     <Container>
       <TopContainer>
@@ -388,10 +397,10 @@ function SignForm() {
           <Span>*</Span>
           서비스 이용약관 및 개인정보처리방침에 동의합니다.
         </InputCheckBoxWrap>
-        <Button>ZOO:M 패밀리에 가입하세요.</Button>
+        <Button onClick={handleClickSign}>ZOO:M 패밀리에 가입하세요.</Button>
         <HaveLogin>
           <HaveP>이미 계정이 있으신가요?</HaveP>
-          <SpanLogin>로그인하세요</SpanLogin>
+          <SpanLogin onClick={handleClickLogin}>로그인하세요</SpanLogin>
         </HaveLogin>
       </Main>
       <Divider>

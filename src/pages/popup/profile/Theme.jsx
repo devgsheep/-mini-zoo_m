@@ -26,57 +26,6 @@ const Title = styled.p`
   padding-bottom: 17px;
 `;
 
-const ThemeSelectWrap = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const RadioWrapper = styled.label`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  margin-bottom: 30px;
-  position: relative;
-`;
-
-const Input = styled.input`
-  display: none;
-
-  &:checked + span::after {
-    transform: translate(-50%, -50%) scale(1); // 살짝 위로 뜨는 효과
-    border-color: #007aff;
-  }
-`;
-const CustomRadio = styled.span`
-  width: 20px;
-  height: 20px;
-  background-color: #fff;
-  border: 1px solid #e5e5e5;
-  border-radius: 50%;
-  position: relative;
-
-  ::after {
-    content: "";
-    background-color: #fff;
-    border: 5px solid #007aff;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0);
-  }
-`;
-
-const FontWrap = styled.div`
-  display: inline-block;
-  justify-content: center;
-  align-items: center;
-  padding-left: 10px;
-`;
-
 const ModeText = styled.p`
   font-size: 16px;
 `;

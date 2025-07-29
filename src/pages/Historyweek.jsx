@@ -7,6 +7,7 @@ import {
   SadIconCircle,
   TiredIconCircle,
 } from "../components/icons/emotionicon";
+import { Link, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   background-color: #f0f6ff;
@@ -265,7 +266,7 @@ const NavItemFocus = styled.li`
   background-color: #bdd7ff;
   color: #579aff;
 `;
-const NavItem = styled.li`
+const NavItem = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -278,6 +279,11 @@ const NavItem = styled.li`
 `;
 
 function Historyweek() {
+  const navigate = useNavigate();
+
+  const handleClickToday = () => {
+    navigate("/today");
+  };
   return (
     <Container>
       <TopContainer>
@@ -291,9 +297,15 @@ function Historyweek() {
       <TopNavigation>
         <NavigationBoxStyle>
           <NavigationThree>
-            <Daily>일간</Daily>
-            <Week>주간</Week>
-            <Month>월간</Month>
+            <Link to="/history/daily">
+              <Daily>일간</Daily>
+            </Link>
+            <Link to="/history/week">
+              <Week>주간</Week>
+            </Link>
+            <Link to="/history/month">
+              <Month>월간</Month>
+            </Link>
           </NavigationThree>
         </NavigationBoxStyle>
       </TopNavigation>
@@ -346,7 +358,7 @@ function Historyweek() {
           </div>
         </ImgBoxStyle>
       </BoxWrap>
-      <BoxWrap>
+      <BoxWrap onClick={handleClickToday}>
         <BoxStyle>
           <DailyDate>7/15(화)</DailyDate>
           <HappyIconCircle emotion="happy">
@@ -374,7 +386,7 @@ function Historyweek() {
           </EmotionTextBox>
         </BoxStyle>
       </BoxWrap>
-      <BoxWrap>
+      <BoxWrap onClick={handleClickToday}>
         <BoxStyle>
           <DailyDate>7/16(수)</DailyDate>
           <SadIconCircle emotion="sad">
@@ -402,7 +414,7 @@ function Historyweek() {
           </EmotionTextBox>
         </BoxStyle>
       </BoxWrap>
-      <BoxWrap>
+      <BoxWrap onClick={handleClickToday}>
         <BoxStyle>
           <DailyDate>7/17(목)</DailyDate>
           <TiredIconCircle emotion="angry">
@@ -430,7 +442,7 @@ function Historyweek() {
           </EmotionTextBox>
         </BoxStyle>
       </BoxWrap>
-      <BoxWrap>
+      <BoxWrap onClick={handleClickToday}>
         <BoxStyle>
           <DailyDate>7/18(금)</DailyDate>
           <Circle emotion="angry">
@@ -460,7 +472,7 @@ function Historyweek() {
       </BoxWrap>
       <Footer>
         <NavigationBar>
-          <NavItem>
+          <NavItem to="/home">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -475,7 +487,7 @@ function Historyweek() {
             </svg>
             <span>홈</span>
           </NavItem>
-          <NavItem>
+          <NavItem to="/today">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -505,7 +517,7 @@ function Historyweek() {
             </svg>
             <span>히스토리</span>
           </NavItemFocus>
-          <NavItem>
+          <NavItem to="/profile">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="27"

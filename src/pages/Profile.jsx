@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { fonts } from "../styles/fonts";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 394px;
@@ -267,7 +268,7 @@ const NavItemFocus = styled.li`
   background-color: #bdd7ff;
   color: #579aff;
 `;
-const NavItem = styled.li`
+const NavItem = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -299,7 +300,12 @@ function Profile() {
             <ProfileNickName>
               도로롱
               <div>
-                <NickEditImage src="./images/arrowedit.svg" alt="닉네임수정" />
+                <Link to="/profile/edit">
+                  <NickEditImage
+                    src="./images/arrowedit.svg"
+                    alt="닉네임수정"
+                  />
+                </Link>
               </div>
             </ProfileNickName>
             <ProfileEtc>
@@ -358,7 +364,7 @@ function Profile() {
         <Logout>로그아웃</Logout>
       </ProfileWrap>
       <NavigationBar>
-        <NavItem>
+        <NavItem to="/home">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -373,7 +379,7 @@ function Profile() {
           </svg>
           <span>홈</span>
         </NavItem>
-        <NavItem>
+        <NavItem to="/today">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"
@@ -388,7 +394,7 @@ function Profile() {
           </svg>
           <span>추가</span>
         </NavItem>
-        <NavItem>
+        <NavItem to="/history/week">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

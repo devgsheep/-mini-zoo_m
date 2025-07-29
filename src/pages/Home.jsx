@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import colors from "../styles/colors";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = styled.div`
   max-height: 47px;
@@ -178,7 +179,7 @@ const NavItemFocus = styled.li`
   background-color: #bdd7ff;
   color: #579aff;
 `;
-const NavItem = styled.li`
+const NavItem = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -189,7 +190,21 @@ const NavItem = styled.li`
   color: #a8a8a8;
   cursor: pointer;
 `;
+
 function Home() {
+  const navigate = useNavigate();
+
+  const handleClickToday = () => {
+    navigate("/today");
+  };
+  const handleClickDaily = () => {
+    navigate("/history/daily");
+  };
+
+  const handleClickMonth = () => {
+    navigate("/history/month");
+  };
+
   return (
     <div style={{ backgroundColor: "#F0F6FF" }}>
       <Header>
@@ -201,7 +216,7 @@ function Home() {
             <span>OO님의 오늘 하루 어땟나요?</span>
             <span>오늘의 기분은 어때요?</span>
           </TopTitle>
-          <TopButtonWrapper>
+          <TopButtonWrapper onClick={handleClickToday}>
             <HomeTopButton>
               <MainText>오늘의 순간을 기록하세요</MainText>
               <SubText>동물 친구들과 함께 감정을 기록해보세요</SubText>
@@ -229,7 +244,7 @@ function Home() {
           </HomeRecent>
           <div>
             <RecordList>
-              <RecordListItem>
+              <RecordListItem onClick={handleClickDaily}>
                 <RecordInfoWrapper>
                   <RecordImage src="./images/Untitled-1.png" alt="#" />
                   <RecordTextContainer>
@@ -252,7 +267,7 @@ function Home() {
                   </svg>
                 </RecordSvgWrap>
               </RecordListItem>
-              <RecordListItem>
+              <RecordListItem onClick={handleClickDaily}>
                 <RecordInfoWrapper>
                   <RecordImage src="./images/catsky.png" alt="#" />
                   <RecordTextContainer>
@@ -275,7 +290,7 @@ function Home() {
                   </svg>
                 </RecordSvgWrap>
               </RecordListItem>
-              <RecordListItem>
+              <RecordListItem onClick={handleClickDaily}>
                 <RecordInfoWrapper>
                   <RecordImage src="./images/tigersky.png" alt="#" />
                   <RecordTextContainer>
@@ -302,7 +317,7 @@ function Home() {
               </RecordListItem>
             </RecordList>
           </div>
-          <ViewAllButtonWrapper>
+          <ViewAllButtonWrapper onClick={handleClickMonth}>
             <ViewAllButton>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -338,7 +353,7 @@ function Home() {
             </svg>
             <span>홈</span>
           </NavItemFocus>
-          <NavItem>
+          <NavItem to="/today">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -353,7 +368,7 @@ function Home() {
             </svg>
             <span>추가</span>
           </NavItem>
-          <NavItem>
+          <NavItem to="/history/week">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -368,7 +383,7 @@ function Home() {
             </svg>
             <span>히스토리</span>
           </NavItem>
-          <NavItem>
+          <NavItem to="/profile">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="27"

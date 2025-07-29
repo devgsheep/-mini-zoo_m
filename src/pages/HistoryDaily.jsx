@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import React from "react";
 import { fonts } from "../styles/fonts";
 import colors from "../styles/colors";
+import { Link, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   background-color: #f0f6ff;
@@ -293,7 +294,7 @@ const NavItemFocus = styled.li`
   background-color: #bdd7ff;
   color: #579aff;
 `;
-const NavItem = styled.li`
+const NavItem = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -306,6 +307,11 @@ const NavItem = styled.li`
 `;
 
 function HistoryDaily() {
+  const navigate = useNavigate();
+
+  const handleClickToday = () => {
+    navigate("/today");
+  };
   return (
     <Container>
       <TopContainer>
@@ -319,9 +325,15 @@ function HistoryDaily() {
       <TopNavigation>
         <NavigationBoxStyle>
           <NavigationThree>
-            <Daily>일간</Daily>
-            <Week>주간</Week>
-            <Month>월간</Month>
+            <Link to="/history/daily">
+              <Daily>일간</Daily>
+            </Link>
+            <Link to="/history/week">
+              <Week>주간</Week>
+            </Link>
+            <Link to="/history/month">
+              <Month>월간</Month>
+            </Link>
           </NavigationThree>
         </NavigationBoxStyle>
       </TopNavigation>
@@ -366,7 +378,7 @@ function HistoryDaily() {
           </div>
         </EmotionBoxStyle>
       </div>
-      <BoxWrap>
+      <BoxWrap onClick={handleClickToday}>
         <BoxStyle>
           <DailyDate>7/18(금)</DailyDate>
           <Circle emotion="angry">
@@ -402,10 +414,10 @@ function HistoryDaily() {
           </div>
         </ImgBoxStyle>
       </BoxWrap>
-      <Button>수정하기</Button>
+      <Button onClick={handleClickToday}>수정하기</Button>
       <Footer>
         <NavigationBar>
-          <NavItem>
+          <NavItem to="/home">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -420,7 +432,7 @@ function HistoryDaily() {
             </svg>
             <span>홈</span>
           </NavItem>
-          <NavItem>
+          <NavItem to="/today">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -450,7 +462,7 @@ function HistoryDaily() {
             </svg>
             <span>히스토리</span>
           </NavItemFocus>
-          <NavItem>
+          <NavItem to="/profile">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="27"

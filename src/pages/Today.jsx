@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import colors from "../styles/colors";
 import {
   AngryIcon,
@@ -10,44 +12,10 @@ import {
   SadIcon,
   TiredIcon,
 } from "../components/icons/emotionicon";
+import colors from "../styles/colors";
 import Calendar from "react-calendar";
 import "../css/today_calendar.css";
 
-const DateStyle = styled.div`
-  font-size: 10px;
-  color: ${colors.gray[600]};
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  font-weight: 500;
-`;
-
-const TopImageWrapper = styled.div`
-  max-height: 228px;
-  max-width: 152px;
-  display: flex;
-  justify-content: center;
-`;
-
-const HomeTop = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const HomeTopImg = styled.img`
-  padding-top: 11px;
-  width: 100%;
-  height: 100%;
-`;
-
-const HomeTopSpan = styled.span`
-  color: ${colors.gray[700]};
-  font-weight: 700;
-  font-size: 13px;
-  padding-bottom: 25px;
-`;
 const Container = styled.div`
   width: 394px;
   background-color: ${colors.blue[100]};
@@ -83,7 +51,7 @@ const NavItemFocus = styled.li`
   background-color: ${colors.blue[200]};
   color: ${colors.blue[400]};
 `;
-const NavItem = styled.li`
+const NavItem = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -167,40 +135,39 @@ const TextArea = styled.textarea`
   color: ${colors.gray[800]};
   resize: none;
   line-height: 1.5;
-    &::placeholder {
-      font-size: 10px;
-      color: ${colors.gray[300]};
-      line-height: 1.5;
-    }
-  `;
-  const TodayPotoWrap = styled.div`
-    margin-top: 33px;
-    span {
-      margin-left: 17px;
-      font-size: 13px;
-      color: ${colors.gray[700]};
-      display: flex;
-      margin-bottom: 6px;
-    }
-  `;
-  const TodayImgWrap = styled.div`
-    width: 362px;
-    height: 313px;
-    background-color: ${colors.white};
+  &::placeholder {
+    font-size: 10px;
+    color: ${colors.gray[300]};
+    line-height: 1.5;
+  }
+`;
+const TodayPotoWrap = styled.div`
+  margin-top: 33px;
+  span {
+    margin-left: 17px;
+    font-size: 13px;
+    color: ${colors.gray[700]};
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    border-radius: 16px;
-  `;
-  const TodayImg = styled.img`
-    width: 100%;
-    cursor: pointer;
-  `;
-  const TodayButtonWrap = styled.div`
-    margin: 44px auto;
-  `;
-
+    margin-bottom: 6px;
+  }
+`;
+const TodayImgWrap = styled.div`
+  width: 362px;
+  height: 313px;
+  background-color: ${colors.white};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  border-radius: 16px;
+`;
+const TodayImg = styled.img`
+  width: 90%;
+  cursor: pointer;
+`;
+const TodayButtonWrap = styled.div`
+  margin: 44px auto;
+`;
 const TodayAddButton = styled.button`
   display: flex;
   width: 250px;
@@ -227,19 +194,60 @@ const TodayAddButton = styled.button`
     background: ${colors.blue[500]};
   }
 `;
-const CalendarWrap = styled.div`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 200px;
-  height: 250px;
-  background-color: aqua;
-  display: none;
+
+const DateStyle = styled.div`
+  font-size: 10px;
+  color: ${colors.gray[600]};
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 500;
+`;
+
+const TopImageWrapper = styled.div`
+  max-height: 228px;
+  max-width: 152px;
+  display: flex;
+  justify-content: center;
+`;
+
+const HomeTop = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const HomeTopImg = styled.img`
+  padding-top: 11px;
+  width: 100%;
+  height: 100%;
+`;
+
+const HomeTopSpan = styled.span`
+  color: ${colors.gray[700]};
+  font-weight: 700;
+  font-size: 13px;
+  padding-bottom: 25px;
 `;
 
 function HistoryDaily() {
-  //js
-  const [selectedImage, setSelectedImage] = useState(null);
+  const hiddenInputRef = useRef(null);
+  const [selectedDate, setSelectedDate] = useState(() =>
+    formatDateToKorean(new Date().toISOString()),
+  );
+  
+  const handleIconClick = () => {
+    hiddenInputRef.current.showPicker?.(); // 크롬에서만 작동
+    hiddenInputRef.current.click(); // 폴백
+  };
+
+  const handleDateChange = e => {
+    setSelectedDate(formatDateToKorean(e.target.value));
+  };
+  
+  
+   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageChange = e => {
     const file = e.target.files[0];
@@ -248,7 +256,14 @@ function HistoryDaily() {
       setSelectedImage(imageURL);
     }
   };
-  //jsx
+
+  // 네비게이터
+  const navigate = useNavigate();
+
+  const handleClickDaily = () => {
+    navigate("/history/daily");
+  };
+
   return (
     <Container>
       <Header>
@@ -399,11 +414,11 @@ function HistoryDaily() {
           </TodayImgWrap>
         </TodayPotoWrap>
         <TodayButtonWrap>
-          <TodayAddButton>기록하기</TodayAddButton>
+          <TodayAddButton onClick={handleClickDaily}>기록하기</TodayAddButton>
         </TodayButtonWrap>
       </Main>
       <NavigationBar>
-        <NavItem>
+        <NavItem to="/home">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -433,7 +448,7 @@ function HistoryDaily() {
           </svg>
           <span>추가</span>
         </NavItemFocus>
-        <NavItem>
+        <NavItem to="/history/week">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -448,7 +463,7 @@ function HistoryDaily() {
           </svg>
           <span>히스토리</span>
         </NavItem>
-        <NavItem>
+        <NavItem to="/profile">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="27"

@@ -34,4 +34,7 @@ export const DaysButton = styled.button`
   color: ${({ state }) => (state ? colors.white : colors.black)};
   font-size: 13px;
   font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

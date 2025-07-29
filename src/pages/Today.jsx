@@ -177,6 +177,8 @@ function HistoryDaily() {
     padding-bottom: 18px;
   `;
   const TextArea = styled.textarea`
+    font-family: "Pretendard";
+    font-weight: 400;
     width: 344px;
     height: 67px;
     border-radius: 10px;
@@ -184,13 +186,15 @@ function HistoryDaily() {
     box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
       var(--sds-size-depth-100) var(--sds-size-depth-0)
       var(--sds-color-black-100);
-    padding: 5px;
-    font-size: 13px;
+    padding: 8px 10px;
+    font-size: 10px;
     color: ${colors.gray[800]};
     resize: none;
+    line-height: 1.5;
     &::placeholder {
       font-size: 10px;
       color: ${colors.gray[300]};
+      line-height: 1.5;
     }
   `;
   const TodayPotoWrap = styled.div`

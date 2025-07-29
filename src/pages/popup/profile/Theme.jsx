@@ -26,56 +26,56 @@ const Title = styled.p`
   padding-bottom: 17px;
 `;
 
-// const ThemeSelectWrap = styled.div`
-//   display: flex;
-//   align-items: center;
-// `;
+const ThemeSelectWrap = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
-// const RadioWrapper = styled.label`
-//   display: flex;
-//   align-items: center;
-//   gap: 10px;
-//   cursor: pointer;
-//   margin-bottom: 12px;
-//   position: relative;
-// `;
+const RadioWrapper = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 30px;
+  position: relative;
+`;
 
-// const Input = styled.input`
-//   display: none;
+const Input = styled.input`
+  display: none;
 
-//   &:checked + span::after {
-//     transform: translate(-50%, -50%) scale(1); // 살짝 위로 뜨는 효과
-//     border-color: #007aff;
-//   }
-// `;
-// const CustomRadio = styled.span`
-//   width: 20px;
-//   height: 20px;
-//   background-color: #fff;
-//   border: 1px solid #e5e5e5;
-//   border-radius: 10px;
-//   position: relative;
+  &:checked + span::after {
+    transform: translate(-50%, -50%) scale(1); // 살짝 위로 뜨는 효과
+    border-color: #007aff;
+  }
+`;
+const CustomRadio = styled.span`
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  position: relative;
 
-//   ::after {
-//     content: "";
-//     background-color: #fff;
-//     border: 5px solid #007aff;
-//     position: absolute;
-//     top: 50%;
-//     left: 50%;
-//     width: 10px;
-//     height: 10px;
-//     border-radius: 50%;
-//     transform: translate(-50%, -50%) scale(0);
-//   }
-// `;
+  ::after {
+    content: "";
+    background-color: #fff;
+    border: 5px solid #007aff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+  }
+`;
 
-// const FontWrap = styled.div`
-//   display: inline-block;
-//   justify-content: center;
-//   align-items: center;
-//   padding-left: 10px;
-// `;
+const FontWrap = styled.div`
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+`;
 
 const ModeText = styled.p`
   font-size: 16px;
@@ -187,45 +187,6 @@ function Theme() {
             </div>
           </ThemeRadioLabel>
         </ThemeRadioWrap>
-
-        {/* <ThemeSelectWrap>
-          <RadioWrapper>
-            <CustomRadio />
-          </RadioWrapper>
-          <FontWrap>
-            <label htmlFor="light">
-              <Input
-                type="radio"
-                id="light"
-                value="light"
-                name="theme"
-                className="custom-radio"
-              />
-              <ModeText>라이트 모드</ModeText>
-              <EXText>밝고 산뜻한 기본 테마</EXText>
-            </label>
-          </FontWrap>
-        </ThemeSelectWrap>
-        <ThemeSelectWrap>
-          <RadioWrapper>
-            <Input type={"radio"} />
-            <CustomRadio />
-          </RadioWrapper>
-          <FontWrap>
-            <ModeText>다크 모드</ModeText>
-            <EXText>눈이 편안한 어두운 테마</EXText>
-          </FontWrap>
-        </ThemeSelectWrap>
-        <ThemeSelectWrap>
-          <RadioWrapper>
-            <Input type={"radio"} />
-            <CustomRadio />
-          </RadioWrapper>
-          <FontWrap>
-            <ModeText>시스템 설정 따름</ModeText>
-            <EXText>현재 기기의 설정에 따른 테마</EXText>
-          </FontWrap>
-        </ThemeSelectWrap> */}
         <ButtonContainer>
           <ButtonWrap>
             <ButtonOK>확인</ButtonOK>

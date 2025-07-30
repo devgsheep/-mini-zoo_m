@@ -3,6 +3,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { fonts } from "../styles/fonts";
 import Alart from "./popup/profile/Alart";
+import { Modal } from "antd";
+import Theme from "./popup/profile/Theme";
+import { useState } from "react";
+import "../css/modal.css";
 
 const Container = styled.div`
   width: 394px;
@@ -301,7 +305,6 @@ function Profile() {
   //jsx
   return (
     <Container>
-      {/* <Alart /> */}
       <TopContainer>
         <SignWrap>
           <div>
@@ -359,6 +362,17 @@ function Profile() {
             </IconCircleTheme>
             테마
           </Button>
+          <Modal
+            open={isModalOpen}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            footer={null} // ✅ Theme 안에 자체 버튼이 있으므로 footer 제거
+            closable={false}
+            centered
+            width={286} // ✅ Theme 컴포넌트에 맞는 너비 조절
+          >
+            <Theme onClose={handleCancel} />
+          </Modal>
           <Button>
             <IconCirclePersonalInfo>
               <PersonalInfoImage

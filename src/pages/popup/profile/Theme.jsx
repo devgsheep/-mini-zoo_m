@@ -2,16 +2,16 @@ import styled from "@emotion/styled";
 import colors from "../../../styles/colors";
 import "../../../css/radio.css";
 
-const AlertPopUp = styled.div`
-  display: flex;
-  position: fixed;
-  z-index: 99999;
-  width: 394px;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
-`;
+// const AlertPopUp = styled.div`
+//   display: flex;
+//   position: fixed;
+//   z-index: 99999;
+//   width: 394px;
+//   height: 100%;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: rgba(0, 0, 0, 0.6);
+// `;
 const AlertPopUpBox = styled.div`
   width: 286px;
   height: auto;
@@ -88,9 +88,10 @@ const ThemeRadioWrap = styled.div`
   margin-bottom: 20px;
 `;
 
-function Theme() {
+function Theme({ onClose }) {
   return (
-    <AlertPopUp>
+    <>
+      {/* <AlertPopUp> */}
       <AlertPopUpBox>
         <Title>테마설정</Title>
         <ThemeRadioWrap>
@@ -138,13 +139,14 @@ function Theme() {
         </ThemeRadioWrap>
         <ButtonContainer>
           <ButtonWrap>
-            <ButtonOK>확인</ButtonOK>
+            <ButtonOK onClick={onClose}>확인</ButtonOK>
             <Span />
-            <ButtonCC>취소</ButtonCC>
+            <ButtonCC onClick={onClose}>취소</ButtonCC>
           </ButtonWrap>
         </ButtonContainer>
       </AlertPopUpBox>
-    </AlertPopUp>
+    </>
+    // </AlertPopUp>
   );
 }
 

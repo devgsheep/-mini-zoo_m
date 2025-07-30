@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { fonts } from "../styles/fonts";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Modal from "../components/ui/Modal";
+import { fonts } from "../styles/fonts";
 import Alart from "./popup/profile/Alart";
 
 const Container = styled.div`
@@ -284,11 +284,24 @@ const NavItem = styled(Link)`
 `;
 
 function Profile() {
+  //js
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsModalOpen(false);
+  };
+
+  //jsx
   return (
     <Container>
-      <Modal>
-        <Alart />
-      </Modal>
+      {/* <Alart /> */}
       <TopContainer>
         <SignWrap>
           <div>
@@ -333,12 +346,13 @@ function Profile() {
           </ProfileFeelAvg>
         </ProfileFeel>
         <ButtonWrap>
-          <Button>
+          <Button type="primary" onClick={showModal}>
             <IconCircleAlert>
               <AlertImage src="./images/alert.svg" alt="알림" />
             </IconCircleAlert>
             알림
           </Button>
+          {isModalOpen && <Alart onCancel={handleClose} />}
           <Button>
             <IconCircleTheme>
               <ThemeImage src="./images/theme.svg" alt="테마" />

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { useRef, useState } from "react";
+import { useState } from "react";
+import Calendar from "react-calendar";
 import { Link, useNavigate } from "react-router-dom";
-import colors from "../styles/colors";
 import {
   AngryIcon,
   AnxiousIcon,
@@ -12,8 +12,11 @@ import {
   SadIcon,
   TiredIcon,
 } from "../components/icons/emotionicon";
-import Calendar from "react-calendar";
 import "../css/today_calendar.css";
+import colors from "../styles/colors";
+import moment from "moment";
+import "moment/locale/ko";
+moment.locale("ko");
 
 const Container = styled.div`
   width: 394px;
@@ -21,6 +24,7 @@ const Container = styled.div`
   position: relative;
 `;
 const Header = styled.div`
+  position: relative;
   max-height: 47px;
   height: 47px;
   background-color: #fff;
@@ -206,11 +210,11 @@ const DateStyle = styled.div`
 const CalendarWrap = styled.div`
   position: absolute;
   left: 0;
-  top: 0;
+  top: 47px;
   width: 200px;
-  height: 250px;
+  min-height: 100px;
   background-color: aqua;
-  display: none;
+  /* display: none; */
 `;
 
 const TopImageWrapper = styled.div`
@@ -239,8 +243,28 @@ const HomeTopSpan = styled.span`
   font-size: 13px;
   padding-bottom: 25px;
 `;
+const CalendarButton = styled.button`
+  border: none;
+  background-color: ${colors.white};
+`;
+const CustomCalendar = styled(Calendar)`
+  .react-calendar__navigation {
+    display: flex;
+    height: 22px;
+    margin-bottom: 1em;
+  }
 
+  .react-calendar__navigation button {
+    min-width: 22px;
+    background: none;
+  }
+  .react-calendar__navigation__label {
+    font-size: 12px;
+  }
+`;
 function HistoryDaily() {
+  //js
+
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageChange = e => {
@@ -258,27 +282,53 @@ function HistoryDaily() {
     navigate("/history/daily");
   };
 
+  const [showCalendar, setShowCalendar] = useState(false);
+  const weekName = ["일", "월", "화", "수", "목", "금", "토"];
+  const formatShortWeekday = (locale, date) => {
+    const idx = date.getDay();
+    // Date 객체에서 getDay 는 날짜가 0:일, 1:월, 2:화 ... 6:토
+    // console.log(idx);
+    return weekName[idx];
+  };
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const handleDateChange = date => {
+    setSelectedDate(date);
+    setShowCalendar(false);
+  };
+
+  // jsx
   return (
     <Container>
       <Header>
         <div>오늘의 감정</div>
         <DateStyle>
-          <div>7월 15일 화요일</div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="10"
-            height="10"
-            viewBox="0 0 10 10"
-            fill="none"
-          >
-            <path
-              d="M1.01 10C0.722083 10 0.481875 9.91553 0.289375 9.74658C0.0968749 9.57764 0.000416667 9.36683 0 9.11415V2.1096C0 1.85728 0.0964582 1.64665 0.289375 1.47771C0.482291 1.30876 0.7225 1.22411 1.01 1.22374H2.11562V0.295654C2.11562 0.210451 2.1475 0.139875 2.21125 0.0839267C2.275 0.027978 2.35521 3.78288e-06 2.45187 3.78288e-06C2.54854 3.78288e-06 2.62896 0.027978 2.69312 0.0839267C2.75729 0.139875 2.78917 0.210451 2.78875 0.295654V1.22374H7.26V0.27481C7.26 0.196555 7.28979 0.131099 7.34937 0.0784415C7.40896 0.025784 7.48333 -0.000361894 7.5725 3.78288e-06C7.66166 0.00036946 7.73583 0.0265153 7.795 0.0784415C7.85417 0.130368 7.88417 0.195641 7.885 0.274262V1.22374H8.99062C9.27812 1.22374 9.51833 1.3084 9.71125 1.47771C9.90416 1.64701 10.0004 1.85783 10 2.11014V9.11415C10 9.36646 9.90375 9.57728 9.71125 9.74658C9.51875 9.91589 9.27833 10.0004 8.99 10H1.01ZM1.01 9.45148H8.99062C9.08646 9.45148 9.17458 9.41638 9.255 9.34617C9.33541 9.27596 9.37541 9.19843 9.375 9.1136V4.30421H0.625V9.11415C0.625 9.19825 0.665 9.27559 0.745 9.34617C0.825 9.41674 0.91375 9.45185 1.01 9.45148Z"
-              fill="#A8A8A8"
-            />
-          </svg>
-          <CalendarWrap>
-            <Calendar />
-          </CalendarWrap>
+          <div>{moment(selectedDate).format("M월 D일 dddd")}</div>
+          <CalendarButton onClick={() => setShowCalendar(prev => !prev)}>
+            <svg
+              style={{ cursor: "pointer" }}
+              xmlns="http://www.w3.org/2000/svg"
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+            >
+              <path
+                d="M1.01 10C0.722083 10 0.481875 9.91553 0.289375 9.74658C0.0968749 9.57764 0.000416667 9.36683 0 9.11415V2.1096C0 1.85728 0.0964582 1.64665 0.289375 1.47771C0.482291 1.30876 0.7225 1.22411 1.01 1.22374H2.11562V0.295654C2.11562 0.210451 2.1475 0.139875 2.21125 0.0839267C2.275 0.027978 2.35521 3.78288e-06 2.45187 3.78288e-06C2.54854 3.78288e-06 2.62896 0.027978 2.69312 0.0839267C2.75729 0.139875 2.78917 0.210451 2.78875 0.295654V1.22374H7.26V0.27481C7.26 0.196555 7.28979 0.131099 7.34937 0.0784415C7.40896 0.025784 7.48333 -0.000361894 7.5725 3.78288e-06C7.66166 0.00036946 7.73583 0.0265153 7.795 0.0784415C7.85417 0.130368 7.88417 0.195641 7.885 0.274262V1.22374H8.99062C9.27812 1.22374 9.51833 1.3084 9.71125 1.47771C9.90416 1.64701 10.0004 1.85783 10 2.11014V9.11415C10 9.36646 9.90375 9.57728 9.71125 9.74658C9.51875 9.91589 9.27833 10.0004 8.99 10H1.01ZM1.01 9.45148H8.99062C9.08646 9.45148 9.17458 9.41638 9.255 9.34617C9.33541 9.27596 9.37541 9.19843 9.375 9.1136V4.30421H0.625V9.11415C0.625 9.19825 0.665 9.27559 0.745 9.34617C0.825 9.41674 0.91375 9.45185 1.01 9.45148Z"
+                fill="#A8A8A8"
+              />
+            </svg>
+          </CalendarButton>
+          {showCalendar && (
+            <CalendarWrap>
+              <CustomCalendar
+                calendarType="gregory"
+                formatShortWeekday={formatShortWeekday}
+                formatDay={(locale, date) => moment(date).format("D")}
+                onChange={handleDateChange}
+              />
+            </CalendarWrap>
+          )}
         </DateStyle>
       </Header>
       <HomeTop>

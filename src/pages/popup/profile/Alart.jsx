@@ -8,7 +8,6 @@ import {
 import { useState } from "react";
 import "../../../css/radio.css";
 import { ButtonCC, ButtonContainer, ButtonOK, ButtonWrap } from "../../Ui";
-import Modal from "../../../components/ui/Modal";
 
 const Container = styled.div`
   width: 394px;
@@ -37,6 +36,7 @@ const AlertPopUpBox = styled.div`
   flex-direction: column;
   gap: 27px;
 `;
+
 const AlertButtonWrap = styled.div`
   display: flex;
   justify-content: space-between;
@@ -106,18 +106,13 @@ const RadioInput = styled.input`
 `;
 
 const days = ["일", "월", "화", "수", "목", "금", "토"];
-function Alart({ onCancel }) {
+function Alart() {
   //js
 
   const [isOn, setIsOn] = useState(false);
   const handleToggle = () => {
     setIsOn(state => !state);
   };
-  const [showAlart, setShowAlart] = useState(true);
-  const handleChangeAlart = () => {
-    onCancel();
-  };
-
   const [selectedDays, setSelectedDays] = useState([]);
   const handleDayToggle = day => {
     setSelectedDays(prev =>
@@ -155,55 +150,55 @@ function Alart({ onCancel }) {
 
   //jsx
   return (
-    // <Container>
-    //   <AlertPopUp>
-    //     <AlertPopUpBox>
-    <Modal>
-      <AlertButtonWrap>
-        <span>알림 설정</span>
-        <TogleButton state={isOn} onClick={handleToggle}>
-          <TogleButtonCircle state={isOn}></TogleButtonCircle>
-        </TogleButton>
-      </AlertButtonWrap>
-      {/* 추후 안트디자인 수업이후 넣을예정 */}
-      <RadioWrap>
-        <RadioBox>
-          <RadioLabel htmlFor="sound">
-            <RadioInput
-              type="radio"
-              id="sound"
-              value="sound"
-              name="sound-setting"
-              className="custom-radio"
-            />
-            소리
-          </RadioLabel>
-        </RadioBox>
-        <RadioBox>
-          <RadioLabel htmlFor="vibration">
-            <RadioInput
-              type="radio"
-              id="vibration"
-              value="vibration"
-              name="sound-setting"
-              className="custom-radio"
-            />
-            진동
-          </RadioLabel>
-        </RadioBox>
-        <RadioBox>
-          <RadioLabel htmlFor="silent">
-            <RadioInput
-              type="radio"
-              id="silent"
-              value="silent"
-              name="sound-setting"
-              className="custom-radio"
-            />
-            무음
-          </RadioLabel>
-        </RadioBox>
-      </RadioWrap>
+    <Container>
+      <AlertPopUp>
+        <AlertPopUpBox>
+          <AlertButtonWrap>
+            <span>알림 설정</span>
+            <TogleButton state={isOn} onClick={handleToggle}>
+              <TogleButtonCircle state={isOn}></TogleButtonCircle>
+            </TogleButton>
+          </AlertButtonWrap>
+          {/* 추후 안트디자인 수업이후 넣을예정 */}
+          <RadioWrap>
+            <RadioBox>
+              <RadioLabel htmlFor="sound">
+                <RadioInput
+                  type="radio"
+                  id="sound"
+                  value="sound"
+                  name="sound-setting"
+                  className="custom-radio"
+                  // checked
+                />
+                소리
+              </RadioLabel>
+            </RadioBox>
+            <RadioBox>
+              <RadioLabel htmlFor="vibration">
+                <RadioInput
+                  type="radio"
+                  id="vibration"
+                  value="vibration"
+                  name="sound-setting"
+                  className="custom-radio"
+                />
+                진동
+              </RadioLabel>
+            </RadioBox>
+            <RadioBox>
+              <RadioLabel htmlFor="silent">
+                <RadioInput
+                  type="radio"
+                  id="silent"
+                  value="silent"
+                  name="sound-setting"
+                  className="custom-radio"
+                />
+                무음
+              </RadioLabel>
+            </RadioBox>
+          </RadioWrap>
           <DaysWrap>
             <span>요일</span>
             <DaysButtonWrap>
@@ -233,26 +228,24 @@ function Alart({ onCancel }) {
                 </option>
               ))}
             </Select>
-        <Select>
-          {minutes.map(minute => (
-            <option key={minute} value={minute}>
-              {minute}
-            </option>
-          ))}
-        </Select>
-      </TimeWrapper>
-      <ButtonContainer>
-        <ButtonWrap>
-          <ButtonOK onClick={handleChangeAlart}>확인</ButtonOK>
-          <Span />
-          <ButtonCC onClick={handleChangeAlart}>취소</ButtonCC>
-        </ButtonWrap>
-      </ButtonContainer>
-    </Modal>
-
-    //     </AlertPopUpBox>
-    //   </AlertPopUp>
-    // </Container>
+            <Select>
+              {minutes.map(minute => (
+                <option key={minute} value={minute}>
+                  {minute}
+                </option>
+              ))}
+            </Select>
+          </TimeWrapper>
+          <ButtonContainer>
+            <ButtonWrap>
+              <ButtonOK>확인</ButtonOK>
+              <Span />
+              <ButtonCC>취소</ButtonCC>
+            </ButtonWrap>
+          </ButtonContainer>
+        </AlertPopUpBox>
+      </AlertPopUp>
+    </Container>
   );
 }
 

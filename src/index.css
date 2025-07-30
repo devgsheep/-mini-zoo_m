@@ -64,3 +64,7 @@ body {
   max-width: 394px;
   margin: 0 auto;
 }
+abbr[title] {
+  text-decoration: none;
+  border-bottom: none;
+}

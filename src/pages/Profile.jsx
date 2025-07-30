@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { fonts } from "../styles/fonts";
 import { Link } from "react-router-dom";
+import Modal from "../components/ui/Modal";
+import Alart from "./popup/profile/Alart";
 
 const Container = styled.div`
   width: 394px;
@@ -284,6 +286,9 @@ const NavItem = styled(Link)`
 function Profile() {
   return (
     <Container>
+      <Modal>
+        <Alart />
+      </Modal>
       <TopContainer>
         <SignWrap>
           <div>

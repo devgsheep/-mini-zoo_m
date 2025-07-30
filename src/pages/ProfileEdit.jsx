@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useState } from "react";
 import { fonts } from "../styles/fonts";
 import colors from "../styles/colors";
+import { Modal } from "antd";
+import PasswordChange from "./popup/edit/PasswordChange";
 
 const Container = styled.div`
   width: 394px;
@@ -227,6 +229,19 @@ const ReSign = styled.div`
 `;
 
 function ProfileEdit() {
+  //
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+
+  const openPasswordModal = () => {
+    setIsPasswordModalOpen(true);
+  };
+
+  const closePasswordModal = () => {
+    setIsPasswordModalOpen(false);
+  };
+
+  //
+
   return (
     <Container>
       <TopContainer>
@@ -252,7 +267,7 @@ function ProfileEdit() {
         </ProfileEditWrap>
 
         <ButtonWrap>
-          <Button>
+          <Button onClick={openPasswordModal}>
             <IconCirclePass>
               <PassImage src="../images/pass.svg" alt="비밀번호 변경" />
             </IconCirclePass>
@@ -261,6 +276,16 @@ function ProfileEdit() {
               <ButtonSubText>계정 보안을 강화하세요</ButtonSubText>
             </ButtonTextWrapper>
           </Button>
+          <Modal
+            open={isPasswordModalOpen}
+            onCancel={closePasswordModal}
+            footer={null} // ✅ Theme 안에 자체 버튼이 있으므로 footer 제거
+            closable={false}
+            centered
+            width={286}
+          >
+            <PasswordChange onClose={closePasswordModal} />
+          </Modal>
 
           <Button>
             <IconCircleTranceImage>

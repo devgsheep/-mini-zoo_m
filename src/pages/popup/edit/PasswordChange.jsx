@@ -17,7 +17,7 @@ const PasswordChangePopUp = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
+  /* background-color: rgba(0, 0, 0, 0.6); */
   /* display: none; */
 `;
 const PasswordChangePopUpBox = styled.div`
@@ -67,7 +67,7 @@ const ChangePw = styled.div`
   /* padding-top: 25px; */
   gap: 3px;
 `;
-function PasswordChange() {
+function PasswordChange(onClose) {
   return (
     <Container>
       <PasswordChangePopUp>
@@ -85,7 +85,7 @@ function PasswordChange() {
             </InputWrap>
           </ChangePw>
           <ButtonWrap>
-            <Button>확인</Button>
+            <Button onClick={onClose}>확인</Button>
           </ButtonWrap>
         </PasswordChangePopUpBox>
       </PasswordChangePopUp>

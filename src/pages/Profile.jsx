@@ -5,8 +5,10 @@ import { fonts } from "../styles/fonts";
 import Alart from "./popup/profile/Alart";
 import { Modal } from "antd";
 import Theme from "./popup/profile/Theme";
-import { useState } from "react";
 import "../css/modal.css";
+import PersonalInfo from "./popup/profile/PersonalInfo";
+import Ask from "./popup/profile/Ask";
+import Info from "./popup/profile/Info";
 
 const Container = styled.div`
   width: 394px;
@@ -289,18 +291,33 @@ const NavItem = styled(Link)`
 
 function Profile() {
   //js
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOpen = () => {
-    setIsModalOpen(true);
-  };
-
   const handleClose = () => {
     setIsModalOpen(false);
   };
+
+  const showModal = () => setIsModalOpen(true);
+
+  // 테마
+  const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
+  const openThemeModal = () => setIsThemeModalOpen(true);
+  const closeThemeModal = () => setIsThemeModalOpen(false);
+
+  // 개인정보
+  const [isPersonalInfoModalOpen, setIsPersonalInfoMoalOpen] = useState(false);
+  const openPersonalInfoModal = () => setIsPersonalInfoMoalOpen(true);
+  const closePersonalInfoModal = () => setIsPersonalInfoMoalOpen(false);
+
+  // 문의하기
+  const [isAskOpen, setIsAskMoalOpen] = useState(false);
+  const openAskModal = () => setIsAskMoalOpen(true);
+  const closeAskModal = () => setIsAskMoalOpen(false);
+
+  // 정보
+  const [isInfoOpen, setIsInfoMoalOpen] = useState(false);
+  const openInfoModal = () => setIsInfoMoalOpen(true);
+  const closeInfoModal = () => setIsInfoMoalOpen(false);
 
   //jsx
   return (
@@ -356,24 +373,25 @@ function Profile() {
             알림
           </Button>
           {isModalOpen && <Alart onCancel={handleClose} />}
-          <Button>
+          {/* 테마 버튼 */}
+          <Button type="primary" onClick={openThemeModal}>
             <IconCircleTheme>
               <ThemeImage src="./images/theme.svg" alt="테마" />
             </IconCircleTheme>
             테마
           </Button>
           <Modal
-            open={isModalOpen}
-            onOk={handleOk}
-            onCancel={handleCancel}
-            footer={null} // ✅ Theme 안에 자체 버튼이 있으므로 footer 제거
+            open={isThemeModalOpen}
+            onCancel={closeThemeModal}
+            footer={null}
             closable={false}
             centered
-            width={286} // ✅ Theme 컴포넌트에 맞는 너비 조절
+            width={286}
           >
-            <Theme onClose={handleCancel} />
+            <Theme onClose={closeThemeModal} />
           </Modal>
-          <Button>
+          {/* 개인정보처리방침 */}
+          <Button type="primary" onClick={openPersonalInfoModal}>
             <IconCirclePersonalInfo>
               <PersonalInfoImage
                 src="./images/personalinfo.svg"
@@ -382,18 +400,48 @@ function Profile() {
             </IconCirclePersonalInfo>
             개인정보 처리방침
           </Button>
-          <Button>
+          <Modal
+            open={isPersonalInfoModalOpen}
+            onCancel={closePersonalInfoModal}
+            footer={null}
+            closable={false}
+            centered
+            width={286}
+          >
+            <PersonalInfo onClose={closePersonalInfoModal} />
+          </Modal>
+          <Button type="primary" onClick={openAskModal}>
             <IconCircleEtc>
               <EtcImage src="./images/etc.svg" alt="문의" />
             </IconCircleEtc>
             문의
           </Button>
-          <Button>
+          <Modal
+            open={isAskOpen}
+            onCancel={closeAskModal}
+            footer={null}
+            closable={false}
+            centered
+            width={286}
+          >
+            <Ask onClose={closeAskModal} />
+          </Modal>
+          <Button type="primary" onClick={openInfoModal}>
             <IconCircleInfo>
               <InfoImage src="./images/info.svg" alt="정보" />
             </IconCircleInfo>
             정보
           </Button>
+          <Modal
+            open={isInfoOpen}
+            onCancel={closeInfoModal}
+            footer={null}
+            closable={false}
+            centered
+            width={286}
+          >
+            <Info onClose={closeInfoModal} />
+          </Modal>
         </ButtonWrap>
         <Logout>로그아웃</Logout>
       </ProfileWrap>

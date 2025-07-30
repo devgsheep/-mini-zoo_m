@@ -69,27 +69,29 @@ const ChangePw = styled.div`
 `;
 function PasswordChange(onClose) {
   return (
-    <Container>
-      <PasswordChangePopUp>
-        <PasswordChangePopUpBox>
-          <PasswordChangeTitle>비밀번호 변경</PasswordChangeTitle>
+    // <Container>
+    //   <PasswordChangePopUp>
+    <>
+      <PasswordChangePopUpBox>
+        <PasswordChangeTitle>비밀번호 변경</PasswordChangeTitle>
+        <InputWrap>
+          <Input type="password" placeholder="현재 비밀번호" />
+        </InputWrap>
+        <ChangePw className="changepw">
           <InputWrap>
-            <Input type="password" placeholder="현재 비밀번호" />
+            <Input type="password" placeholder="새 비밀번호" />
           </InputWrap>
-          <ChangePw className="changepw">
-            <InputWrap>
-              <Input type="password" placeholder="새 비밀번호" />
-            </InputWrap>
-            <InputWrap>
-              <Input type="password" placeholder="새 비밀번호 확인" />
-            </InputWrap>
-          </ChangePw>
-          <ButtonWrap>
-            <Button onClick={onClose}>확인</Button>
-          </ButtonWrap>
-        </PasswordChangePopUpBox>
-      </PasswordChangePopUp>
-    </Container>
+          <InputWrap>
+            <Input type="password" placeholder="새 비밀번호 확인" />
+          </InputWrap>
+        </ChangePw>
+        <ButtonWrap>
+          <Button onClick={onClose}>확인</Button>
+        </ButtonWrap>
+      </PasswordChangePopUpBox>
+    </>
+    //   </PasswordChangePopUp>
+    // </Container>
   );
 }
 

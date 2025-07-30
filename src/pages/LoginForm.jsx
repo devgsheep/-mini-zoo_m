@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useState } from "react";
 import { fonts } from "../styles/fonts";
 import colors from "../styles/colors";
 import { useNavigate } from "react-router-dom";
+import { Modal } from "antd";
+import PasswordFind from "./PasswordFind";
 
 const Container = styled.div`
   height: 852px;
@@ -284,6 +286,7 @@ const GUESTP = styled.p`
 `;
 
 function LoginForm() {
+  // 네비게이터
   const navigate = useNavigate();
 
   const handleClickHome = () => {
@@ -292,6 +295,11 @@ function LoginForm() {
   const handleClickSign = () => {
     navigate("/sign");
   };
+
+  // 비밀번호 모달
+  const [isPasswordFindOpen, setIsPasswordFindMoalOpen] = useState(false);
+  const openPasswordFindModal = () => setIsPasswordFindMoalOpen(true);
+  const closePasswordFindModal = () => setIsPasswordFindMoalOpen(false);
 
   return (
     <Container>
@@ -372,7 +380,19 @@ function LoginForm() {
           <InputCheckBox type="checkbox" />
           <p>로그인 상태 유지</p>
         </LeftWrap>
-        <SpanLogin>비밀번호를 잊으셨나요?</SpanLogin>
+        <SpanLogin type="primary" onClick={openPasswordFindModal}>
+          비밀번호를 잊으셨나요?
+        </SpanLogin>
+        <Modal
+          open={isPasswordFindOpen}
+          onCancel={closePasswordFindModal}
+          footer={null}
+          closable={false}
+          centered
+          width={286}
+        >
+          <PasswordFind onClick={closePasswordFindModal} />
+        </Modal>
       </InputCheckBoxWrap>
       <Button onClick={handleClickHome}>로그인</Button>
       <HaveLogin>

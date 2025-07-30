@@ -1,14 +1,14 @@
 import styled from "@emotion/styled";
-import colors from "../../../styles/colors";
+import { useState } from "react";
 import {
   DaysButton,
   TogleButton,
   TogleButtonCircle,
 } from "../../../components/icons/button";
-import { useState } from "react";
-import "../../../css/radio.css";
-import { ButtonCC, ButtonContainer, ButtonOK, ButtonWrap } from "../../Ui";
 import Modal from "../../../components/ui/Modal";
+import "../../../css/radio.css";
+import colors from "../../../styles/colors";
+import { ButtonCC, ButtonContainer, ButtonOK, ButtonWrap } from "../../Ui";
 
 const Container = styled.div`
   width: 394px;
@@ -113,7 +113,7 @@ function Alart({ onCancel }) {
   const handleToggle = () => {
     setIsOn(state => !state);
   };
-  const [showAlart, setShowAlart] = useState(true);
+
   const handleChangeAlart = () => {
     onCancel();
   };
@@ -204,35 +204,35 @@ function Alart({ onCancel }) {
           </RadioLabel>
         </RadioBox>
       </RadioWrap>
-          <DaysWrap>
-            <span>요일</span>
-            <DaysButtonWrap>
-              {days.map(item => {
-                return (
-                  <DaysButton
-                    key={item}
-                    state={selectedDays.includes(item)}
-                    onClick={() => handleDayToggle(item)}
-                  >
-                    {item}
-                  </DaysButton>
-                );
-              })}
-            </DaysButtonWrap>
-          </DaysWrap>
-          {/* 시계부분 */}
-          <TimeWrapper>
-            <Select id="ampm" name="timer">
-              <option value="am">오전</option>
-              <option value="pm">오후</option>
-            </Select>
-            <Select>
-              {hours.map(hour => (
-                <option key={hour} value={hour}>
-                  {hour}
-                </option>
-              ))}
-            </Select>
+      <DaysWrap>
+        <span>요일</span>
+        <DaysButtonWrap>
+          {days.map(item => {
+            return (
+              <DaysButton
+                key={item}
+                state={selectedDays.includes(item)}
+                onClick={() => handleDayToggle(item)}
+              >
+                {item}
+              </DaysButton>
+            );
+          })}
+        </DaysButtonWrap>
+      </DaysWrap>
+      {/* 시계부분 */}
+      <TimeWrapper>
+        <Select id="ampm" name="timer">
+          <option value="am">오전</option>
+          <option value="pm">오후</option>
+        </Select>
+        <Select>
+          {hours.map(hour => (
+            <option key={hour} value={hour}>
+              {hour}
+            </option>
+          ))}
+        </Select>
         <Select>
           {minutes.map(minute => (
             <option key={minute} value={minute}>

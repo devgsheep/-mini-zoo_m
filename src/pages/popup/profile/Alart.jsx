@@ -109,16 +109,24 @@ const days = ["일", "월", "화", "수", "목", "금", "토"];
 function Alart() {
   //js
 
-  const [isOn, setIsOn] = useState(false);
+  const [isOn, setIsOn] = useState(true);
   const handleToggle = () => {
     setIsOn(state => !state);
+    if (isOn) {
+      setSelectedDays([]);
+      setRadioValue("");
+    } else {
+      setRadioValue("sound");
+    }
   };
+  const [radioValue, setRadioValue] = useState("sound");
   const [selectedDays, setSelectedDays] = useState([]);
   const handleDayToggle = day => {
     setSelectedDays(prev =>
       prev.includes(day) ? prev.filter(d => d !== day) : [...prev, day],
     );
   };
+
   // 시간 부분
   const hours = [
     "01",
@@ -169,7 +177,8 @@ function Alart() {
                   value="sound"
                   name="sound-setting"
                   className="custom-radio"
-                  // checked
+                  checked={radioValue === "sound"}
+                  onChange={e => setRadioValue(e.target.value)}
                 />
                 소리
               </RadioLabel>
@@ -182,6 +191,8 @@ function Alart() {
                   value="vibration"
                   name="sound-setting"
                   className="custom-radio"
+                  checked={radioValue === "vibration"}
+                  onChange={e => setRadioValue(e.target.value)}
                 />
                 진동
               </RadioLabel>
@@ -194,6 +205,8 @@ function Alart() {
                   value="silent"
                   name="sound-setting"
                   className="custom-radio"
+                  checked={radioValue === "silent"}
+                  onChange={e => setRadioValue(e.target.value)}
                 />
                 무음
               </RadioLabel>

@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useState } from "react";
 import { fonts } from "../styles/fonts";
 import colors from "../styles/colors";
 import { useNavigate } from "react-router-dom";
+import { Form, Input } from "antd";
 
 const Container = styled.div`
   height: 852px;
@@ -82,19 +83,6 @@ const Main = styled.div`
   padding-top: 29px;
 `;
 
-const TitleSpan = styled.div`
-  display: flex;
-  gap: 3px;
-`;
-
-const MainP = styled.p`
-  padding-left: 20px;
-  padding-bottom: 7px;
-  font-size: 13px;
-  font-weight: 500;
-  color: #5c5c5c;
-`;
-
 const Span = styled.span`
   font-size: 13px;
   font-weight: 500;
@@ -109,7 +97,25 @@ const InputWrap = styled.div`
   padding-bottom: 18px;
 `;
 
-const Input = styled.input`
+const AntCustomInput = styled(Input)`
+  width: 350px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 10px;
+  border: 1px solid #c6ddff;
+  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
+    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
+  padding-left: 10px;
+  font-size: 13px;
+  color: ${colors.black};
+  margin-bottom: 2px;
+  &::placeholder {
+    font-family: "Pretendard";
+    font-size: 11px;
+    color: #999;
+  }
+`;
+const AntCustomInputPw = styled(Input.Password)`
   width: 350px;
   height: 36px;
   line-height: 36px;
@@ -120,18 +126,24 @@ const Input = styled.input`
   padding-left: 10px;
   font-size: 13px;
   color: #c2c2c2;
+  margin-bottom: 2px;
   &::placeholder {
+    font-family: "Pretendard";
     font-size: 11px;
     color: #999;
   }
+  .ant-input-suffix svg {
+    color: #8ab9ff;
+    font-size: 18px;
+  }
 `;
-
-const Svg = styled.svg`
-  position: absolute;
-  right: 10px;
-  width: 16px;
-  height: 16px;
-  transform: translateX(-150%);
+const AntCustomFormItem = styled(Form.Item)`
+  margin-bottom: 5px;
+  height: 84px;
+  .ant-form-item-explain .ant-form-item-explain-error {
+    text-align: left;
+    font-size: 10px;
+  }
 `;
 
 const InputCheckBoxWrap = styled.div`
@@ -253,6 +265,23 @@ const KakaoButton = styled.button`
 `;
 
 function SignForm() {
+  //js
+  // 비밀번호 비교 상태 저장
+  const [match, setMatch] = useState(true);
+  // form 요소 저장해두고 참조하기
+  const [form] = Form.useForm();
+  // 비밀번호가 바뀔때 마다 체크함.
+  const handleChangePassword = () => {
+    const pw = form.getFieldValue("password");
+    const pwConfirm = form.getFieldValue("passwordConfirm");
+    if (pwConfirm) {
+      setMatch(pw === pwConfirm);
+    }
+  };
+  const onFinish = values => {
+    console.log(values);
+  };
+
   const navigate = useNavigate();
 
   const handleClickSign = () => {
@@ -261,6 +290,7 @@ function SignForm() {
   const handleClickLogin = () => {
     navigate("/login");
   };
+  //jsx
   return (
     <Container>
       <TopContainer>
@@ -282,122 +312,145 @@ function SignForm() {
       </Title>
       <Main>
         <div>
-          <TitleSpan>
-            <MainP>별명</MainP>
-            <Span>*</Span>
-          </TitleSpan>
           <InputWrap>
-            <Input
-              type="text"
-              placeholder="당신의 동물 친구들이 부를 이름을 선택하세요"
-            />
-            <Svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-              fill="none"
+            <Form
+              form={form}
+              layout="vertical"
+              requiredMark={false}
+              onFinish={values => onFinish(values)}
             >
-              <path
-                d="M6.83333 12.6667C10.055 12.6667 12.6667 10.055 12.6667 6.83333C12.6667 3.61167 10.055 1 6.83333 1C3.61167 1 1 3.61167 1 6.83333C1 10.055 3.61167 12.6667 6.83333 12.6667Z"
-                stroke="#8AB9FF"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M4.5 8.5835C4.77168 8.94573 5.12397 9.23974 5.52896 9.44224C5.93396 9.64474 6.38054 9.75016 6.83333 9.75016C7.28613 9.75016 7.73271 9.64474 8.13771 9.44224C8.5427 9.23974 8.89499 8.94573 9.16667 8.5835M4.50525 5.0835H4.5M9.16667 5.0835H9.16142"
-                stroke="#8AB9FF"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </Svg>
-          </InputWrap>
-        </div>
-        <div>
-          <TitleSpan>
-            <MainP>이메일</MainP>
-            <Span>*</Span>
-          </TitleSpan>
-          <InputWrap>
-            <Input type="email" placeholder="example@email.com" />
-            <Svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="11"
-              viewBox="0 0 14 11"
-              fill="none"
-            >
-              <path
-                d="M11.5 1H2.5C1.67157 1 1 1.67157 1 2.5V8.5C1 9.32843 1.67157 10 2.5 10H11.5C12.3284 10 13 9.32843 13 8.5V2.5C13 1.67157 12.3284 1 11.5 1Z"
-                stroke="#8AB9FF"
-                strokeWidth="2"
-              />
-              <path
-                d="M1 3.25L6.3295 5.91475C6.5377 6.01879 6.76725 6.07295 7 6.07295C7.23275 6.07295 7.4623 6.01879 7.6705 5.91475L13 3.25"
-                stroke="#8AB9FF"
-                strokeWidth="2"
-              />
-            </Svg>
-          </InputWrap>
-        </div>
-        <div>
-          <TitleSpan>
-            <MainP>비밀번호</MainP>
-            <Span>*</Span>
-          </TitleSpan>
-          <InputWrap>
-            <Input type="password" placeholder="최소 8자 이상 입력하세요" />
-            <Svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-            >
-              <g clipPath="url(#clip0_119_1191)">
-                <path
-                  d="M11.9221 12.8645C10.7494 13.6083 9.3888 14.0022 8.00009 13.9999C4.40542 13.9999 1.41475 11.4132 0.788086 7.99987C1.07536 6.44771 1.85581 5.02968 3.01342 3.95653L0.929419 1.87187L1.87209 0.929199L15.0714 14.1279L14.1288 15.0712L11.9221 12.8645ZM3.95742 4.89987C3.05135 5.72364 2.42002 6.80572 2.14875 7.99987C2.35695 8.91084 2.77493 9.76063 3.36942 10.4816C3.96391 11.2026 4.7185 11.7748 5.57312 12.1527C6.42774 12.5307 7.35878 12.7039 8.29215 12.6586C9.22551 12.6133 10.1354 12.3508 10.9494 11.8919L9.59742 10.5399C9.02188 10.9024 8.34022 11.0586 7.66424 10.9828C6.98827 10.907 6.35811 10.6038 5.87713 10.1228C5.39615 9.64184 5.0929 9.01168 5.01713 8.33571C4.94135 7.65973 5.09754 6.97807 5.46009 6.40253L3.95742 4.89987ZM8.60942 9.55187L6.44809 7.3912C6.32946 7.69316 6.30154 8.02317 6.36776 8.34076C6.43397 8.65836 6.59143 8.94972 6.82083 9.17912C7.05023 9.40852 7.3416 9.56598 7.65919 9.6322C7.97678 9.69841 8.30746 9.67049 8.60942 9.55187ZM13.8708 11.0619L12.9168 10.1079C13.3634 9.47314 13.6812 8.75694 13.8521 7.99987C13.6709 7.20628 13.3303 6.45782 12.8508 5.8C12.3713 5.14218 11.7631 4.58873 11.0631 4.17331C10.3631 3.75788 9.58588 3.48916 8.77876 3.38347C7.97165 3.27779 7.15147 3.33735 6.36809 3.55853L5.31609 2.50653C6.14742 2.17987 7.05342 1.99987 8.00009 1.99987C11.5948 1.99987 14.5854 4.58653 15.2128 7.99987C15.0085 9.11054 14.5487 10.1587 13.8708 11.0619ZM7.81542 5.00587C7.87631 5.00187 7.93786 4.99987 8.00009 4.99987C8.4097 4.99981 8.81498 5.08364 9.19096 5.24618C9.56693 5.40872 9.90564 5.64654 10.1862 5.94497C10.4668 6.2434 10.6833 6.59613 10.8223 6.98141C10.9614 7.36669 11.0201 7.77637 10.9948 8.1852L7.81542 5.00587Z"
-                  fill="#8AB9FF"
+              <AntCustomFormItem
+                name="nickname"
+                required={true}
+                rules={[
+                  { required: true, message: "별명을 입력해주세요." },
+                  { max: 8, message: "별명은 최대 8자 이상 입니다." },
+                ]}
+                label={
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    <span style={{ fontSize: "13px", color: "#5c5c5c" }}>
+                      별명
+                    </span>
+                    <span style={{ color: "red" }}>*</span>
+                  </div>
+                }
+              >
+                <AntCustomInput placeholder="당신의 동물 친구들이 부를 이름을 선택하세요" />
+              </AntCustomFormItem>
+              <AntCustomFormItem
+                name="email"
+                required={true}
+                rules={[
+                  { required: true, message: "이메일은 필수요소입니다." },
+                  { type: "email", message: "이메일 형식에 맞지않습니다." },
+                ]}
+                label={
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    <span style={{ fontSize: "13px", color: "#5c5c5c" }}>
+                      이메일
+                    </span>
+                    <span style={{ color: "red" }}>*</span>
+                  </div>
+                }
+              >
+                <AntCustomInput placeholder="example@email.com" />
+              </AntCustomFormItem>
+              <AntCustomFormItem
+                name="password"
+                required={true}
+                rules={[
+                  { required: true, message: "비밀번호는 필수요소입니다." },
+                  {
+                    pattern:
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[{\]};:'",<.>/?\\|`~])[a-zA-Z\d!@#$%^&*()_\-+=\[{\]};:'",<.>/?\\|`~]{8,}$/,
+                    message:
+                      "비밀번호는 최소 8자 이상이며, 대소문자, 특수문자, 숫자를 포함해야 합니다.",
+                  },
+                ]}
+                label={
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    <span style={{ fontSize: "13px", color: "#5c5c5c" }}>
+                      비밀번호
+                    </span>
+                    <span style={{ color: "red" }}>*</span>
+                  </div>
+                }
+              >
+                <AntCustomInputPw
+                  placeholder="비밀번호를 입력하세요."
+                  onChange={handleChangePassword}
                 />
-              </g>
-              <defs>
-                <clipPath id="clip0_119_1191">
-                  <rect width="16" height="16" fill="white" />
-                </clipPath>
-              </defs>
-            </Svg>
-          </InputWrap>
-        </div>
-        <div>
-          <TitleSpan>
-            <MainP>비밀번호 확인</MainP>
-            <Span>*</Span>
-          </TitleSpan>
-          <InputWrap>
-            <Input type="password" placeholder="비밀번호를 다시 입력하세요" />
-            <Svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-            >
-              <g clipPath="url(#clip0_119_1191)">
-                <path
-                  d="M11.9221 12.8645C10.7494 13.6083 9.3888 14.0022 8.00009 13.9999C4.40542 13.9999 1.41475 11.4132 0.788086 7.99987C1.07536 6.44771 1.85581 5.02968 3.01342 3.95653L0.929419 1.87187L1.87209 0.929199L15.0714 14.1279L14.1288 15.0712L11.9221 12.8645ZM3.95742 4.89987C3.05135 5.72364 2.42002 6.80572 2.14875 7.99987C2.35695 8.91084 2.77493 9.76063 3.36942 10.4816C3.96391 11.2026 4.7185 11.7748 5.57312 12.1527C6.42774 12.5307 7.35878 12.7039 8.29215 12.6586C9.22551 12.6133 10.1354 12.3508 10.9494 11.8919L9.59742 10.5399C9.02188 10.9024 8.34022 11.0586 7.66424 10.9828C6.98827 10.907 6.35811 10.6038 5.87713 10.1228C5.39615 9.64184 5.0929 9.01168 5.01713 8.33571C4.94135 7.65973 5.09754 6.97807 5.46009 6.40253L3.95742 4.89987ZM8.60942 9.55187L6.44809 7.3912C6.32946 7.69316 6.30154 8.02317 6.36776 8.34076C6.43397 8.65836 6.59143 8.94972 6.82083 9.17912C7.05023 9.40852 7.3416 9.56598 7.65919 9.6322C7.97678 9.69841 8.30746 9.67049 8.60942 9.55187ZM13.8708 11.0619L12.9168 10.1079C13.3634 9.47314 13.6812 8.75694 13.8521 7.99987C13.6709 7.20628 13.3303 6.45782 12.8508 5.8C12.3713 5.14218 11.7631 4.58873 11.0631 4.17331C10.3631 3.75788 9.58588 3.48916 8.77876 3.38347C7.97165 3.27779 7.15147 3.33735 6.36809 3.55853L5.31609 2.50653C6.14742 2.17987 7.05342 1.99987 8.00009 1.99987C11.5948 1.99987 14.5854 4.58653 15.2128 7.99987C15.0085 9.11054 14.5487 10.1587 13.8708 11.0619ZM7.81542 5.00587C7.87631 5.00187 7.93786 4.99987 8.00009 4.99987C8.4097 4.99981 8.81498 5.08364 9.19096 5.24618C9.56693 5.40872 9.90564 5.64654 10.1862 5.94497C10.4668 6.2434 10.6833 6.59613 10.8223 6.98141C10.9614 7.36669 11.0201 7.77637 10.9948 8.1852L7.81542 5.00587Z"
-                  fill="#8AB9FF"
+              </AntCustomFormItem>
+              <AntCustomFormItem
+                name="passwordConfirm"
+                required={true}
+                rules={[
+                  {
+                    required: true,
+                    message: "비밀번호를 다시 입력해주세요.",
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(new Error("비밀번호가 다릅니다."));
+                    },
+                  }),
+                ]}
+                label={
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    <span style={{ fontSize: "13px", color: "#5c5c5c" }}>
+                      비밀번호 확인
+                    </span>
+                    <span style={{ color: "red" }}>*</span>
+                  </div>
+                }
+              >
+                <AntCustomInputPw
+                  placeholder="비밀번호를 입력하세요."
+                  onChange={handleChangePassword}
                 />
-              </g>
-              <defs>
-                <clipPath id="clip0_119_1191">
-                  <rect width="16" height="16" fill="white" />
-                </clipPath>
-              </defs>
-            </Svg>
+              </AntCustomFormItem>
+              {/* {!match && (
+                <div
+                  style={{
+                    color: "red",
+                    textAlign: "left",
+                    fontSize: "10px",
+                  }}
+                >
+                  비밀번호가 다릅니다.
+                </div>
+              )} */}
+            </Form>
           </InputWrap>
         </div>
+
         <InputCheckBoxWrap>
           <InputCheckBox type="checkbox" />
           <Span>*</Span>

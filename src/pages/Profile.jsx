@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
-import { fonts } from "../styles/fonts";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { fonts } from "../styles/fonts";
+import Alart from "./popup/profile/Alart";
 import { Modal } from "antd";
 import Theme from "./popup/profile/Theme";
 import { useState } from "react";
@@ -286,12 +288,21 @@ const NavItem = styled(Link)`
 `;
 
 function Profile() {
+  //js
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
-  const showModal = () => setIsModalOpen(true);
-  const handleOk = () => setIsModalOpen(false);
-  const handleCancel = () => setIsModalOpen(false);
+  const handleOpen = () => {
+    setIsModalOpen(true);
+  };
 
+  const handleClose = () => {
+    setIsModalOpen(false);
+  };
+
+  //jsx
   return (
     <Container>
       <TopContainer>
@@ -338,13 +349,14 @@ function Profile() {
           </ProfileFeelAvg>
         </ProfileFeel>
         <ButtonWrap>
-          <Button>
+          <Button type="primary" onClick={showModal}>
             <IconCircleAlert>
               <AlertImage src="./images/alert.svg" alt="알림" />
             </IconCircleAlert>
             알림
           </Button>
-          <Button type="primary" onClick={showModal}>
+          {isModalOpen && <Alart onCancel={handleClose} />}
+          <Button>
             <IconCircleTheme>
               <ThemeImage src="./images/theme.svg" alt="테마" />
             </IconCircleTheme>

@@ -5,10 +5,13 @@ function Modal({ children }) {
   // js 자리
   const Overlay = styled.div`
     display: flex;
-    position: fixed;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
     z-index: 99999;
-    width: 394px;
-    height: 100%;
+    width: 100%;
+    height: 100vh;
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.6);

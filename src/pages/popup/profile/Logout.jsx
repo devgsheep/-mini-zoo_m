@@ -1,18 +1,19 @@
 import styled from "@emotion/styled";
 import React from "react";
 import colors from "../../../styles/colors";
+import { useNavigate } from "react-router-dom";
 
-const AlertPopUp = styled.div`
-  display: flex;
-  position: fixed;
-  z-index: 99999;
-  width: 394px;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
-  text-align: center;
-`;
+// const AlertPopUp = styled.div`
+//   display: flex;
+//   position: fixed;
+//   z-index: 99999;
+//   width: 394px;
+//   height: 100%;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: rgba(0, 0, 0, 0.6);
+//   text-align: center;
+// `;
 const AlertPopUpBox = styled.div`
   width: 286px;
   height: auto;
@@ -53,7 +54,7 @@ const Text = styled.p`
 `;
 
 const SubText = styled.p`
-  font-size: 10px;
+  font-size: 9px;
   color: ${colors.gray[500]};
   padding-top: 3px;
 `;
@@ -89,9 +90,16 @@ const ButtonLogout = styled.button`
   color: #ef4444;
 `;
 
-function Logout() {
+function Logout({ onClose }) {
+  // 네비게이터
+  const navigate = useNavigate();
+  const handleClickLogout = () => {
+    navigate("/");
+  };
+
   return (
-    <AlertPopUp>
+    // <AlertPopUp>
+    <>
       <AlertPopUpBox>
         <IconCircleLogout>
           <LogOutImage src="../images/logout.svg" alt="로그아웃" />
@@ -102,11 +110,12 @@ function Logout() {
           ZOO:M과 함께하는 당신의 감정 여정이 잠시 멈추게 될 것입니다.
         </SubText>
         <ButtonWrapLogout>
-          <ButtonCancel>취소</ButtonCancel>
-          <ButtonLogout>로그아웃</ButtonLogout>
+          <ButtonCancel onClick={onClose}>취소</ButtonCancel>
+          <ButtonLogout onClick={handleClickLogout}>로그아웃</ButtonLogout>
         </ButtonWrapLogout>
       </AlertPopUpBox>
-    </AlertPopUp>
+    </>
+    // </AlertPopUp>
   );
 }
 

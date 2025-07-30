@@ -2,17 +2,17 @@ import styled from "@emotion/styled";
 import React from "react";
 import colors from "../../../styles/colors";
 
-const AlertPopUp = styled.div`
-  display: flex;
-  position: fixed;
-  z-index: 99999;
-  width: 394px;
-  height: 100%;
+// const AlertPopUp = styled.div`
+//   display: flex;
+//   position: fixed;
+//   z-index: 99999;
+//   width: 394px;
+//   height: 100%;
 
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
-`;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: rgba(0, 0, 0, 0.6);
+// `;
 const AlertPopUpBox = styled.div`
   width: 286px;
   height: auto;
@@ -101,9 +101,10 @@ const Button = styled.div`
   margin-left: auto;
 `;
 
-function Language() {
+function Language({ onClose }) {
   return (
-    <AlertPopUp>
+    // <AlertPopUp>
+    <>
       <AlertPopUpBox>
         <Title>언어 설정</Title>
         <TextWrap>
@@ -152,9 +153,10 @@ function Language() {
           </Svg>
           <InputTitle type="text" placeholder="한국어" /> */}
         </TextWrap>
-        <Button>확인</Button>
+        <Button onClick={onClose}>확인</Button>
       </AlertPopUpBox>
-    </AlertPopUp>
+    </>
+    // </AlertPopUp>
   );
 }
 

@@ -1,4 +1,12 @@
 /* App.css 또는 글로벌 스타일 */
+.custom-modal .ant-modal {
+  width: auto !important; /* 자동 크기 */
+  max-width: 600px; /* 원하는 최대 가로 크기 */
+  margin: 0 auto; /* 좌우 가운데 */
+  top: 50% !important; /* 수직 가운데 */
+  transform: translateY(-50%) !important;
+}
+
 .ant-modal-content {
   background: transparent !important;
   box-shadow: none !important;

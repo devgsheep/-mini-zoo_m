@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import "../css/modal.css";
 import { fonts } from "../styles/fonts";
 import Theme from "./popup/profile/Theme";
+import PersonalInfo from "./popup/profile/PersonalInfo";
+import Ask from "./popup/profile/Ask";
+import Info from "./popup/profile/Info";
 
 const Container = styled.div`
   width: 394px;
@@ -294,9 +297,27 @@ function Profile() {
   };
 
   const showModal = () => setIsModalOpen(true);
+
+  // 테마
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
   const openThemeModal = () => setIsThemeModalOpen(true);
   const closeThemeModal = () => setIsThemeModalOpen(false);
+
+  // 개인정보
+  const [isPersonalInfoModalOpen, setIsPersonalInfoMoalOpen] = useState(false);
+  const openPersonalInfoModal = () => setIsPersonalInfoMoalOpen(true);
+  const closePersonalInfoModal = () => setIsPersonalInfoMoalOpen(false);
+
+  // 문의하기
+  const [isAskOpen, setIsAskMoalOpen] = useState(false);
+  const openAskModal = () => setIsAskMoalOpen(true);
+  const closeAskModal = () => setIsAskMoalOpen(false);
+
+  // 정보
+  const [isInfoOpen, setIsInfoMoalOpen] = useState(false);
+  const openInfoModal = () => setIsInfoMoalOpen(true);
+  const closeInfoModal = () => setIsInfoMoalOpen(false);
+
   //jsx
   return (
     <Container>
@@ -361,7 +382,6 @@ function Profile() {
 
           <Modal
             open={isThemeModalOpen}
-            onOk={closeThemeModal}
             onCancel={closeThemeModal}
             footer={null}
             closable={false}
@@ -370,7 +390,8 @@ function Profile() {
           >
             <Theme onClose={closeThemeModal} />
           </Modal>
-          <Button>
+          {/* 개인정보처리방침 */}
+          <Button type="primary" onClick={openPersonalInfoModal}>
             <IconCirclePersonalInfo>
               <PersonalInfoImage
                 src="./images/personalinfo.svg"
@@ -379,18 +400,48 @@ function Profile() {
             </IconCirclePersonalInfo>
             개인정보 처리방침
           </Button>
-          <Button>
+          <Modal
+            open={isPersonalInfoModalOpen}
+            onCancel={closePersonalInfoModal}
+            footer={null}
+            closable={false}
+            centered
+            width={286}
+          >
+            <PersonalInfo onClose={closePersonalInfoModal} />
+          </Modal>
+          <Button type="primary" onClick={openAskModal}>
             <IconCircleEtc>
               <EtcImage src="./images/etc.svg" alt="문의" />
             </IconCircleEtc>
             문의
           </Button>
-          <Button>
+          <Modal
+            open={isAskOpen}
+            onCancel={closeAskModal}
+            footer={null}
+            closable={false}
+            centered
+            width={286}
+          >
+            <Ask onClose={closeAskModal} />
+          </Modal>
+          <Button type="primary" onClick={openInfoModal}>
             <IconCircleInfo>
               <InfoImage src="./images/info.svg" alt="정보" />
             </IconCircleInfo>
             정보
           </Button>
+          <Modal
+            open={isInfoOpen}
+            onCancel={closeInfoModal}
+            footer={null}
+            closable={false}
+            centered
+            width={286}
+          >
+            <Info onClose={closeInfoModal} />
+          </Modal>
         </ButtonWrap>
         <Logout>로그아웃</Logout>
       </ProfileWrap>

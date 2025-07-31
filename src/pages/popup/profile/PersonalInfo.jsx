@@ -1,20 +1,19 @@
 import styled from "@emotion/styled";
-import React from "react";
 import colors from "../../../styles/colors";
 
-const PersonalInfoPopUp = styled.div`
-  display: flex;
-  position: fixed;
-  z-index: 99999;
-  width: 394px;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
-  /* display: none; */
-`;
+// const PersonalInfoPopUp = styled.div`
+//   display: flex;
+//   position: fixed;
+//   z-index: 99999;
+//   width: 394px;
+//   height: 100%;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: rgba(0, 0, 0, 0.6);
+//   /* display: none; */
+// `;
 const PersonalInfoPopUpBox = styled.div`
-  height: 541px;
+  height: auto;
   width: 286px;
   background-color: ${colors.white};
   border-radius: 16px;
@@ -26,7 +25,7 @@ const PersonalInfoPopUpWrap = styled.div`
   justify-content: center;
   align-items: flex-start;
   gap: 26px;
-  padding: 17px 17px 83px 17px;
+  padding: 17px;
 `;
 
 const PersonalInfoText = styled.div`
@@ -50,7 +49,7 @@ const PersonalInfoContents = styled.div`
 `;
 
 const PersonalInfoSubTitle = styled.div`
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: #000;
   ::before {
@@ -60,7 +59,7 @@ const PersonalInfoSubTitle = styled.div`
 `;
 
 const ItemList = styled.div`
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 400;
   padding-left: 8px;
   color: #5c5c5c;
@@ -87,9 +86,10 @@ const Button = styled.div`
   margin-left: auto;
 `;
 
-function PersonalInfo() {
+function PersonalInfo({ onClose }) {
   return (
-    <PersonalInfoPopUp>
+    // <PersonalInfoPopUp>
+    <>
       <PersonalInfoPopUpBox>
         <PersonalInfoPopUpWrap>
           <PersonalInfoText>
@@ -151,10 +151,11 @@ function PersonalInfo() {
               </div>
             </PersonalInfoContents>
           </PersonalInfoText>
-          <Button>확인</Button>
+          <Button onClick={onClose}>확인</Button>
         </PersonalInfoPopUpWrap>
       </PersonalInfoPopUpBox>
-    </PersonalInfoPopUp>
+    </>
+    // </PersonalInfoPopUp>
   );
 }
 

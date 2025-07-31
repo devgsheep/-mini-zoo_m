@@ -8,16 +8,16 @@ import {
   Span,
 } from "../../Ui";
 
-const AlertPopUp = styled.div`
-  display: flex;
-  position: fixed;
-  z-index: 99999;
-  width: 394px;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
-`;
+// const AlertPopUp = styled.div`
+//   display: flex;
+//   position: fixed;
+//   z-index: 99999;
+//   width: 394px;
+//   height: 100%;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: rgba(0, 0, 0, 0.6);
+// `;
 const AlertPopUpBox = styled.div`
   width: 286px;
   height: auto;
@@ -112,9 +112,10 @@ const RadioInput = styled.input`
   cursor: pointer;
 `;
 
-function Ask() {
+function Ask({ onClose }) {
   return (
-    <AlertPopUp>
+    // <AlertPopUp>
+    <>
       <AlertPopUpBox>
         <Title>문의하기</Title>
         <SubTitle>[문의 유형]</SubTitle>
@@ -179,16 +180,16 @@ function Ask() {
             <TextArea type="text" placeholder="발생한 문제상황을 입력하세요." />
           </TextWrap>
         </AskTextWrap>
-
         <ButtonContainer>
           <ButtonWrap>
-            <ButtonOK>확인</ButtonOK>
+            <ButtonOK onClick={onClose}>확인</ButtonOK>
             <Span />
-            <ButtonCC>취소</ButtonCC>
+            <ButtonCC onClick={onClose}>취소</ButtonCC>
           </ButtonWrap>
         </ButtonContainer>
       </AlertPopUpBox>
-    </AlertPopUp>
+    </>
+    // </AlertPopUp>
   );
 }
 

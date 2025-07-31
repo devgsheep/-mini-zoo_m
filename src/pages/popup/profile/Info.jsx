@@ -9,18 +9,18 @@ import {
   Span,
 } from "../../Ui";
 
-const InfoPopup = styled.div`
-  display: flex;
-  position: fixed;
-  z-index: 99999;
-  width: 394px;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
+// const InfoPopup = styled.div`
+//   display: flex;
+//   position: fixed;
+//   z-index: 99999;
+//   width: 394px;
+//   height: 100%;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: rgba(0, 0, 0, 0.6);
 
-  /* display: none; */
-`;
+//   /* display: none; */
+// `;
 const InfoPopupBox = styled.div`
   height: auto;
   width: 286px;
@@ -44,7 +44,7 @@ const VersionInfoBox = styled.div`
 `;
 const VersionInfoTitle = styled.div`
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   color: #000;
 `;
 const VersionWrap = styled.div`
@@ -105,7 +105,7 @@ const AccountInfoBox = styled.div`
 `;
 const AccountInfoTitle = styled.div`
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   color: #000;
 `;
 const AccountWrap = styled.div`
@@ -141,9 +141,10 @@ const Date = styled.div`
   font-weight: 400;
 `;
 
-function Info() {
+function Info({ onClose }) {
   return (
-    <InfoPopup>
+    // <InfoPopup>
+    <>
       <InfoPopupBox>
         <InfoPopupWrap>
           <InfoPopupTitle>정보</InfoPopupTitle>
@@ -175,14 +176,15 @@ function Info() {
           </AccountInfoBox>
           <ButtonContainer>
             <ButtonWrap>
-              <ButtonOK>확인</ButtonOK>
+              <ButtonOK onClick={onClose}>확인</ButtonOK>
               <Span />
-              <ButtonCC>취소</ButtonCC>
+              <ButtonCC onClick={onClose}>취소</ButtonCC>
             </ButtonWrap>
           </ButtonContainer>
         </InfoPopupWrap>
       </InfoPopupBox>
-    </InfoPopup>
+    </>
+    // </InfoPopup>
   );
 }
 

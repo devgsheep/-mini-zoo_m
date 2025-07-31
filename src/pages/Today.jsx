@@ -16,6 +16,8 @@ import "../css/today_calendar.css";
 import colors from "../styles/colors";
 import moment from "moment";
 import "moment/locale/ko";
+import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
+import { Slider } from "antd";
 moment.locale("ko");
 
 const Container = styled.div`
@@ -262,6 +264,7 @@ const CustomCalendar = styled(Calendar)`
     font-size: 12px;
   }
 `;
+
 function HistoryDaily() {
   //js
 
@@ -378,7 +381,11 @@ function HistoryDaily() {
           </SliderTitle>
           <div
             className="slide_wrap"
-            style={{ display: "flex", justifyContent: "center", marginTop: 20 }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: 20,
+            }}
           >
             <svg
               width="332"
@@ -526,5 +533,4 @@ function HistoryDaily() {
     </Container>
   );
 }
-
 export default HistoryDaily;

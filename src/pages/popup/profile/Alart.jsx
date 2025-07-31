@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
-import colors from "../../../styles/colors";
+import { useState } from "react";
 import {
   DaysButton,
   TogleButton,
   TogleButtonCircle,
 } from "../../../components/icons/button";
-import { useState } from "react";
+import Modal from "../../../components/ui/Modal";
 import "../../../css/radio.css";
+import colors from "../../../styles/colors";
 import { ButtonCC, ButtonContainer, ButtonOK, ButtonWrap } from "../../Ui";
 
 const Container = styled.div`
@@ -119,6 +120,11 @@ function Alart() {
       setRadioValue("sound");
     }
   };
+
+  const handleChangeAlart = () => {
+    onCancel();
+  };
+
   const [radioValue, setRadioValue] = useState("sound");
   const [selectedDays, setSelectedDays] = useState([]);
   const handleDayToggle = day => {
@@ -158,107 +164,104 @@ function Alart() {
 
   //jsx
   return (
-    <Container>
-      <AlertPopUp>
-        <AlertPopUpBox>
-          <AlertButtonWrap>
-            <span>알림 설정</span>
-            <TogleButton state={isOn} onClick={handleToggle}>
-              <TogleButtonCircle state={isOn}></TogleButtonCircle>
-            </TogleButton>
-          </AlertButtonWrap>
-          {/* 추후 안트디자인 수업이후 넣을예정 */}
-          <RadioWrap>
-            <RadioBox>
-              <RadioLabel htmlFor="sound">
-                <RadioInput
-                  type="radio"
-                  id="sound"
-                  value="sound"
-                  name="sound-setting"
-                  className="custom-radio"
-                  checked={radioValue === "sound"}
-                  onChange={e => setRadioValue(e.target.value)}
-                />
-                소리
-              </RadioLabel>
-            </RadioBox>
-            <RadioBox>
-              <RadioLabel htmlFor="vibration">
-                <RadioInput
-                  type="radio"
-                  id="vibration"
-                  value="vibration"
-                  name="sound-setting"
-                  className="custom-radio"
-                  checked={radioValue === "vibration"}
-                  onChange={e => setRadioValue(e.target.value)}
-                />
-                진동
-              </RadioLabel>
-            </RadioBox>
-            <RadioBox>
-              <RadioLabel htmlFor="silent">
-                <RadioInput
-                  type="radio"
-                  id="silent"
-                  value="silent"
-                  name="sound-setting"
-                  className="custom-radio"
-                  checked={radioValue === "silent"}
-                  onChange={e => setRadioValue(e.target.value)}
-                />
-                무음
-              </RadioLabel>
-            </RadioBox>
-          </RadioWrap>
-          <DaysWrap>
-            <span>요일</span>
-            <DaysButtonWrap>
-              {days.map(item => {
-                return (
-                  <DaysButton
-                    key={item}
-                    state={selectedDays.includes(item)}
-                    onClick={() => handleDayToggle(item)}
-                  >
-                    {item}
-                  </DaysButton>
-                );
-              })}
-            </DaysButtonWrap>
-          </DaysWrap>
-          {/* 시계부분 */}
-          <TimeWrapper>
-            <Select id="ampm" name="timer">
-              <option value="am">오전</option>
-              <option value="pm">오후</option>
-            </Select>
-            <Select>
-              {hours.map(hour => (
-                <option key={hour} value={hour}>
-                  {hour}
-                </option>
-              ))}
-            </Select>
-            <Select>
-              {minutes.map(minute => (
-                <option key={minute} value={minute}>
-                  {minute}
-                </option>
-              ))}
-            </Select>
-          </TimeWrapper>
-          <ButtonContainer>
-            <ButtonWrap>
-              <ButtonOK>확인</ButtonOK>
-              <Span />
-              <ButtonCC>취소</ButtonCC>
-            </ButtonWrap>
-          </ButtonContainer>
-        </AlertPopUpBox>
-      </AlertPopUp>
-    </Container>
+    // <Container>
+    //   <AlertPopUp>
+    //     <AlertPopUpBox>
+    <Modal>
+      <AlertButtonWrap>
+        <span>알림 설정</span>
+        <TogleButton state={isOn} onClick={handleToggle}>
+          <TogleButtonCircle state={isOn}></TogleButtonCircle>
+        </TogleButton>
+      </AlertButtonWrap>
+      {/* 추후 안트디자인 수업이후 넣을예정 */}
+      <RadioWrap>
+        <RadioBox>
+          <RadioLabel htmlFor="sound">
+            <RadioInput
+              type="radio"
+              id="sound"
+              value="sound"
+              name="sound-setting"
+              className="custom-radio"
+            />
+            소리
+          </RadioLabel>
+        </RadioBox>
+        <RadioBox>
+          <RadioLabel htmlFor="vibration">
+            <RadioInput
+              type="radio"
+              id="vibration"
+              value="vibration"
+              name="sound-setting"
+              className="custom-radio"
+            />
+            진동
+          </RadioLabel>
+        </RadioBox>
+        <RadioBox>
+          <RadioLabel htmlFor="silent">
+            <RadioInput
+              type="radio"
+              id="silent"
+              value="silent"
+              name="sound-setting"
+              className="custom-radio"
+            />
+            무음
+          </RadioLabel>
+        </RadioBox>
+      </RadioWrap>
+      <DaysWrap>
+        <span>요일</span>
+        <DaysButtonWrap>
+          {days.map(item => {
+            return (
+              <DaysButton
+                key={item}
+                state={selectedDays.includes(item)}
+                onClick={() => handleDayToggle(item)}
+              >
+                {item}
+              </DaysButton>
+            );
+          })}
+        </DaysButtonWrap>
+      </DaysWrap>
+      {/* 시계부분 */}
+      <TimeWrapper>
+        <Select id="ampm" name="timer">
+          <option value="am">오전</option>
+          <option value="pm">오후</option>
+        </Select>
+        <Select>
+          {hours.map(hour => (
+            <option key={hour} value={hour}>
+              {hour}
+            </option>
+          ))}
+        </Select>
+        <Select>
+          {minutes.map(minute => (
+            <option key={minute} value={minute}>
+              {minute}
+            </option>
+          ))}
+        </Select>
+      </TimeWrapper>
+      <ButtonContainer>
+        <ButtonWrap>
+          <ButtonOK onClick={handleChangeAlart}>확인</ButtonOK>
+          <Span />
+          <ButtonCC onClick={handleChangeAlart}>취소</ButtonCC>
+        </ButtonWrap>
+      </ButtonContainer>
+    </Modal>
+
+    //     </AlertPopUpBox>
+    //   </AlertPopUp>
+    // </Container>
   );
 }
 

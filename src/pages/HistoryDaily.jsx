@@ -20,24 +20,6 @@ const TopContainer = styled.div`
   margin-bottom: 13px;
 `;
 
-const SignWrap = styled.div`
-  width: 18px;
-  height: 18px;
-  left: 10px;
-  top: 35%;
-  position: absolute;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: auto;
-  cursor: pointer;
-`;
-
 const SignDiv = styled.div`
   height: 100%;
   font-family: ${fonts.bold};
@@ -315,11 +297,6 @@ function HistoryDaily() {
   return (
     <Container>
       <TopContainer>
-        <SignWrap>
-          <div>
-            <Image src="/images/majesticons_arrow-left.svg" alt="뒤로가기" />
-          </div>
-        </SignWrap>
         <SignDiv>히스토리</SignDiv>
       </TopContainer>
       <TopNavigation>

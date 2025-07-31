@@ -245,6 +245,7 @@ function ProfileEdit() {
   const closeNicknameEditModal = () => {
     setIsNicknameEditModalOpen(false);
   };
+
   // passwordchange
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const openPasswordModal = () => {
@@ -253,6 +254,7 @@ function ProfileEdit() {
   const closePasswordModal = () => {
     setIsPasswordModalOpen(false);
   };
+
   // profileimage
   const [isProfileImageModalOpen, setIsProfileImageModalOpen] = useState(false);
   const openProfileImageModal = () => {
@@ -261,6 +263,7 @@ function ProfileEdit() {
   const closeProfileImageModal = () => {
     setIsProfileImageModalOpen(false);
   };
+
   // language
   const [isLanguageModalOpen, setIsLanguageModalOpen] = useState(false);
   const openLanguageModal = () => {
@@ -269,6 +272,7 @@ function ProfileEdit() {
   const closeLanguageModal = () => {
     setIsLanguageModalOpen(false);
   };
+
   // logout
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const openLogoutModal = () => {
@@ -277,6 +281,7 @@ function ProfileEdit() {
   const closeLogoutModal = () => {
     setIsLogoutModalOpen(false);
   };
+
   // resing
   const [isReSignModalOpen, setIsReSignModalOpen] = useState(false);
   const openReSignModal = () => {

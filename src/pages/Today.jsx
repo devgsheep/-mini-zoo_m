@@ -269,6 +269,7 @@ const CustomCalendar = styled(Calendar)`
 function HistoryDaily() {
   //js
 
+  // 이미지 추가
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageChange = e => {

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useState } from "react";
 import colors from "../../../styles/colors";
 
 // const AlertPopUp = styled.div`
@@ -82,14 +82,37 @@ const Button = styled.div`
 `;
 
 function ProfileImage({ onClose }) {
+  // 이미지 추가
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageChange = e => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageURL = URL.createObjectURL(file);
+      setSelectedImage(imageURL);
+    }
+  };
   return (
     // <AlertPopUp>
     <>
       <AlertPopUpBox>
         <Title>프로필 이미지 변경</Title>
         <ImageGroup>
-          <Img src="/images/tigerwhite.svg" alt="프로필이미지변경" />
-          <ProfileImgEdit />
+          <input
+            type="file"
+            accept="image/*"
+            id="photo-upload"
+            style={{ display: "none" }}
+            onChange={handleImageChange}
+          />
+          <label htmlFor="photo-upload">
+            <Img
+              src={selectedImage || "/images/tigerwhite.svg"}
+              alt="프로필이미지변경"
+              style={{ cursor: "pointer" }}
+            />
+            <ProfileImgEdit />
+          </label>
         </ImageGroup>
         <Button onClick={onClose}>확인</Button>
       </AlertPopUpBox>

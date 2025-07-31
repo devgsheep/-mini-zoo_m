@@ -1,5 +1,5 @@
 import React from "react";
-import colors from "../styles/colors";
+import colors from "../../../styles/colors";
 import styled from "@emotion/styled";
 
 const AlertPopUpBox = styled.div`
@@ -58,12 +58,12 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-function PasswordFind() {
+function Mail() {
   return (
     <>
       <AlertPopUpBox>
         <Title>비밀번호 찾기</Title>
-        <Text>가입 시 등록한 이메일 주소를 입력하세요.</Text>
+        <Text>메일로 임시비밀번호가 발송되었습니다.</Text>
         <Input type="email" placeholder="example@email.com" />
         <Button>확인</Button>
       </AlertPopUpBox>
@@ -71,4 +71,4 @@ function PasswordFind() {
   );
 }
 
-export default PasswordFind;
+export default Mail;

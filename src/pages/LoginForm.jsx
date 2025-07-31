@@ -4,7 +4,7 @@ import { fonts } from "../styles/fonts";
 import colors from "../styles/colors";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "antd";
-import PasswordFind from "./PasswordFind";
+import PasswordFind from "./popup/profile/PasswordFind";
 
 const Container = styled.div`
   height: 852px;

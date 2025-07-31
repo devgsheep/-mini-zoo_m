@@ -3,17 +3,19 @@ import React, { useState } from "react";
 import { fonts } from "../styles/fonts";
 import colors from "../styles/colors";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "antd";
+import { Button, Checkbox, Form, Input, Modal } from "antd";
 import PasswordFind from "./popup/profile/PasswordFind";
+import FormItem from "antd/es/form/FormItem";
+import { GoogleSvg, KaKaoSvg } from "./SignForm";
 
 const Container = styled.div`
-  height: 852px;
+  width: 394px;
+  height: 100%;
   background-color: #f0f6ff;
   text-align: center;
 `;
 
 const TopContainer = styled.div`
-  width: 394px;
   height: 47px;
   position: relative;
   background-color: #fff;
@@ -107,7 +109,7 @@ const InputWrap = styled.div`
   padding-bottom: 18px;
 `;
 
-const Input = styled.input`
+const CustomLoginInput = styled.input`
   width: 350px;
   height: 46px;
   line-height: 36px;
@@ -172,14 +174,14 @@ const InputCheckBox = styled.input`
 `;
 
 const SpanLogin = styled.span`
+  font-family: "pretendard";
   color: #ec48b3;
   font-size: 13px;
   font-weight: 500;
-  padding-right: 25px;
   cursor: pointer;
 `;
 
-const Button = styled.button`
+const CustomLoginButton = styled.button`
   display: inline-flex;
   padding: 15px 152px;
   justify-content: center;
@@ -246,6 +248,7 @@ const Footer = styled.div`
   align-items: center;
   text-align: center;
   gap: 11px;
+  padding-bottom: 20px;
 `;
 
 const GoogleButton = styled.button`
@@ -285,7 +288,87 @@ const GUESTP = styled.p`
   cursor: pointer;
 `;
 
+const AntCustomFormItem = styled(Form.Item)`
+  padding: 0 20px;
+
+  .ant-form-item-explain .ant-form-item-explain-error {
+    text-align: left;
+    font-size: 10px;
+  }
+`;
+
+const AntCustomInput = styled(Input)`
+  width: 350px;
+  height: 46px;
+  line-height: 36px;
+  border-radius: 10px;
+  border: 1px solid #c6ddff;
+  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
+    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
+  padding-left: 10px;
+  font-size: 13px;
+  color: ${colors.black};
+  margin-bottom: 2px;
+  &::placeholder {
+    font-family: "Pretendard";
+    font-size: 11px;
+    color: #999;
+  }
+`;
+const AntCustomInputPw = styled(Input.Password)`
+  width: 350px;
+  height: 46px;
+  line-height: 36px;
+  border-radius: 10px;
+  border: 1px solid #c6ddff;
+  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
+    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
+  padding-left: 10px;
+  font-size: 13px;
+  color: #c2c2c2;
+  margin-bottom: 2px;
+  &::placeholder {
+    font-family: "Pretendard";
+    font-size: 11px;
+    color: #999;
+  }
+  .ant-input-suffix svg {
+    color: #8ab9ff;
+    font-size: 18px;
+  }
+`;
+const AntCustomSignButton = styled(Button)`
+  width: 350px;
+  display: inline-flex;
+  padding: 25px 63px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  background-color: #8ab9ff;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f5f5f5;
+  letter-spacing: 1.6px;
+  line-height: normal;
+  cursor: pointer;
+`;
+const CustomAntCheckbox = styled(Checkbox)`
+  & .ant-checkbox-inner {
+    border: 1px solid #c6ddff;
+  }
+`;
+
 function LoginForm() {
+  const [form] = Form.useForm();
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const onFinish = values => {
+    console.log(values);
+    handleClickSign();
+  };
   // 네비게이터
   const navigate = useNavigate();
 
@@ -320,13 +403,121 @@ function LoginForm() {
           <TitleP2>당신의 동물 친구들이 기다리고 있어요</TitleP2>
         </div>
       </Title>
-      <Main>
+      <Form
+        form={form}
+        layout="vertical"
+        requiredMark={false}
+        onFinish={values => onFinish(values)}
+      >
+        <AntCustomFormItem
+          name="email"
+          required={true}
+          rules={[
+            { required: true, message: "이메일은 필수요소입니다." },
+            { type: "email", message: "이메일 형식에 맞지않습니다." },
+          ]}
+          label={
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "4px",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "16px",
+                  color: "#5c5c5c",
+                  fontFamily: "pretendard",
+                }}
+              >
+                이메일
+              </span>
+            </div>
+          }
+        >
+          <AntCustomInput placeholder="example@email.com" />
+        </AntCustomFormItem>
+        <AntCustomFormItem
+          name="password"
+          required={true}
+          rules={[
+            { required: true, message: "비밀번호는 필수요소입니다." },
+            {
+              pattern:
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[{\]};:'",<.>/?\\|`~])[a-zA-Z\d!@#$%^&*()_\-+=\[{\]};:'",<.>/?\\|`~]{8,}$/,
+              message:
+                "비밀번호는 최소 8자 이상이며, 대소문자, 특수문자, 숫자를 포함해야 합니다.",
+            },
+          ]}
+          label={
+            <span
+              style={{
+                fontSize: "16px",
+                color: "#5c5c5c",
+                fontFamily: "pretendard",
+              }}
+            >
+              비밀번호
+            </span>
+          }
+        >
+          <AntCustomInputPw placeholder="비밀번호를 입력하세요." />
+        </AntCustomFormItem>
+        <FormItem
+          style={{
+            display: "flex",
+            textAlign: "left",
+            padding: "0 20px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              width: "350px",
+              justifyContent: "space-between",
+            }}
+          >
+            <CustomAntCheckbox
+              checked={isChecked}
+              onChange={e => setIsChecked(e.target.checked)}
+              style={{ color: "#5C5C5C" }}
+            >
+              로그인 상태 유지
+            </CustomAntCheckbox>
+            <SpanLogin type="primary" onClick={openPasswordFindModal}>
+              비밀번호를 잊으셨나요?
+            </SpanLogin>
+            <Modal
+              open={isPasswordFindOpen}
+              onCancel={closePasswordFindModal}
+              footer={null}
+              closable={false}
+              centered
+              width={286}
+            >
+              <PasswordFind onClick={closePasswordFindModal} />
+            </Modal>
+          </div>
+        </FormItem>
+        <FormItem style={{ marginBottom: 0 }}>
+          <AntCustomSignButton
+            type="primary"
+            htmlType="submit"
+            disabled={!isChecked}
+            // onClick={handleClickSign}
+          >
+            로그인
+          </AntCustomSignButton>
+        </FormItem>
+      </Form>
+      {/* <Main>
         <div>
           <TitleSpan>
             <MainP>이메일</MainP>
           </TitleSpan>
           <InputWrap>
-            <Input type="email" placeholder="example@email.com" />
+            <CustomLoginInput type="email" placeholder="example@email.com" />
             <Svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"
@@ -352,7 +543,10 @@ function LoginForm() {
             <MainP>비밀번호</MainP>
           </TitleSpan>
           <InputWrap>
-            <Input type="password" placeholder="최소 8자 이상 입력하세요" />
+            <CustomLoginInput
+              type="password"
+              placeholder="최소 8자 이상 입력하세요"
+            />
             <PassSvg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -374,27 +568,14 @@ function LoginForm() {
             </PassSvg>
           </InputWrap>
         </div>
-      </Main>
-      <InputCheckBoxWrap>
+      </Main> */}
+      {/* <InputCheckBoxWrap>
         <LeftWrap>
           <InputCheckBox type="checkbox" />
           <p>로그인 상태 유지</p>
         </LeftWrap>
-        <SpanLogin type="primary" onClick={openPasswordFindModal}>
-          비밀번호를 잊으셨나요?
-        </SpanLogin>
-        <Modal
-          open={isPasswordFindOpen}
-          onCancel={closePasswordFindModal}
-          footer={null}
-          closable={false}
-          centered
-          width={286}
-        >
-          <PasswordFind onClick={closePasswordFindModal} />
-        </Modal>
       </InputCheckBoxWrap>
-      <Button onClick={handleClickHome}>로그인</Button>
+      <CustomLoginButton onClick={handleClickHome}>로그인</CustomLoginButton> */}
       <HaveLogin>
         <HaveP>계정이 없으신가요?</HaveP>
         <NoHaveLogin onClick={handleClickSign}>가입하세요</NoHaveLogin>
@@ -406,7 +587,8 @@ function LoginForm() {
       </Divider>
       <Footer>
         <GoogleButton>
-          <svg
+          <GoogleSvg />
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
             height="19"
@@ -445,11 +627,12 @@ function LoginForm() {
                 />
               </clipPath>
             </defs>
-          </svg>
+          </svg> */}
           Google로 계속하기
         </GoogleButton>
         <KakaoButton>
-          <svg
+          <KaKaoSvg />
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="19"
@@ -460,7 +643,7 @@ function LoginForm() {
               d="M9.99909 0C15.2467 0 19.5 3.60725 19.5 8.05823C19.5 12.5082 15.2467 16.1155 10 16.1155C9.4776 16.1145 8.95577 16.0783 8.43748 16.0072L4.44929 18.8455C3.996 19.1064 3.83586 19.0779 4.02224 18.4389L4.82929 14.8179C2.22357 13.3805 0.5 10.8897 0.5 8.05823C0.5 3.60824 4.75238 0 10 0M15.3453 7.93516L16.6753 6.53322C16.7521 6.44649 16.7949 6.33074 16.7948 6.21034C16.7946 6.08995 16.7516 5.97431 16.6746 5.88778C16.5977 5.80126 16.4929 5.7506 16.3823 5.74649C16.2717 5.74237 16.164 5.78512 16.0818 5.86572L14.3374 7.70282V6.1847C14.3374 6.06146 14.2924 5.94326 14.2123 5.85612C14.1323 5.76897 14.0236 5.72001 13.9104 5.72001C13.7971 5.72001 13.6885 5.76897 13.6084 5.85612C13.5283 5.94326 13.4833 6.06146 13.4833 6.1847V8.7021C13.4683 8.77403 13.4683 8.84873 13.4833 8.92066V10.3374C13.4833 10.4606 13.5283 10.5788 13.6084 10.666C13.6885 10.7531 13.7971 10.8021 13.9104 10.8021C14.0236 10.8021 14.1323 10.7531 14.2123 10.666C14.2924 10.5788 14.3374 10.4606 14.3374 10.3374V8.99548L14.7238 8.58888L16.0158 10.5904C16.048 10.6404 16.089 10.6829 16.1364 10.7157C16.1838 10.7484 16.2366 10.7707 16.2919 10.7812C16.3472 10.7917 16.4038 10.7902 16.4586 10.7769C16.5133 10.7636 16.5652 10.7387 16.6111 10.7036C16.657 10.6685 16.6961 10.6239 16.7262 10.5724C16.7563 10.5208 16.7768 10.4633 16.7864 10.4032C16.7961 10.343 16.7948 10.2814 16.7825 10.2218C16.7703 10.1622 16.7474 10.1058 16.7151 10.0558L15.3453 7.93516ZM12.669 9.82937H11.3481V6.19947C11.343 6.08006 11.2959 5.96735 11.2164 5.88479C11.137 5.80223 11.0314 5.75616 10.9215 5.75616C10.8116 5.75616 10.706 5.80223 10.6266 5.88479C10.5471 5.96735 10.5 6.08006 10.4949 6.19947V10.2941C10.4949 10.55 10.6849 10.7587 10.921 10.7587H12.669C12.7823 10.7587 12.8909 10.7098 12.971 10.6226C13.0511 10.5355 13.0961 10.4173 13.0961 10.2941C13.0961 10.1708 13.0511 10.0526 12.971 9.96547C12.8909 9.87832 12.7823 9.82937 12.669 9.82937ZM7.36986 8.75526L7.99957 7.07372L8.57681 8.75428L7.36986 8.75526ZM9.65257 9.23472L9.65438 9.21897C9.65408 9.10192 9.61302 8.98934 9.53948 8.90392L8.59309 6.14729C8.55342 6.01593 8.47785 5.90086 8.37649 5.81747C8.27512 5.73409 8.15278 5.68635 8.02581 5.68063C7.89803 5.68057 7.77322 5.72257 7.66777 5.80111C7.56233 5.87965 7.48118 5.99106 7.435 6.12071L5.93129 10.1326C5.88845 10.2467 5.88903 10.3746 5.93289 10.4883C5.97675 10.6019 6.06031 10.692 6.16517 10.7386C6.27003 10.7852 6.38761 10.7845 6.49205 10.7368C6.59648 10.6891 6.67922 10.5982 6.72205 10.4841L7.02243 9.68366H8.89529L9.1649 10.4713C9.1833 10.5301 9.21236 10.5844 9.25037 10.6308C9.28839 10.6772 9.33458 10.7149 9.38621 10.7416C9.43784 10.7682 9.49386 10.7833 9.55095 10.786C9.60804 10.7886 9.66504 10.7788 9.71858 10.757C9.77211 10.7353 9.82109 10.7021 9.86262 10.6594C9.90414 10.6166 9.93736 10.5653 9.96031 10.5083C9.98327 10.4514 9.99548 10.39 9.99624 10.3278C9.99699 10.2657 9.98627 10.204 9.96471 10.1464L9.65257 9.23472ZM6.64605 6.20439C6.64629 6.14338 6.63543 6.08292 6.61411 6.02648C6.59279 5.97005 6.56143 5.91877 6.52182 5.87558C6.48221 5.83239 6.43515 5.79815 6.38333 5.77483C6.33152 5.75151 6.27598 5.73957 6.2199 5.7397H3.28395C3.17069 5.7397 3.06207 5.78866 2.98198 5.87581C2.9019 5.96295 2.8569 6.08115 2.8569 6.20439C2.8569 6.32764 2.9019 6.44583 2.98198 6.53298C3.06207 6.62012 3.17069 6.66908 3.28395 6.66908H4.33348V10.3472C4.33348 10.4705 4.37847 10.5887 4.45856 10.6758C4.53864 10.7629 4.64726 10.8119 4.76052 10.8119C4.87378 10.8119 4.98241 10.7629 5.06249 10.6758C5.14258 10.5887 5.18757 10.4705 5.18757 10.3472V6.66908H6.219C6.27515 6.66934 6.33079 6.6575 6.38271 6.63424C6.43463 6.61098 6.4818 6.57676 6.5215 6.53356C6.5612 6.49036 6.59265 6.43903 6.61403 6.38253C6.6354 6.32603 6.64629 6.26549 6.64605 6.20439Z"
               fill="black"
             />
-          </svg>
+          </svg> */}
           카카오로 계속하기
         </KakaoButton>
         <GUESTP>게스트로 탐색</GUESTP>

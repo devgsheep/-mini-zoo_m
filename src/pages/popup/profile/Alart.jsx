@@ -37,6 +37,7 @@ const AlertPopUpBox = styled.div`
   flex-direction: column;
   gap: 27px;
 `;
+
 const AlertButtonWrap = styled.div`
   display: flex;
   justify-content: space-between;
@@ -106,24 +107,32 @@ const RadioInput = styled.input`
 `;
 
 const days = ["일", "월", "화", "수", "목", "금", "토"];
-function Alart({ onCancel }) {
+function Alart() {
   //js
 
-  const [isOn, setIsOn] = useState(false);
+  const [isOn, setIsOn] = useState(true);
   const handleToggle = () => {
     setIsOn(state => !state);
+    if (isOn) {
+      setSelectedDays([]);
+      setRadioValue("");
+    } else {
+      setRadioValue("sound");
+    }
   };
 
   const handleChangeAlart = () => {
     onCancel();
   };
 
+  const [radioValue, setRadioValue] = useState("sound");
   const [selectedDays, setSelectedDays] = useState([]);
   const handleDayToggle = day => {
     setSelectedDays(prev =>
       prev.includes(day) ? prev.filter(d => d !== day) : [...prev, day],
     );
   };
+
   // 시간 부분
   const hours = [
     "01",

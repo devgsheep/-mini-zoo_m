@@ -3,23 +3,24 @@ import React from "react";
 import colors from "../../../styles/colors";
 import { Button } from "../../Ui";
 
-const Container = styled.div`
-  width: 394px;
-  height: auto;
-  background-color: #f0f6ff;
-`;
+// const Container = styled.div`
+//   width: 394px;
+//   height: auto;
+//   background-color: #f0f6ff;
+// `;
 
-const PasswordChangePopUp = styled.div`
-  display: flex;
-  position: fixed;
-  z-index: 99999;
-  width: 394px;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  /* background-color: rgba(0, 0, 0, 0.6); */
-  /* display: none; */
-`;
+// const PasswordChangePopUp = styled.div`
+//   display: flex;
+//   position: fixed;
+//   z-index: 99999;
+//   width: 394px;
+//   height: 100%;
+//   justify-content: center;
+//   align-items: center;
+//   /* background-color: rgba(0, 0, 0, 0.6); */
+//   /* display: none; */
+// `;
+
 const PasswordChangePopUpBox = styled.div`
   width: 286px;
   height: auto;
@@ -67,7 +68,7 @@ const ChangePw = styled.div`
   /* padding-top: 25px; */
   gap: 3px;
 `;
-function PasswordChange(onClose) {
+function PasswordChange({ onClose }) {
   return (
     // <Container>
     //   <PasswordChangePopUp>

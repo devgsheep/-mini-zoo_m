@@ -1,24 +1,25 @@
 import styled from "@emotion/styled";
 import React from "react";
 import colors from "../../../styles/colors";
+import { useNavigate } from "react-router-dom";
 
-const Container = styled.div`
-  width: 394px;
-  height: auto;
-  background-color: #f0f6ff;
-`;
+// const Container = styled.div`
+//   width: 394px;
+//   height: auto;
+//   background-color: #f0f6ff;
+// `;
 
-const ReSignPopUp = styled.div`
-  display: flex;
-  position: fixed;
-  z-index: 99999;
-  width: 394px;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
-  /* display: none; */
-`;
+// const ReSignPopUp = styled.div`
+//   display: flex;
+//   position: fixed;
+//   z-index: 99999;
+//   width: 394px;
+//   height: 100%;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: rgba(0, 0, 0, 0.6);
+//   /* display: none; */
+// `;
 const ReSignPopUpBox = styled.div`
   width: 286px;
   height: auto;
@@ -118,37 +119,44 @@ const ResignOKButton = styled.button`
   background-color: #fef2f2;
   color: #ef4444;
 `;
-function ReSign() {
+
+function ReSign({ onClose }) {
+  // 네비게이터
+  const navigate = useNavigate();
+  const handleClickReSign = () => {
+    navigate("/");
+  };
+
   return (
-    <Container>
-      <ReSignPopUp>
-        <ReSignPopUpBox>
-          <ResignTopBox>
-            <ResignImgBox>
-              <img src="./images/catwhite.svg" alt="" />
-            </ResignImgBox>
-            <span>회원탈퇴</span>
-          </ResignTopBox>
-          <ResignMiddleBox>
-            <ResignMainText>계정을 삭제하시겠어요?</ResignMainText>
-            <ResignSubTextBox>
-              <ResignSubText>계정을 삭제하면 복구할 수 없습니다.</ResignSubText>
-              <ResignSubText>모든 데이터가 완전히 삭제됩니다.</ResignSubText>
-            </ResignSubTextBox>
-          </ResignMiddleBox>
-          <ResignBottomBox>
-            <ResignSubText>계속하려면 비밀번호를 입력해주세요.</ResignSubText>
-            <InputWrap>
-              <Input type="password" placeholder="비밀번호를 입력해주세요." />
-            </InputWrap>
-          </ResignBottomBox>
-          <ResignButtonWrap>
-            <ResignCCButton>취소</ResignCCButton>
-            <ResignOKButton>회원탈퇴</ResignOKButton>
-          </ResignButtonWrap>
-        </ReSignPopUpBox>
-      </ReSignPopUp>
-    </Container>
+    // <Container>
+    //    <ReSignPopUp>
+    <ReSignPopUpBox>
+      <ResignTopBox>
+        <ResignImgBox>
+          <img src="/images/catwhite.svg" alt="탈퇴" />
+        </ResignImgBox>
+        <span>회원탈퇴</span>
+      </ResignTopBox>
+      <ResignMiddleBox>
+        <ResignMainText>계정을 삭제하시겠어요?</ResignMainText>
+        <ResignSubTextBox>
+          <ResignSubText>계정을 삭제하면 복구할 수 없습니다.</ResignSubText>
+          <ResignSubText>모든 데이터가 완전히 삭제됩니다.</ResignSubText>
+        </ResignSubTextBox>
+      </ResignMiddleBox>
+      <ResignBottomBox>
+        <ResignSubText>계속하려면 비밀번호를 입력해주세요.</ResignSubText>
+        <InputWrap>
+          <Input type="password" placeholder="비밀번호를 입력해주세요." />
+        </InputWrap>
+      </ResignBottomBox>
+      <ResignButtonWrap>
+        <ResignCCButton onClick={onClose}>취소</ResignCCButton>
+        <ResignOKButton onClick={handleClickReSign}>회원탈퇴</ResignOKButton>
+      </ResignButtonWrap>
+    </ReSignPopUpBox>
+    //   </ReSignPopUp>
+    // </Container>
   );
 }
 

@@ -129,7 +129,7 @@ function ReSign({ onClose }) {
 
   return (
     // <Container>
-    //   <ReSignPopUp>
+    //    <ReSignPopUp>
     <ReSignPopUpBox>
       <ResignTopBox>
         <ResignImgBox>

@@ -1,11 +1,10 @@
 import styled from "@emotion/styled";
+import { Modal } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { fonts } from "../styles/fonts";
-import Alart from "./popup/profile/Alart";
-import { Modal } from "antd";
-import Theme from "./popup/profile/Theme";
 import "../css/modal.css";
+import { fonts } from "../styles/fonts";
+import Theme from "./popup/profile/Theme";
 
 const Container = styled.div`
   width: 394px;
@@ -296,7 +295,6 @@ function Profile() {
 
   const showModal = () => setIsModalOpen(true);
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
-
   const openThemeModal = () => setIsThemeModalOpen(true);
   const closeThemeModal = () => setIsThemeModalOpen(false);
   //jsx
@@ -346,7 +344,7 @@ function Profile() {
           </ProfileFeelAvg>
         </ProfileFeel>
         <ButtonWrap>
-          <Button type="primary" onClick={showModal}>
+          <Button>
             <IconCircleAlert>
               <AlertImage src="./images/alert.svg" alt="알림" />
             </IconCircleAlert>

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Alert, Modal } from "antd";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "../css/modal.css";
 import { fonts } from "../styles/fonts";
 import Theme from "./popup/profile/Theme";
@@ -323,14 +323,10 @@ function Profile() {
   const closeInfoModal = () => setIsInfoMoalOpen(false);
 
   // 로그아웃
-  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-  const openLogoutModal = () => {
-    setIsLogoutModalOpen(true);
+  const navigate = useNavigate();
+  const handleClickReSign = () => {
+    navigate("/");
   };
-  const closeLogoutModal = () => {
-    setIsLogoutModalOpen(false);
-  };
-
   //jsx
   return (
     <Container>
@@ -460,18 +456,7 @@ function Profile() {
             <Info onClose={closeInfoModal} />
           </Modal>
         </ButtonWrap>
-        <LogoutButton onClick={openLogoutModal}>로그아웃</LogoutButton>
-        <Modal
-          open={isLogoutModalOpen}
-          nOk={closeLogoutModal}
-          onCancel={closeLogoutModal}
-          footer={null}
-          closable={false}
-          centered
-          width={286}
-        >
-          <Logout onClose={closeLogoutModal} />
-        </Modal>
+        <Logout onClick={handleClickReSign}>로그아웃</Logout>
       </ProfileWrap>
       <NavigationBar>
         <NavItem to="/home">

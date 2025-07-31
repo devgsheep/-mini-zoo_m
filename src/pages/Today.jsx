@@ -1,4 +1,7 @@
 import styled from "@emotion/styled";
+import { Slider } from "antd";
+import moment from "moment";
+import "moment/locale/ko";
 import { useState } from "react";
 import Calendar from "react-calendar";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,10 +17,8 @@ import {
 } from "../components/icons/emotionicon";
 import "../css/today_calendar.css";
 import colors from "../styles/colors";
-import moment from "moment";
-import "moment/locale/ko";
-import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
-import { Slider } from "antd";
+import "../css/slider.css";
+
 moment.locale("ko");
 
 const Container = styled.div`

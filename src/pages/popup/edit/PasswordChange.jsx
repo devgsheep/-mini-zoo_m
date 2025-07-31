@@ -3,23 +3,24 @@ import React from "react";
 import colors from "../../../styles/colors";
 import { Button } from "../../Ui";
 
-const Container = styled.div`
-  width: 394px;
-  height: auto;
-  background-color: #f0f6ff;
-`;
+// const Container = styled.div`
+//   width: 394px;
+//   height: auto;
+//   background-color: #f0f6ff;
+// `;
 
-const PasswordChangePopUp = styled.div`
-  display: flex;
-  position: fixed;
-  z-index: 99999;
-  width: 394px;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  /* background-color: rgba(0, 0, 0, 0.6); */
-  /* display: none; */
-`;
+// const PasswordChangePopUp = styled.div`
+//   display: flex;
+//   position: fixed;
+//   z-index: 99999;
+//   width: 394px;
+//   height: 100%;
+//   justify-content: center;
+//   align-items: center;
+//   /* background-color: rgba(0, 0, 0, 0.6); */
+//   /* display: none; */
+// `;
+
 const PasswordChangePopUpBox = styled.div`
   width: 286px;
   height: auto;
@@ -67,29 +68,31 @@ const ChangePw = styled.div`
   /* padding-top: 25px; */
   gap: 3px;
 `;
-function PasswordChange(onClose) {
+function PasswordChange({ onClose }) {
   return (
-    <Container>
-      <PasswordChangePopUp>
-        <PasswordChangePopUpBox>
-          <PasswordChangeTitle>비밀번호 변경</PasswordChangeTitle>
+    // <Container>
+    //   <PasswordChangePopUp>
+    <>
+      <PasswordChangePopUpBox>
+        <PasswordChangeTitle>비밀번호 변경</PasswordChangeTitle>
+        <InputWrap>
+          <Input type="password" placeholder="현재 비밀번호" />
+        </InputWrap>
+        <ChangePw className="changepw">
           <InputWrap>
-            <Input type="password" placeholder="현재 비밀번호" />
+            <Input type="password" placeholder="새 비밀번호" />
           </InputWrap>
-          <ChangePw className="changepw">
-            <InputWrap>
-              <Input type="password" placeholder="새 비밀번호" />
-            </InputWrap>
-            <InputWrap>
-              <Input type="password" placeholder="새 비밀번호 확인" />
-            </InputWrap>
-          </ChangePw>
-          <ButtonWrap>
-            <Button onClick={onClose}>확인</Button>
-          </ButtonWrap>
-        </PasswordChangePopUpBox>
-      </PasswordChangePopUp>
-    </Container>
+          <InputWrap>
+            <Input type="password" placeholder="새 비밀번호 확인" />
+          </InputWrap>
+        </ChangePw>
+        <ButtonWrap>
+          <Button onClick={onClose}>확인</Button>
+        </ButtonWrap>
+      </PasswordChangePopUpBox>
+    </>
+    //   </PasswordChangePopUp>
+    // </Container>
   );
 }
 

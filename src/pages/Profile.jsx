@@ -5,7 +5,6 @@ import { fonts } from "../styles/fonts";
 import Alart from "./popup/profile/Alart";
 import { Modal } from "antd";
 import Theme from "./popup/profile/Theme";
-import { useState } from "react";
 import "../css/modal.css";
 
 const Container = styled.div`
@@ -289,19 +288,17 @@ const NavItem = styled(Link)`
 
 function Profile() {
   //js
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOpen = () => {
-    setIsModalOpen(true);
-  };
-
   const handleClose = () => {
     setIsModalOpen(false);
   };
 
+  const showModal = () => setIsModalOpen(true);
+  const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
+
+  const openThemeModal = () => setIsThemeModalOpen(true);
+  const closeThemeModal = () => setIsThemeModalOpen(false);
   //jsx
   return (
     <Container>
@@ -356,22 +353,24 @@ function Profile() {
             알림
           </Button>
           {isModalOpen && <Alart onCancel={handleClose} />}
-          <Button>
+          {/* 테마 버튼 */}
+          <Button type="primary" onClick={openThemeModal}>
             <IconCircleTheme>
               <ThemeImage src="./images/theme.svg" alt="테마" />
             </IconCircleTheme>
             테마
           </Button>
+
           <Modal
-            open={isModalOpen}
-            onOk={handleOk}
-            onCancel={handleCancel}
-            footer={null} // ✅ Theme 안에 자체 버튼이 있으므로 footer 제거
+            open={isThemeModalOpen}
+            onOk={closeThemeModal}
+            onCancel={closeThemeModal}
+            footer={null}
             closable={false}
             centered
-            width={286} // ✅ Theme 컴포넌트에 맞는 너비 조절
+            width={286}
           >
-            <Theme onClose={handleCancel} />
+            <Theme onClose={closeThemeModal} />
           </Modal>
           <Button>
             <IconCirclePersonalInfo>

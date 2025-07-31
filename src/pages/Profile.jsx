@@ -288,8 +288,13 @@ const NavItem = styled(Link)`
 function Profile() {
   //js
 
-  const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleClose = () => {
+    setIsModalOpen(false);
+  };
 
+  const showModal = () => setIsModalOpen(true);
+  const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
   const openThemeModal = () => setIsThemeModalOpen(true);
   const closeThemeModal = () => setIsThemeModalOpen(false);
   //jsx
@@ -345,6 +350,7 @@ function Profile() {
             </IconCircleAlert>
             알림
           </Button>
+          {isModalOpen && <Alart onCancel={handleClose} />}
           {/* 테마 버튼 */}
           <Button type="primary" onClick={openThemeModal}>
             <IconCircleTheme>

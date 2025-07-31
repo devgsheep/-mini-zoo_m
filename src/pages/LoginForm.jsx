@@ -297,9 +297,9 @@ function LoginForm() {
   };
 
   // 비밀번호 모달
-  const [isPasswordFindOpen, setIsPasswordFindMoalOpen] = useState(false);
-  const openPasswordFindModal = () => setIsPasswordFindMoalOpen(true);
-  const closePasswordFindModal = () => setIsPasswordFindMoalOpen(false);
+  const [isPasswordFindOpen, setIsPasswordFindModalOpen] = useState(false);
+  const openPasswordFindModal = () => setIsPasswordFindModalOpen(true);
+  const closePasswordFindModal = () => setIsPasswordFindModalOpen(false);
 
   return (
     <Container>
@@ -391,7 +391,7 @@ function LoginForm() {
           centered
           width={286}
         >
-          <PasswordFind onClick={closePasswordFindModal} />
+          <PasswordFind onClose={closePasswordFindModal} />
         </Modal>
       </InputCheckBoxWrap>
       <Button onClick={handleClickHome}>로그인</Button>
@@ -463,7 +463,7 @@ function LoginForm() {
           </svg>
           카카오로 계속하기
         </KakaoButton>
-        <GUESTP>게스트로 탐색</GUESTP>
+        <GUESTP onClick={handleClickHome}>게스트로 탐색</GUESTP>
       </Footer>
     </Container>
   );

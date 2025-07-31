@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import React from "react";
-import colors from "../../../styles/colors";
+import { Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
+import colors from "../../../styles/colors";
 
 // const Container = styled.div`
 //   width: 394px;
@@ -64,6 +64,7 @@ const ResignSubText = styled.span`
   font-size: 10px;
   color: ${colors.gray[500]};
 `;
+
 const ResignSubTextBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -76,29 +77,39 @@ const ResignBottomBox = styled.div`
   gap: 7px;
   margin-bottom: 20px;
 `;
-const InputWrap = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+const AntCustomFormItem = styled(Form.Item)`
+  width: 240px;
+  margin-bottom: 20px;
+  .ant-form-item-explain .ant-form-item-explain-error {
+    text-align: left;
+    font-size: 10px;
+  }
 `;
 
-const Input = styled.input`
-  width: 258px;
+const AntCustomInputPw = styled(Input.Password)`
+  width: 100%;
   height: 36px;
   line-height: 36px;
   border-radius: 10px;
-  border: 1px solid ${colors.gray[400]};
+  border: 1px solid ${colors.gray[200]};
   box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
     var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
   padding-left: 10px;
   font-size: 13px;
   color: #c2c2c2;
+  margin-bottom: 2px;
   &::placeholder {
+    font-family: "Pretendard";
     font-size: 11px;
-    color: ${colors.gray[500]};
+    color: #999;
+  }
+  .ant-input-suffix svg {
+    color: ${colors.gray[200]};
+    font-size: 18px;
   }
 `;
+
 const ResignButtonWrap = styled.div`
   display: flex;
   justify-content: space-between;
@@ -127,6 +138,13 @@ function ReSign({ onClose }) {
     navigate("/");
   };
 
+  // form 요소 저장해두고 참조하기
+  const [form] = Form.useForm();
+
+  const onFinish = values => {
+    console.log(values);
+  };
+
   return (
     // <Container>
     //    <ReSignPopUp>
@@ -146,9 +164,21 @@ function ReSign({ onClose }) {
       </ResignMiddleBox>
       <ResignBottomBox>
         <ResignSubText>계속하려면 비밀번호를 입력해주세요.</ResignSubText>
-        <InputWrap>
-          <Input type="password" placeholder="비밀번호를 입력해주세요." />
-        </InputWrap>
+
+        <Form
+          form={form}
+          layout="vertical"
+          requiredMark={false}
+          onFinish={values => onFinish(values)}
+        >
+          <AntCustomFormItem
+            name="password"
+            required={true}
+            rules={[{ required: true, message: "비밀번호는 필수요소입니다." }]}
+          >
+            <AntCustomInputPw placeholder="비밀번호를 입력하세요." />
+          </AntCustomFormItem>
+        </Form>
       </ResignBottomBox>
       <ResignButtonWrap>
         <ResignCCButton onClick={onClose}>취소</ResignCCButton>

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Modal } from "antd";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "../css/modal.css";
 import { fonts } from "../styles/fonts";
 import Theme from "./popup/profile/Theme";
@@ -311,6 +311,11 @@ function Profile() {
   const openInfoModal = () => setIsInfoMoalOpen(true);
   const closeInfoModal = () => setIsInfoMoalOpen(false);
 
+  // 로그아웃
+  const navigate = useNavigate();
+  const handleClickReSign = () => {
+    navigate("/");
+  };
   //jsx
   return (
     <Container>
@@ -434,7 +439,7 @@ function Profile() {
             <Info onClose={closeInfoModal} />
           </Modal>
         </ButtonWrap>
-        <Logout>로그아웃</Logout>
+        <Logout onClick={handleClickReSign}>로그아웃</Logout>
       </ProfileWrap>
       <NavigationBar>
         <NavItem to="/home">

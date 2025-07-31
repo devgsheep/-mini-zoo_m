@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Modal } from "antd";
+import { Alert, Modal } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/modal.css";
@@ -8,6 +8,8 @@ import Theme from "./popup/profile/Theme";
 import PersonalInfo from "./popup/profile/PersonalInfo";
 import Ask from "./popup/profile/Ask";
 import Info from "./popup/profile/Info";
+import Logout from "./popup/profile/Logout";
+import Alart from "./popup/profile/Alart";
 
 const Container = styled.div`
   width: 394px;
@@ -247,7 +249,7 @@ const InfoImage = styled.img`
   height: 24px;
 `;
 
-const Logout = styled.div`
+const LogoutButton = styled.div`
   font-size: 13px;
   color: #8f8f8f;
   font-weight: 500;
@@ -291,6 +293,15 @@ const NavItem = styled(Link)`
 function Profile() {
   //js
 
+  // 알람
+  const [isAlartModalOpen, setIsAlartModalOpen] = useState(false);
+  const openAlartModal = () => {
+    setIsAlartModalOpen(true);
+  };
+  const closeAlartModal = () => {
+    setIsAlartModalOpen(false);
+  };
+
   // 테마
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
   const openThemeModal = () => setIsThemeModalOpen(true);
@@ -311,15 +322,20 @@ function Profile() {
   const openInfoModal = () => setIsInfoMoalOpen(true);
   const closeInfoModal = () => setIsInfoMoalOpen(false);
 
+  // 로그아웃
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const openLogoutModal = () => {
+    setIsLogoutModalOpen(true);
+  };
+  const closeLogoutModal = () => {
+    setIsLogoutModalOpen(false);
+  };
+
   //jsx
   return (
     <Container>
       <TopContainer>
-        <SignWrap>
-          <div>
-            <Image src="./images/majesticons_arrow-left.svg" alt="뒤로가기" />
-          </div>
-        </SignWrap>
+        <SignWrap></SignWrap>
         <SignDiv>프로필</SignDiv>
       </TopContainer>
       <ProfileWrap>
@@ -358,12 +374,22 @@ function Profile() {
           </ProfileFeelAvg>
         </ProfileFeel>
         <ButtonWrap>
-          <Button>
+          <Button onClick={openAlartModal}>
             <IconCircleAlert>
               <AlertImage src="./images/alert.svg" alt="알림" />
             </IconCircleAlert>
             알림
           </Button>
+          <Modal
+            open={isAlartModalOpen}
+            onCancel={closeAlartModal}
+            footer={null}
+            closable={false}
+            centered
+            width={286}
+          >
+            <Alart onClose={closeAlartModal} />
+          </Modal>
           {/* 테마 버튼 */}
           <Button type="primary" onClick={openThemeModal}>
             <IconCircleTheme>
@@ -434,7 +460,18 @@ function Profile() {
             <Info onClose={closeInfoModal} />
           </Modal>
         </ButtonWrap>
-        <Logout>로그아웃</Logout>
+        <LogoutButton onClick={openLogoutModal}>로그아웃</LogoutButton>
+        <Modal
+          open={isLogoutModalOpen}
+          nOk={closeLogoutModal}
+          onCancel={closeLogoutModal}
+          footer={null}
+          closable={false}
+          centered
+          width={286}
+        >
+          <Logout onClose={closeLogoutModal} />
+        </Modal>
       </ProfileWrap>
       <NavigationBar>
         <NavItem to="/home">

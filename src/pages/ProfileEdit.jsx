@@ -1,6 +1,8 @@
 import { Modal } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { userEmailAtom, userNameAtom } from "../atoms/userInfoAtom ";
 import {
   Button,
   ButtonSubText,
@@ -37,8 +39,6 @@ import PasswordChange from "./popup/edit/PasswordChange";
 import ProfileImage from "./popup/edit/ProfileImage";
 import ReSign from "./popup/edit/ReSign";
 import Logout from "./popup/profile/Logout";
-import { useRecoilState, useResetRecoilState } from "recoil";
-import { userEmailAtom, userNameAtom } from "../atoms/userInfoAtom ";
 
 function ProfileEdit() {
   // js

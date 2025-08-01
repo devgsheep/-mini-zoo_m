@@ -1,27 +1,15 @@
-import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import FirstForm from "./pages/FirstForm";
-import SignForm from "./pages/SignForm";
-import LoginForm from "./pages/LoginForm";
-import Home from "./pages/Home";
-import Today from "./pages/Today";
 import HistoryDaily from "./pages/HistoryDaily";
 import Historymonth from "./pages/Historymonth";
+import Historyweek from "./pages/Historyweek";
+import Home from "./pages/Home";
+import LoginForm from "./pages/LoginForm";
+import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
-import Historyweek from "./pages/Historyweek";
-import NotFound from "./pages/NotFound";
-import Alart from "./pages/popup/profile/Alart";
-import Ask from "./pages/popup/profile/Ask";
-import PersonalInfo from "./pages/popup/profile/PersonalInfo";
-import Theme from "./pages/popup/profile/Theme";
-import Info from "./pages/popup/profile/Info";
-import Logout from "./pages/popup/profile/Logout";
-import NicknameEdit from "./pages/popup/edit/NicknameEdit";
-import ReSign from "./pages/popup/edit/ReSign";
-import Language from "./pages/popup/edit/Language";
-import ProfileImage from "./pages/popup/edit/ProfileImage";
-import PasswordChange from "./pages/popup/edit/PasswordChange";
+import SignForm from "./pages/SignForm";
+import Today from "./pages/Today";
 
 function App() {
   return (

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Slider as AntdSlider, Slider } from "antd";
+import { Slider as AntdSlider } from "antd";
 import moment from "moment";
 import "moment/locale/ko";
 import { useState } from "react";
@@ -83,31 +83,32 @@ const SliderTitle = styled.span`
   color: ${colors.gray[700]};
 `;
 
-const SliderCircleUl = styled.ul`
-  display: flex;
-  justify-content: space-between;
-  width: 332px;
-  margin: 0 auto;
-  padding-top: 14px;
-`;
-const SliderCircleli = styled.li`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-`;
-const SliderCircle = styled.i`
-  width: 6px;
-  height: 6px;
-  border-radius: 3px;
-  background-color: ${colors.blue[300]};
-  display: block;
-`;
-const SliderCircletxt = styled.p`
-  color: ${colors.gray[700]};
-  font-size: 8px;
-`;
+// const SliderCircleUl = styled.ul`
+//   display: flex;
+//   justify-content: space-between;
+//   width: 332px;
+//   margin: 0 auto;
+//   padding-top: 14px;
+// `;
+// const SliderCircleli = styled.li`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   gap: 3px;
+// `;
+// const SliderCircle = styled.i`
+//   width: 6px;
+//   height: 6px;
+//   border-radius: 3px;
+//   background-color: ${colors.blue[300]};
+//   display: block;
+// `;
+// const SliderCircletxt = styled.p`
+//   color: ${colors.gray[700]};
+//   font-size: 8px;
+// `;
+
 const TodayText = styled.div`
   display: flex;
   flex-direction: column;

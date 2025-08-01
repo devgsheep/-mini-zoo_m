@@ -1,6 +1,8 @@
 import { Modal } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { userEmailAtom, userNameAtom } from "../atoms/userInfoAtom ";
 import "../css/modal.css";
 import {
   AlertImage,
@@ -43,8 +45,6 @@ import Info from "./popup/profile/Info";
 import Logout from "./popup/profile/Logout";
 import PersonalInfo from "./popup/profile/PersonalInfo";
 import Theme from "./popup/profile/Theme";
-import { useRecoilState, useResetRecoilState } from "recoil";
-import { userEmailAtom, userNameAtom } from "../atoms/userInfoAtom ";
 
 function Profile() {
   //js

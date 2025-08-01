@@ -1,6 +1,7 @@
+import { ResponsiveBar } from "@nivo/bar";
 import moment from "moment";
-import Calendar from "react-calendar";
 import { Link } from "react-router-dom";
+import { barMonthData } from "../apis/bar_month_data";
 import "../css/calendar.css";
 import {
   BoxWrap,
@@ -20,17 +21,13 @@ import {
   NavItem,
   NavItemFocus,
   SignDiv,
+  StyledCalendar,
   Title,
   TopContainer,
   TopNavigation,
   Week,
   Wrap,
 } from "../emotions/historymonth.style";
-import { ResponsiveBar } from "@nivo/bar";
-import { useEffect, useState } from "react";
-import { barData } from "../apis/bar_data";
-import colors from "../styles/colors";
-import { barMonthData } from "../apis/bar_month_data";
 
 function Historymonth() {
   // js

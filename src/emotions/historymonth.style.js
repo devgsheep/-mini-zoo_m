@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
-import { fonts } from "../styles/fonts";
-import colors from "../styles/colors";
+import Calendar from "react-calendar";
 import { Link } from "react-router-dom";
+import colors from "../styles/colors";
+import { fonts } from "../styles/fonts";
 
 export const Container = styled.div`
   background-color: #f0f6ff;
@@ -164,6 +165,10 @@ export const ChartWrap = styled.div`
   && {
     padding: 15px !important;
   }
+`;
+
+export const StyledCalendar = styled(Calendar)`
+  border: none;
 `;
 
 export const Footer = styled.div`

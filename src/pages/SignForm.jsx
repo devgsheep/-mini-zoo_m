@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
-import React, { useState } from "react";
-import { fonts } from "../styles/fonts";
-import colors from "../styles/colors";
-import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from "antd";
 import FormItem from "antd/es/form/FormItem";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getGoogleLoginLink } from "../google/googleapi";
 import { getKakaoLoginLink } from "../kko/kkoapi";
+import colors from "../styles/colors";
+import { fonts } from "../styles/fonts";
 
 const Container = styled.div`
   height: auto;

@@ -30,7 +30,7 @@ export const Input = styled.input`
   display: none;
 
   &:checked + span::after {
-    transform: translate(-50%, -50%) scale(1); // 살짝 위로 뜨는 효과
+    transform: translate(-50%, -50%) scale(1);
     border-color: #007aff;
   }
 `;

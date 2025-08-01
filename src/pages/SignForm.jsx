@@ -5,6 +5,7 @@ import colors from "../styles/colors";
 import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from "antd";
 import FormItem from "antd/es/form/FormItem";
+import { getGoogleLoginLink } from "../google/googleapi";
 import { getKakaoLoginLink } from "../kko/kkoapi";
 
 const Container = styled.div`
@@ -371,6 +372,7 @@ function SignForm() {
     handleClickSign();
   };
 
+  // 네비게이터
   const navigate = useNavigate();
 
   const handleClickSign = () => {
@@ -379,10 +381,13 @@ function SignForm() {
   const handleClickLogin = () => {
     navigate("/login");
   };
-
+  
   const handleClickMain = () => {
     navigate("/");
-
+    
+  // 구글 로그인
+  const googleLogin = () => {
+    getGoogleLoginLink();
 
   // 카카오 로그인 URL 만들기
   const kkoLogin = () => {
@@ -596,7 +601,7 @@ function SignForm() {
         <DividerLine />
       </Divider>
       <Footer>
-        <GoogleButton>
+        <GoogleButton onClick={googleLogin}>
           <GoogleSvg />
           Google로 계속하기
         </GoogleButton>

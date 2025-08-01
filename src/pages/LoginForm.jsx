@@ -7,6 +7,7 @@ import { Button, Checkbox, Form, Input, Modal } from "antd";
 import PasswordFind from "./popup/profile/PasswordFind";
 import FormItem from "antd/es/form/FormItem";
 import { GoogleSvg, KaKaoSvg } from "./SignForm";
+import { getGoogleLoginLink } from "../google/googleapi";
 
 const Container = styled.div`
   width: 394px;
@@ -84,94 +85,94 @@ const TitleP2 = styled.p`
   color: ${colors.gray[500]};
 `;
 
-const Main = styled.div`
-  padding-top: 48px;
-`;
+// const Main = styled.div`
+//   padding-top: 48px;
+// `;
 
-const TitleSpan = styled.div`
-  display: flex;
-  gap: 3px;
-`;
+// const TitleSpan = styled.div`
+//   display: flex;
+//   gap: 3px;
+// `;
 
-const MainP = styled.p`
-  padding-left: 20px;
-  padding-bottom: 7px;
-  font-size: 16px;
-  font-weight: 400;
-  color: #5c5c5c;
-`;
+// const MainP = styled.p`
+//   padding-left: 20px;
+//   padding-bottom: 7px;
+//   font-size: 16px;
+//   font-weight: 400;
+//   color: #5c5c5c;
+// `;
 
-const InputWrap = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 18px;
-`;
+// const InputWrap = styled.div`
+//   position: relative;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   padding-bottom: 18px;
+// `;
 
-const CustomLoginInput = styled.input`
-  width: 350px;
-  height: 46px;
-  line-height: 36px;
-  border-radius: 10px;
-  border: 1px solid #c6ddff;
-  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
-    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
-  padding-left: 10px;
-  font-size: 13px;
-  color: #c2c2c2;
-  &::placeholder {
-    font-size: 11px;
-    color: #999;
-  }
-`;
+// const CustomLoginInput = styled.input`
+//   width: 350px;
+//   height: 46px;
+//   line-height: 36px;
+//   border-radius: 10px;
+//   border: 1px solid #c6ddff;
+//   box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
+//     var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
+//   padding-left: 10px;
+//   font-size: 13px;
+//   color: #c2c2c2;
+//   &::placeholder {
+//     font-size: 11px;
+//     color: #999;
+//   }
+// `;
 
-const Svg = styled.svg`
-  position: absolute;
-  right: 10px;
-  width: 16px;
-  height: 16px;
-  transform: translateX(-150%);
-`;
+// const Svg = styled.svg`
+//   position: absolute;
+//   right: 10px;
+//   width: 16px;
+//   height: 16px;
+//   transform: translateX(-150%);
+// `;
 
-const PassSvg = styled.svg`
-  position: absolute;
-  right: 10px;
-  width: 16px;
-  height: 16px;
-  transform: translateX(-150%);
-  cursor: pointer;
-`;
+// const PassSvg = styled.svg`
+//   position: absolute;
+//   right: 10px;
+//   width: 16px;
+//   height: 16px;
+//   transform: translateX(-150%);
+//   cursor: pointer;
+// `;
 
-const InputCheckBoxWrap = styled.div`
-  display: flex;
-  align-items: center;
-  padding-left: 22px;
-  gap: 7px;
-  font-size: 13px;
-  font-weight: 400;
-  color: #5c5c5c;
-  letter-spacing: 0.52px;
-  padding-bottom: 26px;
-  justify-content: space-between;
-  padding-top: 5px;
-`;
+// const InputCheckBoxWrap = styled.div`
+//   display: flex;
+//   align-items: center;
+//   padding-left: 22px;
+//   gap: 7px;
+//   font-size: 13px;
+//   font-weight: 400;
+//   color: #5c5c5c;
+//   letter-spacing: 0.52px;
+//   padding-bottom: 26px;
+//   justify-content: space-between;
+//   padding-top: 5px;
+// `;
 
-const LeftWrap = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-`;
+// const LeftWrap = styled.div`
+//   display: flex;
+//   align-items: center;
+//   gap: 4px;
+// `;
 
-const InputCheckBox = styled.input`
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  border-radius: 2px;
-  border: 1px solid #c6ddff;
-  background-color: #fff;
-  cursor: pointer;
-`;
+// const InputCheckBox = styled.input`
+//   appearance: none;
+//   width: 14px;
+//   height: 14px;
+//   border-radius: 2px;
+//   border: 1px solid #c6ddff;
+//   background-color: #fff;
+//   cursor: pointer;
+// `;
 
 const SpanLogin = styled.span`
   font-family: "pretendard";
@@ -181,22 +182,22 @@ const SpanLogin = styled.span`
   cursor: pointer;
 `;
 
-const CustomLoginButton = styled.button`
-  display: inline-flex;
-  padding: 15px 152px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 10px;
-  background-color: #8ab9ff;
-  border: none;
-  font-size: 16px;
-  font-weight: 600;
-  color: #f5f5f5;
-  letter-spacing: 1.6px;
-  line-height: normal;
-  cursor: pointer;
-`;
+// const CustomLoginButton = styled.button`
+//   display: inline-flex;
+//   padding: 15px 152px;
+//   justify-content: center;
+//   align-items: center;
+//   gap: 10px;
+//   border-radius: 10px;
+//   background-color: #8ab9ff;
+//   border: none;
+//   font-size: 16px;
+//   font-weight: 600;
+//   color: #f5f5f5;
+//   letter-spacing: 1.6px;
+//   line-height: normal;
+//   cursor: pointer;
+// `;
 
 const HaveLogin = styled.div`
   display: flex;
@@ -386,6 +387,11 @@ function LoginForm() {
   const [isPasswordFindOpen, setIsPasswordFindMoalOpen] = useState(false);
   const openPasswordFindModal = () => setIsPasswordFindMoalOpen(true);
   const closePasswordFindModal = () => setIsPasswordFindMoalOpen(false);
+
+  // 구글 로그인
+  const googleLogin = () => {
+    getGoogleLoginLink();
+  };
 
   return (
     <Container>
@@ -593,7 +599,7 @@ function LoginForm() {
         <DividerLine />
       </Divider>
       <Footer>
-        <GoogleButton>
+        <GoogleButton onClick={googleLogin}>
           <GoogleSvg />
           {/* <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -49,7 +49,7 @@ function App() {
           path={"/profile/edit"}
           element={<ProfileEdit>프로필편집</ProfileEdit>}
         />
-        {/* 팝업임시작업 */}
+        {/* 팝업임시작업
         <Route path={"/alart"} element={<Alart>알람</Alart>}></Route>
         <Route path={"/theme"} element={<Theme>테마</Theme>}></Route>
         <Route
@@ -75,7 +75,7 @@ function App() {
           path={"/language"}
           element={<Language>언어변경</Language>}
         ></Route>
-        <Route path={"/resign"} element={<ReSign>회원탈퇴</ReSign>}></Route>
+        <Route path={"/resign"} element={<ReSign>회원탈퇴</ReSign>}></Route> */}
         {/* 잘못된 경로 접근 처리 */}
         <Route path="*" element={<NotFound />} />;
       </Routes>

@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
-import React from "react";
-import colors from "../../../styles/colors";
 import { useNavigate } from "react-router-dom";
+import colors from "../../../styles/colors";
 
 // const AlertPopUp = styled.div`
 //   display: flex;
@@ -20,11 +19,10 @@ const AlertPopUpBox = styled.div`
   background-color: ${colors.white};
   border-radius: 16px;
   padding: 20px 16px 10px 16px;
-
   display: flex;
   flex-direction: column;
-  align-items: center; /* 가로 가운데 정렬 */
-  justify-content: center; /* 세로 가운데 정렬 */
+  align-items: center;
+  justify-content: center;
 `;
 
 const IconCircleLogout = styled.div`

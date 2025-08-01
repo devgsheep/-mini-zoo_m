@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Slider } from "antd";
 import moment from "moment";
 import "moment/locale/ko";
 import { useState } from "react";
@@ -17,7 +16,6 @@ import {
 } from "../components/icons/emotionicon";
 import "../css/today_calendar.css";
 import colors from "../styles/colors";
-import "../css/slider.css";
 
 moment.locale("ko");
 

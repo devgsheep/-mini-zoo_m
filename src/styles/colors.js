@@ -46,35 +46,35 @@ export const colors = {
   emotion: {
     happy: {
       base: "#ffdb65",
-      hover: "#f4c738", // 진한 밝은 노랑
+      hover: "#f4c738", // 기쁨
     },
     sad: {
       base: "#6b9dfa",
-      hover: "#4a7bd8", // 어두운 파랑
+      hover: "#4a7bd8", // 슬픔
     },
     angry: {
       base: "#fa6b6b",
-      hover: "#e64747", // 강한 붉은색
+      hover: "#e64747", // 화남
     },
     boring: {
       base: "#8E8AF9",
-      hover: "#6f6cf0", // 더 진한 보라
+      hover: "#6f6cf0", // 지루
     },
     anxious: {
       base: "#FB9E34",
-      hover: "#e68213", // 진한 주황
+      hover: "#e68213", // 불안
     },
     disgust: {
       base: "#38E25D",
-      hover: "#27c34d", // 어두운 초록
+      hover: "#27c34d", // 까칠
     },
     embarrassed: {
       base: "#E59FDC",
-      hover: "#cc6fbc", // 붉은 핑크
+      hover: "#cc6fbc", // 당황
     },
     tired: {
       base: "#6DEBD2",
-      hover: "#45cab7", // 어두운 민트
+      hover: "#45cab7", // 피곤
     },
   },
   black: "#000000",

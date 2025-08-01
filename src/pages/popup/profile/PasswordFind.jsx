@@ -30,7 +30,8 @@ const AntCustomFormItem = styled(Form.Item)`
     font-size: 10px;
   }
   .ant-form-item-label {
-    margin-bottom: -5px !important; // 이 줄이 인풋과 라벨 사이 여백에 영향 가능
+    // 이 줄이 인풋과 라벨 사이 여백에 영향
+    margin-bottom: -5px !important;
   }
 `;
 

@@ -5,6 +5,7 @@ import colors from "../styles/colors";
 import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from "antd";
 import FormItem from "antd/es/form/FormItem";
+import { getKakaoLoginLink } from "../kko/kkoapi";
 
 const Container = styled.div`
   height: auto;
@@ -378,6 +379,12 @@ function SignForm() {
   const handleClickLogin = () => {
     navigate("/login");
   };
+
+  // 카카오 로그인 URL 만들기
+  const kkoLogin = () => {
+    getKakaoLoginLink();
+  };
+
   //jsx
   return (
     <Container>
@@ -585,7 +592,7 @@ function SignForm() {
           <GoogleSvg />
           Google로 계속하기
         </GoogleButton>
-        <KakaoButton>
+        <KakaoButton onClick={kkoLogin}>
           <KaKaoSvg />
           카카오로 계속하기
         </KakaoButton>

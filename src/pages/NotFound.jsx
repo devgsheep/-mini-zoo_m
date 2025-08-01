@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 import colors from "../styles/colors";
+
 const Container = styled.div`
   width: 100%;
   height: 852px;

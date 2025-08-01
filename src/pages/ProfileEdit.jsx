@@ -1,240 +1,44 @@
-import styled from "@emotion/styled";
-import React, { useState } from "react";
-import { fonts } from "../styles/fonts";
-import colors from "../styles/colors";
 import { Modal } from "antd";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Button,
+  ButtonSubText,
+  ButtonText,
+  ButtonTextWrapper,
+  ButtonWrap,
+  Container,
+  IconCircleLanguage,
+  IconCircleLogout,
+  IconCirclePass,
+  IconCircleTranceImage,
+  Image,
+  LanguageImage,
+  LogOutButton,
+  LogOutImage,
+  NickEdit,
+  PassImage,
+  ProfileEditIcon,
+  ProfileEditIconWrap,
+  ProfileEditWrap,
+  ProfileEtc,
+  ProfileInfo,
+  ProfileNickName,
+  ProfileWrap,
+  ReSignWrap,
+  SignDiv,
+  SignWrap,
+  TopContainer,
+  TranceImage,
+} from "../emotions/profileedit.style";
+import Language from "./popup/edit/Language";
+import NicknameEdit from "./popup/edit/NicknameEdit";
 import PasswordChange from "./popup/edit/PasswordChange";
 import ProfileImage from "./popup/edit/ProfileImage";
-import Language from "./popup/edit/Language";
-import Logout from "./popup/profile/Logout";
-import NicknameEdit from "./popup/edit/NicknameEdit";
 import ReSign from "./popup/edit/ReSign";
-import { useNavigate } from "react-router-dom";
+import Logout from "./popup/profile/Logout";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { userEmailAtom, userNameAtom } from "../atoms/userInfoAtom ";
-
-const Container = styled.div`
-  width: 394px;
-  height: auto;
-  background: ${colors.blue[100]};
-`;
-const TopContainer = styled.div`
-  width: 394px;
-  height: 47px;
-  position: relative;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SignWrap = styled.div`
-  width: 18px;
-  height: 18px;
-  left: 10px;
-  top: 35%;
-  position: absolute;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: auto;
-  cursor: pointer;
-`;
-
-const SignDiv = styled.div`
-  height: 100%;
-  font-family: ${fonts.bold};
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ProfileWrap = styled.div`
-  padding: 30px 13px 13px 13px;
-`;
-
-const ProfileEditWrap = styled.div`
-  margin-bottom: 30px;
-`;
-
-const ProfileEditIconWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 106px;
-  height: 106px;
-  border-radius: 50%;
-  margin: 0 auto;
-`;
-const ProfileEditIcon = styled.img`
-  width: 100%;
-  height: 100%;
-`;
-const ProfileInfo = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-`;
-
-const ProfileNickName = styled.div`
-  font-size: 20px;
-  font-family: ${fonts.bold};
-
-  gap: 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 3px;
-`;
-
-const NickEdit = styled.img`
-  width: 14px;
-  height: 14px;
-  cursor: pointer;
-`;
-
-const ProfileEtc = styled.div`
-  font-size: 16px;
-  color: #757575;
-  font-weight: 300;
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ButtonWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-`;
-
-const Button = styled.button`
-  width: 367px;
-  height: 83px;
-  border-radius: 16px;
-  padding: 10px 10px;
-  text-align: center;
-  background-color: #fff;
-  border: none;
-  box-shadow: 0px 1px 4px rgba(12, 12, 13, 0.05);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  font-size: 20px;
-  cursor: pointer;
-`;
-
-const IconCirclePass = styled.div`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #feccd0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const PassImage = styled.img`
-  width: 20px;
-  height: 20px;
-`;
-const ButtonTextWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
-const ButtonText = styled.div`
-  font-size: 20px;
-  font-weight: 500;
-  color: #424242;
-`;
-const ButtonSubText = styled.div`
-  font-size: 13px;
-  font-weight: 300;
-  color: #5c5c5c;
-`;
-
-const IconCircleTranceImage = styled.div`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #c5d5fe;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-const TranceImage = styled.img`
-  width: 20px;
-  height: 20px;
-`;
-
-const IconCircleLanguage = styled.div`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #adf4d0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const LanguageImage = styled.img`
-  width: 20px;
-  height: 20px;
-`;
-const LogOutButton = styled.div`
-  display: flex;
-  width: 367px;
-  padding: 19px 0 18px 0;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 10px;
-  border-radius: 16px;
-  border: 1px solid #fecaca;
-  background: #fef2f2;
-  box-shadow: 0 4px 4px 0 rgba(12, 12, 13, 0.05);
-  margin-top: 165px;
-  color: #dc2626;
-  font-weight: 600;
-  font-size: 20px;
-  margin-bottom: 20px;
-  cursor: pointer;
-`;
-
-const IconCircleLogout = styled.div`
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #ef4444;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const LogOutImage = styled.img`
-  width: 16px;
-  height: 16px;
-`;
-
-const ReSignWrap = styled.div`
-  font-size: 13px;
-  color: #8f8f8f;
-  font-weight: 500;
-  padding-top: 14px;
-  text-align: center;
-  text-decoration: underline;
-  cursor: pointer;
-  margin-bottom: 20px;
-`;
 
 function ProfileEdit() {
   // js

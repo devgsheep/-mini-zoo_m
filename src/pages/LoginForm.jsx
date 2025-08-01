@@ -379,6 +379,9 @@ function LoginForm() {
   const handleClickSign = () => {
     navigate("/sign");
   };
+  const handleClickMain = () => {
+    navigate("/");
+  };
 
   // 비밀번호 모달
   const [isPasswordFindOpen, setIsPasswordFindMoalOpen] = useState(false);
@@ -395,7 +398,11 @@ function LoginForm() {
       <TopContainer>
         <SignWrap>
           <div>
-            <Image src="/images/majesticons_arrow-left.svg" alt="뒤로가기" />
+            <Image
+              src="/images/majesticons_arrow-left.svg"
+              alt="뒤로가기"
+              onClick={handleClickMain}
+            />
           </div>
         </SignWrap>
         <SignDiv>로그인</SignDiv>

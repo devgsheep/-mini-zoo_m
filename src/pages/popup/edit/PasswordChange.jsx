@@ -106,12 +106,31 @@ function PasswordChange({ onClose }) {
       <Form form={form} onFinish={onFinish}>
         <PasswordChangePopUpBox>
           <PasswordChangeTitle>비밀번호 변경</PasswordChangeTitle>
-          <Form.Item>
-            <CustumPwChInput
-              type="password"
-              placeholder="현재 비밀번호"
-              onChange={handleChangePassword}
-            />
+          <Form.Item
+            form={form}
+            name={"password-form"}
+            style={{ height: 36 }}
+            onFinish={values => onFinish(values)}
+          >
+            <AntCustomFormItem
+              name={"password"}
+              required={true}
+              rules={[
+                { required: true, message: "비밀번호는 필수항목입니다." },
+                {
+                  pattern:
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+\[\]{};:'",.<>/?\\|`~])[A-Za-z\d!@#$%^&*()\-_=+\[\]{};:'",.<>/?\\|`~]{8,}$/,
+                  message: "비밀번호 형식에 맞지 않습니다.",
+                },
+              ]}
+              style={{ position: "relative", top: "20px" }}
+            >
+              <CustumPwChInput
+                type="password"
+                placeholder="현재 비밀번호"
+                onChange={handleChangePassword}
+              />
+            </AntCustomFormItem>
           </Form.Item>
           <ChangePw className="changepw">
             <InputWrap>

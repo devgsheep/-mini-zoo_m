@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from "antd";
 import FormItem from "antd/es/form/FormItem";
 import { getGoogleLoginLink } from "../google/googleapi";
+import { getKakaoLoginLink } from "../kko/kkoapi";
 
 const Container = styled.div`
   height: auto;
@@ -380,10 +381,17 @@ function SignForm() {
   const handleClickLogin = () => {
     navigate("/login");
   };
-
+  
+  const handleClickMain = () => {
+    navigate("/");
+    
   // 구글 로그인
   const googleLogin = () => {
     getGoogleLoginLink();
+
+  // 카카오 로그인 URL 만들기
+  const kkoLogin = () => {
+    getKakaoLoginLink();
   };
 
   //jsx
@@ -392,7 +400,11 @@ function SignForm() {
       <TopContainer>
         <SignWrap>
           <div>
-            <Image src="/images/majesticons_arrow-left.svg" alt="뒤로가기" />
+            <Image
+              src="/images/majesticons_arrow-left.svg"
+              alt="뒤로가기"
+              onClick={handleClickMain}
+            />
           </div>
         </SignWrap>
         <SignDiv>가입하기</SignDiv>
@@ -593,7 +605,7 @@ function SignForm() {
           <GoogleSvg />
           Google로 계속하기
         </GoogleButton>
-        <KakaoButton>
+        <KakaoButton onClick={kkoLogin}>
           <KaKaoSvg />
           카카오로 계속하기
         </KakaoButton>

@@ -150,7 +150,7 @@ const DailyDate = styled.div`
   font-size: 9px;
   font-style: normal;
   font-weight: 400;
-  line-height: 100%; /* 9px */
+  line-height: 100%;
   right: 0;
   top: 0;
   transform: translateX(-30%) translateY(100%);
@@ -187,7 +187,7 @@ const EmotionFill = styled.p`
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 100%; /* 12px */
+  line-height: 100%;
 `;
 
 const Span = styled.span`
@@ -202,7 +202,7 @@ const Span = styled.span`
   font-size: 8px;
   font-style: normal;
   font-weight: 400;
-  line-height: 100%; /* 8px */
+  line-height: 100%;
   color: #fff;
 `;
 
@@ -210,7 +210,7 @@ const Text = styled.p`
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
-  line-height: 100%; /* 10px */
+  line-height: 100%;
 `;
 
 const ImgBoxStyle = styled.div`

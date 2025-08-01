@@ -5,6 +5,7 @@ import colors from "../styles/colors";
 import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from "antd";
 import FormItem from "antd/es/form/FormItem";
+import { getGoogleLoginLink } from "../google/googleapi";
 
 const Container = styled.div`
   height: auto;
@@ -370,6 +371,7 @@ function SignForm() {
     handleClickSign();
   };
 
+  // 네비게이터
   const navigate = useNavigate();
 
   const handleClickSign = () => {
@@ -378,6 +380,12 @@ function SignForm() {
   const handleClickLogin = () => {
     navigate("/login");
   };
+
+  // 구글 로그인
+  const googleLogin = () => {
+    getGoogleLoginLink();
+  };
+
   //jsx
   return (
     <Container>
@@ -581,7 +589,7 @@ function SignForm() {
         <DividerLine />
       </Divider>
       <Footer>
-        <GoogleButton>
+        <GoogleButton onClick={googleLogin}>
           <GoogleSvg />
           Google로 계속하기
         </GoogleButton>

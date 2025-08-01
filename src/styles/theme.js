@@ -1,4 +1,3 @@
-// src/styles/theme.js
 import colors from "./colors";
 import { fonts } from "./fonts";
 

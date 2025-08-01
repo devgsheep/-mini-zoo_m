@@ -70,11 +70,11 @@ const Week = styled.div`
   cursor: pointer;
 `;
 const Month = styled.div`
+  // 선택시
   flex: 1;
   padding: 7px 49px;
   font-size: 12px;
   font-weight: 400;
-  // 선택시
   background-color: ${colors.blue[200]};
   border-radius: 6px;
   color: ${colors.gray[700]};
@@ -190,7 +190,6 @@ function Historymonth() {
     margin: "0 auto",
     background: "yellowgreen",
   };
-
   // 1. 날짜를 US 방식으로 변경
   const weekName = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
   const formatShortWeekday = (locale, date) => {

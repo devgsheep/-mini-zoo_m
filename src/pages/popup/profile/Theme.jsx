@@ -122,7 +122,6 @@ function Theme({ onClose }) {
               <EXText>눈이 편안한 어두운 테마</EXText>
             </div>
           </ThemeRadioLabel>
-
           <ThemeRadioLabel htmlFor="system">
             <input
               type="radio"

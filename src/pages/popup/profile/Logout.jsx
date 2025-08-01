@@ -11,10 +11,11 @@ import {
   Title,
 } from "../../../emotions/profile/logout.style";
 
-function Logout({ onClose }) {
+function Logout({ onClose, handleLogout }) {
   // 네비게이터
   const navigate = useNavigate();
   const handleClickLogout = () => {
+    handleLogout();
     navigate("/");
   };
 

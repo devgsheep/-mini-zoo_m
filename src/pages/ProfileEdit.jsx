@@ -37,6 +37,8 @@ import PasswordChange from "./popup/edit/PasswordChange";
 import ProfileImage from "./popup/edit/ProfileImage";
 import ReSign from "./popup/edit/ReSign";
 import Logout from "./popup/profile/Logout";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import { userEmailAtom, userNameAtom } from "../atoms/userInfoAtom ";
 
 function ProfileEdit() {
   // js
@@ -100,6 +102,15 @@ function ProfileEdit() {
   const handleClickProfile = () => {
     navigate("/Profile");
   };
+  // 리코일로 닉네임, 이메일 불러오기
+  const [userName, setUserName] = useRecoilState(userNameAtom);
+  const [userEmail, setUserEmail] = useRecoilState(userEmailAtom);
+
+  // 로그아웃 버튼 클릭시 사용자 정보 초기화
+  const handleLogout = () => {
+    setUserName("OO");
+    setUserEmail("example@email.com");
+  };
 
   // jsx
 
@@ -125,7 +136,7 @@ function ProfileEdit() {
 
           <ProfileInfo>
             <ProfileNickName>
-              도현
+              {userName}
               <NickEdit
                 src="../images/edit.svg"
                 alt="닉네임편집"
@@ -225,7 +236,7 @@ function ProfileEdit() {
           centered
           width={286}
         >
-          <Logout onClose={closeLogoutModal} />
+          <Logout onClose={closeLogoutModal} handleLogout={handleLogout} />
         </Modal>
         <ReSignWrap onClick={openReSignModal}>회원탈퇴</ReSignWrap>
         <Modal

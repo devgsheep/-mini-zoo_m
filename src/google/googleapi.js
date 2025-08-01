@@ -2,7 +2,8 @@ const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_KEY;
 const GOOGLE_REDIRECT_URI = "http://localhost:3000/home";
 // 구글 로그인시 활용
 export const getGoogleLoginLink = () => {
-  window.location.href = `https://accounts.google.com/o/oauth2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_REDIRECT_URI}&response_type=code&scope=openid email profile`;
+  const googleURL = `https://accounts.google.com/o/oauth2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_REDIRECT_URI}&response_type=code&scope=openid email profile&state=google`;
+  window.location.href = googleURL;
 };
 
 export const getGoogleToken = async code => {

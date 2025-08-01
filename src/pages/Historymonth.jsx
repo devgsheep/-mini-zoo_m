@@ -40,7 +40,7 @@ function Historymonth() {
     background: "yellowgreen",
   };
   // 1. 날짜를 US 방식으로 변경
-  const weekName = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+  const weekName = ["일", "월", "화", "수", "목", "금", "토"];
   const formatShortWeekday = (locale, date) => {
     const idx = date.getDay();
     moment.locale("en");
@@ -176,7 +176,7 @@ function Historymonth() {
       <BoxWrap>
         <ImgBoxStyle>
           <div style={historyWrap}>
-            <Calendar
+            <StyledCalendar
               calendarType="gregory"
               formatShortWeekday={formatShortWeekday}
               formatDay={(locale, date) => moment(date).format("D")}

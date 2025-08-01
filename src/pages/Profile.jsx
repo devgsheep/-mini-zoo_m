@@ -43,6 +43,8 @@ import Info from "./popup/profile/Info";
 import Logout from "./popup/profile/Logout";
 import PersonalInfo from "./popup/profile/PersonalInfo";
 import Theme from "./popup/profile/Theme";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import { userEmailAtom, userNameAtom } from "../atoms/userInfoAtom ";
 
 function Profile() {
   //js
@@ -85,6 +87,16 @@ function Profile() {
     setIsLogoutModalOpen(false);
   };
 
+  // 리코일로 닉네임, 이메일 불러오기
+  const [userName, setUserName] = useRecoilState(userNameAtom);
+  const [userEmail, setUserEmail] = useRecoilState(userEmailAtom);
+
+  // 로그아웃 버튼 클릭시 사용자 정보 초기화
+  const handleLogout = () => {
+    setUserName("OO");
+    setUserEmail("example@email.com");
+  };
+
   //jsx
   return (
     <Container>
@@ -99,7 +111,7 @@ function Profile() {
           </ProfileImageWrap>
           <ProfileInfo>
             <ProfileNickName>
-              도로롱
+              {userName}
               <div>
                 <Link to="/profile/edit">
                   <NickEditImage
@@ -111,7 +123,7 @@ function Profile() {
             </ProfileNickName>
             <ProfileEtc>
               <div>지침 도현</div>
-              <div>dev.dorong@gmail.com</div>
+              <div>{userEmail}</div>
             </ProfileEtc>
           </ProfileInfo>
         </ProfileMain>
@@ -224,7 +236,7 @@ function Profile() {
           centered
           width={286}
         >
-          <Logout onClose={closeLogoutModal} />
+          <Logout onClose={closeLogoutModal} handleLogout={handleLogout} />
         </Modal>
       </ProfileWrap>
       <NavigationBar>

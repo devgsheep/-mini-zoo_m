@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Slider as AntdSlider, Slider } from "antd";
 import moment from "moment";
 import "moment/locale/ko";
 import { useState } from "react";
@@ -264,6 +265,28 @@ const CustomCalendar = styled(Calendar)`
   }
 `;
 
+const StyledSlider = styled(AntdSlider)`
+  .ant-slider-handle {
+    margin-top: 1px;
+  }
+  .ant-slider-handle::after {
+    background-color: #9dc4ff !important;
+    box-shadow: none;
+  }
+  .ant-slider-handle::before {
+  }
+
+  .ant-slider-track {
+    background-color: #9dc4ff !important;
+    height: 6px;
+  }
+
+  .ant-slider-rail {
+    background-color: #fff !important;
+    height: 6px;
+  }
+`;
+
 function HistoryDaily() {
   //js
 
@@ -300,7 +323,21 @@ function HistoryDaily() {
     setShowCalendar(false);
   };
 
+  //
+  const [emotionIntensity, setEmotionIntensity] = useState(5);
+  const handleSliderChange = value => {
+    setEmotionIntensity(value);
+  };
+  // const marks = {
+  //   1: "1",
+  //   3: "3",
+  //   5: "5",
+  //   7: "7",
+  //   10: "10",
+  // };
+
   // jsx
+
   return (
     <Container>
       <Header>
@@ -379,61 +416,34 @@ function HistoryDaily() {
           >
             감정의 강도는 어느 정도인가요?
           </SliderTitle>
+
           <div
+            className="icon-wrapper"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <StyledSlider
+              min={1}
+              max={10}
+              step={1}
+              value={emotionIntensity}
+              onChange={handleSliderChange}
+              style={{ width: 326, top: "15px" }}
+              // marks={marks}
+            />
+          </div>
+
+          {/* <div
             className="slide_wrap"
             style={{
               display: "flex",
               justifyContent: "center",
-              marginTop: 20,
+              // marginTop: 20,
             }}
-          >
-            <svg
-              width="332"
-              height="10"
-              viewBox="0 0 332 10"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M3 5H329"
-                stroke="white"
-                strokeWidth="6"
-                strokeLinecap="round"
-              />
-              <path
-                d="M3 2C1.34315 2 0 3.34315 0 5C0 6.65685 1.34315 8 3 8V2ZM3 5V8H166V5V2H3V5Z"
-                fill="#9DC4FF"
-              />
-              <path
-                d="M171 5C171 7.76142 168.761 10 166 10C163.239 10 161 7.76142 161 5C161 2.23858 163.239 0 166 0C168.761 0 171 2.23858 171 5Z"
-                fill="#9DC4FF"
-              />
-            </svg>
-          </div>
-          <div>
-            <SliderCircleUl>
-              <SliderCircleli>
-                <SliderCircle></SliderCircle>
-                <SliderCircletxt>1</SliderCircletxt>
-              </SliderCircleli>
-              <SliderCircleli>
-                <SliderCircle></SliderCircle>
-                <SliderCircletxt>3</SliderCircletxt>
-              </SliderCircleli>
-              <SliderCircleli>
-                <SliderCircle></SliderCircle>
-                <SliderCircletxt>5</SliderCircletxt>
-              </SliderCircleli>
-              <SliderCircleli>
-                <SliderCircle></SliderCircle>
-                <SliderCircletxt>7</SliderCircletxt>
-              </SliderCircleli>
-              <SliderCircleli>
-                <SliderCircle></SliderCircle>
-                <SliderCircletxt>10</SliderCircletxt>
-              </SliderCircleli>
-            </SliderCircleUl>
-          </div>
+          > */}
         </SliderWrap>
         <TodayText>
           <span>더 자세히 표현하고 싶다면? (선택사항)</span>

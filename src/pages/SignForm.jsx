@@ -381,14 +381,14 @@ function SignForm() {
   const handleClickLogin = () => {
     navigate("/login");
   };
-  
+
   const handleClickMain = () => {
     navigate("/");
-    
+  };
   // 구글 로그인
   const googleLogin = () => {
     getGoogleLoginLink();
-
+  };
   // 카카오 로그인 URL 만들기
   const kkoLogin = () => {
     getKakaoLoginLink();

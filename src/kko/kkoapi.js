@@ -8,7 +8,7 @@ const auth_code_path = "https://kauth.kakao.com/oauth/authorize";
 const kko_user_api = "https://kapi.kakao.com/v2/user/me";
 // 카카오 로그인 시도시 활용할 URL 자동 생성
 export const getKakaoLoginLink = () => {
-  const kakaoURL = `${auth_code_path}?client_id=${rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`;
+  const kakaoURL = `${auth_code_path}?client_id=${rest_api_key}&redirect_uri=${redirect_uri}&response_type=code&state=kakao`;
   window.location.href = kakaoURL;
 };
 
@@ -58,7 +58,7 @@ export const getMemberWithAccessToken = async accessToken => {
     }
 
     const userData = await response.json();
-    console.log(userData);
+    // console.log(userData);
     return userData;
   } catch (error) {
     console.error("fetch 에러:", error);

@@ -8,6 +8,7 @@ import PasswordFind from "./popup/profile/PasswordFind";
 import FormItem from "antd/es/form/FormItem";
 import { GoogleSvg, KaKaoSvg } from "./SignForm";
 import { getGoogleLoginLink } from "../google/googleapi";
+import { getKakaoLoginLink } from "../kko/kkoapi";
 
 const Container = styled.div`
   width: 394px;
@@ -393,6 +394,11 @@ function LoginForm() {
     getGoogleLoginLink();
   };
 
+  // 카카오 로그인 URL 만들기
+  const kkoLogin = () => {
+    getKakaoLoginLink();
+  };
+
   return (
     <Container>
       <TopContainer>
@@ -643,7 +649,7 @@ function LoginForm() {
           </svg> */}
           Google로 계속하기
         </GoogleButton>
-        <KakaoButton>
+        <KakaoButton onClick={kkoLogin}>
           <KaKaoSvg />
           {/* <svg
             xmlns="http://www.w3.org/2000/svg"

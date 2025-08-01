@@ -385,6 +385,7 @@ function SignForm() {
   const handleClickMain = () => {
     navigate("/");
   };
+
   // 구글 로그인
   const googleLogin = () => {
     getGoogleLoginLink();

@@ -380,6 +380,10 @@ function SignForm() {
     navigate("/login");
   };
 
+  const handleClickMain = () => {
+    navigate("/");
+
+
   // 카카오 로그인 URL 만들기
   const kkoLogin = () => {
     getKakaoLoginLink();
@@ -391,7 +395,11 @@ function SignForm() {
       <TopContainer>
         <SignWrap>
           <div>
-            <Image src="/images/majesticons_arrow-left.svg" alt="뒤로가기" />
+            <Image
+              src="/images/majesticons_arrow-left.svg"
+              alt="뒤로가기"
+              onClick={handleClickMain}
+            />
           </div>
         </SignWrap>
         <SignDiv>가입하기</SignDiv>

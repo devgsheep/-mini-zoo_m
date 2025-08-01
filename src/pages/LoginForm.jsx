@@ -380,9 +380,9 @@ function LoginForm() {
   };
 
   // 비밀번호 모달
-  const [isPasswordFindOpen, setIsPasswordFindModalOpen] = useState(false);
-  const openPasswordFindModal = () => setIsPasswordFindModalOpen(true);
-  const closePasswordFindModal = () => setIsPasswordFindModalOpen(false);
+  const [isPasswordFindOpen, setIsPasswordFindMoalOpen] = useState(false);
+  const openPasswordFindModal = () => setIsPasswordFindMoalOpen(true);
+  const closePasswordFindModal = () => setIsPasswordFindMoalOpen(false);
 
   return (
     <Container>
@@ -496,16 +496,16 @@ function LoginForm() {
               centered
               width={286}
             >
-              <PasswordFind onClick={closePasswordFindModal} />
+              <PasswordFind onClose={closePasswordFindModal} />
             </Modal>
           </div>
         </FormItem>
         <FormItem style={{ marginBottom: 0 }}>
           <AntCustomSignButton
             type="primary"
-            htmlType="submit"
+            htmlType="button"
             disabled={!isChecked}
-            // onClick={handleClickSign}
+            onClick={handleClickHome}
           >
             로그인
           </AntCustomSignButton>

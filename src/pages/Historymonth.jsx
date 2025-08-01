@@ -147,6 +147,11 @@ const ImgBoxStyle = styled.div`
   box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
     var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
 `;
+const StyledCalendar = styled(Calendar)`
+  border: none;
+  .react-calendar {
+  }
+`;
 
 const Footer = styled.div`
   padding-top: 30px;
@@ -191,7 +196,7 @@ function Historymonth() {
     background: "yellowgreen",
   };
   // 1. 날짜를 US 방식으로 변경
-  const weekName = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+  const weekName = ["일", "월", "화", "수", "목", "금", "토"];
   const formatShortWeekday = (locale, date) => {
     const idx = date.getDay();
     moment.locale("en");
@@ -272,7 +277,7 @@ function Historymonth() {
       <BoxWrap>
         <ImgBoxStyle>
           <div style={historyWrap}>
-            <Calendar
+            <StyledCalendar
               calendarType="gregory"
               formatShortWeekday={formatShortWeekday}
               formatDay={(locale, date) => moment(date).format("D")}

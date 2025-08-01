@@ -1,269 +1,45 @@
-import styled from "@emotion/styled";
-import React from "react";
-import colors from "../styles/colors";
-import { fonts } from "../styles/fonts";
+import { Link, useNavigate } from "react-router-dom";
 import {
   HappyIconCircle,
   SadIconCircle,
   TiredIconCircle,
 } from "../components/icons/emotionicon";
-import { Link, useNavigate } from "react-router-dom";
-
-const Container = styled.div`
-  background-color: #f0f6ff;
-  text-align: center;
-`;
-
-const TopContainer = styled.div`
-  width: 394px;
-  height: 47px;
-  position: relative;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 13px;
-`;
-
-const SignDiv = styled.div`
-  height: 100%;
-  font-family: ${fonts.bold};
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const TopNavigation = styled.div`
-  padding-bottom: 13px;
-`;
-
-const NavigationBoxStyle = styled.div`
-  width: 366px;
-  display: inline-flex;
-  padding: 4px;
-  align-items: center;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
-    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
-`;
-
-const NavigationThree = styled.div`
-  display: flex;
-  width: 100%;
-`;
-const Daily = styled.div`
-  flex: 1;
-  padding: 7px 49px;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  color: ${colors.gray[700]};
-  cursor: pointer;
-`;
-const Week = styled.div`
-  flex: 1;
-  padding: 7px 49px;
-  font-size: 12px;
-  font-weight: 400;
-  // 선택시
-  background-color: ${colors.blue[200]};
-  border-radius: 6px;
-  color: ${colors.gray[700]};
-  cursor: pointer;
-`;
-const Month = styled.div`
-  flex: 1;
-  padding: 7px 49px;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  color: ${colors.gray[700]};
-  cursor: pointer;
-`;
-
-const EmotionBoxStyle = styled.div`
-  width: 366px;
-  display: inline-flex;
-  padding: 8px 0px 16px 8px;
-  align-items: center;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
-    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
-`;
-
-const Title = styled.p`
-  display: flex;
-  align-items: flex-start;
-  padding-top: 0px;
-  padding-left: 5px;
-  padding-bottom: 15px;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-`;
-
-const ColorsGuide = styled.div`
-  display: flex;
-  padding-left: 10px;
-  width: 90%;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px 50px;
-  flex-wrap: wrap;
-`;
-
-const Wrap = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1;
-`;
-
-const Emotion = styled.div`
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  /* background: ${colors.emotion.boring.base}; */
-  background-color: ${({ emotion }) => colors.emotion[emotion]?.base || "#000"};
-`;
-
-const BoxWrap = styled.div`
-  padding-top: 13px;
-`;
-
-const ImgBoxStyle = styled.div`
-  position: relative;
-  width: 366px;
-  display: inline-flex;
-  padding: 15px 0px 8px 0px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
-    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
-`;
-
-const BoxStyle = styled.div`
-  position: relative;
-  width: 366px;
-  display: inline-flex;
-  padding: 15px 0px 35px 12px;
-  align-items: center;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
-    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
-  cursor: pointer;
-`;
-
-const DailyDate = styled.div`
-  position: absolute;
-  color: ${colors.gray[300]};
-  font-size: 9px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-  right: 0;
-  top: 0;
-  transform: translateX(-30%) translateY(100%);
-`;
-
-const Circle = styled.div`
-  display: flex;
-  width: 32px;
-  height: 32px;
-  padding: 11px 12px;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-  border-radius: 16px;
-  /* background: #fa6b6b; */
-  background-color: ${({ emotion }) => colors.emotion[emotion]?.base || "#000"};
-`;
-
-const EmotionTextBox = styled.div`
-  display: block;
-  padding-left: 16px;
-  text-align: left;
-`;
-const EmotionTitle = styled.div`
-  display: flex;
-  gap: 7px;
-  align-items: center;
-  padding-bottom: 7px;
-`;
-
-const EmotionFill = styled.p`
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-`;
-
-const Span = styled.span`
-  display: flex;
-  width: 31px;
-  height: 14px;
-  padding: 3px 5px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-  background-color: ${({ emotion }) => colors.emotion[emotion]?.base || "#000"};
-  font-size: 8px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-  color: #fff;
-`;
-
-const Text = styled.p`
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-`;
-
-const Footer = styled.div`
-  padding-top: 30px;
-`;
-
-const NavigationBar = styled.ul`
-  display: flex;
-  width: 100%;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`;
-
-const NavItemFocus = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 14px 0;
-  width: 25%;
-  cursor: pointer;
-  background-color: #bdd7ff;
-  color: #579aff;
-`;
-const NavItem = styled(Link)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 14px 0;
-  width: 25%;
-  background-color: #fff;
-  color: #a8a8a8;
-  cursor: pointer;
-`;
+import {
+  BoxStyle,
+  BoxWrap,
+  ChartTitle,
+  ChartWrap,
+  Circle,
+  ColorsGuide,
+  Container,
+  Daily,
+  DailyDate,
+  Emotion,
+  EmotionBoxStyle,
+  EmotionFill,
+  EmotionTextBox,
+  EmotionTitle,
+  Footer,
+  ImgBoxStyle,
+  Month,
+  NavigationBar,
+  NavigationBoxStyle,
+  NavigationThree,
+  NavItem,
+  NavItemFocus,
+  SignDiv,
+  Span,
+  Text,
+  Title,
+  TopContainer,
+  TopNavigation,
+  Week,
+  Wrap,
+} from "../emotions/historyweek.style";
+import colors from "../styles/colors";
+import { ResponsiveBar } from "@nivo/bar";
+import { useEffect, useState } from "react";
+import { barData } from "../apis/bar_data";
 
 function Historyweek() {
   const navigate = useNavigate();
@@ -271,6 +47,13 @@ function Historyweek() {
   const handleClickToday = () => {
     navigate("/today");
   };
+
+  // 차트
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setData(barData);
+  }, []);
   return (
     <Container>
       <TopContainer>
@@ -335,8 +118,60 @@ function Historyweek() {
       <BoxWrap>
         <ImgBoxStyle>
           <div>
-            <Title>감정 변화 차트</Title>
-            <img src="/images/chart.png" alt="" />
+            <ChartTitle>감정 변화 차트</ChartTitle>
+            <div
+              style={{
+                width: "330px",
+                height: "150px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <ChartWrap>
+                <ResponsiveBar
+                  data={data}
+                  keys={["point"]}
+                  indexBy="date"
+                  groupMode="stacked"
+                  padding={0.8}
+                  enableLabel={false}
+                  borderRadius={5}
+                  // X축 범례 제거
+                  legends={[]}
+                  // Food, Y축 범례 제거
+                  axisLeft={null}
+                  // 눈금선
+                  enableGridX={false}
+                  enableGridY={false}
+                  axisBottom={{
+                    format: value => {
+                      const date = new Date(value);
+                      const month = date.getMonth() + 1; // 0부터 시작하므로 1을 더함
+                      const day = date.getDate();
+                      return `${month}/${day}`;
+                    },
+                    // 차트 바로 밑 | 표시 제거
+                    tickSize: 0,
+                  }}
+                  margin={{ top: 0, right: -20, bottom: 18, left: -20 }}
+                  // 감정에 따른 색 반환
+                  colors={({ data }) => {
+                    const emotionColorMap = {
+                      happy: `${colors.emotion.happy.base}`,
+                      sad: `${colors.emotion.sad.base}`,
+                      angry: `${colors.emotion.angry.base}`,
+                      boring: `${colors.emotion.boring.base}`,
+                      anxious: `${colors.emotion.anxious.base}`,
+                      disgust: `${colors.emotion.disgust.base}`,
+                      embarrassed: `${colors.emotion.embarrassed.base}`,
+                      tired: `${colors.emotion.tired.base}`,
+                    };
+                    return emotionColorMap[data.emotion];
+                  }}
+                />
+              </ChartWrap>
+            </div>
           </div>
         </ImgBoxStyle>
       </BoxWrap>

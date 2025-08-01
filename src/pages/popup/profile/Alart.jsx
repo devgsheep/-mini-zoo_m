@@ -1,109 +1,24 @@
-import styled from "@emotion/styled";
-import colors from "../../../styles/colors";
+import { useState } from "react";
 import {
   DaysButton,
   TogleButton,
   TogleButtonCircle,
 } from "../../../components/icons/button";
-import { useState } from "react";
 import "../../../css/radio.css";
+import {
+  AlertButtonWrap,
+  AlertPopUpBox,
+  DaysButtonWrap,
+  DaysWrap,
+  RadioBox,
+  RadioInput,
+  RadioLabel,
+  RadioWrap,
+  Select,
+  Span,
+  TimeWrapper,
+} from "../../../emotions/profile/alart.style";
 import { ButtonCC, ButtonContainer, ButtonOK, ButtonWrap } from "../../Ui";
-
-// const Container = styled.div`
-//   width: 394px;
-//   height: auto;
-//   background-color: #f0f6ff;
-// `;
-
-// const AlertPopUp = styled.div`
-//   display: flex;
-//   position: fixed;
-//   z-index: 99999;
-//   width: 394px;
-//   height: 100%;
-//   justify-content: center;
-//   align-items: center;
-//   background-color: rgba(0, 0, 0, 0.6);
-//   /* display: none; */
-// `;
-const AlertPopUpBox = styled.div`
-  width: 286px;
-  height: auto;
-  background-color: ${colors.white};
-  border-radius: 16px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 27px;
-`;
-
-const AlertButtonWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  span {
-    font-size: 16px;
-    color: ${colors.black};
-    font-weight: 700;
-  }
-`;
-const DaysWrap = styled.div`
-  margin-bottom: 5px;
-  span {
-    display: flex;
-    justify-content: left;
-    font-size: 16px;
-    color: ${colors.black};
-    font-weight: 700;
-  }
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
-const DaysButtonWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Span = styled.span`
-  width: 1px;
-  height: 21px;
-  background: ${colors.gray[400]};
-`;
-const Select = styled.select`
-  width: 50px;
-  font-size: 16px;
-  border: none;
-`;
-const TimeWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-`;
-const RadioWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-const RadioBox = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  color: ${colors.black};
-`;
-const RadioLabel = styled.label`
-  display: flex;
-  gap: 6px;
-  cursor: pointer;
-  font-weight: 500;
-`;
-const RadioInput = styled.input`
-  cursor: pointer;
-`;
 
 const days = ["일", "월", "화", "수", "목", "금", "토"];
 function Alart({ onClose }) {

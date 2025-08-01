@@ -1,187 +1,36 @@
-import React from "react";
-import colors from "../styles/colors";
-import { fonts } from "../styles/fonts";
-import styled from "@emotion/styled";
-import Calendar from "react-calendar";
-import "../css/calendar.css";
 import moment from "moment";
+import Calendar from "react-calendar";
 import { Link } from "react-router-dom";
-
-const Container = styled.div`
-  background-color: #f0f6ff;
-  text-align: center;
-`;
-
-const TopContainer = styled.div`
-  width: 394px;
-  height: 47px;
-  position: relative;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 13px;
-`;
-
-const SignDiv = styled.div`
-  height: 100%;
-  font-family: ${fonts.bold};
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const TopNavigation = styled.div`
-  padding-bottom: 13px;
-`;
-
-const NavigationBoxStyle = styled.div`
-  width: 366px;
-  display: inline-flex;
-  padding: 4px;
-  align-items: center;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
-    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
-`;
-
-const NavigationThree = styled.div`
-  display: flex;
-  width: 100%;
-`;
-const Daily = styled.div`
-  flex: 1;
-  padding: 7px 49px;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  color: ${colors.gray[700]};
-  cursor: pointer;
-`;
-const Week = styled.div`
-  flex: 1;
-  padding: 7px 49px;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  color: ${colors.gray[700]};
-  cursor: pointer;
-`;
-const Month = styled.div`
-  // 선택시
-  flex: 1;
-  padding: 7px 49px;
-  font-size: 12px;
-  font-weight: 400;
-  background-color: ${colors.blue[200]};
-  border-radius: 6px;
-  color: ${colors.gray[700]};
-  cursor: pointer;
-`;
-
-const EmotionBoxStyle = styled.div`
-  width: 366px;
-  display: inline-flex;
-  padding: 8px 0px 16px 8px;
-  align-items: center;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
-    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
-`;
-
-const Title = styled.p`
-  display: flex;
-  align-items: flex-start;
-  padding-top: 0px;
-  padding-left: 5px;
-  padding-bottom: 15px;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-`;
-
-const ColorsGuide = styled.div`
-  display: flex;
-  padding-left: 10px;
-  width: 90%;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px 50px;
-  flex-wrap: wrap;
-`;
-
-const Wrap = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1;
-`;
-
-const Emotion = styled.div`
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  /* background: ${colors.emotion.boring.base}; */
-  background-color: ${({ emotion }) => colors.emotion[emotion]?.base || "#000"};
-`;
-
-const BoxWrap = styled.div`
-  padding-top: 13px;
-`;
-
-const ImgBoxStyle = styled.div`
-  position: relative;
-  width: 366px;
-  display: inline-flex;
-  padding: 15px 0px 8px 0px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
-    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
-`;
-
-const Footer = styled.div`
-  padding-top: 30px;
-`;
-
-const NavigationBar = styled.ul`
-  display: flex;
-  width: 100%;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`;
-
-const NavItemFocus = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 14px 0;
-  width: 25%;
-  cursor: pointer;
-  background-color: #bdd7ff;
-  color: #579aff;
-`;
-const NavItem = styled(Link)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 14px 0;
-  width: 25%;
-  background-color: #fff;
-  color: #a8a8a8;
-  cursor: pointer;
-`;
+import "../css/calendar.css";
+import {
+  BoxWrap,
+  ChartTitle,
+  ChartWrap,
+  ColorsGuide,
+  Container,
+  Daily,
+  Emotion,
+  EmotionBoxStyle,
+  Footer,
+  ImgBoxStyle,
+  Month,
+  NavigationBar,
+  NavigationBoxStyle,
+  NavigationThree,
+  NavItem,
+  NavItemFocus,
+  SignDiv,
+  Title,
+  TopContainer,
+  TopNavigation,
+  Week,
+  Wrap,
+} from "../emotions/historymonth.style";
+import { ResponsiveBar } from "@nivo/bar";
+import { useEffect, useState } from "react";
+import { barData } from "../apis/bar_data";
+import colors from "../styles/colors";
+import { barMonthData } from "../apis/bar_month_data";
 
 function Historymonth() {
   // js
@@ -199,6 +48,24 @@ function Historymonth() {
     console.log(idx);
     return weekName[idx];
   };
+
+  // 차트
+  const emotionCounts = {};
+
+  barMonthData.forEach(({ emotion }) => {
+    emotionCounts[emotion] = (emotionCounts[emotion] || 0) + 1;
+  });
+
+  const total = Object.values(emotionCounts).reduce((a, b) => a + b, 0);
+
+  const top3 = Object.entries(emotionCounts)
+    .sort((a, b) => b[1] - a[1]) // 많이 등장한 순으로 정렬
+    .slice(0, 3) // 상위 3개만 가져오기
+    .map(([emotion, count]) => ({
+      emotion,
+      point: count,
+      percentage: Math.round((count / total) * 100),
+    }));
 
   // jsx
   return (
@@ -264,8 +131,45 @@ function Historymonth() {
       </div>
       <BoxWrap>
         <ImgBoxStyle>
-          <div>
-            <img src="/images/TOP3.png" alt="" />
+          <ChartTitle>감정 변화 차트</ChartTitle>
+          <div
+            style={{
+              width: "330px",
+              height: "150px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <ChartWrap>
+              <ResponsiveBar
+                data={top3}
+                keys={["point"]}
+                indexBy="emotion"
+                layout="horizontal"
+                padding={0}
+                borderRadius={5}
+                legends={[
+                  {
+                    dataFrom: "keys",
+                    anchor: "bottom-right",
+                    direction: "column",
+                    translateX: 120,
+                    itemsSpacing: 3,
+                    itemWidth: 100,
+                    itemHeight: 16,
+                  },
+                ]}
+                enableLabel={true}
+                label={({ data }) => `${data.point}회  ${data.percentage}%`}
+                labelSkipWidth={0}
+                labelSkipHeight={0}
+                labelTextColor="#555"
+                axisBottom={{ legend: "country (indexBy)", legendOffset: 32 }}
+                axisLeft={{ legend: undefined, legendOffset: -40 }}
+                margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+              />
+            </ChartWrap>
           </div>
         </ImgBoxStyle>
       </BoxWrap>

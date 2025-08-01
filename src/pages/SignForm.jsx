@@ -378,13 +378,21 @@ function SignForm() {
   const handleClickLogin = () => {
     navigate("/login");
   };
+  const handleClickMain = () => {
+    navigate("/");
+  };
+
   //jsx
   return (
     <Container>
       <TopContainer>
         <SignWrap>
           <div>
-            <Image src="/images/majesticons_arrow-left.svg" alt="뒤로가기" />
+            <Image
+              src="/images/majesticons_arrow-left.svg"
+              alt="뒤로가기"
+              onClick={handleClickMain}
+            />
           </div>
         </SignWrap>
         <SignDiv>가입하기</SignDiv>

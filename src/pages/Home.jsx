@@ -4,6 +4,9 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAccessToken, getMemberWithAccessToken } from "../kko/kkoapi";
 import { GoogleSvg } from "./SignForm";
+import { getGoogleToken, getGoogleUserInfo } from "../google/googleapi";
+import { userEmailAtom, userNameAtom } from "../atoms/userInfoAtom ";
+import { useRecoilState } from "recoil";
 
 const Header = styled.div`
   max-height: 47px;
@@ -196,20 +199,39 @@ const NavItem = styled(Link)`
 
 function Home() {
   //js
-  // 사용자 정보 관리
   const [userInfo, setUserInfo] = useState(null);
-  // 카카오 인증키 알아내기
-  const [URLSearchParams, setURLSearchParams] = useSearchParams();
-  const kkoAuthCode = URLSearchParams.get("code");
-
-  // 인가 키를 받아서 엑세스 토큰을 요청한다.
+  const [accessToken, setAccessToken] = useState(null);
+  const [searchParams] = useSearchParams();
+  const authCode = searchParams.get("code");
+  const provider = searchParams.get("provider") || searchParams.get("state");
   const getAccessTokenCall = async () => {
-    const accesskey = await getAccessToken(kkoAuthCode);
-    // 사용자 정보 호출
-    const info = await getMemberWithAccessToken(accesskey);
-    console.log(info);
-    setUserInfo(info);
+    try {
+      const accesskey = await getGoogleToken(authCode);
+      if (accesskey) {
+        setAccessToken(accesskey.access_token);
+        const googleuserinfo = await getGoogleUserInfo(accesskey.access_token);
+        // console.log("구글의 사용자 정보 : ", googleuserinfo);
+        setUserInfo(googleuserinfo);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  // // 사용자 정보 관리
+  // const [userInfo, setUserInfo] = useState(null);
+  // // 카카오 인증키 알아내기
+  // const [URLSearchParams, setURLSearchParams] = useSearchParams();
+  // const kkoAuthCode = URLSearchParams.get("code");
+  // // 카카오 인가 키를 받아서 엑세스 토큰을 요청한다.
+  const getKkoAccessTokenCall = async () => {
+    const accesskey = await getAccessToken(authCode);
+    //   // 사용자 정보 호출
+    const kkouserinfo = await getMemberWithAccessToken(accesskey);
+    // console.log("카카오의 사용자 정보 : ", kkouserinfo);
+    setUserInfo(kkouserinfo);
+  };
+
   const navigate = useNavigate();
 
   const handleClickToday = () => {
@@ -223,14 +245,43 @@ function Home() {
     navigate("/history/month");
   };
 
-  useEffect(() => {
-    if (kkoAuthCode) {
-      getAccessTokenCall();
-    } else {
-      return;
-    }
-  }, [kkoAuthCode]);
+  // useEffect(() => {
+  //   if (kkoAuthCode) {
+  //     getAccessTokenCall();
+  //   } else {
+  //     return;
+  //   }
+  // }, [kkoAuthCode]);
+  const [userName, setUserName] = useRecoilState(userNameAtom);
+  const [userEmail, setUserEmail] = useRecoilState(userEmailAtom);
+  // const userName =
+  //   userInfo?.kakao_account?.profile?.nickname || userInfo?.name || "OO";
+  // const userEmail =
+  //   userInfo?.kakao_account?.email || userInfo?.email || "example@email.com";
 
+  useEffect(() => {
+    if (!authCode) return;
+
+    if (provider === "google") {
+      getAccessTokenCall(); // 구글만 실행
+    } else if (provider === "kakao") {
+      getKkoAccessTokenCall(); // 카카오만 실행
+    }
+  }, [authCode, provider]);
+  useEffect(() => {
+    if (userInfo) {
+      const name =
+        userInfo?.kakao_account?.profile?.nickname || userInfo?.name || "OO";
+
+      const email =
+        userInfo?.kakao_account?.email ||
+        userInfo?.email ||
+        "example@email.com";
+
+      setUserName(name);
+      setUserEmail(email);
+    }
+  }, [userInfo]);
   //jsx
   return (
     <div style={{ backgroundColor: "#F0F6FF" }}>
@@ -241,8 +292,8 @@ function Home() {
         <HomeTop>
           <TopTitle>
             <span>
-              {userInfo ? userInfo?.kakao_account.profile.nickname : "OO"}님의
-              오늘 하루 어땟나요?
+              {userName}
+              님의 오늘 하루 어땟나요?
             </span>
             <span>오늘의 기분은 어때요?</span>
           </TopTitle>

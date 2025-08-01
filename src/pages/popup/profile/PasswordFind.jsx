@@ -82,7 +82,7 @@ function PasswordFind({ onClose }) {
     // PasswordFind 모달 열기
     onClose();
     // 메일전송 모달 열기
-    openMailModal(true);
+    openMailModal();
   };
 
   // 메일 전송 모달

@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import colors from "../styles/colors";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getAccessToken, getMemberWithAccessToken } from "../kko/kkoapi";
+import { GoogleSvg } from "./SignForm";
 
 const Header = styled.div`
   max-height: 47px;
@@ -192,6 +195,21 @@ const NavItem = styled(Link)`
 `;
 
 function Home() {
+  //js
+  // 사용자 정보 관리
+  const [userInfo, setUserInfo] = useState(null);
+  // 카카오 인증키 알아내기
+  const [URLSearchParams, setURLSearchParams] = useSearchParams();
+  const kkoAuthCode = URLSearchParams.get("code");
+
+  // 인가 키를 받아서 엑세스 토큰을 요청한다.
+  const getAccessTokenCall = async () => {
+    const accesskey = await getAccessToken(kkoAuthCode);
+    // 사용자 정보 호출
+    const info = await getMemberWithAccessToken(accesskey);
+    console.log(info);
+    setUserInfo(info);
+  };
   const navigate = useNavigate();
 
   const handleClickToday = () => {
@@ -205,6 +223,15 @@ function Home() {
     navigate("/history/month");
   };
 
+  useEffect(() => {
+    if (kkoAuthCode) {
+      getAccessTokenCall();
+    } else {
+      return;
+    }
+  }, [kkoAuthCode]);
+
+  //jsx
   return (
     <div style={{ backgroundColor: "#F0F6FF" }}>
       <Header>
@@ -213,7 +240,10 @@ function Home() {
       <div>
         <HomeTop>
           <TopTitle>
-            <span>OO님의 오늘 하루 어땟나요?</span>
+            <span>
+              {userInfo ? userInfo?.kakao_account.profile.nickname : "OO"}님의
+              오늘 하루 어땟나요?
+            </span>
             <span>오늘의 기분은 어때요?</span>
           </TopTitle>
           <TopButtonWrapper onClick={handleClickToday}>

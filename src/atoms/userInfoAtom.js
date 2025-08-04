@@ -1,22 +1,22 @@
 import { atom } from "recoil";
 
-const userNameAtom = atom({
-  key: "userNameAtom",
-  default: localStorage.getItem("userName") || "",
-});
+export const userInfoAtom = atom({
+  key: "userInfoAtom",
+  default: () => {
+    const saveUserInfo = localStorage.getItem("userInfo");
+    return saveUserInfo
+      ? JSON.parse(saveUserInfo)
+      : {
+          nickname: "게스트",
+          email: "example@example.com",
+          password: "",
+        };
+  },
 
-const userEmailAtom = atom({
-  key: "userEmailAtom",
-  default: localStorage.getItem("userEmail") || "",
+  // 아래코드로 작성했으나, 검토했을때 userInfo 의 값이 null 이라면 앱에서 오류가 발생할수도있어서, 개선합니다.
+  // JSON.parse(localStorage.getItem("userInfo")) || {
+  //   nickame: "게스트",
+  //   email: "example@example.com",
+  //   password: "",
+  // },
 });
-
-const userPasswordAtom = atom({
-  key: "userPasswordAtom",
-  default: localStorage.getItem("userPassword") || "",
-});
-const userStateAtom = atom({
-  key: "userStateAtom",
-  default: false,
-});
-
-export { userEmailAtom, userNameAtom, userPasswordAtom, userStateAtom };

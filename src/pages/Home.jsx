@@ -1,16 +1,13 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-import { getAccessToken, getMemberWithAccessToken } from "../kko/kkoapi";
-import { GoogleSvg } from "./SignForm";
-import { getGoogleToken, getGoogleUserInfo } from "../google/googleapi";
-import {
-  userEmailAtom,
-  userNameAtom,
-  userStateAtom,
-} from "../atoms/userInfoAtom";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { userEmailAtom, userNameAtom } from "../atoms/userInfoAtom ";
+import {
+  userInfoAtom
+} from "../atoms/userInfoAtom";
+import { userStateAtom } from "../atoms/userStateAtom";
+import { getGoogleToken, getGoogleUserInfo } from "../google/googleapi";
+import { getAccessToken, getMemberWithAccessToken } from "../kko/kkoapi";
 import colors from "../styles/colors";
 
 const Header = styled.div`
@@ -204,7 +201,7 @@ const NavItem = styled(Link)`
 
 function Home() {
   //js
-  const [userInfo, setUserInfo] = useState(null);
+  const [socialuserInfo, setSocialUserInfo] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
   const [searchParams] = useSearchParams();
   const authCode = searchParams.get("code");
@@ -216,7 +213,7 @@ function Home() {
         setAccessToken(accesskey.access_token);
         const googleuserinfo = await getGoogleUserInfo(accesskey.access_token);
         // console.log("구글의 사용자 정보 : ", googleuserinfo);
-        setUserInfo(googleuserinfo);
+        setSocialUserInfo(googleuserinfo);
       }
     } catch (error) {
       console.log(error);
@@ -224,7 +221,7 @@ function Home() {
   };
 
   // // 사용자 정보 관리
-  // const [userInfo, setUserInfo] = useState(null);
+  // const [socialuserInfo, setSocialUserInfo] = useState(null);
   // // 카카오 인증키 알아내기
   // const [URLSearchParams, setURLSearchParams] = useSearchParams();
   // const kkoAuthCode = URLSearchParams.get("code");
@@ -234,7 +231,7 @@ function Home() {
     //   // 사용자 정보 호출
     const kkouserinfo = await getMemberWithAccessToken(accesskey);
     // console.log("카카오의 사용자 정보 : ", kkouserinfo);
-    setUserInfo(kkouserinfo);
+    setSocialUserInfo(kkouserinfo);
   };
 
   const navigate = useNavigate();
@@ -257,12 +254,12 @@ function Home() {
   //     return;
   //   }
   // }, [kkoAuthCode]);
-  const [userName, setUserName] = useRecoilState(userNameAtom);
-  const [userEmail, setUserEmail] = useRecoilState(userEmailAtom);
   // const userName =
-  //   userInfo?.kakao_account?.profile?.nickname || userInfo?.name || "OO";
+  //   socialuserInfo?.kakao_account?.profile?.nickname || socialuserInfo?.name || "OO";
   // const userEmail =
-  //   userInfo?.kakao_account?.email || userInfo?.email || "example@email.com";
+  //   socialuserInfo?.kakao_account?.email || socialuserInfo?.email || "example@email.com";
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+  const [userState, setUserState] = useRecoilState(userStateAtom);
 
   useEffect(() => {
     if (!authCode) return;
@@ -274,19 +271,23 @@ function Home() {
     }
   }, [authCode, provider]);
   useEffect(() => {
-    if (userInfo) {
-      const name =
-        userInfo?.kakao_account?.profile?.nickname || userInfo?.name || "OO";
+    if (socialuserInfo) {
+      const socialname =
+        socialuserInfo?.kakao_account?.profile?.nickname ||
+        socialuserInfo?.name ||
+        "게스트";
 
-      const email =
-        userInfo?.kakao_account?.email ||
-        userInfo?.email ||
+      const socialemail =
+        socialuserInfo?.kakao_account?.email ||
+        socialuserInfo?.email ||
         "example@email.com";
+      setUserInfo({ nickname: socialname, email: socialemail, password: "" });
+      setUserState(true);
 
-      setUserName(name);
-      setUserEmail(email);
+      // setUserName(name);
+      // setUserEmail(email);
     }
-  }, [userInfo]);
+  }, [socialuserInfo]);
   //jsx
   return (
     <div style={{ backgroundColor: "#F0F6FF" }}>
@@ -297,7 +298,7 @@ function Home() {
         <HomeTop>
           <TopTitle>
             <span>
-              {userName}
+              {userInfo.nickname}
               님의 오늘 하루 어땟나요?
             </span>
             <span>오늘의 기분은 어때요?</span>

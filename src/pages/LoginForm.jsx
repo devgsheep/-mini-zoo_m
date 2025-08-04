@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import {
   userEmailAtom,
+  userInfoAtom,
   userNameAtom,
   userPasswordAtom,
-  userStateAtom,
 } from "../atoms/userInfoAtom";
 import { getGoogleLoginLink } from "../google/googleapi";
 import { getKakaoLoginLink } from "../kko/kkoapi";
@@ -16,6 +16,7 @@ import colors from "../styles/colors";
 import { fonts } from "../styles/fonts";
 import PasswordFind from "./popup/profile/PasswordFind";
 import { GoogleSvg, KaKaoSvg } from "./SignForm";
+import { userStateAtom } from "../atoms/userStateAtom";
 
 const Container = styled.div`
   width: 394px;
@@ -264,33 +265,12 @@ const CustomAntCheckbox = styled(Checkbox)`
 `;
 
 function LoginForm() {
+  // js
+
   const [form] = Form.useForm();
 
   const [isChecked, setIsChecked] = useState(false);
-  const [userstate, setUserstate] = useRecoilState(userStateAtom);
 
-  const onFinish = values => {
-    const { email, password } = values;
-
-    const localname = localStorage.getItem("userName");
-    const localemail = localStorage.getItem("userEmail");
-    const localpassword = localStorage.getItem("userPassword");
-    if (!localemail) {
-      alert("회원가입부터 해주십시오.");
-    } else if (email !== localemail && password !== localpassword) {
-      alert("유효하지 않은 회원정보입니다. 회원가입 해주세요.");
-    } else if (email !== localemail) {
-      alert("이메일 주소를 확인해주세요");
-    } else if (password !== localpassword) {
-      alert("비밀번호를 확인해주세요.");
-    } else {
-      setUserstate(true);
-      setUserEmail(localemail);
-      setUserName(localname);
-      setUserPassword(localpassword);
-      handleClickHome();
-    }
-  };
   // 네비게이터
   const navigate = useNavigate();
 
@@ -319,17 +299,37 @@ function LoginForm() {
     getKakaoLoginLink();
   };
 
-  const [userName, setUserName] = useRecoilState(userNameAtom);
-  const [userEmail, setUserEmail] = useRecoilState(userEmailAtom);
-  const [userPassword, setUserPassword] = useRecoilState(userPasswordAtom);
+  // 회원가입 및 로그인 관련
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const [userState, setUserState] = useRecoilState(userStateAtom);
+
   const handleGuestLogin = () => {
-    setUserState(false); //
-    setUserName("OO");
-    setUserEmail("");
+    setUserState(true); // 게스트 로그인시 항목은 보이게끔 로그인으로 처리, 대신 유저의 정보는 초기값으로 세팅
+    setUserInfo({
+      nickname: "게스트",
+      email: "example@example.com",
+      password: "",
+    });
     handleClickHome();
   };
 
+  // Form 에서 입력이 끝났을때, email 과 password 를 받고, 로컬에 저장된 userInfo 를 객체로 뜯어서 email 과 userData.email ,
+  // password 와 userData.password 를 비교하여, 얼라트 창을 띄우고, 값이 모두 같으면 유저의 로그인상태를 true 로 변경시킨후 home 으로 이동시킴.
+  const onFinish = values => {
+    const { email, password } = values;
+    const userData = JSON.parse(localStorage.getItem("userInfo"));
+    if (!userData) {
+      alert("회원가입부터 해주십시오.");
+    } else if (email !== userData.email && password !== userData.password) {
+      alert("유효하지 않은 회원정보입니다. 회원가입 해주세요.");
+    } else if (email === userData.email && password !== userData.password) {
+      alert("비밀번호를 확인해주세요.");
+    } else if (email === userData.email && password === userData.password) {
+      setUserState(true);
+      handleClickHome();
+    }
+  };
+  // jsx
   return (
     <Container>
       <TopContainer>

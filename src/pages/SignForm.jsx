@@ -3,16 +3,12 @@ import { Button, Checkbox, Form, Input } from "antd";
 import FormItem from "antd/es/form/FormItem";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { userInfoAtom } from "../atoms/userInfoAtom";
 import { getGoogleLoginLink } from "../google/googleapi";
 import { getKakaoLoginLink } from "../kko/kkoapi";
 import colors from "../styles/colors";
 import { fonts } from "../styles/fonts";
-import { useRecoilState } from "recoil";
-import {
-  userEmailAtom,
-  userNameAtom,
-  userPasswordAtom,
-} from "../atoms/userInfoAtom";
 
 const Container = styled.div`
   height: auto;
@@ -359,10 +355,9 @@ const CustomAntCheckbox = styled(Checkbox)`
 
 function SignForm() {
   //js
-  const [userName, setUserName] = useRecoilState(userNameAtom);
-  const [userEmail, setUserEmail] = useRecoilState(userEmailAtom);
-  const [userPassword, setUserPassword] = useRecoilState(userPasswordAtom);
   const [isChecked, setIsChecked] = useState(false);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+
   // const [componentDisabled, setComponentDisabled] = useState(false);
   // 비밀번호 비교 상태 저장
   const [match, setMatch] = useState(true);
@@ -377,17 +372,14 @@ function SignForm() {
     }
   };
   const onFinish = values => {
-    console.log(values);
     const { nickname, email, password } = values;
+    const user = { nickname, email, password };
+    setUserInfo(user);
+    localStorage.setItem("userInfo", JSON.stringify(user));
 
-    // 리코일 저장
-    setUserName(nickname);
-    setUserEmail(email);
-    setUserPassword(password);
-    // 로컬스토리지 저장
-    localStorage.setItem("userName", nickname);
-    localStorage.setItem("userEmail", email);
-    localStorage.setItem("userPassword", password);
+    // console.log("values : ", values);
+    // console.log("userInfo : ", userInfo);
+    // console.log("setUserInfo : ", setUserInfo);
 
     handleClickLogin();
   };
@@ -509,7 +501,7 @@ function SignForm() {
                   },
                 ]}
                 label={
-                  <div 
+                  <div
                     style={{
                       display: "flex",
                       alignItems: "center",

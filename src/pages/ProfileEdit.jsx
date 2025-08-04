@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import {
   userEmailAtom,
+  userInfoAtom,
   userNameAtom,
-  userStateAtom,
 } from "../atoms/userInfoAtom";
 import {
   Button,
@@ -43,6 +43,7 @@ import PasswordChange from "./popup/edit/PasswordChange";
 import ProfileImage from "./popup/edit/ProfileImage";
 import ReSign from "./popup/edit/ReSign";
 import Logout from "./popup/profile/Logout";
+import { userStateAtom } from "../atoms/userStateAtom";
 
 function ProfileEdit() {
   // js
@@ -106,13 +107,12 @@ function ProfileEdit() {
   const handleClickProfile = () => {
     navigate("/Profile");
   };
-  // 리코일로 닉네임, 이메일 불러오기
-  const [userName, setUserName] = useRecoilState(userNameAtom);
-  const [isLogin, setIslogin] = useRecoilState(userStateAtom);
 
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+  const [userState, setUserState] = useRecoilState(userStateAtom);
   // 로그아웃 버튼 클릭시 사용자 정보 초기화
   const handleLogout = () => {
-    setIslogin(false);
+    setUserState(false);
   };
 
   // jsx
@@ -139,7 +139,7 @@ function ProfileEdit() {
 
           <ProfileInfo>
             <ProfileNickName>
-              {userName}
+              {userInfo.nickname}
               <NickEdit
                 src="../images/edit.svg"
                 alt="닉네임편집"

@@ -28,6 +28,8 @@ import {
   Week,
   Wrap,
 } from "../emotions/historymonth.style";
+import colors from "../styles/colors";
+import styled from "@emotion/styled";
 
 function Historymonth() {
   // js
@@ -63,6 +65,27 @@ function Historymonth() {
       point: count,
       percentage: Math.round((count / total) * 100),
     }));
+
+  // 캘린더 데이터 임시
+  const emotionMap = barMonthData.reduce((map, entry) => {
+    const { date, emotion } = entry;
+    const emotionTranslation = {
+      기쁨: "happy",
+      슬픔: "sad",
+      화남: "angry",
+      지루: "boring",
+      불안: "anxious",
+      까칠: "disgust",
+      당황: "embarrassed",
+      피곤: "tired",
+    };
+
+    const engEmotion = emotionTranslation[emotion];
+    if (engEmotion) {
+      map[date] = engEmotion;
+    }
+    return map;
+  }, {});
 
   // jsx
   return (
@@ -171,12 +194,42 @@ function Historymonth() {
         </ImgBoxStyle>
       </BoxWrap>
       <BoxWrap>
-        <ImgBoxStyle>
+        <ImgBoxStyle
+          style={{
+            height: "320px",
+          }}
+        >
           <div style={historyWrap}>
             <StyledCalendar
               calendarType="gregory"
               formatShortWeekday={formatShortWeekday}
               formatDay={(locale, date) => moment(date).format("D")}
+              tileContent={({ date, view }) => {
+                if (view === "month") {
+                  const formattedDate = moment(date).format("YYYY-MM-DD");
+                  const emotion = emotionMap[formattedDate];
+
+                  const bgColor = emotion
+                    ? colors.emotion[emotion]?.base
+                    : undefined;
+
+                  return bgColor ? (
+                    <div
+                      style={{
+                        backgroundColor: bgColor,
+                        borderRadius: "8px",
+                        width: "90%",
+                        height: "90%",
+                        position: "absolute",
+                        top: "2px",
+                        left: "2px",
+                        zIndex: 0,
+                        opacity: 0.3,
+                      }}
+                    ></div>
+                  ) : null;
+                }
+              }}
             />
           </div>
         </ImgBoxStyle>

@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import colors from "../styles/colors";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAccessToken, getMemberWithAccessToken } from "../kko/kkoapi";
 import { GoogleSvg } from "./SignForm";
@@ -10,7 +8,10 @@ import {
   userNameAtom,
   userStateAtom,
 } from "../atoms/userInfoAtom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import { userEmailAtom, userNameAtom } from "../atoms/userInfoAtom ";
+import colors from "../styles/colors";
 
 const Header = styled.div`
   max-height: 47px;

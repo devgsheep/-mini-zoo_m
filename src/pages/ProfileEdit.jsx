@@ -2,7 +2,11 @@ import { Modal } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { userEmailAtom, userNameAtom } from "../atoms/userInfoAtom ";
+import {
+  userEmailAtom,
+  userNameAtom,
+  userStateAtom,
+} from "../atoms/userInfoAtom";
 import {
   Button,
   ButtonSubText,
@@ -104,12 +108,11 @@ function ProfileEdit() {
   };
   // 리코일로 닉네임, 이메일 불러오기
   const [userName, setUserName] = useRecoilState(userNameAtom);
-  const [userEmail, setUserEmail] = useRecoilState(userEmailAtom);
+  const [isLogin, setIslogin] = useRecoilState(userStateAtom);
 
   // 로그아웃 버튼 클릭시 사용자 정보 초기화
   const handleLogout = () => {
-    setUserName("OO");
-    setUserEmail("example@email.com");
+    setIslogin(false);
   };
 
   // jsx

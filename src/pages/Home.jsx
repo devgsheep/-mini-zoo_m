@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 import { getAccessToken, getMemberWithAccessToken } from "../kko/kkoapi";
 import { GoogleSvg } from "./SignForm";
 import { getGoogleToken, getGoogleUserInfo } from "../google/googleapi";
-import { userEmailAtom, userNameAtom } from "../atoms/userInfoAtom ";
+import {
+  userEmailAtom,
+  userNameAtom,
+  userStateAtom,
+} from "../atoms/userInfoAtom";
 import { useRecoilState } from "recoil";
 
 const Header = styled.div`

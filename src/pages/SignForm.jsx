@@ -7,6 +7,12 @@ import { getGoogleLoginLink } from "../google/googleapi";
 import { getKakaoLoginLink } from "../kko/kkoapi";
 import colors from "../styles/colors";
 import { fonts } from "../styles/fonts";
+import { useRecoilState } from "recoil";
+import {
+  userEmailAtom,
+  userNameAtom,
+  userPasswordAtom,
+} from "../atoms/userInfoAtom";
 
 const Container = styled.div`
   height: auto;
@@ -353,6 +359,9 @@ const CustomAntCheckbox = styled(Checkbox)`
 
 function SignForm() {
   //js
+  const [userName, setUserName] = useRecoilState(userNameAtom);
+  const [userEmail, setUserEmail] = useRecoilState(userEmailAtom);
+  const [userPassword, setUserPassword] = useRecoilState(userPasswordAtom);
   const [isChecked, setIsChecked] = useState(false);
   // const [componentDisabled, setComponentDisabled] = useState(false);
   // 비밀번호 비교 상태 저장
@@ -369,15 +378,26 @@ function SignForm() {
   };
   const onFinish = values => {
     console.log(values);
-    handleClickSign();
+    const { nickname, email, password } = values;
+
+    // 리코일 저장
+    setUserName(nickname);
+    setUserEmail(email);
+    setUserPassword(password);
+    // 로컬스토리지 저장
+    localStorage.setItem("userName", nickname);
+    localStorage.setItem("userEmail", email);
+    localStorage.setItem("userPassword", password);
+
+    handleClickLogin();
   };
 
   // 네비게이터
   const navigate = useNavigate();
 
-  const handleClickSign = () => {
-    navigate("/login");
-  };
+  // const handleClickSign = () => {
+  //   navigate("/login");
+  // };
   const handleClickLogin = () => {
     navigate("/login");
   };

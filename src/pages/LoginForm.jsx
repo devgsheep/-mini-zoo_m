@@ -325,6 +325,7 @@ function LoginForm() {
     } else if (email === userData.email && password !== userData.password) {
       alert("비밀번호를 확인해주세요.");
     } else if (email === userData.email && password === userData.password) {
+      setUserInfo(userData);
       setUserState(true);
       handleClickHome();
     }

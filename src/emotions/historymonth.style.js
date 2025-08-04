@@ -157,13 +157,12 @@ export const ImgBoxStyle = styled.div`
 
 export const ChartWrap = styled.div`
   background-color: ${colors.blue[100]}; // 원하는 배경색
-  padding: 20px;
   border-radius: 10px;
   height: 100%;
   width: 100%;
   max-width: 330px;
   && {
-    padding: 15px !important;
+    padding: 0px !important;
   }
 `;
 

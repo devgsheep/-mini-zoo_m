@@ -509,7 +509,7 @@ function SignForm() {
                   },
                 ]}
                 label={
-                  <div
+                  <div 
                     style={{
                       display: "flex",
                       alignItems: "center",

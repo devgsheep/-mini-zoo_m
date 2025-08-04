@@ -374,7 +374,7 @@ function SignForm() {
   const onFinish = values => {
     const { nickname, email, password } = values;
     const user = { nickname, email, password };
-    setUserInfo(user);
+    // setUserInfo(user);
     localStorage.setItem("userInfo", JSON.stringify(user));
 
     // console.log("values : ", values);

@@ -17,276 +17,36 @@ import {
 } from "../components/icons/emotionicon";
 import "../css/today_calendar.css";
 import colors from "../styles/colors";
+import {
+  CalendarButton,
+  CalendarWrap,
+  Container,
+  CustomCalendar,
+  DateStyle,
+  Header,
+  HomeTop,
+  HomeTopImg,
+  HomeTopSpan,
+  Main,
+  NavigationBar,
+  NavItem,
+  NavItemFocus,
+  SliderTitle,
+  SliderWrap,
+  StyledSlider,
+  TextArea,
+  TextWrap,
+  TodayAddButton,
+  TodayButtonWrap,
+  TodayEmotionUl,
+  TodayImg,
+  TodayImgWrap,
+  TodayPotoWrap,
+  TodayText,
+  TopImageWrapper,
+} from "../emotions/today.style";
 
 moment.locale("ko");
-
-const Container = styled.div`
-  width: 394px;
-  background-color: ${colors.blue[100]};
-  position: relative;
-`;
-const Header = styled.div`
-  position: relative;
-  max-height: 47px;
-  height: 47px;
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-  padding-left: 10px;
-`;
-
-const NavigationBar = styled.ul`
-  display: flex;
-  width: 100%;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`;
-
-const NavItemFocus = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 14px 0;
-  width: 25%;
-  cursor: pointer;
-  background-color: ${colors.blue[200]};
-  color: ${colors.blue[400]};
-`;
-const NavItem = styled(Link)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 14px 0;
-  width: 25%;
-  background-color: ${colors.white};
-  color: ${colors.gray[400]};
-  cursor: pointer;
-`;
-const Main = styled.div``;
-const TodayEmotionUl = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-`;
-const SliderWrap = styled.div``;
-const SliderTitle = styled.span`
-  display: "flex";
-  justify-content: "center";
-  margin-top: "27px";
-  font-size: 13px;
-  color: ${colors.gray[700]};
-`;
-
-// const SliderCircleUl = styled.ul`
-//   display: flex;
-//   justify-content: space-between;
-//   width: 332px;
-//   margin: 0 auto;
-//   padding-top: 14px;
-// `;
-// const SliderCircleli = styled.li`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   gap: 3px;
-// `;
-// const SliderCircle = styled.i`
-//   width: 6px;
-//   height: 6px;
-//   border-radius: 3px;
-//   background-color: ${colors.blue[300]};
-//   display: block;
-// `;
-// const SliderCircletxt = styled.p`
-//   color: ${colors.gray[700]};
-//   font-size: 8px;
-// `;
-
-const TodayText = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 41px;
-  gap: 15px;
-  span {
-    margin-left: 35px;
-    font-size: 13px;
-    color: ${colors.gray[700]};
-  }
-`;
-const TextWrap = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 18px;
-`;
-const TextArea = styled.textarea`
-  font-family: "Pretendard";
-  font-weight: 400;
-  width: 344px;
-  height: 67px;
-  border-radius: 10px;
-  border: 1px solid #c6ddff;
-  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
-    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
-  padding: 8px 10px;
-  font-size: 10px;
-  color: ${colors.gray[800]};
-  resize: none;
-  line-height: 1.5;
-  &::placeholder {
-    font-size: 10px;
-    color: ${colors.gray[300]};
-    line-height: 1.5;
-  }
-`;
-const TodayPotoWrap = styled.div`
-  margin-top: 33px;
-  span {
-    margin-left: 17px;
-    font-size: 13px;
-    color: ${colors.gray[700]};
-    display: flex;
-    margin-bottom: 6px;
-  }
-`;
-const TodayImgWrap = styled.div`
-  width: 362px;
-  height: 313px;
-  background-color: ${colors.white};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  border-radius: 16px;
-`;
-const TodayImg = styled.img`
-  width: 100%;
-  cursor: pointer;
-`;
-const TodayButtonWrap = styled.div`
-  margin: 44px auto;
-`;
-const TodayAddButton = styled.button`
-  display: flex;
-  width: 250px;
-  padding: 8px 0 9px 0;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 8px;
-  border: 1px solid ${colors.blue[300]};
-  background: ${colors.blue[300]};
-  color: ${colors.gray[100]};
-  /* Drop Shadow/100 */
-  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
-    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  letter-spacing: 1.6px;
-  margin: 0 auto;
-  margin-top: 30px;
-  cursor: pointer;
-  :hover {
-    background: ${colors.blue[500]};
-  }
-`;
-
-const DateStyle = styled.div`
-  font-size: 10px;
-  color: ${colors.gray[600]};
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  font-weight: 500;
-`;
-
-const CalendarWrap = styled.div`
-  position: absolute;
-  left: 0;
-  top: 47px;
-  width: 200px;
-  min-height: 100px;
-  background-color: aqua;
-  /* display: none; */
-`;
-
-const TopImageWrapper = styled.div`
-  max-height: 228px;
-  max-width: 152px;
-  display: flex;
-  justify-content: center;
-`;
-
-const HomeTop = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const HomeTopImg = styled.img`
-  padding-top: 11px;
-  width: 100%;
-  height: 100%;
-`;
-
-const HomeTopSpan = styled.span`
-  color: ${colors.gray[700]};
-  font-weight: 700;
-  font-size: 13px;
-  padding-bottom: 25px;
-`;
-const CalendarButton = styled.button`
-  border: none;
-  background-color: ${colors.white};
-`;
-const CustomCalendar = styled(Calendar)`
-  .react-calendar__navigation {
-    display: flex;
-    height: 22px;
-    margin-bottom: 1em;
-  }
-
-  .react-calendar__navigation button {
-    min-width: 22px;
-    background: none;
-  }
-  .react-calendar__navigation__label {
-    font-size: 12px;
-  }
-`;
-
-const StyledSlider = styled(AntdSlider)`
-  .ant-slider-handle {
-    margin-top: 1px;
-  }
-  .ant-slider-handle::after {
-    background-color: #9dc4ff !important;
-    box-shadow: none;
-  }
-  .ant-slider-handle::before {
-  }
-
-  .ant-slider-track {
-    background-color: #9dc4ff !important;
-    height: 6px;
-  }
-
-  .ant-slider-rail {
-    background-color: #fff !important;
-    height: 6px;
-  }
-`;
 
 function HistoryDaily() {
   //js

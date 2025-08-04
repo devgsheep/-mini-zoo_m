@@ -168,6 +168,29 @@ export const ChartWrap = styled.div`
 
 export const StyledCalendar = styled(Calendar)`
   border: none;
+  width: 100%;
+
+  abbr {
+    font-size: 10px;
+  }
+  button {
+    font-weight: bold;
+    background: none;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+      background: ${colors.blue[300]};
+    }
+  }
+  .react-calendar__tile--active {
+    background: ${colors.blue[300]};
+    color: white;
+    border-radius: 8px;
+  }
+  .react-calendar__tile {
+    position: relative;
+  }
 `;
 
 export const Footer = styled.div`

@@ -14,6 +14,7 @@ import {
   HappyIcon,
   SadIcon,
   TiredIcon,
+  TodayEmotionButton,
 } from "../components/icons/emotionicon";
 import "../css/today_calendar.css";
 import colors from "../styles/colors";
@@ -23,6 +24,7 @@ import {
   Container,
   CustomCalendar,
   DateStyle,
+  EmotionListItem,
   Header,
   HomeTop,
   HomeTopImg,
@@ -50,6 +52,19 @@ moment.locale("ko");
 
 function HistoryDaily() {
   //js
+  // 감정에 따른 동물 출력
+  const emotionImageMap = {
+    happy: "./images/happy_dog.svg",
+    sad: "./images/sad_cat.svg",
+    angry: "./images/angry_tiger.svg",
+    boring: "./images/boring_sloth.svg",
+    anxious: "./images/anxious_rabbit.svg",
+    disgust: "./images/disgust_dochi.svg",
+    embarrassed: "./images/embarrassed_raccoon.svg",
+    tired: "./images/tired_panda.svg",
+  };
+
+  const [selectedEmotion, setSelectedEmotion] = useState(null);
 
   // 이미지 추가
   const [selectedImage, setSelectedImage] = useState(null);
@@ -134,37 +149,76 @@ function HistoryDaily() {
       </Header>
       <HomeTop>
         <TopImageWrapper>
-          <HomeTopImg src="./images/angry_tiger.svg" alt="#" />
+          {selectedEmotion && (
+            <div>
+              <HomeTopImg
+                src={emotionImageMap[selectedEmotion]}
+                alt={`${selectedEmotion} 이미지`}
+              />
+            </div>
+          )}
         </TopImageWrapper>
         <HomeTopSpan>지금 기분은 어떠신가요?</HomeTopSpan>
       </HomeTop>
       <Main>
         <div>
           <TodayEmotionUl>
-            <li>
-              <HappyIcon />
-            </li>
-            <li>
-              <SadIcon />
-            </li>
-            <li>
-              <AngryIcon />
-            </li>
-            <li>
-              <BoringIcon />
-            </li>
-            <li>
-              <AnxiousIcon />
-            </li>
-            <li>
-              <DisgusIcon />
-            </li>
-            <li>
-              <EmbarrassedIcon />
-            </li>
-            <li>
-              <TiredIcon />
-            </li>
+            <EmotionListItem>
+              <HappyIcon
+                emotion="happy"
+                isSelected={selectedEmotion === "happy"}
+                onClick={() => setSelectedEmotion("happy")}
+              />
+            </EmotionListItem>
+            <EmotionListItem>
+              <SadIcon
+                emotion="sad"
+                isSelected={selectedEmotion === "sad"}
+                onClick={() => setSelectedEmotion("sad")}
+              />
+            </EmotionListItem>
+            <EmotionListItem>
+              <AngryIcon
+                emotion="angry"
+                isSelected={selectedEmotion === "angry"}
+                onClick={() => setSelectedEmotion("angry")}
+              />
+            </EmotionListItem>
+            <EmotionListItem>
+              <BoringIcon
+                emotion="boring"
+                isSelected={selectedEmotion === "boring"}
+                onClick={() => setSelectedEmotion("boring")}
+              />
+            </EmotionListItem>
+            <EmotionListItem>
+              <AnxiousIcon
+                emotion="anxious"
+                isSelected={selectedEmotion === "anxious"}
+                onClick={() => setSelectedEmotion("anxious")}
+              />
+            </EmotionListItem>
+            <EmotionListItem>
+              <DisgusIcon
+                emotion="disgust"
+                isSelected={selectedEmotion === "disgust"}
+                onClick={() => setSelectedEmotion("disgust")}
+              />
+            </EmotionListItem>
+            <EmotionListItem>
+              <EmbarrassedIcon
+                emotion="embarrassed"
+                isSelected={selectedEmotion === "embarrassed"}
+                onClick={() => setSelectedEmotion("embarrassed")}
+              />
+            </EmotionListItem>
+            <EmotionListItem>
+              <TiredIcon
+                emotion="tired"
+                isSelected={selectedEmotion === "tired"}
+                onClick={() => setSelectedEmotion("tired")}
+              />
+            </EmotionListItem>
           </TodayEmotionUl>
         </div>
         <SliderWrap>

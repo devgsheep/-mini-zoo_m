@@ -58,6 +58,26 @@ export const TodayEmotionUl = styled.ul`
   justify-content: center;
   gap: 8px;
 `;
+
+export const EmotionListItem = styled.li`
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: ${({ emotion, isSelected }) =>
+    isSelected
+      ? colors.emotion[emotion]?.hover || "#ddd"
+      : colors.emotion[emotion]?.base || "#eee"};
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: ${({ emotion }) =>
+      colors.emotion[emotion]?.hover || "#ccc"};
+  }
+`;
+
 export const SliderWrap = styled.div``;
 export const SliderTitle = styled.span`
   display: "flex";
@@ -228,6 +248,7 @@ export const HomeTopSpan = styled.span`
   color: ${colors.gray[700]};
   font-weight: 700;
   font-size: 13px;
+  padding-top: -10px;
   padding-bottom: 25px;
 `;
 export const CalendarButton = styled.button`

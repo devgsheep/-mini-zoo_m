@@ -157,18 +157,40 @@ export const ImgBoxStyle = styled.div`
 
 export const ChartWrap = styled.div`
   background-color: ${colors.blue[100]}; // 원하는 배경색
-  padding: 20px;
   border-radius: 10px;
   height: 100%;
   width: 100%;
   max-width: 330px;
   && {
-    padding: 15px !important;
+    padding: 0px !important;
   }
 `;
 
 export const StyledCalendar = styled(Calendar)`
   border: none;
+  width: 100%;
+
+  abbr {
+    font-size: 10px;
+  }
+  button {
+    font-weight: bold;
+    background: none;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+      background: ${colors.blue[300]};
+    }
+  }
+  .react-calendar__tile--active {
+    background: ${colors.blue[300]};
+    color: white;
+    border-radius: 8px;
+  }
+  .react-calendar__tile {
+    position: relative;
+  }
 `;
 
 export const Footer = styled.div`

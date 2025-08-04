@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import colors from "../../styles/colors";
+import { useState } from "react";
 
 const TodayEmotionButton = styled.button`
   width: 80px;
@@ -9,7 +10,10 @@ const TodayEmotionButton = styled.button`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: ${({ emotion }) => colors.emotion[emotion]?.base || "#000"};
+  background-color: ${({ emotion, isSelected }) =>
+    isSelected
+      ? colors.emotion[emotion]?.hover || "#000"
+      : colors.emotion[emotion]?.base || "#000"};
   border: none;
   border-radius: 8px;
   color: #fff;
@@ -33,8 +37,8 @@ const TodayEmotionCircle = styled.div`
   background-color: ${({ emotion }) => colors.emotion[emotion]?.base || "#000"};
 `;
 
-export const HappyIcon = () => (
-  <TodayEmotionButton emotion="happy">
+export const HappyIcon = props => (
+  <TodayEmotionButton emotion="happy" {...props}>
     <svg
       width="20"
       height="20"
@@ -51,8 +55,8 @@ export const HappyIcon = () => (
   </TodayEmotionButton>
 );
 
-export const SadIcon = () => (
-  <TodayEmotionButton emotion="sad">
+export const SadIcon = props => (
+  <TodayEmotionButton emotion="sad" {...props}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="20"
@@ -68,8 +72,8 @@ export const SadIcon = () => (
     <span>슬픔</span>
   </TodayEmotionButton>
 );
-export const AngryIcon = () => (
-  <TodayEmotionButton emotion="angry">
+export const AngryIcon = props => (
+  <TodayEmotionButton emotion="angry" {...props}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="17"
@@ -87,8 +91,8 @@ export const AngryIcon = () => (
     <span>화남</span>
   </TodayEmotionButton>
 );
-export const BoringIcon = () => (
-  <TodayEmotionButton emotion="boring">
+export const BoringIcon = props => (
+  <TodayEmotionButton emotion="boring" {...props}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="25"
@@ -104,8 +108,8 @@ export const BoringIcon = () => (
     <span>지루</span>
   </TodayEmotionButton>
 );
-export const AnxiousIcon = () => (
-  <TodayEmotionButton emotion="anxious">
+export const AnxiousIcon = props => (
+  <TodayEmotionButton emotion="anxious" {...props}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="20"
@@ -121,8 +125,8 @@ export const AnxiousIcon = () => (
     <span>불안</span>
   </TodayEmotionButton>
 );
-export const DisgusIcon = () => (
-  <TodayEmotionButton emotion="disgust">
+export const DisgusIcon = props => (
+  <TodayEmotionButton emotion="disgust" {...props}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="15"
@@ -138,8 +142,8 @@ export const DisgusIcon = () => (
     <span>까칠</span>
   </TodayEmotionButton>
 );
-export const EmbarrassedIcon = () => (
-  <TodayEmotionButton emotion="embarrassed">
+export const EmbarrassedIcon = props => (
+  <TodayEmotionButton emotion="embarrassed" {...props}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="20"
@@ -155,8 +159,8 @@ export const EmbarrassedIcon = () => (
     <span>당황</span>
   </TodayEmotionButton>
 );
-export const TiredIcon = () => (
-  <TodayEmotionButton emotion="tired">
+export const TiredIcon = props => (
+  <TodayEmotionButton emotion="tired" {...props}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="20"

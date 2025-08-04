@@ -2,6 +2,12 @@ import styled from "@emotion/styled";
 import { Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
 import colors from "../../../styles/colors";
+import {
+  userEmailAtom,
+  userNameAtom,
+  userStateAtom,
+} from "../../../atoms/userInfoAtom";
+import { useRecoilState } from "recoil";
 
 // const Container = styled.div`
 //   width: 394px;
@@ -132,9 +138,20 @@ const ResignOKButton = styled.button`
 `;
 
 function ReSign({ onClose }) {
+  const [userEmail, setUserEmail] = useRecoilState(userEmailAtom);
+  const [userName, setUserName] = useRecoilState(userNameAtom);
+  const [userState, setUserState] = useRecoilState(userStateAtom);
   // 네비게이터
   const navigate = useNavigate();
   const handleClickReSign = () => {
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("userPassword");
+    localStorage.removeItem("userName");
+
+    setUserEmail("");
+    setUserName("OO");
+    setUserState(false);
+
     navigate("/");
   };
 
@@ -142,7 +159,14 @@ function ReSign({ onClose }) {
   const [form] = Form.useForm();
 
   const onFinish = values => {
-    console.log(values);
+    const { password } = values;
+
+    const localpassword = localStorage.getItem("userPassword");
+    if (password !== localpassword) {
+      alert("비밀번호가 다릅니다.");
+    } else {
+      handleClickReSign();
+    }
   };
 
   return (
@@ -182,7 +206,7 @@ function ReSign({ onClose }) {
       </ResignBottomBox>
       <ResignButtonWrap>
         <ResignCCButton onClick={onClose}>취소</ResignCCButton>
-        <ResignOKButton onClick={handleClickReSign}>회원탈퇴</ResignOKButton>
+        <ResignOKButton onClick={() => form.submit()}>회원탈퇴</ResignOKButton>
       </ResignButtonWrap>
     </ReSignPopUpBox>
     //   </ReSignPopUp>

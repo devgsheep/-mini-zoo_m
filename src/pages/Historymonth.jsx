@@ -28,9 +28,12 @@ import {
   Week,
   Wrap,
 } from "../emotions/historymonth.style";
+import colors from "../styles/colors";
+import styled from "@emotion/styled";
 
 function Historymonth() {
   // js
+
   const historyWrap = {
     width: "338px",
     margin: "0 auto",
@@ -48,21 +51,50 @@ function Historymonth() {
 
   // 차트
   const emotionCounts = {};
-
   barMonthData.forEach(({ emotion }) => {
     emotionCounts[emotion] = (emotionCounts[emotion] || 0) + 1;
   });
 
   const total = Object.values(emotionCounts).reduce((a, b) => a + b, 0);
-
+  // 최대값
+  const maxCount = Math.max(...Object.values(emotionCounts));
   const top3 = Object.entries(emotionCounts)
     .sort((a, b) => b[1] - a[1]) // 많이 등장한 순으로 정렬
     .slice(0, 3) // 상위 3개만 가져오기
-    .map(([emotion, count]) => ({
-      emotion,
-      point: count,
-      percentage: Math.round((count / total) * 100),
-    }));
+    .reverse() // 정렬 반대로, 내림차순
+    .map(([emotion, count]) => {
+      const percentage = Math.round((count / total) * 100);
+      return {
+        emotion,
+        // 퍼센트를 실제 값으로 사용,
+        point: percentage,
+        remaining: 100 - percentage,
+        // 실제 횟수
+        actualCount: count,
+        percentage: percentage,
+      };
+    });
+
+  // 캘린더 데이터 임시
+  const emotionMap = barMonthData.reduce((map, entry) => {
+    const { date, emotion } = entry;
+    const emotionTranslation = {
+      기쁨: "happy",
+      슬픔: "sad",
+      화남: "angry",
+      지루: "boring",
+      불안: "anxious",
+      까칠: "disgust",
+      당황: "embarrassed",
+      피곤: "tired",
+    };
+
+    const engEmotion = emotionTranslation[emotion];
+    if (engEmotion) {
+      map[date] = engEmotion;
+    }
+    return map;
+  }, {});
 
   // jsx
   return (
@@ -132,7 +164,7 @@ function Historymonth() {
           <div
             style={{
               width: "330px",
-              height: "150px",
+              height: "200px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -141,42 +173,105 @@ function Historymonth() {
             <ChartWrap>
               <ResponsiveBar
                 data={top3}
-                keys={["point"]}
+                keys={["point", "remaining"]}
                 indexBy="emotion"
                 layout="horizontal"
-                padding={0}
+                padding={0.8}
                 borderRadius={5}
-                legends={[
-                  {
-                    dataFrom: "keys",
-                    anchor: "bottom-right",
-                    direction: "column",
-                    translateX: 120,
-                    itemsSpacing: 3,
-                    itemWidth: 100,
-                    itemHeight: 16,
-                  },
+                legends={[]}
+                enableLabel={false}
+                maxValue={100}
+                // true시에 바 중앙에 회, % 나타남
+                // label={({ data }) => `${data.point}회  ${data.percentage}%`}
+                // % 라벨 이동
+                layers={[
+                  "grid",
+                  "axes",
+                  "bars",
+                  "markers",
+                  "legends",
+                  "annotations",
+                  ({ bars, xScale }) => (
+                    <>
+                      {bars.map(bar => (
+                        <text
+                          key={bar.key}
+                          x={bar.x + bar.width + 10} // 바 오른쪽 끝에서 10px 떨어진 위치
+                          y={bar.y + bar.height / 2} // 바 중앙 높이
+                          textAnchor="start"
+                          dominantBaseline="middle"
+                          fill="#666"
+                          fontSize="12"
+                        >
+                          {bar.data.data.percentage}%
+                        </text>
+                      ))}
+                    </>
+                  ),
                 ]}
-                enableLabel={true}
-                label={({ data }) => `${data.point}회  ${data.percentage}%`}
                 labelSkipWidth={0}
                 labelSkipHeight={0}
                 labelTextColor="#555"
-                axisBottom={{ legend: "country (indexBy)", legendOffset: 32 }}
-                axisLeft={{ legend: undefined, legendOffset: -40 }}
-                margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+                // 감정에 따른 색 반환
+                colors={({ id, data }) => {
+                  if (id === "remaining") return "#E5E5E5"; // 회색 배경
+                  const emotionColorMap = {
+                    기쁨: `${colors.emotion.happy.base}`,
+                    슬픔: `${colors.emotion.sad.base}`,
+                    화남: `${colors.emotion.angry.base}`,
+                    지루: `${colors.emotion.boring.base}`,
+                    불안: `${colors.emotion.anxious.base}`,
+                    까칠: `${colors.emotion.disgust.base}`,
+                    당황: `${colors.emotion.embarrassed.base}`,
+                    피곤: `${colors.emotion.tired.base}`,
+                  };
+                  return emotionColorMap[data.emotion];
+                }}
+                axisBottom={null}
+                axisLeft={{ legend: undefined, legendOffset: -40, tickSize: 0 }}
+                margin={{ top: 30, right: 50, bottom: 30, left: 60 }}
               />
             </ChartWrap>
           </div>
         </ImgBoxStyle>
       </BoxWrap>
       <BoxWrap>
-        <ImgBoxStyle>
+        <ImgBoxStyle
+          style={{
+            height: "320px",
+          }}
+        >
           <div style={historyWrap}>
             <StyledCalendar
               calendarType="gregory"
               formatShortWeekday={formatShortWeekday}
               formatDay={(locale, date) => moment(date).format("D")}
+              tileContent={({ date, view }) => {
+                if (view === "month") {
+                  const formattedDate = moment(date).format("YYYY-MM-DD");
+                  const emotion = emotionMap[formattedDate];
+
+                  const bgColor = emotion
+                    ? colors.emotion[emotion]?.base
+                    : undefined;
+
+                  return bgColor ? (
+                    <div
+                      style={{
+                        backgroundColor: bgColor,
+                        borderRadius: "8px",
+                        width: "90%",
+                        height: "90%",
+                        position: "absolute",
+                        top: "2px",
+                        left: "2px",
+                        zIndex: 0,
+                        opacity: 0.3,
+                      }}
+                    ></div>
+                  ) : null;
+                }
+              }}
             />
           </div>
         </ImgBoxStyle>

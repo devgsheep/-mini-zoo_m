@@ -3,6 +3,9 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { barMonthData } from "../apis/bar_month_data";
 import "../css/calendar.css";
+import { PiNumberCircleOneFill } from "react-icons/pi";
+import { PiNumberCircleTwoFill } from "react-icons/pi";
+import { PiNumberCircleThreeFill } from "react-icons/pi";
 import {
   BoxWrap,
   ChartTitle,
@@ -20,6 +23,7 @@ import {
   NavigationThree,
   NavItem,
   NavItemFocus,
+  NumberWrap,
   SignDiv,
   StyledCalendar,
   Title,
@@ -29,7 +33,6 @@ import {
   Wrap,
 } from "../emotions/historymonth.style";
 import colors from "../styles/colors";
-import styled from "@emotion/styled";
 
 function Historymonth() {
   // js
@@ -160,14 +163,19 @@ function Historymonth() {
       </div>
       <BoxWrap>
         <ImgBoxStyle>
-          <ChartTitle>감정 변화 차트</ChartTitle>
+          <NumberWrap>
+            <PiNumberCircleOneFill size={30} color={"gold"} />
+            <PiNumberCircleTwoFill size={30} color={"gray"} />
+            <PiNumberCircleThreeFill size={30} color={"orange"} />
+          </NumberWrap>
+          <ChartTitle>자주 느낀 감정 TOP3</ChartTitle>
           <div
             style={{
               width: "330px",
-              height: "200px",
+              height: "120px",
               display: "flex",
               justifyContent: "center",
-              alignItems: "center",
+              alignItems: "flex_end",
             }}
           >
             <ChartWrap>
@@ -177,7 +185,7 @@ function Historymonth() {
                 indexBy="emotion"
                 layout="horizontal"
                 padding={0.8}
-                borderRadius={5}
+                borderRadius={0}
                 legends={[]}
                 enableLabel={false}
                 maxValue={100}
@@ -187,25 +195,109 @@ function Historymonth() {
                 layers={[
                   "grid",
                   "axes",
-                  "bars",
+                  // 커스텀 감정 이름 레이어 (북동쪽 위치, 왼쪽 정렬)
+                  ({ bars }) => (
+                    <>
+                      {bars
+                        .filter(bar => bar.key.includes("remaining"))
+                        .map(bar => (
+                          <text
+                            key={`emotion-${bar.key}`}
+                            x={0} // 고정된 x 위치 (차트 왼쪽 마진과 일치)
+                            y={bar.y + bar.height / 2 - 10} // 위쪽으로
+                            textAnchor="start" // 왼쪽 정렬
+                            dominantBaseline="middle"
+                            fill="#999"
+                            fontSize="10"
+                            fontWeight="400"
+                          >
+                            {bar.data.indexValue}
+                          </text>
+                        ))}
+                    </>
+                  ),
+                  // 커스텀 바 레이어
+                  ({ bars }) => (
+                    <>
+                      {bars.map(bar => {
+                        const isPoint = bar.key.includes("point");
+                        const isRemaining = bar.key.includes("remaining");
+                        const radius = 5;
+                        // 각 바의 좌표와 크기
+                        const { x, y, width, height, color } = bar;
+                        let path;
+                        if (isPoint) {
+                          // 왼쪽 모서리만 둥글게 (시작 부분)
+                          path = `
+              M ${x + radius} ${y}
+              L ${x + width} ${y}
+              L ${x + width} ${y + height}
+              L ${x + radius} ${y + height}
+              Q ${x} ${y + height} ${x} ${y + height - radius}
+              L ${x} ${y + radius}
+              Q ${x} ${y} ${x + radius} ${y}
+              Z
+            `;
+                        } else if (isRemaining) {
+                          // 오른쪽 모서리만 둥글게 (끝 부분)
+                          path = `
+              M ${x} ${y}
+              L ${x + width - radius} ${y}
+              Q ${x + width} ${y} ${x + width} ${y + radius}
+              L ${x + width} ${y + height - radius}
+              Q ${x + width} ${y + height} ${x + width - radius} ${y + height}
+              L ${x} ${y + height}
+              Z
+            `;
+                        } else {
+                          // 기본 사각형 (radius 없음)
+                          path = `
+              M ${x} ${y}
+              L ${x + width} ${y}
+              L ${x + width} ${y + height}
+              L ${x} ${y + height}
+              Z
+            `;
+                        }
+                        return <path key={bar.key} d={path} fill={color} />;
+                      })}
+                    </>
+                  ),
                   "markers",
                   "legends",
                   "annotations",
-                  ({ bars, xScale }) => (
+                  ({ bars }) => (
                     <>
-                      {bars.map(bar => (
-                        <text
-                          key={bar.key}
-                          x={bar.x + bar.width + 10} // 바 오른쪽 끝에서 10px 떨어진 위치
-                          y={bar.y + bar.height / 2} // 바 중앙 높이
-                          textAnchor="start"
-                          dominantBaseline="middle"
-                          fill="#666"
-                          fontSize="12"
-                        >
-                          {bar.data.data.percentage}%
-                        </text>
-                      ))}
+                      {bars
+                        .filter(bar => bar.key.includes("remaining"))
+                        .map(bar => (
+                          <g key={bar.key}>
+                            {/* 실제 횟수 표시 */}
+                            <text
+                              x={bar.x + bar.width - 3}
+                              y={bar.y + bar.height / 2 - 10}
+                              textAnchor="end"
+                              dominantBaseline="middle"
+                              fill="#999"
+                              fontSize="10"
+                              fontWeight="500"
+                            >
+                              {bar.data.data.actualCount}회
+                            </text>
+                            {/* 퍼센트 표시 */}
+                            <text
+                              key={bar.key}
+                              x={bar.x + bar.width + 7}
+                              y={bar.y + bar.height / 2 - 5}
+                              textAnchor="start"
+                              dominantBaseline="middle"
+                              fill="#999"
+                              fontSize="11"
+                            >
+                              {bar.data.data.percentage}%
+                            </text>
+                          </g>
+                        ))}
                     </>
                   ),
                 ]}
@@ -228,8 +320,8 @@ function Historymonth() {
                   return emotionColorMap[data.emotion];
                 }}
                 axisBottom={null}
-                axisLeft={{ legend: undefined, legendOffset: -40, tickSize: 0 }}
-                margin={{ top: 30, right: 50, bottom: 30, left: 60 }}
+                axisLeft={null}
+                margin={{ top: -20, right: 40, bottom: -30, left: 40 }}
               />
             </ChartWrap>
           </div>

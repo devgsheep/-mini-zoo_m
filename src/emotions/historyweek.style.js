@@ -92,7 +92,7 @@ export const Title = styled.p`
   display: flex;
   align-items: flex-start;
   padding-top: 0px;
-  padding-left: 100px;
+  padding-left: 10px;
   padding-bottom: 15px;
   font-size: 12px;
   font-style: normal;

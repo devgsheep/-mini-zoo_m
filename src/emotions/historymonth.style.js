@@ -127,6 +127,15 @@ export const Emotion = styled.div`
   background-color: ${({ emotion }) => colors.emotion[emotion]?.base || "#000"};
 `;
 
+export const NumberWrap = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 6%;
+  bottom: 10%;
+  gap: 14px;
+`;
+
 export const ChartTitle = styled.p`
   width: 100%;
   text-align: left;
@@ -156,7 +165,7 @@ export const ImgBoxStyle = styled.div`
 `;
 
 export const ChartWrap = styled.div`
-  background-color: ${colors.blue[100]}; // 원하는 배경색
+  /* background-color: ${colors.blue[100]}; // 원하는 배경색 */
   border-radius: 10px;
   height: 100%;
   width: 100%;

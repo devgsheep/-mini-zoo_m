@@ -47,6 +47,9 @@ import {
   TodayText,
   TopImageWrapper,
 } from "../emotions/today.style";
+import { useRecoilState } from "recoil";
+import { emotionStateAtom } from "../atoms/emotionStateAtom";
+import { textStateAtom } from "../atoms/textStateAtom";
 
 moment.locale("ko");
 
@@ -64,9 +67,10 @@ function HistoryDaily() {
     tired: "./images/tired_panda.svg",
   };
 
-  const [selectedEmotion, setSelectedEmotion] = useState(null);
+  const [selectedEmotion, setSelectedEmotion] = useState("happy");
 
   // 이미지 추가
+
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageChange = e => {
@@ -75,6 +79,7 @@ function HistoryDaily() {
       const imageURL = URL.createObjectURL(file);
       setSelectedImage(imageURL);
     }
+    console.log(file);
   };
 
   // 네비게이터
@@ -99,8 +104,8 @@ function HistoryDaily() {
     setShowCalendar(false);
   };
 
-  //
-  const [emotionIntensity, setEmotionIntensity] = useState(5);
+  // 차트 선택 값
+  const [emotionIntensity, setEmotionIntensity] = useState(1);
   const handleSliderChange = value => {
     setEmotionIntensity(value);
   };
@@ -112,8 +117,21 @@ function HistoryDaily() {
   //   10: "10",
   // };
 
-  // jsx
+  // 입력값 저장 (감정버튼)
+  const [emotionState, setEmotionState] = useRecoilState(emotionStateAtom);
 
+  const handleEmotionClick = emotion => {
+    setEmotionState(emotion);
+  };
+  // 입력값 저장 (textarea)
+  const [textState, setTextState] = useRecoilState(textStateAtom);
+
+  const handleTextArea = e => {
+    const txt = e.target.value;
+    setTextState(txt);
+  };
+
+  // jsx
   return (
     <Container>
       <Header>
@@ -167,56 +185,80 @@ function HistoryDaily() {
               <HappyIcon
                 emotion="happy"
                 isSelected={selectedEmotion === "happy"}
-                onClick={() => setSelectedEmotion("happy")}
+                onClick={() => {
+                  setSelectedEmotion("happy");
+                  handleEmotionClick("happy");
+                }}
               />
             </EmotionListItem>
             <EmotionListItem>
               <SadIcon
                 emotion="sad"
                 isSelected={selectedEmotion === "sad"}
-                onClick={() => setSelectedEmotion("sad")}
+                onClick={() => {
+                  setSelectedEmotion("sad");
+                  handleEmotionClick("sad");
+                }}
               />
             </EmotionListItem>
             <EmotionListItem>
               <AngryIcon
                 emotion="angry"
                 isSelected={selectedEmotion === "angry"}
-                onClick={() => setSelectedEmotion("angry")}
+                onClick={() => {
+                  setSelectedEmotion("angry");
+                  handleEmotionClick("angry");
+                }}
               />
             </EmotionListItem>
             <EmotionListItem>
               <BoringIcon
                 emotion="boring"
                 isSelected={selectedEmotion === "boring"}
-                onClick={() => setSelectedEmotion("boring")}
+                onClick={() => {
+                  setSelectedEmotion("boring");
+                  handleEmotionClick("boring");
+                }}
               />
             </EmotionListItem>
             <EmotionListItem>
               <AnxiousIcon
                 emotion="anxious"
                 isSelected={selectedEmotion === "anxious"}
-                onClick={() => setSelectedEmotion("anxious")}
+                onClick={() => {
+                  setSelectedEmotion("anxious");
+                  handleEmotionClick("anxious");
+                }}
               />
             </EmotionListItem>
             <EmotionListItem>
               <DisgusIcon
                 emotion="disgust"
                 isSelected={selectedEmotion === "disgust"}
-                onClick={() => setSelectedEmotion("disgust")}
+                onClick={() => {
+                  setSelectedEmotion("disgust");
+                  handleEmotionClick("disgust");
+                }}
               />
             </EmotionListItem>
             <EmotionListItem>
               <EmbarrassedIcon
                 emotion="embarrassed"
                 isSelected={selectedEmotion === "embarrassed"}
-                onClick={() => setSelectedEmotion("embarrassed")}
+                onClick={() => {
+                  setSelectedEmotion("embarrassed");
+                  handleEmotionClick("embarrassed");
+                }}
               />
             </EmotionListItem>
             <EmotionListItem>
               <TiredIcon
                 emotion="tired"
                 isSelected={selectedEmotion === "tired"}
-                onClick={() => setSelectedEmotion("tired")}
+                onClick={() => {
+                  setSelectedEmotion("tired");
+                  handleEmotionClick("tired");
+                }}
               />
             </EmotionListItem>
           </TodayEmotionUl>
@@ -266,6 +308,7 @@ function HistoryDaily() {
             <TextArea
               type="text"
               placeholder="오늘 하루는 어떠셨나요? 자유롭게 기록해보세요.."
+              onChange={handleTextArea}
             />
           </TextWrap>
         </TodayText>
@@ -290,7 +333,13 @@ function HistoryDaily() {
           </TodayImgWrap>
         </TodayPotoWrap>
         <TodayButtonWrap>
-          <TodayAddButton onClick={handleClickDaily}>기록하기</TodayAddButton>
+          <TodayAddButton
+            type="primary"
+            htmlType="submit"
+            onClick={handleClickDaily}
+          >
+            기록하기
+          </TodayAddButton>
         </TodayButtonWrap>
       </Main>
       <NavigationBar>

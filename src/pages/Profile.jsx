@@ -46,6 +46,11 @@ import Info from "./popup/profile/Info";
 import Logout from "./popup/profile/Logout";
 import PersonalInfo from "./popup/profile/PersonalInfo";
 import Theme from "./popup/profile/Theme";
+import { BsBell } from "react-icons/bs";
+import { GoSun } from "react-icons/go";
+import { CiCircleQuestion } from "react-icons/ci";
+import { CiCircleAlert } from "react-icons/ci";
+import { RiShieldCrossLine } from "react-icons/ri";
 
 function Profile() {
   //js
@@ -155,7 +160,13 @@ function Profile() {
         <ButtonWrap>
           <Button onClick={openAlartModal}>
             <IconCircleAlert>
-              <AlertImage src="./images/alert.svg" alt="알림" />
+              <BsBell
+                style={{
+                  color: "#247CFF",
+                  fontSize: "20px",
+                }}
+              />
+              {/* <AlertImage src="./images/alert.svg" alt="알림" /> */}
             </IconCircleAlert>
             알림
           </Button>
@@ -172,7 +183,13 @@ function Profile() {
           {/* 테마 버튼 */}
           <Button type="primary" onClick={openThemeModal}>
             <IconCircleTheme>
-              <ThemeImage src="./images/theme.svg" alt="테마" />
+              <GoSun
+                style={{
+                  color: "#D8A12D",
+                  fontSize: "20px",
+                }}
+              />
+              {/* <ThemeImage src="./images/theme.svg" alt="테마" /> */}
             </IconCircleTheme>
             테마
           </Button>
@@ -189,6 +206,12 @@ function Profile() {
           {/* 개인정보처리방침 */}
           <Button type="primary" onClick={openPersonalInfoModal}>
             <IconCirclePersonalInfo>
+              {/* <RiShieldCrossLine
+                style={{
+                  color: "#48BE75",
+                  fontSize: "25px",
+                }}
+              /> */}
               <PersonalInfoImage
                 src="./images/personalinfo.svg"
                 alt="개인정보처리방침"
@@ -208,7 +231,13 @@ function Profile() {
           </Modal>
           <Button type="primary" onClick={openAskModal}>
             <IconCircleEtc>
-              <EtcImage src="./images/etc.svg" alt="문의" />
+              <CiCircleQuestion
+                style={{
+                  color: "#E43059",
+                  fontSize: "25px",
+                }}
+              />
+              {/* <EtcImage src="./images/etc.svg" alt="문의" /> */}
             </IconCircleEtc>
             문의
           </Button>
@@ -224,7 +253,13 @@ function Profile() {
           </Modal>
           <Button type="primary" onClick={openInfoModal}>
             <IconCircleInfo>
-              <InfoImage src="./images/info.svg" alt="정보" />
+              <CiCircleAlert
+                style={{
+                  color: "#4C5664",
+                  fontSize: "25px",
+                }}
+              />
+              {/* <InfoImage src="./images/info.svg" alt="정보" /> */}
             </IconCircleInfo>
             정보
           </Button>

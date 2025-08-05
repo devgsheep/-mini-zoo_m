@@ -178,10 +178,6 @@ export const StyledCalendar = styled(Calendar)`
     background: none;
     font-size: 14px;
     cursor: pointer;
-
-    &:hover {
-      background: ${colors.blue[300]};
-    }
   }
   .react-calendar__tile--active {
     background: ${colors.blue[300]};
@@ -190,6 +186,17 @@ export const StyledCalendar = styled(Calendar)`
   }
   .react-calendar__tile {
     position: relative;
+  }
+
+  .react-calendar__tile.emotion-tile.react-calendar__tile--active {
+    background-color: ${colors.blue[100]};
+    color: ${colors.gray[600]};
+  }
+
+  .react-calendar__tile:not(.emotion-tile) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 

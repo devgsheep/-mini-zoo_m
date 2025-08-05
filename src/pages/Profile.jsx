@@ -2,11 +2,8 @@ import { Modal } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import {
-  userEmailAtom,
-  userNameAtom,
-  userStateAtom,
-} from "../atoms/userInfoAtom";
+import { userInfoAtom } from "../atoms/userInfoAtom";
+import { userStateAtom } from "../atoms/userStateAtom";
 import "../css/modal.css";
 import {
   AlertImage,
@@ -91,14 +88,13 @@ function Profile() {
     setIsLogoutModalOpen(false);
   };
 
-  // 리코일로 닉네임, 이메일 불러오기
-  const [userName, setUserName] = useRecoilState(userNameAtom);
-  const [userEmail, setUserEmail] = useRecoilState(userEmailAtom);
-  const [islogin, setIslogin] = useRecoilState(userStateAtom);
+  // 사용자 정보 불러오기, 상태 불러오기
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+  const [userState, setUserState] = useRecoilState(userStateAtom);
 
   // 로그아웃 버튼 클릭시 사용자 정보 초기화
   const handleLogout = () => {
-    setIslogin(false);
+    setUserState(false);
   };
 
   //jsx
@@ -115,7 +111,7 @@ function Profile() {
           </ProfileImageWrap>
           <ProfileInfo>
             <ProfileNickName>
-              {userName}
+              {userInfo.nickname}
               <div>
                 <Link to="/profile/edit">
                   <NickEditImage
@@ -127,7 +123,7 @@ function Profile() {
             </ProfileNickName>
             <ProfileEtc>
               <div>지침 도현</div>
-              <div>{userEmail}</div>
+              <div>{userInfo.email}</div>
             </ProfileEtc>
           </ProfileInfo>
         </ProfileMain>

@@ -10,11 +10,15 @@ import {
   Text,
   Title,
 } from "../../../emotions/profile/logout.style";
+import { useRecoilState } from "recoil";
+import { userStateAtom } from "../../../atoms/userStateAtom";
 
 function Logout({ onClose, handleLogout }) {
+  const [userState, setUserState] = useRecoilState(userStateAtom);
   // 네비게이터
   const navigate = useNavigate();
   const handleClickLogout = () => {
+    setUserState(false);
     handleLogout();
     navigate("/");
   };

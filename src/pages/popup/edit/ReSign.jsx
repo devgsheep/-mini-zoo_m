@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 import colors from "../../../styles/colors";
 import {
   userEmailAtom,
+  userInfoAtom,
   userNameAtom,
-  userStateAtom,
 } from "../../../atoms/userInfoAtom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import { userStateAtom } from "../../../atoms/userStateAtom";
 
 // const Container = styled.div`
 //   width: 394px;
@@ -138,20 +139,18 @@ const ResignOKButton = styled.button`
 `;
 
 function ReSign({ onClose }) {
-  const [userEmail, setUserEmail] = useRecoilState(userEmailAtom);
-  const [userName, setUserName] = useRecoilState(userNameAtom);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const [userState, setUserState] = useRecoilState(userStateAtom);
   // 네비게이터
   const navigate = useNavigate();
   const handleClickReSign = () => {
-    localStorage.removeItem("userEmail");
-    localStorage.removeItem("userPassword");
-    localStorage.removeItem("userName");
-
-    setUserEmail("");
-    setUserName("OO");
+    localStorage.removeItem("userInfo");
+    setUserInfo({
+      nickname: "게스트",
+      email: "example@example.com",
+      password: "",
+    });
     setUserState(false);
-
     navigate("/");
   };
 

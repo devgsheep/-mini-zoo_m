@@ -1,296 +1,50 @@
-import styled from "@emotion/styled";
-import { Button, Checkbox, Form, Input, Modal } from "antd";
+import { Form, Modal } from "antd";
 import FormItem from "antd/es/form/FormItem";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import { userInfoAtom } from "../atoms/userInfoAtom";
+import { userStateAtom } from "../atoms/userStateAtom";
 import {
-  userEmailAtom,
-  userNameAtom,
-  userPasswordAtom,
-  userStateAtom,
-} from "../atoms/userInfoAtom";
+  AntCustomFormItem,
+  AntCustomInput,
+  AntCustomInputPw,
+  AntCustomSignButton,
+  Container,
+  CustomAntCheckbox,
+  Divider,
+  DividerLine,
+  DividerText,
+  Footer,
+  GoogleButton,
+  GUESTP,
+  HaveLogin,
+  HaveP,
+  Image,
+  ImageEdit,
+  KakaoButton,
+  LogoImg,
+  NoHaveLogin,
+  SignDiv,
+  SignWrap,
+  SpanLogin,
+  Title,
+  TitleP1,
+  TitleP2,
+  TopContainer,
+} from "../emotions/loginform.style";
 import { getGoogleLoginLink } from "../google/googleapi";
 import { getKakaoLoginLink } from "../kko/kkoapi";
-import colors from "../styles/colors";
-import { fonts } from "../styles/fonts";
 import PasswordFind from "./popup/profile/PasswordFind";
-import { GoogleSvg, KaKaoSvg } from "./SignForm";
-
-const Container = styled.div`
-  width: 394px;
-  height: 100%;
-  background-color: #f0f6ff;
-  text-align: center;
-`;
-
-const TopContainer = styled.div`
-  height: 47px;
-  position: relative;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SignWrap = styled.div`
-  width: 18px;
-  height: 18px;
-  left: 10px;
-  top: 35%;
-  position: absolute;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: auto;
-  cursor: pointer;
-`;
-
-const SignDiv = styled.div`
-  height: 100%;
-  font-family: ${fonts.bold};
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Title = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  row-gap: 4px;
-  padding-top: 31px;
-`;
-
-const ImageEdit = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100px;
-  height: 100px;
-`;
-const LogoImg = styled.img`
-  width: 100%;
-  height: 100%;
-`;
-
-const TitleP1 = styled.p`
-  font-size: 20px;
-  font-weight: 600;
-  padding-bottom: 10px;
-`;
-const TitleP2 = styled.p`
-  font-size: 13px;
-  font-weight: 400;
-  line-height: normal;
-  color: ${colors.gray[500]};
-`;
-
-const SpanLogin = styled.span`
-  font-family: "pretendard";
-  color: #ec48b3;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-`;
-
-const HaveLogin = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 24px;
-  padding-bottom: 24px;
-  gap: 7px;
-`;
-const HaveP = styled.p`
-  font-size: 13px;
-  font-weight: 500;
-  color: #757575;
-`;
-
-const NoHaveLogin = styled.span`
-  color: #ec48b3;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-`;
-
-const Divider = styled.div`
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #999;
-  font-size: 14px;
-  margin: 5px 20px 40px 20px;
-`;
-
-const DividerLine = styled.span`
-  flex: 1;
-  height: 1px;
-  background-color: #ddd;
-`;
-
-const DividerText = styled.span`
-  color: #757575;
-  font-weight: 500;
-  font-size: 10px;
-  padding: 0 10px;
-  white-space: nowrap;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 11px;
-  padding-bottom: 20px;
-`;
-
-const GoogleButton = styled.button`
-  display: flex;
-  width: 355px;
-  height: 43px;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #dbdbdb;
-  background: #fff;
-  gap: 10px;
-  cursor: pointer;
-`;
-
-const KakaoButton = styled.button`
-  display: flex;
-  width: 355px;
-  height: 43px;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  border-radius: 8px;
-  background: #facc15;
-  border: 1px solid #facc15;
-  gap: 10px;
-  cursor: pointer;
-`;
-
-const GUESTP = styled.p`
-  padding-top: 20px;
-  font-size: 12px;
-  font-weight: 500;
-  color: ${colors.gray[600]};
-  text-decoration: underline;
-  cursor: pointer;
-`;
-
-const AntCustomFormItem = styled(Form.Item)`
-  padding: 0 20px;
-
-  .ant-form-item-explain .ant-form-item-explain-error {
-    text-align: left;
-    font-size: 10px;
-  }
-`;
-
-const AntCustomInput = styled(Input)`
-  width: 350px;
-  height: 46px;
-  line-height: 36px;
-  border-radius: 10px;
-  border: 1px solid #c6ddff;
-  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
-    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
-  padding-left: 10px;
-  font-size: 13px;
-  color: ${colors.black};
-  margin-bottom: 2px;
-  &::placeholder {
-    font-family: "Pretendard";
-    font-size: 11px;
-    color: #999;
-  }
-`;
-const AntCustomInputPw = styled(Input.Password)`
-  width: 350px;
-  height: 46px;
-  line-height: 36px;
-  border-radius: 10px;
-  border: 1px solid #c6ddff;
-  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
-    var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
-  padding-left: 10px;
-  font-size: 13px;
-  color: #c2c2c2;
-  margin-bottom: 2px;
-  &::placeholder {
-    font-family: "Pretendard";
-    font-size: 11px;
-    color: #999;
-  }
-  .ant-input-suffix svg {
-    color: #8ab9ff;
-    font-size: 18px;
-  }
-`;
-const AntCustomSignButton = styled(Button)`
-  width: 350px;
-  display: inline-flex;
-  padding: 25px 63px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 10px;
-  background-color: #8ab9ff;
-  border: none;
-  font-size: 16px;
-  font-weight: 600;
-  color: #f5f5f5;
-  letter-spacing: 1.6px;
-  line-height: normal;
-  cursor: pointer;
-`;
-const CustomAntCheckbox = styled(Checkbox)`
-  & .ant-checkbox-inner {
-    border: 1px solid #c6ddff;
-  }
-`;
+import { GoogleSvg, KaKaoSvg } from "../emotions/signform.style";
 
 function LoginForm() {
+  // js
+
   const [form] = Form.useForm();
 
   const [isChecked, setIsChecked] = useState(false);
-  const [userstate, setUserstate] = useRecoilState(userStateAtom);
 
-  const onFinish = values => {
-    const { email, password } = values;
-
-    const localname = localStorage.getItem("userName");
-    const localemail = localStorage.getItem("userEmail");
-    const localpassword = localStorage.getItem("userPassword");
-    if (!localemail) {
-      alert("회원가입부터 해주십시오.");
-    } else if (email !== localemail && password !== localpassword) {
-      alert("유효하지 않은 회원정보입니다. 회원가입 해주세요.");
-    } else if (email !== localemail) {
-      alert("이메일 주소를 확인해주세요");
-    } else if (password !== localpassword) {
-      alert("비밀번호를 확인해주세요.");
-    } else {
-      setUserstate(true);
-      setUserEmail(localemail);
-      setUserName(localname);
-      setUserPassword(localpassword);
-      handleClickHome();
-    }
-  };
   // 네비게이터
   const navigate = useNavigate();
 
@@ -319,17 +73,38 @@ function LoginForm() {
     getKakaoLoginLink();
   };
 
-  const [userName, setUserName] = useRecoilState(userNameAtom);
-  const [userEmail, setUserEmail] = useRecoilState(userEmailAtom);
-  const [userPassword, setUserPassword] = useRecoilState(userPasswordAtom);
+  // 회원가입 및 로그인 관련
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const [userState, setUserState] = useRecoilState(userStateAtom);
+
   const handleGuestLogin = () => {
-    setUserState(false); //
-    setUserName("OO");
-    setUserEmail("");
+    setUserState(true); // 게스트 로그인시 항목은 보이게끔 로그인으로 처리, 대신 유저의 정보는 초기값으로 세팅
+    setUserInfo({
+      nickname: "게스트",
+      email: "example@example.com",
+      password: "",
+    });
     handleClickHome();
   };
 
+  // Form 에서 입력이 끝났을때, email 과 password 를 받고, 로컬에 저장된 userInfo 를 객체로 뜯어서 email 과 userData.email ,
+  // password 와 userData.password 를 비교하여, 얼라트 창을 띄우고, 값이 모두 같으면 유저의 로그인상태를 true 로 변경시킨후 home 으로 이동시킴.
+  const onFinish = values => {
+    const { email, password } = values;
+    const userData = JSON.parse(localStorage.getItem("userInfo"));
+    if (!userData) {
+      alert("회원가입부터 해주십시오.");
+    } else if (email !== userData.email) {
+      alert("유효하지 않은 회원정보입니다. 이메일을 확인해주세요.");
+    } else if (email === userData.email && password !== userData.password) {
+      alert("비밀번호를 확인해주세요.");
+    } else if (email === userData.email && password === userData.password) {
+      setUserInfo(userData);
+      setUserState(true);
+      handleClickHome();
+    }
+  };
+  // jsx
   return (
     <Container>
       <TopContainer>

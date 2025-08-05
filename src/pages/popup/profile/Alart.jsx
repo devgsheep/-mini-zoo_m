@@ -72,7 +72,6 @@ function Alart({ onClose }) {
   ];
 
   //jsx
-
   return (
     // <Container>
     //   <AlertPopUp>

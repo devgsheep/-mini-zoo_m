@@ -45,7 +45,6 @@ function Historymonth() {
     const idx = date.getDay();
     moment.locale("en");
     // Date 객체에서 getDay 는 날짜가 0:일, 1:월, 2:화 ... 6:토
-    console.log(idx);
     return weekName[idx];
   };
 
@@ -266,11 +265,19 @@ function Historymonth() {
                         top: "2px",
                         left: "2px",
                         zIndex: 0,
-                        opacity: 0.3,
+                        opacity: 0.35,
                       }}
                     ></div>
                   ) : null;
                 }
+              }}
+              tileClassName={({ date, view }) => {
+                if (view === "month") {
+                  const formattedDate = moment(date).format("YYYY-MM-DD");
+                  const emotion = emotionMap[formattedDate];
+                  return emotion ? `emotion-tile emotion-${emotion}` : null;
+                }
+                return null;
               }}
             />
           </div>

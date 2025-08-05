@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import colors from "../../../styles/colors";
 import "../../../css/radio.css";
+import { useEffect, useState } from "react";
 
 // const AlertPopUp = styled.div`
 //   display: flex;
@@ -89,6 +90,24 @@ const ThemeRadioWrap = styled.div`
 `;
 
 function Theme({ onClose }) {
+  // js 자리
+
+  // 테마설정
+  const [theme, setTheme] = useState("light");
+  useEffect(() => {
+    document.body.className = "";
+    if (theme === "dark") {
+      document.body.classList.add("theme-dark");
+    } else if (theme === "light") {
+      document.body.classList.add("theme-light");
+    } else {
+      // 시스템 설정
+      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.body.classList.add(isDark ? "theme-dark" : "theme-light");
+    }
+  }, [theme]);
+
+  // jsx
   return (
     <>
       {/* <AlertPopUp> */}
@@ -102,6 +121,8 @@ function Theme({ onClose }) {
               value="light"
               name="theme"
               className="custom-radio"
+              checked={theme === "light"}
+              onChange={() => setTheme("light")}
             />
             <div>
               <ModeText>라이트 모드</ModeText>
@@ -116,7 +137,10 @@ function Theme({ onClose }) {
               value="dark"
               name="theme"
               className="custom-radio"
+              checked={theme === "dark"}
+              onChange={() => setTheme("dark")}
             />
+
             <div>
               <ModeText>다크 모드</ModeText>
               <EXText>눈이 편안한 어두운 테마</EXText>
@@ -129,6 +153,8 @@ function Theme({ onClose }) {
               value="system"
               name="theme"
               className="custom-radio"
+              checked={theme === "system"}
+              onChange={() => setTheme("system")}
             />
             <div>
               <ModeText>시스템 설정 따름</ModeText>

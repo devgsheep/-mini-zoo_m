@@ -175,7 +175,7 @@ function ProfileEdit() {
             open={isPasswordModalOpen}
             nOk={closePasswordModal}
             onCancel={closePasswordModal}
-            footer={null} // ✅ Theme 안에 자체 버튼이 있으므로 footer 제거
+            footer={null}
             closable={false}
             centered
             width={286}

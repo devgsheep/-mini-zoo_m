@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import colors from "../../../styles/colors";
 import { Button } from "../../Ui";
 import { Form } from "antd";
+import { useRecoilState } from "recoil";
+import { userInfoAtom } from "../../../atoms/userInfoAtom";
 
 // const Container = styled.div`
 //   width: 394px;
@@ -84,18 +86,31 @@ function PasswordChange({ onClose }) {
 
   // 비밀번호 비교 상태 저장
   const [match, setMatch] = useState(true);
-  // form 요소 저장해두고 참조하기
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const [form] = Form.useForm();
+  // form 요소 저장해두고 참조하기
   // 비밀번호가 바뀔때 마다 체크함.
   const handleChangePassword = () => {
-    const pw = form.getFieldValue("password");
+    const password = form.getFieldValue("newpassword");
     const pwConfirm = form.getFieldValue("passwordConfirm");
     if (pwConfirm) {
-      setMatch(pw === pwConfirm);
+      setMatch(password === pwConfirm);
     }
   };
   const onFinish = values => {
-    console.log(values);
+    const savedpw = userInfo.password;
+    const inputpw = values.password;
+    const newpw = values.newpassword;
+    if (savedpw !== inputpw) {
+      alert("비밀번호가 다릅니다.");
+      return;
+    }
+
+    const updatedUser = { ...userInfo, password: newpw };
+    setUserInfo(updatedUser);
+    localStorage.setItem("userInfo", JSON.stringify(updatedUser));
+    console.log(savedpw, inputpw, newpw);
+    onClose();
   };
 
   //
@@ -106,12 +121,7 @@ function PasswordChange({ onClose }) {
       <Form form={form} onFinish={onFinish}>
         <PasswordChangePopUpBox>
           <PasswordChangeTitle>비밀번호 변경</PasswordChangeTitle>
-          <Form.Item
-            form={form}
-            name={"password-form"}
-            style={{ height: 36 }}
-            onFinish={values => onFinish(values)}
-          >
+          <Form.Item name={"password-form"} style={{ height: 36 }}>
             <AntCustomFormItem
               name={"password"}
               required={true}
@@ -125,21 +135,12 @@ function PasswordChange({ onClose }) {
               ]}
               style={{ position: "relative", top: "20px" }}
             >
-              <CustumPwChInput
-                type="password"
-                placeholder="현재 비밀번호"
-                onChange={handleChangePassword}
-              />
+              <CustumPwChInput type="password" placeholder="현재 비밀번호" />
             </AntCustomFormItem>
           </Form.Item>
           <ChangePw className="changepw">
             <InputWrap>
-              <Form.Item
-                form={form}
-                name={"password-form"}
-                style={{ height: 36 }}
-                onFinish={values => onFinish(values)}
-              >
+              <Form.Item name={"password-form"} style={{ height: 36 }}>
                 <AntCustomFormItem
                   name={"newpassword"}
                   required={true}
@@ -188,7 +189,7 @@ function PasswordChange({ onClose }) {
             </InputWrap>
           </ChangePw>
           <ButtonWrap>
-            <Button onClick={onClose}>확인</Button>
+            <Button>확인</Button>
           </ButtonWrap>
         </PasswordChangePopUpBox>
       </Form>

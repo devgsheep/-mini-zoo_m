@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import colors from "../../../styles/colors";
 import styled from "@emotion/styled";
+import { useRecoilState } from "recoil";
+import { userInfoAtom } from "../../../atoms/userInfoAtom";
 
 // const AlertPopUp = styled.div`
 //   display: flex;
@@ -52,7 +54,7 @@ const InputTitle = styled.input`
   }
 `;
 
-const Button = styled.div`
+const Button = styled.button`
   background-color: #247cff;
   width: 60px;
   padding: 10px;
@@ -65,22 +67,45 @@ const Button = styled.div`
   border-radius: 8px;
   cursor: pointer;
   margin-left: auto;
+  border: none;
+  display: flex;
 `;
 
 function NicknameEdit({ onClose }) {
+  //js
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+  const [nickname, setNickname] = useState(userInfo.nickname || "");
+  const handleSubmit = e => {
+    e.preventDefault(); // 새로고침 방지
+    const updatedUser = {
+      ...userInfo,
+      nickname,
+    };
+    setUserInfo(updatedUser);
+    localStorage.setItem("userInfo", JSON.stringify(updatedUser));
+    onClose();
+  };
+  //jsx
   return (
     // <AlertPopUp>
     <>
       <AlertPopUpBox>
         <Title>프로필 편집</Title>
-        <TextWrap>
-          <InputTitle type="text" placeholder="변경할 닉네임을 입력해주세요!" />
-        </TextWrap>
-        <Title>한줄 자기소개</Title>
-        <TextWrap>
-          <InputTitle type="text" placeholder="자기소개를 입력해주세요!" />
-        </TextWrap>
-        <Button onClick={onClose}>확인</Button>
+        <form onSubmit={handleSubmit}>
+          <TextWrap>
+            <InputTitle
+              type="text"
+              name="nickname"
+              placeholder="변경할 닉네임을 입력해주세요!"
+              onChange={e => setNickname(e.target.value)}
+            />
+          </TextWrap>
+          <Title>한줄 자기소개</Title>
+          <TextWrap>
+            <InputTitle type="text" placeholder="자기소개를 입력해주세요!" />
+          </TextWrap>
+          <Button type="submit">확인</Button>
+        </form>
       </AlertPopUpBox>
     </>
     // </AlertPopUp>

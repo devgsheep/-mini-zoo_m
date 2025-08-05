@@ -114,7 +114,49 @@ function ProfileEdit() {
   const handleLogout = () => {
     setUserState(false);
   };
+  // 게스트 로그인시 이용할수 없는 메뉴
+  const handleNickNameEditClick = () => {
+    if (userInfo.nickname === "게스트") {
+      return (
+        alert("게스트는 이용할수 없는 메뉴입니다."),
+        closeNicknameEditModal()
+      );
+    } else {
+      openNicknameEditModal();
+    }
+  };
+  const handlePasswordEditClick = () => {
+    if (userInfo.password) {
+      openPasswordModal();
+    } else {
+      return (
+        alert("게스트 및 소셜회원은 이용할수 없는 메뉴입니다."),
+        closePasswordModal()
+      );
+    }
+  };
+  const handleProfileImageClick = () => {
+    if (userInfo.nickname === "게스트") {
+      return (
+        alert("게스트는 이용할수 없는 메뉴입니다."),
+        closeProfileImageModal()
+      );
+    } else {
+      openProfileImageModal();
+    }
+  };
+  const handleResignClick = () => {
+    if (userInfo.password) {
+      openReSignModal();
+    } else {
+      return (
+        alert("게스트 및 소셜회원은 이용할수 없는 메뉴입니다."),
+        closePasswordModal()
+      );
+    }
+  };
 
+  // openProfileImageModal
   // jsx
 
   return (
@@ -135,6 +177,11 @@ function ProfileEdit() {
         <ProfileEditWrap>
           <ProfileEditIconWrap>
             <ProfileEditIcon src="../images/panwhite.png" alt="프로필 이미지" />
+            <ProfileEditIcon src={userInfo.thumbnail_img} alt="프로필 이미지" />
+            <ProfileEditIcon
+              src="../images/defaultuser.png"
+              alt="프로필 이미지"
+            />
           </ProfileEditIconWrap>
 
           <ProfileInfo>
@@ -143,7 +190,7 @@ function ProfileEdit() {
               <NickEdit
                 src="../images/edit.svg"
                 alt="닉네임편집"
-                onClick={openNicknameEditModal}
+                onClick={handleNickNameEditClick}
               />
             </ProfileNickName>
             <Modal
@@ -162,7 +209,7 @@ function ProfileEdit() {
         </ProfileEditWrap>
 
         <ButtonWrap>
-          <Button onClick={openPasswordModal}>
+          <Button onClick={handlePasswordEditClick}>
             <IconCirclePass>
               <PassImage src="../images/pass.svg" alt="비밀번호 변경" />
             </IconCirclePass>
@@ -183,7 +230,7 @@ function ProfileEdit() {
             <PasswordChange onClose={closePasswordModal} />
           </Modal>
 
-          <Button onClick={openProfileImageModal}>
+          <Button onClick={handleProfileImageClick}>
             <IconCircleTranceImage>
               <TranceImage src="../images/image.svg" alt="프로필이미지변경" />
             </IconCircleTranceImage>
@@ -241,7 +288,7 @@ function ProfileEdit() {
         >
           <Logout onClose={closeLogoutModal} handleLogout={handleLogout} />
         </Modal>
-        <ReSignWrap onClick={openReSignModal}>회원탈퇴</ReSignWrap>
+        <ReSignWrap onClick={handleResignClick}>회원탈퇴</ReSignWrap>
         <Modal
           open={isReSignModalOpen}
           nOk={closeReSignModal}

@@ -1,5 +1,5 @@
 import { Modal } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userInfoAtom } from "../atoms/userInfoAtom";
@@ -96,6 +96,19 @@ function Profile() {
   const handleLogout = () => {
     setUserState(false);
   };
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("userInfo");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed && typeof parsed === "object" && parsed.nickname) {
+          setUserInfo(parsed);
+        }
+      }
+    } catch (e) {
+      console.error("userInfo 파싱 실패:", e);
+    }
+  }, []);
 
   //jsx
   return (
@@ -107,7 +120,7 @@ function Profile() {
       <ProfileWrap>
         <ProfileMain>
           <ProfileImageWrap>
-            <ProfileImage src="./images/pansky.png" alt="프로필 이미지" />
+            <ProfileImage src={userInfo.thumbnail_img} alt="프로필 이미지" />
           </ProfileImageWrap>
           <ProfileInfo>
             <ProfileNickName>

@@ -1,6 +1,6 @@
 import { Form } from "antd";
 import FormItem from "antd/es/form/FormItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userInfoAtom } from "../atoms/userInfoAtom";
@@ -91,6 +91,19 @@ function SignForm() {
   const kkoLogin = () => {
     getKakaoLoginLink();
   };
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("userInfo");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed && typeof parsed === "object" && parsed.nickname) {
+          setUserInfo(parsed);
+        }
+      }
+    } catch (e) {
+      console.error("userInfo 파싱 실패:", e);
+    }
+  }, []);
 
   //jsx
   return (

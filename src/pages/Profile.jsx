@@ -101,19 +101,6 @@ function Profile() {
   const handleLogout = () => {
     setUserState(false);
   };
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem("userInfo");
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed && typeof parsed === "object" && parsed.nickname) {
-          setUserInfo(parsed);
-        }
-      }
-    } catch (e) {
-      console.error("userInfo 파싱 실패:", e);
-    }
-  }, []);
 
   //jsx
   return (
@@ -140,7 +127,7 @@ function Profile() {
               </div>
             </ProfileNickName>
             <ProfileEtc>
-              <div>지침 도현</div>
+              <div>{userInfo.introduction}</div>
               <div>{userInfo.email}</div>
             </ProfileEtc>
           </ProfileInfo>

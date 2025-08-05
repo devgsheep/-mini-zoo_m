@@ -271,7 +271,7 @@ function Home() {
   useEffect(() => {
     if (socialuserInfo) {
       const socialname =
-        socialuserInfo?.kakao_account?.profile?.nickname ||
+        socialuserInfo?.kakao_account?.profile.nickname ||
         socialuserInfo?.name ||
         "게스트";
 
@@ -279,7 +279,19 @@ function Home() {
         socialuserInfo?.kakao_account?.email ||
         socialuserInfo?.email ||
         "example@email.com";
-      setUserInfo({ nickname: socialname, email: socialemail, password: "" });
+
+      const socialtumbnail_image =
+        socialuserInfo?.kakao_account?.profile.thumbnail_image_url ||
+        socialuserInfo.picture ||
+        "images/defaultuser.png";
+
+      setUserInfo({
+        nickname: socialname,
+        email: socialemail,
+        password: "",
+        thumbnail_img: socialtumbnail_image,
+        introduction: "자기소개를 입력해주세요",
+      });
       setUserState(true);
 
       // setUserName(name);

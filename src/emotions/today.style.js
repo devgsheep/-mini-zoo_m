@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import colors from "../styles/colors";
-import { Calendar } from "antd";
 import { Slider as AntdSlider } from "antd";
 import { Link } from "react-router-dom";
+import Calendar from "react-calendar";
 
 export const Container = styled.div`
   width: 394px;

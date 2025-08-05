@@ -1,10 +1,10 @@
-import styled from "@emotion/styled";
-import { Slider as AntdSlider } from "antd";
 import moment from "moment";
 import "moment/locale/ko";
 import { useState } from "react";
-import Calendar from "react-calendar";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { emotionStateAtom } from "../atoms/emotionStateAtom";
+import { textStateAtom } from "../atoms/textStateAtom";
 import {
   AngryIcon,
   AnxiousIcon,
@@ -14,10 +14,8 @@ import {
   HappyIcon,
   SadIcon,
   TiredIcon,
-  TodayEmotionButton,
 } from "../components/icons/emotionicon";
 import "../css/today_calendar.css";
-import colors from "../styles/colors";
 import {
   CalendarButton,
   CalendarWrap,
@@ -47,9 +45,7 @@ import {
   TodayText,
   TopImageWrapper,
 } from "../emotions/today.style";
-import { useRecoilState } from "recoil";
-import { emotionStateAtom } from "../atoms/emotionStateAtom";
-import { textStateAtom } from "../atoms/textStateAtom";
+import colors from "../styles/colors";
 
 moment.locale("ko");
 

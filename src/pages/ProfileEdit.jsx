@@ -176,12 +176,7 @@ function ProfileEdit() {
       <ProfileWrap>
         <ProfileEditWrap>
           <ProfileEditIconWrap>
-            <ProfileEditIcon src="../images/panwhite.png" alt="프로필 이미지" />
             <ProfileEditIcon src={userInfo.thumbnail_img} alt="프로필 이미지" />
-            <ProfileEditIcon
-              src="../images/defaultuser.png"
-              alt="프로필 이미지"
-            />
           </ProfileEditIconWrap>
 
           <ProfileInfo>
@@ -204,7 +199,7 @@ function ProfileEdit() {
             >
               <NicknameEdit onClose={closeNicknameEditModal} />
             </Modal>
-            <ProfileEtc>프로필을 편집하세요</ProfileEtc>
+            <ProfileEtc>{userInfo.introduction}</ProfileEtc>
           </ProfileInfo>
         </ProfileEditWrap>
 

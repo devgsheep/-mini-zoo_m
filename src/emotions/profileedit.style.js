@@ -56,14 +56,16 @@ export const ProfileEditIconWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 106px;
-  height: 106px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   margin: 0 auto;
+  overflow: hidden;
 `;
 export const ProfileEditIcon = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: cover;
 `;
 export const ProfileInfo = styled.div`
   align-items: center;

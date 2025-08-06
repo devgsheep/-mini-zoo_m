@@ -181,7 +181,18 @@ export const TiredIcon = props => (
 
 // 원형
 
-const emotionImgWrap = {
+export const emotionMap = {
+  happy: "기쁨",
+  sad: "슬픔",
+  angry: "화남",
+  boring: "지루",
+  anxious: "불안",
+  disgust: "까칠",
+  embarrassed: "당황",
+  tired: "피곤",
+};
+
+export const emotionImgWrap = {
   happy: (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -302,8 +313,8 @@ export const EmotionIconCircle = () => {
   const emotionState = useRecoilValue(emotionStateAtom);
 
   return (
-    <TodayEmotionCircle emotion={emotionState}>
-      {emotionImgWrap[emotionState]}
+    <TodayEmotionCircle emotion={emotionState.emotion}>
+      {emotionImgWrap[emotionState.emotion]}
     </TodayEmotionCircle>
   );
 };

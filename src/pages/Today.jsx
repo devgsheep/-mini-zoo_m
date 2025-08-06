@@ -2,7 +2,7 @@ import moment from "moment";
 import "moment/locale/ko";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { RecoilState, useRecoilState } from "recoil";
 import { emotionStateAtom } from "../atoms/emotionStateAtom";
 import { textStateAtom } from "../atoms/textStateAtom";
 import {
@@ -51,6 +51,8 @@ import {
   TodayNavigation,
 } from "../components/navigation/Navigation";
 import { todayImgAtom } from "../atoms/todayImgAtom";
+import { selectedDateAtom } from "../atoms/selectedDateAtom";
+import { dailyListAtom } from "../atoms/dailyListAtom";
 import { userThemeAtom } from "../atoms/userThemeAtom";
 
 moment.locale("ko");
@@ -88,7 +90,17 @@ function HistoryDaily() {
   // 네비게이터
   const navigate = useNavigate();
 
+  const [dailyList, setDailyList] = useRecoilState(dailyListAtom);
+
   const handleClickDaily = () => {
+    const dailyList = {
+      emotion: emotionState.emotion,
+      value: emotionState.value,
+      text: textState,
+      date: selectedDate,
+      image: todayImg,
+    };
+    setDailyList(prev => [...prev, dailyList]);
     navigate("/history/daily");
   };
 
@@ -100,7 +112,7 @@ function HistoryDaily() {
     // console.log(idx);
     return weekName[idx];
   };
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateAtom);
 
   const handleDateChange = date => {
     setSelectedDate(date);
@@ -108,10 +120,8 @@ function HistoryDaily() {
   };
 
   // 차트 선택 값
-  const [emotionIntensity, setEmotionIntensity] = useState(1);
-  const handleSliderChange = value => {
-    setEmotionIntensity(value);
-  };
+  // const [emotionIntensity, setEmotionIntensity] = useState(1);
+
   // const marks = {
   //   1: "1",
   //   3: "3",
@@ -124,8 +134,19 @@ function HistoryDaily() {
   const [emotionState, setEmotionState] = useRecoilState(emotionStateAtom);
 
   const handleEmotionClick = emotion => {
-    setEmotionState(emotion);
+    setEmotionState(prev => ({
+      ...prev,
+      emotion,
+    }));
   };
+
+  const handleSliderChange = value => {
+    setEmotionState(prev => ({
+      ...prev,
+      value,
+    }));
+  };
+
   // 입력값 저장 (textarea)
   const [textState, setTextState] = useRecoilState(textStateAtom);
 
@@ -291,7 +312,7 @@ function HistoryDaily() {
               min={1}
               max={10}
               step={1}
-              value={emotionIntensity}
+              value={setSelectedEmotion.value}
               onChange={handleSliderChange}
               style={{ width: 326, top: "15px" }}
               // marks={marks}
@@ -314,6 +335,7 @@ function HistoryDaily() {
               type="text"
               placeholder="오늘 하루는 어떠셨나요? 자유롭게 기록해보세요.."
               onChange={handleTextArea}
+              value={textState}
             />
           </TextWrap>
         </TodayText>
@@ -330,7 +352,7 @@ function HistoryDaily() {
 
             <label htmlFor="photo-upload">
               <TodayImg
-                src={selectedImage || todayImg}
+                src={selectedImage || "/images/noimg_icon.svg"}
                 alt="사진 추가"
                 style={{ cursor: "pointer" }}
               />

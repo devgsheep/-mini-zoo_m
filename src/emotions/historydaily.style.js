@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 export const Container = styled.div`
   background-color: #f0f6ff;
   text-align: center;
+  min-height: 852px;
+
+  display: flex;
+  flex-direction: column;
 `;
 
 export const TopContainer = styled.div`
@@ -17,6 +21,10 @@ export const TopContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 13px;
+`;
+
+export const ContentArea = styled.div`
+  flex-grow: 1;
 `;
 
 export const SignDiv = styled.div`
@@ -170,7 +178,8 @@ export const Circle = styled.div`
 `;
 
 export const EmotionTextBox = styled.div`
-  display: block;
+  display: flex;
+  flex-direction: column;
   padding-left: 16px;
   /* align-items: center;
   justify-content: center; */
@@ -211,6 +220,7 @@ export const Text = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 100%;
+  min-height: 10px;
 `;
 
 export const ImgBoxStyle = styled.div`

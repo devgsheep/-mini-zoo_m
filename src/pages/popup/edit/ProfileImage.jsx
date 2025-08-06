@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import React, { useState } from "react";
 import colors from "../../../styles/colors";
+import { useRecoilState } from "recoil";
+import { userInfoAtom } from "../../../atoms/userInfoAtom";
 
 // const AlertPopUp = styled.div`
 //   display: flex;
@@ -34,14 +36,20 @@ const Title = styled.p`
 `;
 
 const ImageGroup = styled.div`
-  padding-top: 35px;
-  padding-bottom: 35px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-top: 35px;
+  margin: 35px;
+  overflow: hidden;
+  box-shadow: 3px 3px 13.1px -2px rgba(0, 0, 0, 0.25);
 `;
 
 const Img = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   position: relative;
-  border-radius: 50%;
-  box-shadow: 3px 3px 13.1px -2px rgba(0, 0, 0, 0.25);
 `;
 
 const Svg = styled.svg`
@@ -82,14 +90,17 @@ const Button = styled.div`
 `;
 
 function ProfileImage({ onClose }) {
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   // 이미지 추가
-  const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageChange = e => {
     const file = e.target.files[0];
     if (file) {
       const imageURL = URL.createObjectURL(file);
-      setSelectedImage(imageURL);
+      const updatedUser = { ...userInfo, thumbnail_img: imageURL };
+      setUserInfo(updatedUser);
+      localStorage.setItem("userInfo", JSON.stringify(updatedUser));
+      onClose();
     }
   };
   return (
@@ -97,24 +108,26 @@ function ProfileImage({ onClose }) {
     <>
       <AlertPopUpBox>
         <Title>프로필 이미지 변경</Title>
-        <ImageGroup>
-          <input
-            type="file"
-            accept="image/*"
-            id="photo-upload"
-            style={{ display: "none" }}
-            onChange={handleImageChange}
-          />
-          <label htmlFor="photo-upload">
-            <Img
-              src={selectedImage || "/images/tigerwhite.svg"}
-              alt="프로필이미지변경"
-              style={{ cursor: "pointer" }}
+        <form>
+          <ImageGroup>
+            <input
+              type="file"
+              accept="image/*"
+              id="photo-upload"
+              style={{ display: "none" }}
+              onChange={handleImageChange}
             />
-            <ProfileImgEdit />
-          </label>
-        </ImageGroup>
-        <Button onClick={onClose}>확인</Button>
+            <label htmlFor="photo-upload">
+              <Img
+                src={userInfo.thumbnail_img || "/images/guest_img.png"}
+                alt="프로필이미지변경"
+                style={{ cursor: "pointer", width: 100, height: 100 }}
+              />
+              <ProfileImgEdit />
+            </label>
+          </ImageGroup>
+          <Button>확인</Button>
+        </form>
       </AlertPopUpBox>
     </>
     // </AlertPopUp>

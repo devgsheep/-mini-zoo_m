@@ -141,6 +141,7 @@ export const BoxStyle = styled.div`
   background: #fff;
   box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
     var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
+  cursor: pointer;
 `;
 
 export const DailyDate = styled.div`
@@ -220,7 +221,7 @@ export const ImgBoxStyle = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  background: #fff;
+  /* background: #fff; */
   box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
     var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
 `;

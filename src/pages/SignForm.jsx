@@ -58,7 +58,13 @@ function SignForm() {
   };
   const onFinish = values => {
     const { nickname, email, password } = values;
-    const user = { nickname, email, password };
+    const user = {
+      nickname,
+      email,
+      password,
+      thumbnail_img: "/images/guest_img.png",
+      introduction: "자기소개를 입력해주세요",
+    };
     // setUserInfo(user);
     localStorage.setItem("userInfo", JSON.stringify(user));
 

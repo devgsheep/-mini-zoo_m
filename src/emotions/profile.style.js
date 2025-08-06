@@ -62,13 +62,15 @@ export const ProfileMain = styled.div`
   box-shadow: 0px 1px 4px rgba(12, 12, 13, 0.05);
 `;
 export const ProfileImageWrap = styled.div`
-  width: 105px;
-  height: 105px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
+  overflow: hidden;
 `;
 export const ProfileImage = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: cover;
 `;
 export const ProfileInfo = styled.div`
   display: flex;

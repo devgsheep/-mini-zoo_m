@@ -83,7 +83,7 @@ function LoginForm() {
       nickname: "게스트",
       email: "example@example.com",
       password: "",
-      thumbnail_img: "./images/defaultuser.png",
+      thumbnail_img: "./images/guest_img.png.png",
       introduction: "",
     });
     handleClickHome();

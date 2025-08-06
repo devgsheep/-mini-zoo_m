@@ -7,6 +7,10 @@ import { fonts } from "../styles/fonts";
 export const Container = styled.div`
   background-color: #f0f6ff;
   text-align: center;
+  min-height: 852px;
+
+  display: flex;
+  flex-direction: column;
 `;
 
 export const TopContainer = styled.div`
@@ -18,6 +22,10 @@ export const TopContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 13px;
+`;
+
+export const ContentArea = styled.div`
+  flex-grow: 1;
 `;
 
 export const SignDiv = styled.div`

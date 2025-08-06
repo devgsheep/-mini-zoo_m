@@ -12,6 +12,7 @@ import {
   ChartWrap,
   ColorsGuide,
   Container,
+  ContentArea,
   Daily,
   Emotion,
   EmotionBoxStyle,
@@ -105,130 +106,131 @@ function Historymonth() {
       <TopContainer>
         <SignDiv>히스토리</SignDiv>
       </TopContainer>
-      <TopNavigation>
-        <NavigationBoxStyle>
-          <NavigationThree>
-            <Link to="/history/daily">
-              <Daily>일간</Daily>
-            </Link>
-            <Link to="/history/week">
-              <Week>주간</Week>
-            </Link>
-            <Link to="/history/month">
-              <Month>월간</Month>
-            </Link>
-          </NavigationThree>
-        </NavigationBoxStyle>
-      </TopNavigation>
-      <div>
-        <EmotionBoxStyle>
-          <div>
-            <Title>감정 색상 가이드</Title>
-            <ColorsGuide>
-              <Wrap>
-                <Emotion emotion="happy"></Emotion>
-                기쁨
-              </Wrap>
-              <Wrap>
-                <Emotion emotion="sad"></Emotion>
-                슬픔
-              </Wrap>
-              <Wrap>
-                <Emotion emotion="angry"></Emotion>
-                화남
-              </Wrap>
-              <Wrap>
-                <Emotion emotion="boring"></Emotion>
-                지루
-              </Wrap>
-              <Wrap>
-                <Emotion emotion="anxious"></Emotion>
-                불안
-              </Wrap>
-              <Wrap>
-                <Emotion emotion="disgust"></Emotion>
-                까칠
-              </Wrap>
-              <Wrap>
-                <Emotion emotion="embarrassed"></Emotion>
-                당황
-              </Wrap>
-              <Wrap>
-                <Emotion emotion="tired"></Emotion>
-                피곤
-              </Wrap>
-            </ColorsGuide>
-          </div>
-        </EmotionBoxStyle>
-      </div>
-      <BoxWrap>
-        <ImgBoxStyle>
-          <NumberWrap>
-            <PiNumberCircleOneFill size={30} color={"gold"} />
-            <PiNumberCircleTwoFill size={30} color={"gray"} />
-            <PiNumberCircleThreeFill size={30} color={"orange"} />
-          </NumberWrap>
-          <ChartTitle>자주 느낀 감정 TOP3</ChartTitle>
-          <div
-            style={{
-              width: "330px",
-              height: "120px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "flex_end",
-            }}
-          >
-            <ChartWrap>
-              <ResponsiveBar
-                data={top3}
-                keys={["point", "remaining"]}
-                indexBy="emotion"
-                layout="horizontal"
-                padding={0.8}
-                borderRadius={0}
-                legends={[]}
-                enableLabel={false}
-                maxValue={100}
-                // true시에 바 중앙에 회, % 나타남
-                // label={({ data }) => `${data.point}회  ${data.percentage}%`}
-                // % 라벨 이동
-                layers={[
-                  "grid",
-                  "axes",
-                  // 커스텀 감정 이름 레이어 (북동쪽 위치, 왼쪽 정렬)
-                  ({ bars }) => (
-                    <>
-                      {bars
-                        .filter(bar => bar.key.includes("remaining"))
-                        .map(bar => (
-                          <text
-                            key={`emotion-${bar.key}`}
-                            x={0} // 고정된 x 위치 (차트 왼쪽 마진과 일치)
-                            y={bar.y + bar.height / 2 - 10} // 위쪽으로
-                            textAnchor="start" // 왼쪽 정렬
-                            dominantBaseline="middle"
-                            fill="#999"
-                            fontSize="10"
-                            fontWeight="400"
-                          >
-                            {bar.data.indexValue}
-                          </text>
-                        ))}
-                    </>
-                  ),
-                  // 커스텀 바 레이어
-                  ({ bars }) => (
-                    <>
-                      {bars.map(bar => {
-                        const isPoint = bar.key.includes("point");
-                        const isRemaining = bar.key.includes("remaining");
-                        const radius = 5;
-                        // 각 바의 좌표와 크기
-                        const { x, y, width, height, color } = bar;
-                        let path;
-                        if (isPoint) {
-                          // 왼쪽 모서리만 둥글게 (시작 부분)
-                          path = `
+      <ContentArea>
+        <TopNavigation>
+          <NavigationBoxStyle>
+            <NavigationThree>
+              <Link to="/history/daily">
+                <Daily>일간</Daily>
+              </Link>
+              <Link to="/history/week">
+                <Week>주간</Week>
+              </Link>
+              <Link to="/history/month">
+                <Month>월간</Month>
+              </Link>
+            </NavigationThree>
+          </NavigationBoxStyle>
+        </TopNavigation>
+        <div>
+          <EmotionBoxStyle>
+            <div>
+              <Title>감정 색상 가이드</Title>
+              <ColorsGuide>
+                <Wrap>
+                  <Emotion emotion="happy"></Emotion>
+                  기쁨
+                </Wrap>
+                <Wrap>
+                  <Emotion emotion="sad"></Emotion>
+                  슬픔
+                </Wrap>
+                <Wrap>
+                  <Emotion emotion="angry"></Emotion>
+                  화남
+                </Wrap>
+                <Wrap>
+                  <Emotion emotion="boring"></Emotion>
+                  지루
+                </Wrap>
+                <Wrap>
+                  <Emotion emotion="anxious"></Emotion>
+                  불안
+                </Wrap>
+                <Wrap>
+                  <Emotion emotion="disgust"></Emotion>
+                  까칠
+                </Wrap>
+                <Wrap>
+                  <Emotion emotion="embarrassed"></Emotion>
+                  당황
+                </Wrap>
+                <Wrap>
+                  <Emotion emotion="tired"></Emotion>
+                  피곤
+                </Wrap>
+              </ColorsGuide>
+            </div>
+          </EmotionBoxStyle>
+        </div>
+        <BoxWrap>
+          <ImgBoxStyle>
+            <NumberWrap>
+              <PiNumberCircleOneFill size={30} color={"gold"} />
+              <PiNumberCircleTwoFill size={30} color={"gray"} />
+              <PiNumberCircleThreeFill size={30} color={"orange"} />
+            </NumberWrap>
+            <ChartTitle>자주 느낀 감정 TOP3</ChartTitle>
+            <div
+              style={{
+                width: "330px",
+                height: "120px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex_end",
+              }}
+            >
+              <ChartWrap>
+                <ResponsiveBar
+                  data={top3}
+                  keys={["point", "remaining"]}
+                  indexBy="emotion"
+                  layout="horizontal"
+                  padding={0.8}
+                  borderRadius={0}
+                  legends={[]}
+                  enableLabel={false}
+                  maxValue={100}
+                  // true시에 바 중앙에 회, % 나타남
+                  // label={({ data }) => `${data.point}회  ${data.percentage}%`}
+                  // % 라벨 이동
+                  layers={[
+                    "grid",
+                    "axes",
+                    // 커스텀 감정 이름 레이어 (북동쪽 위치, 왼쪽 정렬)
+                    ({ bars }) => (
+                      <>
+                        {bars
+                          .filter(bar => bar.key.includes("remaining"))
+                          .map(bar => (
+                            <text
+                              key={`emotion-${bar.key}`}
+                              x={0} // 고정된 x 위치 (차트 왼쪽 마진과 일치)
+                              y={bar.y + bar.height / 2 - 10} // 위쪽으로
+                              textAnchor="start" // 왼쪽 정렬
+                              dominantBaseline="middle"
+                              fill="#999"
+                              fontSize="10"
+                              fontWeight="400"
+                            >
+                              {bar.data.indexValue}
+                            </text>
+                          ))}
+                      </>
+                    ),
+                    // 커스텀 바 레이어
+                    ({ bars }) => (
+                      <>
+                        {bars.map(bar => {
+                          const isPoint = bar.key.includes("point");
+                          const isRemaining = bar.key.includes("remaining");
+                          const radius = 5;
+                          // 각 바의 좌표와 크기
+                          const { x, y, width, height, color } = bar;
+                          let path;
+                          if (isPoint) {
+                            // 왼쪽 모서리만 둥글게 (시작 부분)
+                            path = `
               M ${x + radius} ${y}
               L ${x + width} ${y}
               L ${x + width} ${y + height}
@@ -238,9 +240,9 @@ function Historymonth() {
               Q ${x} ${y} ${x + radius} ${y}
               Z
             `;
-                        } else if (isRemaining) {
-                          // 오른쪽 모서리만 둥글게 (끝 부분)
-                          path = `
+                          } else if (isRemaining) {
+                            // 오른쪽 모서리만 둥글게 (끝 부분)
+                            path = `
               M ${x} ${y}
               L ${x + width - radius} ${y}
               Q ${x + width} ${y} ${x + width} ${y + radius}
@@ -249,133 +251,134 @@ function Historymonth() {
               L ${x} ${y + height}
               Z
             `;
-                        } else {
-                          // 기본 사각형 (radius 없음)
-                          path = `
+                          } else {
+                            // 기본 사각형 (radius 없음)
+                            path = `
               M ${x} ${y}
               L ${x + width} ${y}
               L ${x + width} ${y + height}
               L ${x} ${y + height}
               Z
             `;
-                        }
-                        return <path key={bar.key} d={path} fill={color} />;
-                      })}
-                    </>
-                  ),
-                  "markers",
-                  "legends",
-                  "annotations",
-                  ({ bars }) => (
-                    <>
-                      {bars
-                        .filter(bar => bar.key.includes("remaining"))
-                        .map(bar => (
-                          <g key={bar.key}>
-                            {/* 실제 횟수 표시 */}
-                            <text
-                              x={bar.x + bar.width - 3}
-                              y={bar.y + bar.height / 2 - 10}
-                              textAnchor="end"
-                              dominantBaseline="middle"
-                              fill="#999"
-                              fontSize="10"
-                              fontWeight="500"
-                            >
-                              {bar.data.data.actualCount}회
-                            </text>
-                            {/* 퍼센트 표시 */}
-                            <text
-                              key={bar.key}
-                              x={bar.x + bar.width + 7}
-                              y={bar.y + bar.height / 2 - 5}
-                              textAnchor="start"
-                              dominantBaseline="middle"
-                              fill="#999"
-                              fontSize="11"
-                            >
-                              {bar.data.data.percentage}%
-                            </text>
-                          </g>
-                        ))}
-                    </>
-                  ),
-                ]}
-                labelSkipWidth={0}
-                labelSkipHeight={0}
-                labelTextColor="#555"
-                // 감정에 따른 색 반환
-                colors={({ id, data }) => {
-                  if (id === "remaining") return "#E5E5E5"; // 회색 배경
-                  const emotionColorMap = {
-                    기쁨: `${colors.emotion.happy.base}`,
-                    슬픔: `${colors.emotion.sad.base}`,
-                    화남: `${colors.emotion.angry.base}`,
-                    지루: `${colors.emotion.boring.base}`,
-                    불안: `${colors.emotion.anxious.base}`,
-                    까칠: `${colors.emotion.disgust.base}`,
-                    당황: `${colors.emotion.embarrassed.base}`,
-                    피곤: `${colors.emotion.tired.base}`,
-                  };
-                  return emotionColorMap[data.emotion];
+                          }
+                          return <path key={bar.key} d={path} fill={color} />;
+                        })}
+                      </>
+                    ),
+                    "markers",
+                    "legends",
+                    "annotations",
+                    ({ bars }) => (
+                      <>
+                        {bars
+                          .filter(bar => bar.key.includes("remaining"))
+                          .map(bar => (
+                            <g key={bar.key}>
+                              {/* 실제 횟수 표시 */}
+                              <text
+                                x={bar.x + bar.width - 3}
+                                y={bar.y + bar.height / 2 - 10}
+                                textAnchor="end"
+                                dominantBaseline="middle"
+                                fill="#999"
+                                fontSize="10"
+                                fontWeight="500"
+                              >
+                                {bar.data.data.actualCount}회
+                              </text>
+                              {/* 퍼센트 표시 */}
+                              <text
+                                key={bar.key}
+                                x={bar.x + bar.width + 7}
+                                y={bar.y + bar.height / 2 - 5}
+                                textAnchor="start"
+                                dominantBaseline="middle"
+                                fill="#999"
+                                fontSize="11"
+                              >
+                                {bar.data.data.percentage}%
+                              </text>
+                            </g>
+                          ))}
+                      </>
+                    ),
+                  ]}
+                  labelSkipWidth={0}
+                  labelSkipHeight={0}
+                  labelTextColor="#555"
+                  // 감정에 따른 색 반환
+                  colors={({ id, data }) => {
+                    if (id === "remaining") return "#E5E5E5"; // 회색 배경
+                    const emotionColorMap = {
+                      기쁨: `${colors.emotion.happy.base}`,
+                      슬픔: `${colors.emotion.sad.base}`,
+                      화남: `${colors.emotion.angry.base}`,
+                      지루: `${colors.emotion.boring.base}`,
+                      불안: `${colors.emotion.anxious.base}`,
+                      까칠: `${colors.emotion.disgust.base}`,
+                      당황: `${colors.emotion.embarrassed.base}`,
+                      피곤: `${colors.emotion.tired.base}`,
+                    };
+                    return emotionColorMap[data.emotion];
+                  }}
+                  axisBottom={null}
+                  axisLeft={null}
+                  margin={{ top: -20, right: 40, bottom: -30, left: 40 }}
+                />
+              </ChartWrap>
+            </div>
+          </ImgBoxStyle>
+        </BoxWrap>
+        <BoxWrap>
+          <ImgBoxStyle
+            style={{
+              height: "320px",
+            }}
+          >
+            <div style={historyWrap}>
+              <StyledCalendar
+                calendarType="gregory"
+                formatShortWeekday={formatShortWeekday}
+                formatDay={(locale, date) => moment(date).format("D")}
+                tileContent={({ date, view }) => {
+                  if (view === "month") {
+                    const formattedDate = moment(date).format("YYYY-MM-DD");
+                    const emotion = emotionMap[formattedDate];
+
+                    const bgColor = emotion
+                      ? colors.emotion[emotion]?.base
+                      : undefined;
+
+                    return bgColor ? (
+                      <div
+                        style={{
+                          backgroundColor: bgColor,
+                          borderRadius: "8px",
+                          width: "90%",
+                          height: "90%",
+                          position: "absolute",
+                          top: "2px",
+                          left: "2px",
+                          zIndex: 0,
+                          opacity: 0.35,
+                        }}
+                      ></div>
+                    ) : null;
+                  }
                 }}
-                axisBottom={null}
-                axisLeft={null}
-                margin={{ top: -20, right: 40, bottom: -30, left: 40 }}
+                tileClassName={({ date, view }) => {
+                  if (view === "month") {
+                    const formattedDate = moment(date).format("YYYY-MM-DD");
+                    const emotion = emotionMap[formattedDate];
+                    return emotion ? `emotion-tile emotion-${emotion}` : null;
+                  }
+                  return null;
+                }}
               />
-            </ChartWrap>
-          </div>
-        </ImgBoxStyle>
-      </BoxWrap>
-      <BoxWrap>
-        <ImgBoxStyle
-          style={{
-            height: "320px",
-          }}
-        >
-          <div style={historyWrap}>
-            <StyledCalendar
-              calendarType="gregory"
-              formatShortWeekday={formatShortWeekday}
-              formatDay={(locale, date) => moment(date).format("D")}
-              tileContent={({ date, view }) => {
-                if (view === "month") {
-                  const formattedDate = moment(date).format("YYYY-MM-DD");
-                  const emotion = emotionMap[formattedDate];
-
-                  const bgColor = emotion
-                    ? colors.emotion[emotion]?.base
-                    : undefined;
-
-                  return bgColor ? (
-                    <div
-                      style={{
-                        backgroundColor: bgColor,
-                        borderRadius: "8px",
-                        width: "90%",
-                        height: "90%",
-                        position: "absolute",
-                        top: "2px",
-                        left: "2px",
-                        zIndex: 0,
-                        opacity: 0.35,
-                      }}
-                    ></div>
-                  ) : null;
-                }
-              }}
-              tileClassName={({ date, view }) => {
-                if (view === "month") {
-                  const formattedDate = moment(date).format("YYYY-MM-DD");
-                  const emotion = emotionMap[formattedDate];
-                  return emotion ? `emotion-tile emotion-${emotion}` : null;
-                }
-                return null;
-              }}
-            />
-          </div>
-        </ImgBoxStyle>
-      </BoxWrap>
+            </div>
+          </ImgBoxStyle>
+        </BoxWrap>
+      </ContentArea>
       <Footer>
         <HistoryNavigation />
       </Footer>

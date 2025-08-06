@@ -2,5 +2,8 @@ import { atom } from "recoil";
 
 export const emotionStateAtom = atom({
   key: "emotionStateAtom",
-  default: "happy",
+  default: {
+    emotion: "happy",
+    value: 5,
+  },
 });

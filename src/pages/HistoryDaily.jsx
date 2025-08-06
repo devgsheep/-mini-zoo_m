@@ -42,6 +42,7 @@ import { selectedDateAtom } from "../atoms/selectedDateAtom";
 import moment from "moment";
 import { dailyListAtom } from "../atoms/dailyListAtom";
 import styled from "@emotion/styled";
+import { userThemeAtom } from "../atoms/userThemeAtom";
 
 function HistoryDaily() {
   const emotionState = useRecoilValue(emotionStateAtom);
@@ -59,6 +60,11 @@ function HistoryDaily() {
   };
 
   // 하루에 한번만 등록하기
+
+  const [todayImg, setTodayImg] = useRecoilState(todayImgAtom);
+  const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
+  const theme = userTheme;
+
 
   return (
     <Container>
@@ -164,7 +170,7 @@ function HistoryDaily() {
       </ContentArea>
       <Button onClick={handleClickToday}>수정하기</Button>
       <Footer>
-        <HistoryNavigation />
+        <HistoryNavigation theme={theme} />
       </Footer>
     </Container>
   );

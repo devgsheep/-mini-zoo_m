@@ -59,6 +59,12 @@ function Historyweek() {
   const selectedDate = useRecoilValue(selectedDateAtom);
   const dailyList = useRecoilValue(dailyListAtom);
 
+import { useRecoilState } from "recoil";
+import { userThemeAtom } from "../atoms/userThemeAtom";
+
+function Historyweek() {
+  const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
+  const theme = userTheme;
   const navigate = useNavigate();
 
   const handleClickToday = () => {
@@ -216,7 +222,7 @@ function Historyweek() {
         ))}
       </ContentArea>
       <Footer>
-        <HistoryNavigation />
+        <HistoryNavigation theme={theme} />
       </Footer>
     </Container>
   );

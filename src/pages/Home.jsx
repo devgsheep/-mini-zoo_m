@@ -8,6 +8,7 @@ import { getGoogleToken, getGoogleUserInfo } from "../google/googleapi";
 import { getAccessToken, getMemberWithAccessToken } from "../kko/kkoapi";
 import colors from "../styles/colors";
 import { HomeNavigation } from "../components/navigation/Navigation";
+import { userThemeAtom } from "../atoms/userThemeAtom";
 
 const Header = styled.div`
   max-height: 47px;
@@ -259,6 +260,8 @@ function Home() {
   //   socialuserInfo?.kakao_account?.email || socialuserInfo?.email || "example@email.com";
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const [userState, setUserState] = useRecoilState(userStateAtom);
+  const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
+  const theme = userTheme;
 
   useEffect(() => {
     if (!authCode) return;
@@ -435,7 +438,7 @@ function Home() {
         </HomeBottomSection>
       </div>
       <Footer>
-        <HomeNavigation />
+        <HomeNavigation theme={theme} />
       </Footer>
     </div>
   );

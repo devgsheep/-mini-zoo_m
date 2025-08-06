@@ -35,6 +35,8 @@ import {
 } from "../emotions/historymonth.style";
 import colors from "../styles/colors";
 import { HistoryNavigation } from "../components/navigation/Navigation";
+import { userThemeAtom } from "../atoms/userThemeAtom";
+import { useRecoilState } from "recoil";
 
 function Historymonth() {
   // js
@@ -99,6 +101,8 @@ function Historymonth() {
     }
     return map;
   }, {});
+  const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
+  const theme = userTheme;
 
   // jsx
   return (
@@ -380,7 +384,7 @@ function Historymonth() {
         </BoxWrap>
       </ContentArea>
       <Footer>
-        <HistoryNavigation />
+        <HistoryNavigation theme={theme} />
       </Footer>
     </Container>
   );

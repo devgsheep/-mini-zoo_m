@@ -1,27 +1,26 @@
 import { Modal } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { BsBell } from "react-icons/bs";
+import { CiCircleAlert, CiCircleQuestion } from "react-icons/ci";
+import { GoSun } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userInfoAtom } from "../atoms/userInfoAtom";
 import { userStateAtom } from "../atoms/userStateAtom";
+import { userThemeAtom } from "../atoms/userThemeAtom";
+import { ProfileNavigation } from "../components/navigation/Navigation";
 import "../css/modal.css";
 import {
-  AlertImage,
   Button,
   ButtonWrap,
   Container,
   EmotionP,
-  EtcImage,
   IconCircleAlert,
   IconCircleEtc,
   IconCircleInfo,
   IconCirclePersonalInfo,
   IconCircleTheme,
-  InfoImage,
   LogoutButton,
-  NavigationBar,
-  NavItem,
-  NavItemFocus,
   NickEditImage,
   PersonalInfoImage,
   ProfileEtc,
@@ -37,7 +36,6 @@ import {
   ProfileWrap,
   SignDiv,
   SignWrap,
-  ThemeImage,
   TopContainer,
 } from "../emotions/profile.style";
 import Alart from "./popup/profile/Alart";
@@ -46,12 +44,6 @@ import Info from "./popup/profile/Info";
 import Logout from "./popup/profile/Logout";
 import PersonalInfo from "./popup/profile/PersonalInfo";
 import Theme from "./popup/profile/Theme";
-import { BsBell } from "react-icons/bs";
-import { GoSun } from "react-icons/go";
-import { CiCircleQuestion } from "react-icons/ci";
-import { CiCircleAlert } from "react-icons/ci";
-import { RiShieldCrossLine } from "react-icons/ri";
-import { ProfileNavigation } from "../components/navigation/Navigation";
 
 function Profile() {
   //js
@@ -97,15 +89,17 @@ function Profile() {
   // 사용자 정보 불러오기, 상태 불러오기
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const [userState, setUserState] = useRecoilState(userStateAtom);
+  const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
 
   // 로그아웃 버튼 클릭시 사용자 정보 초기화
   const handleLogout = () => {
     setUserState(false);
   };
+  const theme = userTheme;
 
   //jsx
   return (
-    <Container>
+    <Container theme={theme}>
       <TopContainer>
         <SignWrap></SignWrap>
         <SignDiv>프로필</SignDiv>
@@ -138,7 +132,7 @@ function Profile() {
             <ProfileIcon src="../images/profileicon.svg" alr="감정 성향" />
             나의 감정 성향
           </ProfileFeelDiv>
-          <ProfileFeelAvg>
+          <ProfileFeelAvg theme={theme}>
             <EmotionP>
               평균적으로 불안하고 지친 감정이 많아요. 에너지 소비가 많아
               지치시는 편이에요.
@@ -275,7 +269,7 @@ function Profile() {
         </Modal>
       </ProfileWrap>
 
-      <ProfileNavigation />
+      <ProfileNavigation theme={theme} />
     </Container>
   );
 }

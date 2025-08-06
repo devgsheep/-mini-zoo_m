@@ -41,8 +41,12 @@ import { ResponsiveBar } from "@nivo/bar";
 import { useEffect, useState } from "react";
 import { barData } from "../apis/bar_data";
 import { HistoryNavigation } from "../components/navigation/Navigation";
+import { useRecoilState } from "recoil";
+import { userThemeAtom } from "../atoms/userThemeAtom";
 
 function Historyweek() {
+  const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
+  const theme = userTheme;
   const navigate = useNavigate();
 
   const handleClickToday = () => {
@@ -289,7 +293,7 @@ function Historyweek() {
         </BoxStyle>
       </BoxWrap>
       <Footer>
-        <HistoryNavigation />
+        <HistoryNavigation theme={theme} />
       </Footer>
     </Container>
   );

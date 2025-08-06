@@ -51,6 +51,7 @@ import {
   TodayNavigation,
 } from "../components/navigation/Navigation";
 import { todayImgAtom } from "../atoms/todayImgAtom";
+import { userThemeAtom } from "../atoms/userThemeAtom";
 
 moment.locale("ko");
 
@@ -132,6 +133,8 @@ function HistoryDaily() {
     const txt = e.target.value;
     setTextState(txt);
   };
+  const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
+  const theme = userTheme;
 
   // jsx
   return (
@@ -344,7 +347,7 @@ function HistoryDaily() {
           </TodayAddButton>
         </TodayButtonWrap>
       </Main>
-      <TodayNavigation />
+      <TodayNavigation theme={theme} />
     </Container>
   );
 }

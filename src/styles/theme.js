@@ -1,5 +1,7 @@
+import { useRecoilState } from "recoil";
 import colors from "./colors";
 import { fonts } from "./fonts";
+import { userTemaAtom } from "../atoms/userTemaAtom";
 
 export const theme = {
   colors,

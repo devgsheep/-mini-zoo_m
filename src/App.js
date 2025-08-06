@@ -10,34 +10,36 @@ import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
 import SignForm from "./pages/SignForm";
 import Today from "./pages/Today";
+import { RecoilRoot } from "recoil";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path={"/"} element={<FirstForm>첫화면</FirstForm>} />
-        <Route path={"/sign"} element={<SignForm>가입하기</SignForm>} />
-        <Route path={"/login"} element={<LoginForm>로그인</LoginForm>} />
-        <Route path={"/home"} element={<Home>홈</Home>} />
-        <Route path={"/today"} element={<Today>오늘의기록</Today>} />
-        <Route
-          path={"/history/daily"}
-          element={<HistoryDaily>히스토리:일간</HistoryDaily>}
-        />
-        <Route
-          path={"/history/week"}
-          element={<Historyweek>히스토리:주간</Historyweek>}
-        />
-        <Route
-          path={"/history/month"}
-          element={<Historymonth>히스토리:월간</Historymonth>}
-        />
-        <Route path={"/profile"} element={<Profile>프로필</Profile>} />
-        <Route
-          path={"/profile/edit"}
-          element={<ProfileEdit>프로필편집</ProfileEdit>}
-        />
-        {/* 팝업임시작업
+    <RecoilRoot>
+      <Router>
+        <Routes>
+          <Route path={"/"} element={<FirstForm>첫화면</FirstForm>} />
+          <Route path={"/sign"} element={<SignForm>가입하기</SignForm>} />
+          <Route path={"/login"} element={<LoginForm>로그인</LoginForm>} />
+          <Route path={"/home"} element={<Home>홈</Home>} />
+          <Route path={"/today"} element={<Today>오늘의기록</Today>} />
+          <Route
+            path={"/history/daily"}
+            element={<HistoryDaily>히스토리:일간</HistoryDaily>}
+          />
+          <Route
+            path={"/history/week"}
+            element={<Historyweek>히스토리:주간</Historyweek>}
+          />
+          <Route
+            path={"/history/month"}
+            element={<Historymonth>히스토리:월간</Historymonth>}
+          />
+          <Route path={"/profile"} element={<Profile>프로필</Profile>} />
+          <Route
+            path={"/profile/edit"}
+            element={<ProfileEdit>프로필편집</ProfileEdit>}
+          />
+          {/* 팝업임시작업
         <Route path={"/alart"} element={<Alart>알람</Alart>}></Route>
         <Route path={"/theme"} element={<Theme>테마</Theme>}></Route>
         <Route
@@ -64,10 +66,11 @@ function App() {
           element={<Language>언어변경</Language>}
         ></Route>
         <Route path={"/resign"} element={<ReSign>회원탈퇴</ReSign>}></Route> */}
-        {/* 잘못된 경로 접근 처리 */}
-        <Route path="*" element={<NotFound />} />;
-      </Routes>
-    </Router>
+          {/* 잘못된 경로 접근 처리 */}
+          <Route path="*" element={<NotFound />} />;
+        </Routes>
+      </Router>
+    </RecoilRoot>
   );
 }
 

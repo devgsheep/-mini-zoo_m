@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
-import colors from "../../../styles/colors";
 import "../../../css/radio.css";
-import { useEffect, useState } from "react";
+import colors from "../../../styles/colors";
 
 // const AlertPopUp = styled.div`
 //   display: flex;
@@ -92,20 +91,20 @@ const ThemeRadioWrap = styled.div`
 function Theme({ onClose }) {
   // js 자리
 
-  // 테마설정
-  const [theme, setTheme] = useState("light");
-  useEffect(() => {
-    document.body.className = "";
-    if (theme === "dark") {
-      document.body.classList.add("theme-dark");
-    } else if (theme === "light") {
-      document.body.classList.add("theme-light");
-    } else {
-      // 시스템 설정
-      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.body.classList.add(isDark ? "theme-dark" : "theme-light");
-    }
-  }, [theme]);
+  // // 테마설정
+  // const [theme, setTheme] = useState("light");
+  // useEffect(() => {
+  //   document.body.className = "";
+  //   if (theme === "dark") {
+  //     document.body.classList.add("theme-dark");
+  //   } else if (theme === "light") {
+  //     document.body.classList.add("theme-light");
+  //   } else {
+  //     // 시스템 설정
+  //     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  //     document.body.classList.add(isDark ? "theme-dark" : "theme-light");
+  //   }
+  // }, [theme]);
 
   // jsx
   return (
@@ -121,12 +120,13 @@ function Theme({ onClose }) {
               value="light"
               name="theme"
               className="custom-radio"
-              checked={theme === "light"}
-              onChange={() => setTheme("light")}
+              // checked={theme === "light"}
+              // onChange={() => setTheme("light")}
+              
             />
             <div>
-              <ModeText>라이트 모드</ModeText>
-              <EXText>밝고 산뜻한 기본 테마</EXText>
+              <ModeText>블루 모드</ModeText>
+              <EXText>심플한 기본 테마</EXText>
             </div>
           </ThemeRadioLabel>
 
@@ -137,13 +137,13 @@ function Theme({ onClose }) {
               value="dark"
               name="theme"
               className="custom-radio"
-              checked={theme === "dark"}
-              onChange={() => setTheme("dark")}
+              // checked={theme === "dark"}
+              // onChange={() => setTheme("dark")}
             />
 
             <div>
-              <ModeText>다크 모드</ModeText>
-              <EXText>눈이 편안한 어두운 테마</EXText>
+              <ModeText>옐로우 모드</ModeText>
+              <EXText>밝고 산뜻한 옐로우 테마</EXText>
             </div>
           </ThemeRadioLabel>
           <ThemeRadioLabel htmlFor="system">
@@ -153,12 +153,12 @@ function Theme({ onClose }) {
               value="system"
               name="theme"
               className="custom-radio"
-              checked={theme === "system"}
-              onChange={() => setTheme("system")}
+              // checked={theme === "system"}
+              // onChange={() => setTheme("system")}
             />
             <div>
-              <ModeText>시스템 설정 따름</ModeText>
-              <EXText>현재 기기의 설정에 따른 테마</EXText>
+              <ModeText>그린 모드</ModeText>
+              <EXText>눈이 편안한 그린 테마</EXText>
             </div>
           </ThemeRadioLabel>
         </ThemeRadioWrap>

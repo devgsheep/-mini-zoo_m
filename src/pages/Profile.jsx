@@ -1,7 +1,7 @@
 import { Modal } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { RecoilRoot, useRecoilState } from "recoil";
 import { userInfoAtom } from "../atoms/userInfoAtom";
 import { userStateAtom } from "../atoms/userStateAtom";
 import "../css/modal.css";
@@ -51,7 +51,10 @@ import { GoSun } from "react-icons/go";
 import { CiCircleQuestion } from "react-icons/ci";
 import { CiCircleAlert } from "react-icons/ci";
 import { RiShieldCrossLine } from "react-icons/ri";
+import { IoHeart } from "react-icons/io5";
 import { ProfileNavigation } from "../components/navigation/Navigation";
+import { userTemaAtom } from "../atoms/userTemaAtom";
+import colors from "../styles/colors";
 
 function Profile() {
   //js
@@ -135,7 +138,15 @@ function Profile() {
         </ProfileMain>
         <ProfileFeel>
           <ProfileFeelDiv>
-            <ProfileIcon src="../images/profileicon.svg" alr="감정 성향" />
+            {/* <ProfileIcon src="../images/profileicon.svg" alr="감정 성향" /> */}
+            <IoHeart
+              style={{
+                color: "#8AB9FF",
+                position: "relative",
+                fontSize: "22px",
+                right: "15px",
+              }}
+            />
             나의 감정 성향
           </ProfileFeelDiv>
           <ProfileFeelAvg>
@@ -274,7 +285,6 @@ function Profile() {
           <Logout onClose={closeLogoutModal} handleLogout={handleLogout} />
         </Modal>
       </ProfileWrap>
-
       <ProfileNavigation />
     </Container>
   );

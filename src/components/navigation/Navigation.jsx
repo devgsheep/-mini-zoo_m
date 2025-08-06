@@ -1,9 +1,36 @@
-import {
-  NavigationBar,
-  NavItem,
-  NavItemFocus,
-} from "../../emotions/profile.style";
+import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
+import colors from "../../styles/colors";
+const NavigationBar = styled.ul`
+  display: flex;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
 
+const NavItemFocus = styled.li`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 0;
+  width: 25%;
+  cursor: pointer;
+  background-color: ${colors.blue[200]};
+  color: ${colors.blue[400]};
+`;
+const NavItem = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 0;
+  width: 25%;
+  background-color: ${colors.white};
+  color: ${colors.gray[400]};
+  cursor: pointer;
+`;
 function HomeNavigation() {
   return (
     <>

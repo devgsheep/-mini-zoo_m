@@ -1,9 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { emotionStateAtom } from "../atoms/emotionStateAtom";
+import { todayImgAtom } from "../atoms/todayImgAtom";
+import { EmotionIconCircle } from "../components/icons/emotionicon";
+import { HistoryNavigation } from "../components/navigation/Navigation";
 import {
   BoxStyle,
   BoxWrap,
   Button,
-  Circle,
   ColorsGuide,
   Container,
   Daily,
@@ -16,11 +20,8 @@ import {
   Footer,
   ImgBoxStyle,
   Month,
-  NavigationBar,
   NavigationBoxStyle,
   NavigationThree,
-  NavItem,
-  NavItemFocus,
   SignDiv,
   Span,
   Text,
@@ -30,11 +31,6 @@ import {
   Week,
   Wrap,
 } from "../emotions/historydaily.style";
-import { emotionStateAtom } from "../atoms/emotionStateAtom";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { EmotionIconCircle } from "../components/icons/emotionicon";
-import { HistoryNavigation } from "../components/navigation/Navigation";
-import { todayImgAtom } from "../atoms/todayImgAtom";
 import { TodayImg, TodayImgWrap } from "../emotions/today.style";
 
 function HistoryDaily() {

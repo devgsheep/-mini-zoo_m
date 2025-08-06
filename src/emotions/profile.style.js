@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import { fonts } from "../styles/fonts";
 import { Link } from "react-router-dom";
+import colors from "../styles/colors";
 
 export const Container = styled.div`
   width: 394px;
   height: auto;
-  background-color: #f0f6ff;
+  background-color: ${({ theme }) => colors[theme][100]};
 `;
 
 export const TopContainer = styled.div`
@@ -136,7 +137,7 @@ export const ProfileFeelAvg = styled.div`
   height: 71px;
   padding: 10px;
   align-items: center;
-  background: #f0f6ff;
+  background: ${({ theme }) => colors[theme][100]};
   border-radius: 12px;
   margin-top: 25px;
   font-size: 14px;

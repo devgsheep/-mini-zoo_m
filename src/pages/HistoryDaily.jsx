@@ -32,6 +32,7 @@ import {
   Wrap,
 } from "../emotions/historydaily.style";
 import { TodayImg, TodayImgWrap } from "../emotions/today.style";
+import { userThemeAtom } from "../atoms/userThemeAtom";
 
 function HistoryDaily() {
   const emotionMap = {
@@ -84,6 +85,9 @@ function HistoryDaily() {
     navigate("/today");
   };
   const [todayImg, setTodayImg] = useRecoilState(todayImgAtom);
+  const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
+  const theme = userTheme;
+
   return (
     <Container>
       <TopContainer>
@@ -167,18 +171,20 @@ function HistoryDaily() {
           <div>
             <Title>사진</Title>
             <TodayImgWrap>
-              <TodayImg
-                style={{ cursor: "default" }}
-                src={todayImg}
-                alt="빈이미지"
-              />
+              <div>
+                <TodayImg
+                  style={{ cursor: "default" }}
+                  src={todayImg}
+                  alt="빈이미지"
+                />
+              </div>
             </TodayImgWrap>
           </div>
         </ImgBoxStyle>
       </BoxWrap>
       <Button onClick={handleClickToday}>수정하기</Button>
       <Footer>
-        <HistoryNavigation />
+        <HistoryNavigation theme={theme} />
       </Footer>
     </Container>
   );

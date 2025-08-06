@@ -6,7 +6,7 @@ import Calendar from "react-calendar";
 
 export const Container = styled.div`
   width: 394px;
-  background-color: ${colors.blue[100]};
+  background-color: ${({ theme }) => colors[theme][100]};
   position: relative;
 `;
 export const Header = styled.div`
@@ -137,7 +137,7 @@ export const TextArea = styled.textarea`
   width: 344px;
   height: 67px;
   border-radius: 10px;
-  border: 1px solid #c6ddff;
+  border: 1px solid ${({ theme }) => colors[theme][200]};
   box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
     var(--sds-size-depth-100) var(--sds-size-depth-0) var(--sds-color-black-100);
   padding: 8px 10px;
@@ -189,8 +189,8 @@ export const TodayAddButton = styled.button`
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  border: 1px solid ${colors.blue[300]};
-  background: ${colors.blue[300]};
+  border: none;
+  background: ${({ theme }) => colors[theme][300]};
   color: ${colors.gray[100]};
   /* Drop Shadow/100 */
   box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
@@ -204,7 +204,7 @@ export const TodayAddButton = styled.button`
   margin-top: 30px;
   cursor: pointer;
   :hover {
-    background: ${colors.blue[500]};
+    background: ${({ theme }) => colors[theme][500]};
   }
 `;
 
@@ -279,14 +279,14 @@ export const StyledSlider = styled(AntdSlider)`
     margin-top: 1px;
   }
   .ant-slider-handle::after {
-    background-color: #9dc4ff !important;
+    background-color: ${({ theme }) => colors[theme][200]} !important;
     box-shadow: none;
   }
   .ant-slider-handle::before {
   }
 
   .ant-slider-track {
-    background-color: #9dc4ff !important;
+    background-color: ${({ theme }) => colors[theme][200]} !important;
     height: 6px;
   }
 

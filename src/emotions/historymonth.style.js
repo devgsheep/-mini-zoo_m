@@ -5,7 +5,7 @@ import colors from "../styles/colors";
 import { fonts } from "../styles/fonts";
 
 export const Container = styled.div`
-  background-color: #f0f6ff;
+  background-color: ${({ theme }) => colors[theme][100]};
   text-align: center;
   min-height: 852px;
 
@@ -80,7 +80,7 @@ export const Month = styled.div`
   padding: 7px 49px;
   font-size: 12px;
   font-weight: 400;
-  background-color: ${colors.blue[200]};
+  background-color: ${({ theme }) => colors[theme][200]};
   border-radius: 6px;
   color: ${colors.gray[700]};
   cursor: pointer;
@@ -197,7 +197,7 @@ export const StyledCalendar = styled(Calendar)`
     cursor: pointer;
   }
   .react-calendar__tile--active {
-    background: ${colors.blue[300]};
+    background: ${({ theme }) => colors[theme][300]};
     color: white;
     border-radius: 8px;
   }
@@ -206,7 +206,7 @@ export const StyledCalendar = styled(Calendar)`
   }
 
   .react-calendar__tile.emotion-tile.react-calendar__tile--active {
-    background-color: ${colors.blue[100]};
+    background-color: ${({ theme }) => colors[theme][100]};
     color: ${colors.gray[600]};
   }
 

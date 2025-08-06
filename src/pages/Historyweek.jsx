@@ -51,6 +51,8 @@ import { textStateAtom } from "../atoms/textStateAtom";
 import { emotionStateAtom } from "../atoms/emotionStateAtom";
 import { dailyListAtom } from "../atoms/dailyListAtom";
 import moment from "moment";
+import { useRecoilState } from "recoil";
+import { userThemeAtom } from "../atoms/userThemeAtom";
 
 function Historyweek() {
   // 기록
@@ -59,10 +61,6 @@ function Historyweek() {
   const selectedDate = useRecoilValue(selectedDateAtom);
   const dailyList = useRecoilValue(dailyListAtom);
 
-import { useRecoilState } from "recoil";
-import { userThemeAtom } from "../atoms/userThemeAtom";
-
-function Historyweek() {
   const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
   const theme = userTheme;
   const navigate = useNavigate();

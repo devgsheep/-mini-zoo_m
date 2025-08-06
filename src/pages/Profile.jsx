@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BsBell } from "react-icons/bs";
 import { CiCircleAlert, CiCircleQuestion } from "react-icons/ci";
 import { GoSun } from "react-icons/go";
+import { IoHeart } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userInfoAtom } from "../atoms/userInfoAtom";
@@ -27,7 +28,6 @@ import {
   ProfileFeel,
   ProfileFeelAvg,
   ProfileFeelDiv,
-  ProfileIcon,
   ProfileImage,
   ProfileImageWrap,
   ProfileInfo,
@@ -36,6 +36,7 @@ import {
   ProfileWrap,
   SignDiv,
   SignWrap,
+  Text,
   TopContainer,
 } from "../emotions/profile.style";
 import Alart from "./popup/profile/Alart";
@@ -44,6 +45,7 @@ import Info from "./popup/profile/Info";
 import Logout from "./popup/profile/Logout";
 import PersonalInfo from "./popup/profile/PersonalInfo";
 import Theme from "./popup/profile/Theme";
+import colors from "../styles/colors";
 
 function Profile() {
   //js
@@ -129,8 +131,15 @@ function Profile() {
         </ProfileMain>
         <ProfileFeel>
           <ProfileFeelDiv>
-            <ProfileIcon src="../images/profileicon.svg" alr="감정 성향" />
-            나의 감정 성향
+            <IoHeart
+              style={{
+                color: colors[theme][200],
+                position: "relative",
+                fontSize: "22px",
+                right: "15px",
+              }}
+            />
+            <Text>나의 감정 성향</Text>
           </ProfileFeelDiv>
           <ProfileFeelAvg theme={theme}>
             <EmotionP>

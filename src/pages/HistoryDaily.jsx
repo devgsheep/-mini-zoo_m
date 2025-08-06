@@ -51,8 +51,6 @@ function HistoryDaily() {
   // 기록하기 > 기록
   const dailyList = useRecoilValue(dailyListAtom);
 
-  const [todayImg, setTodayImg] = useRecoilState(todayImgAtom);
-
   const navigate = useNavigate();
 
   const handleClickToday = () => {
@@ -64,7 +62,6 @@ function HistoryDaily() {
   const [todayImg, setTodayImg] = useRecoilState(todayImgAtom);
   const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
   const theme = userTheme;
-
 
   return (
     <Container>

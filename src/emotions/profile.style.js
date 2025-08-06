@@ -116,8 +116,9 @@ export const ProfileFeelDiv = styled.div`
   font-size: 15px;
   display: flex;
   padding: 15px;
-  padding-left: 25px;
+  padding-left: 20px;
 `;
+export const Text = styled.p``;
 
 export const ProfileIcon = styled.img`
   position: absolute;

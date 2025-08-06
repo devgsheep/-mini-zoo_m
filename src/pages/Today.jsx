@@ -50,6 +50,7 @@ import {
   HomeNavigation,
   TodayNavigation,
 } from "../components/navigation/Navigation";
+import { todayImgAtom } from "../atoms/todayImgAtom";
 
 moment.locale("ko");
 
@@ -70,7 +71,7 @@ function HistoryDaily() {
   const [selectedEmotion, setSelectedEmotion] = useState("happy");
 
   // 이미지 추가
-
+  const [todayImg, setTodayImg] = useRecoilState(todayImgAtom);
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageChange = e => {
@@ -78,6 +79,7 @@ function HistoryDaily() {
     if (file) {
       const imageURL = URL.createObjectURL(file);
       setSelectedImage(imageURL);
+      setTodayImg(imageURL);
     }
     console.log(file);
   };
@@ -314,7 +316,7 @@ function HistoryDaily() {
         </TodayText>
         <TodayPotoWrap>
           <span>사진 (선택사항)</span>
-          <TodayImgWrap>
+          <TodayImgWrap className="today_img_wrap">
             <input
               type="file"
               accept="image/*"
@@ -325,7 +327,7 @@ function HistoryDaily() {
 
             <label htmlFor="photo-upload">
               <TodayImg
-                src={selectedImage || "./images/noimg_icon.svg"}
+                src={selectedImage || todayImg}
                 alt="사진 추가"
                 style={{ cursor: "pointer" }}
               />

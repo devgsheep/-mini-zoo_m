@@ -162,17 +162,20 @@ export const TodayPotoWrap = styled.div`
   }
 `;
 export const TodayImgWrap = styled.div`
-  width: 362px;
-  height: 313px;
+  width: 360px;
+  height: 310px;
   background-color: ${colors.white};
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   border-radius: 16px;
+  overflow: hidden;
 `;
 export const TodayImg = styled.img`
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   cursor: pointer;
 `;
 export const TodayButtonWrap = styled.div`

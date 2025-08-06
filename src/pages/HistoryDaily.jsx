@@ -31,9 +31,11 @@ import {
   Wrap,
 } from "../emotions/historydaily.style";
 import { emotionStateAtom } from "../atoms/emotionStateAtom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { EmotionIconCircle } from "../components/icons/emotionicon";
 import { HistoryNavigation } from "../components/navigation/Navigation";
+import { todayImgAtom } from "../atoms/todayImgAtom";
+import { TodayImg, TodayImgWrap } from "../emotions/today.style";
 
 function HistoryDaily() {
   const emotionMap = {
@@ -85,6 +87,7 @@ function HistoryDaily() {
   const handleClickToday = () => {
     navigate("/today");
   };
+  const [todayImg, setTodayImg] = useRecoilState(todayImgAtom);
   return (
     <Container>
       <TopContainer>
@@ -146,8 +149,8 @@ function HistoryDaily() {
           </div>
         </EmotionBoxStyle>
       </div>
-      <BoxWrap onClick={handleClickToday}>
-        <BoxStyle>
+      <BoxWrap>
+        <BoxStyle onClick={handleClickToday}>
           <DailyDate>7/18(금)</DailyDate>
           <EmotionIconCircle emotion={emotionState}>
             {emotionImgWrap[emotionState]}
@@ -167,7 +170,13 @@ function HistoryDaily() {
         <ImgBoxStyle>
           <div>
             <Title>사진</Title>
-            <img src="/images/noimg_icon.svg" alt="빈이미지" />
+            <TodayImgWrap>
+              <TodayImg
+                style={{ cursor: "default" }}
+                src={todayImg}
+                alt="빈이미지"
+              />
+            </TodayImgWrap>
           </div>
         </ImgBoxStyle>
       </BoxWrap>

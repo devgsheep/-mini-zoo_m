@@ -63,7 +63,6 @@ function Historymonth() {
 
   const total = Object.values(emotionCounts).reduce((a, b) => a + b, 0);
   // 최대값
-  const maxCount = Math.max(...Object.values(emotionCounts));
   const top3 = Object.entries(emotionCounts)
     .sort((a, b) => b[1] - a[1]) // 많이 등장한 순으로 정렬
     .slice(0, 3) // 상위 3개만 가져오기

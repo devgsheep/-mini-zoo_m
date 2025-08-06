@@ -197,23 +197,19 @@ function Historyweek() {
             </div>
           </ImgBoxStyle>
         </BoxWrap>
-        {dailyList.map(() => (
-          <BoxWrap>
+        {barData.map((item, index) => (
+          <BoxWrap key={index}>
             <BoxStyle onClick={handleClickToday}>
-              <DailyDate>{moment(selectedDate).format("M/D(ddd)")}</DailyDate>
-              <EmotionIconCircle emotion={emotionState.emotion}>
-                {emotionImgWrap[emotionState.emotion]}
+              <DailyDate>{moment(item.date).format("M/D(ddd)")}</DailyDate>
+              <EmotionIconCircle emotion={item.emotion}>
+                {emotionImgWrap[item.emotion]}
               </EmotionIconCircle>
               <EmotionTextBox>
                 <EmotionTitle>
-                  <EmotionFill>
-                    {emotionMap[emotionState.emotion] || emotionState}
-                  </EmotionFill>
-                  <Span emotion={emotionState.emotion}>
-                    강도 {emotionState.value}
-                  </Span>
+                  <EmotionFill>{emotionMap[item.emotion]}</EmotionFill>
+                  <Span emotion={item.emotion}>강도 {item.point}</Span>
                 </EmotionTitle>
-                <Text>{textState}</Text>
+                <Text>{item.text}</Text>
               </EmotionTextBox>
             </BoxStyle>
           </BoxWrap>

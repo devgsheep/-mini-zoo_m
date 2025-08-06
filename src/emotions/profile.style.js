@@ -118,7 +118,11 @@ export const ProfileFeelDiv = styled.div`
   padding: 15px;
   padding-left: 20px;
 `;
-export const Text = styled.p``;
+export const Text = styled.p`
+  position: absolute;
+  left: 12%;
+  bottom: 73%;
+`;
 
 export const ProfileIcon = styled.img`
   position: absolute;

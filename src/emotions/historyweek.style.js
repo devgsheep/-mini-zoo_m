@@ -240,6 +240,7 @@ export const Text = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 100%;
+  min-height: 10px;
 `;
 
 export const ChartWrap = styled.div`

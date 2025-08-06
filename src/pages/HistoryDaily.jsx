@@ -45,17 +45,17 @@ import styled from "@emotion/styled";
 import { userThemeAtom } from "../atoms/userThemeAtom";
 
 function HistoryDaily() {
-  const emotionState = useRecoilValue(emotionStateAtom);
-  const textState = useRecoilValue(textStateAtom);
-  const selectedDate = useRecoilValue(selectedDateAtom);
-  // 기록하기 > 기록
-  const dailyList = useRecoilValue(dailyListAtom);
-
-  const navigate = useNavigate();
-
+  // 수정하기 버튼
   const handleClickToday = () => {
     navigate("/today");
   };
+
+  const emotionState = useRecoilValue(emotionStateAtom);
+  const textState = useRecoilValue(textStateAtom);
+  const selectedDate = useRecoilValue(selectedDateAtom);
+  const dailyList = useRecoilValue(dailyListAtom);
+
+  const navigate = useNavigate();
 
   // 하루에 한번만 등록하기
 
@@ -125,7 +125,7 @@ function HistoryDaily() {
             </div>
           </EmotionBoxStyle>
         </div>
-        {dailyList.map(() => (
+        {dailyList.length > 0 && (
           <>
             <BoxWrap>
               <BoxStyle onClick={handleClickToday}>
@@ -163,9 +163,12 @@ function HistoryDaily() {
               </BoxWrap>
             )}
           </>
-        ))}
+        )}
       </ContentArea>
-      <Button onClick={handleClickToday}>수정하기</Button>
+      {dailyList.length > 0 && (
+        <Button onClick={handleClickToday}>수정하기</Button>
+      )}
+
       <Footer>
         <HistoryNavigation theme={theme} />
       </Footer>

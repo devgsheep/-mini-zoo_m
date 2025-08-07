@@ -1,18 +1,21 @@
+import { ResponsiveBar } from "@nivo/bar";
+import moment from "moment";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { barData } from "../apis/bar_data";
+import { userThemeAtom } from "../atoms/userThemeAtom";
 import {
   EmotionIconCircle,
   emotionImgWrap,
   emotionMap,
-  HappyIconCircle,
-  SadIconCircle,
-  TiredIconCircle,
 } from "../components/icons/emotionicon";
+import { HistoryNavigation } from "../components/navigation/Navigation";
 import {
   BoxStyle,
   BoxWrap,
   ChartTitle,
   ChartWrap,
-  Circle,
   ColorsGuide,
   Container,
   ContentArea,
@@ -26,11 +29,8 @@ import {
   Footer,
   ImgBoxStyle,
   Month,
-  NavigationBar,
   NavigationBoxStyle,
   NavigationThree,
-  NavItem,
-  NavItemFocus,
   SignDiv,
   Span,
   Text,
@@ -41,25 +41,9 @@ import {
   Wrap,
 } from "../emotions/historyweek.style";
 import colors from "../styles/colors";
-import { ResponsiveBar } from "@nivo/bar";
-import { useEffect, useState } from "react";
-import { barData } from "../apis/bar_data";
-import { HistoryNavigation } from "../components/navigation/Navigation";
-import { useRecoilValue } from "recoil";
-import { selectedDateAtom } from "../atoms/selectedDateAtom";
-import { textStateAtom } from "../atoms/textStateAtom";
-import { emotionStateAtom } from "../atoms/emotionStateAtom";
-import { dailyListAtom } from "../atoms/dailyListAtom";
-import moment from "moment";
-import { useRecoilState } from "recoil";
-import { userThemeAtom } from "../atoms/userThemeAtom";
 
 function Historyweek() {
   // 기록
-  const emotionState = useRecoilValue(emotionStateAtom);
-  const textState = useRecoilValue(textStateAtom);
-  const selectedDate = useRecoilValue(selectedDateAtom);
-  const dailyList = useRecoilValue(dailyListAtom);
 
   const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
   const theme = userTheme;
@@ -159,7 +143,7 @@ function Historyweek() {
                   alignItems: "center",
                 }}
               >
-                <ChartWrap>
+                <ChartWrap theme={theme}>
                   <ResponsiveBar
                     data={data}
                     keys={["point"]}

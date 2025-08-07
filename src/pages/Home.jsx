@@ -47,6 +47,7 @@ import {
 import moment from "moment";
 import { selectedDateAtom } from "../atoms/selectedDateAtom";
 import { dailyListAtom } from "../atoms/dailyListAtom";
+import { CiClock2 } from "react-icons/ci";
 
 function Home() {
   //js
@@ -141,9 +142,17 @@ function Home() {
 
       const socialtumbnail_image =
         socialuserInfo?.kakao_account?.profile.thumbnail_image_url ||
-        socialuserInfo.picture ||
+        socialuserInfo?.picture ||
         "images/defaultuser.png";
 
+      const socialUser = {
+        nickname: socialname,
+        email: socialemail,
+        password: "",
+        thumbnail_img: socialtumbnail_image,
+        introduction: "자기소개를 입력해주세요",
+      };
+      localStorage.setItem("userInfo", JSON.stringify(socialUser));
       setUserInfo({
         nickname: socialname,
         email: socialemail,

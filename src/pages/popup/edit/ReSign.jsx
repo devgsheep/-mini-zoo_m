@@ -9,6 +9,7 @@ import {
 } from "../../../atoms/userInfoAtom";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { userStateAtom } from "../../../atoms/userStateAtom";
+import { userThemeAtom } from "../../../atoms/userThemeAtom";
 
 // const Container = styled.div`
 //   width: 394px;
@@ -141,6 +142,7 @@ const ResignOKButton = styled.button`
 function ReSign({ onClose }) {
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const [userState, setUserState] = useRecoilState(userStateAtom);
+  const [theme, setTheme] = useRecoilState(userThemeAtom);
   // 네비게이터
   const navigate = useNavigate();
   const handleClickReSign = () => {
@@ -165,6 +167,7 @@ function ReSign({ onClose }) {
       alert("비밀번호가 다릅니다.");
     } else {
       handleClickReSign();
+      setTheme("blue");
     }
   };
 

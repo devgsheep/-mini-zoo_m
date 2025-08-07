@@ -1,11 +1,16 @@
 import { ResponsiveBar } from "@nivo/bar";
 import moment from "moment";
+import {
+  PiNumberCircleOneFill,
+  PiNumberCircleThreeFill,
+  PiNumberCircleTwoFill,
+} from "react-icons/pi";
 import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { barMonthData } from "../apis/bar_month_data";
+import { userThemeAtom } from "../atoms/userThemeAtom";
+import { HistoryNavigation } from "../components/navigation/Navigation";
 import "../css/calendar.css";
-import { PiNumberCircleOneFill } from "react-icons/pi";
-import { PiNumberCircleTwoFill } from "react-icons/pi";
-import { PiNumberCircleThreeFill } from "react-icons/pi";
 import {
   BoxWrap,
   ChartTitle,
@@ -19,11 +24,8 @@ import {
   Footer,
   ImgBoxStyle,
   Month,
-  NavigationBar,
   NavigationBoxStyle,
   NavigationThree,
-  NavItem,
-  NavItemFocus,
   NumberWrap,
   SignDiv,
   StyledCalendar,
@@ -34,9 +36,6 @@ import {
   Wrap,
 } from "../emotions/historymonth.style";
 import colors from "../styles/colors";
-import { HistoryNavigation } from "../components/navigation/Navigation";
-import { userThemeAtom } from "../atoms/userThemeAtom";
-import { useRecoilState } from "recoil";
 
 function Historymonth() {
   // js

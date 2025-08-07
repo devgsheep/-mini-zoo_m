@@ -1,10 +1,14 @@
 import moment from "moment";
 import "moment/locale/ko";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { RecoilState, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
+import { dailyListAtom } from "../atoms/dailyListAtom";
 import { emotionStateAtom } from "../atoms/emotionStateAtom";
+import { selectedDateAtom } from "../atoms/selectedDateAtom";
 import { textStateAtom } from "../atoms/textStateAtom";
+import { todayImgAtom } from "../atoms/todayImgAtom";
+import { userThemeAtom } from "../atoms/userThemeAtom";
 import {
   AngryIcon,
   AnxiousIcon,
@@ -15,6 +19,7 @@ import {
   SadIcon,
   TiredIcon,
 } from "../components/icons/emotionicon";
+import { TodayNavigation } from "../components/navigation/Navigation";
 import "../css/today_calendar.css";
 import {
   CalendarButton,
@@ -28,9 +33,6 @@ import {
   HomeTopImg,
   HomeTopSpan,
   Main,
-  NavigationBar,
-  NavItem,
-  NavItemFocus,
   SliderTitle,
   SliderWrap,
   StyledSlider,
@@ -108,17 +110,6 @@ function Today() {
     setShowCalendar(false);
   };
 
-  // 차트 선택 값
-  // const [emotionIntensity, setEmotionIntensity] = useState(1);
-
-  // const marks = {
-  //   1: "1",
-  //   3: "3",
-  //   5: "5",
-  //   7: "7",
-  //   10: "10",
-  // };
-
   // 입력값 저장 (감정버튼)
   const [emotionState, setEmotionState] = useRecoilState(emotionStateAtom);
   const [selectedEmotion, setSelectedEmotion] = useState(emotionState.emotion);
@@ -172,6 +163,7 @@ function Today() {
           {showCalendar && (
             <CalendarWrap>
               <CustomCalendar
+                theme={theme}
                 calendarType="gregory"
                 formatShortWeekday={formatShortWeekday}
                 formatDay={(locale, date) => moment(date).format("D")}
@@ -306,18 +298,8 @@ function Today() {
               onChange={handleSliderChange}
               style={{ width: 326, top: "15px" }}
               theme={theme}
-              // marks={marks}
             />
           </div>
-
-          {/* <div
-            className="slide_wrap"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              // marginTop: 20,
-            }}
-          > */}
         </SliderWrap>
         <TodayText>
           <span>더 자세히 표현하고 싶다면? (선택사항)</span>

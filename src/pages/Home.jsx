@@ -48,6 +48,7 @@ import moment from "moment";
 import { selectedDateAtom } from "../atoms/selectedDateAtom";
 import { dailyListAtom } from "../atoms/dailyListAtom";
 import { CiClock2 } from "react-icons/ci";
+import colors from "../styles/colors";
 
 function Home() {
   //js
@@ -201,25 +202,23 @@ function Home() {
           </HomeTop>
           <HomeBottomSection>
             <HomeRecent>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-              >
-                <path
-                  d="M8.99984 17.3332C4.39734 17.3332 0.666504 13.6023 0.666504 8.99984C0.666504 4.39734 4.39734 0.666504 8.99984 0.666504C13.6023 0.666504 17.3332 4.39734 17.3332 8.99984C17.3332 13.6023 13.6023 17.3332 8.99984 17.3332ZM8.99984 15.6665C10.7679 15.6665 12.4636 14.9641 13.7139 13.7139C14.9641 12.4636 15.6665 10.7679 15.6665 8.99984C15.6665 7.23173 14.9641 5.53603 13.7139 4.28579C12.4636 3.03555 10.7679 2.33317 8.99984 2.33317C7.23173 2.33317 5.53603 3.03555 4.28579 4.28579C3.03555 5.53603 2.33317 7.23173 2.33317 8.99984C2.33317 10.7679 3.03555 12.4636 4.28579 13.7139C5.53603 14.9641 7.23173 15.6665 8.99984 15.6665ZM9.83317 8.99984H13.1665V10.6665H8.1665V4.83317H9.83317V8.99984Z"
-                  fill="#8AB9FF"
-                />
-              </svg>
+              <CiClock2
+                style={{
+                  color: colors[theme][300],
+                  fontSize: "20px",
+                }}
+              />
               <span>최근 기록</span>
             </HomeRecent>
             <div>
               {dailyList.length > 0 ? (
                 <RecordList>
                   {dailyList.slice(0, 3).map((item, index) => (
-                    <RecordListItem onClick={handleClickDaily} key={index}>
+                    <RecordListItem
+                      onClick={handleClickDaily}
+                      key={index}
+                      theme={theme}
+                    >
                       <RecordInfoWrapper>
                         <RecordImage
                           src={emotionImageSkyCircleMap[item.emotion]}
@@ -242,7 +241,7 @@ function Home() {
                 </RecordList>
               ) : (
                 <RecordList>
-                  <RecordListItem onClick={handleClickToday}>
+                  <RecordListItem onClick={handleClickToday} theme={theme}>
                     <RecordInfoWrapper>
                       <RecordTextContainer>
                         <RecordTextTitle>

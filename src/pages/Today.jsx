@@ -19,6 +19,7 @@ import {
   SadIcon,
   TiredIcon,
 } from "../components/icons/emotionicon";
+import { emotionImageMap } from "../components/icons/emotionimg";
 import { TodayNavigation } from "../components/navigation/Navigation";
 import "../css/today_calendar.css";
 import {
@@ -47,16 +48,6 @@ import {
   TodayText,
   TopImageWrapper,
 } from "../emotions/today.style";
-import colors from "../styles/colors";
-import {
-  HomeNavigation,
-  TodayNavigation,
-} from "../components/navigation/Navigation";
-import { todayImgAtom } from "../atoms/todayImgAtom";
-import { selectedDateAtom } from "../atoms/selectedDateAtom";
-import { dailyListAtom } from "../atoms/dailyListAtom";
-import { userThemeAtom } from "../atoms/userThemeAtom";
-import { emotionImageMap } from "../components/icons/emotionimg";
 
 moment.locale("ko");
 

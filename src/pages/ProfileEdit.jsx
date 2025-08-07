@@ -1,9 +1,10 @@
-import { Modal, theme } from "antd";
+import { Modal } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userInfoAtom } from "../atoms/userInfoAtom";
 import { userStateAtom } from "../atoms/userStateAtom";
+import { userThemeAtom } from "../atoms/userThemeAtom";
 import {
   Button,
   ButtonSubText,
@@ -40,8 +41,6 @@ import PasswordChange from "./popup/edit/PasswordChange";
 import ProfileImage from "./popup/edit/ProfileImage";
 import ReSign from "./popup/edit/ReSign";
 import Logout from "./popup/profile/Logout";
-import { userStateAtom } from "../atoms/userStateAtom";
-import { userThemeAtom } from "../atoms/userThemeAtom";
 
 function ProfileEdit() {
   // js

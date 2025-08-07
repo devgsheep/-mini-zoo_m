@@ -103,7 +103,7 @@ export const RecordListItem = styled.li`
   padding: 15px 10px;
   background-color: #fff;
   margin: 0 22px;
-  border: 1px solid #bdd7ff;
+  border: 1px solid ${({ theme }) => colors[theme][200]};
   border-radius: 8px;
   cursor: pointer;
 `;

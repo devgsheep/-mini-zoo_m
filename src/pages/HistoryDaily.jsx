@@ -42,6 +42,7 @@ import {
   Wrap,
 } from "../emotions/historydaily.style";
 import { TodayImg, TodayImgWrap } from "../emotions/today.style";
+import { useEffect } from "react";
 
 function HistoryDaily() {
   // 수정하기 버튼

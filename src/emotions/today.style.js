@@ -281,6 +281,9 @@ export const CustomCalendar = styled(Calendar)`
   .react-calendar__tile--now:hover {
     background-color: ${({ theme }) => colors[theme][100]};
   }
+  .react-calendar__tile--now {
+    background-color: ${({ theme }) => colors[theme][200]};
+  }
 `;
 
 export const StyledSlider = styled(AntdSlider)`

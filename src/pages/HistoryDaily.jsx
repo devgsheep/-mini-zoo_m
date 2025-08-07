@@ -1,7 +1,12 @@
+import moment from "moment";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { dailyListAtom } from "../atoms/dailyListAtom";
 import { emotionStateAtom } from "../atoms/emotionStateAtom";
+import { selectedDateAtom } from "../atoms/selectedDateAtom";
+import { textStateAtom } from "../atoms/textStateAtom";
 import { todayImgAtom } from "../atoms/todayImgAtom";
+import { userThemeAtom } from "../atoms/userThemeAtom";
 import {
   EmotionIconCircle,
   emotionImgWrap,
@@ -37,12 +42,6 @@ import {
   Wrap,
 } from "../emotions/historydaily.style";
 import { TodayImg, TodayImgWrap } from "../emotions/today.style";
-import { textStateAtom } from "../atoms/textStateAtom";
-import { selectedDateAtom } from "../atoms/selectedDateAtom";
-import moment from "moment";
-import { dailyListAtom } from "../atoms/dailyListAtom";
-import styled from "@emotion/styled";
-import { userThemeAtom } from "../atoms/userThemeAtom";
 
 function HistoryDaily() {
   // 수정하기 버튼
@@ -166,7 +165,9 @@ function HistoryDaily() {
         )}
       </ContentArea>
       {dailyList.length > 0 && (
-        <Button onClick={handleClickToday}>수정하기</Button>
+        <Button theme={theme} onClick={handleClickToday}>
+          수정하기
+        </Button>
       )}
       <Footer>
         <HistoryNavigation theme={theme} />

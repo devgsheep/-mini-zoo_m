@@ -104,7 +104,7 @@ const RecordListItem = styled.li`
   padding: 15px 10px;
   background-color: #fff;
   margin: 0 22px;
-  border: 1px solid #bdd7ff;
+  border: 1px solid ${({ theme }) => colors[theme][200]};
   border-radius: 8px;
   cursor: pointer;
 `;
@@ -289,9 +289,17 @@ function Home() {
 
       const socialtumbnail_image =
         socialuserInfo?.kakao_account?.profile.thumbnail_image_url ||
-        socialuserInfo.picture ||
+        socialuserInfo?.picture ||
         "images/defaultuser.png";
 
+      const socialUser = {
+        nickname: socialname,
+        email: socialemail,
+        password: "",
+        thumbnail_img: socialtumbnail_image,
+        introduction: "자기소개를 입력해주세요",
+      };
+      localStorage.setItem("userInfo", JSON.stringify(socialUser));
       setUserInfo({
         nickname: socialname,
         email: socialemail,
@@ -348,7 +356,7 @@ function Home() {
           </HomeRecent>
           <div>
             <RecordList>
-              <RecordListItem onClick={handleClickDaily}>
+              <RecordListItem theme={theme} onClick={handleClickDaily}>
                 <RecordInfoWrapper>
                   <RecordImage src="./images/Untitled-1.png" alt="#" />
                   <RecordTextContainer>
@@ -371,7 +379,7 @@ function Home() {
                   </svg>
                 </RecordSvgWrap>
               </RecordListItem>
-              <RecordListItem onClick={handleClickDaily}>
+              <RecordListItem theme={theme} onClick={handleClickDaily}>
                 <RecordInfoWrapper>
                   <RecordImage src="./images/catsky.png" alt="#" />
                   <RecordTextContainer>
@@ -394,7 +402,7 @@ function Home() {
                   </svg>
                 </RecordSvgWrap>
               </RecordListItem>
-              <RecordListItem onClick={handleClickDaily}>
+              <RecordListItem theme={theme} onClick={handleClickDaily}>
                 <RecordInfoWrapper>
                   <RecordImage src="./images/tigersky.png" alt="#" />
                   <RecordTextContainer>

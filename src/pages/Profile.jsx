@@ -157,7 +157,6 @@ function Profile() {
                   fontSize: "20px",
                 }}
               />
-              {/* <AlertImage src="./images/alert.svg" alt="알림" /> */}
             </IconCircleAlert>
             알림
           </Button>
@@ -197,12 +196,6 @@ function Profile() {
           {/* 개인정보처리방침 */}
           <Button type="primary" onClick={openPersonalInfoModal}>
             <IconCirclePersonalInfo>
-              {/* <RiShieldCrossLine
-                style={{
-                  color: "#48BE75",
-                  fontSize: "25px",
-                }}
-              /> */}
               <PersonalInfoImage
                 src="./images/personalinfo.svg"
                 alt="개인정보처리방침"
@@ -228,7 +221,6 @@ function Profile() {
                   fontSize: "25px",
                 }}
               />
-              {/* <EtcImage src="./images/etc.svg" alt="문의" /> */}
             </IconCircleEtc>
             문의
           </Button>
@@ -250,7 +242,6 @@ function Profile() {
                   fontSize: "25px",
                 }}
               />
-              {/* <InfoImage src="./images/info.svg" alt="정보" /> */}
             </IconCircleInfo>
             정보
           </Button>

@@ -3,6 +3,12 @@ import colors from "../styles/colors";
 import { Slider as AntdSlider } from "antd";
 import { Link } from "react-router-dom";
 import Calendar from "react-calendar";
+const hexToRgba = (hex, alpha = 1) => {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
 
 export const Container = styled.div`
   width: 394px;
@@ -272,11 +278,34 @@ export const CustomCalendar = styled(Calendar)`
 `;
 
 export const StyledSlider = styled(AntdSlider)`
-  .ant-slider-handle {
+  &&& .ant-slider-handle {
     margin-top: 1px;
+
+    &::after {
+      background-color: ${({ theme }) => colors[theme][200]} !important;
+      box-shadow: none !important;
+
+      :hover {
+        background-color: ${({ theme }) => colors[theme][300]} !important;
+        ::after {
+          box-shadow: 0 0 0 2px ${({ theme }) => colors[theme][300]};
+        }
+      }
+    }
+
+    &:hover::after {
+      box-shadow: 0 0 0 2.5px ${({ theme }) => colors[theme][400]} !important;
+      outline: 6px solid ${({ theme }) => hexToRgba(colors[theme][300], 0.3)} !important;
+    }
+
+    &:focus::after {
+      box-shadow: 0 0 0 2px ${({ theme }) => colors[theme][300]} !important;
+      outline: 6px solid ${({ theme }) => hexToRgba(colors[theme][300], 0.3)} !important;
+    }
   }
+
   .ant-slider-handle::after {
-    background-color: ${({ theme }) => colors[theme][200]} !important;
+    background-color: ${({ theme }) => colors[theme][200]};
     box-shadow: none;
   }
   .ant-slider-handle::before {
@@ -290,5 +319,8 @@ export const StyledSlider = styled(AntdSlider)`
   .ant-slider-rail {
     background-color: #fff !important;
     height: 6px;
+  }
+  .ant-slider {
+    color: #fff !important;
   }
 `;

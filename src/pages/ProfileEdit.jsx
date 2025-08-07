@@ -2,11 +2,8 @@ import { Modal } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import {
-  userEmailAtom,
-  userInfoAtom,
-  userNameAtom,
-} from "../atoms/userInfoAtom";
+import { userInfoAtom } from "../atoms/userInfoAtom";
+import { userStateAtom } from "../atoms/userStateAtom";
 import {
   Button,
   ButtonSubText,
@@ -43,7 +40,6 @@ import PasswordChange from "./popup/edit/PasswordChange";
 import ProfileImage from "./popup/edit/ProfileImage";
 import ReSign from "./popup/edit/ReSign";
 import Logout from "./popup/profile/Logout";
-import { userStateAtom } from "../atoms/userStateAtom";
 
 function ProfileEdit() {
   // js
@@ -156,7 +152,6 @@ function ProfileEdit() {
     }
   };
 
-  // openProfileImageModal
   // jsx
 
   return (

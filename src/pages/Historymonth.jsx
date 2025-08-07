@@ -1,5 +1,6 @@
 import { ResponsiveBar } from "@nivo/bar";
 import moment from "moment";
+import "moment/locale/ko";
 import {
   PiNumberCircleOneFill,
   PiNumberCircleThreeFill,
@@ -36,6 +37,7 @@ import {
   Wrap,
 } from "../emotions/historymonth.style";
 import colors from "../styles/colors";
+import { useEffect } from "react";
 
 function Historymonth() {
   // js
@@ -102,6 +104,9 @@ function Historymonth() {
   const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
   const theme = userTheme;
 
+  useEffect(() => {
+    moment.locale("ko");
+  }, []);
   // jsx
   return (
     <Container theme={theme}>

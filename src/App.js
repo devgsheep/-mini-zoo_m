@@ -1,4 +1,4 @@
-import { useState } from "react";
+import "moment/locale/ko";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import FirstForm from "./pages/FirstForm";
 import HistoryDaily from "./pages/HistoryDaily";
@@ -11,11 +11,13 @@ import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
 import SignForm from "./pages/SignForm";
 import Today from "./pages/Today";
-import { todayImgAtom } from "./atoms/todayImgAtom";
-import { emotionStateAtom } from "./atoms/emotionStateAtom";
-import { useRecoilValue } from "recoil";
+import moment from "moment";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    moment.locale("ko");
+  }, []);
   return (
     <Router>
       <Routes>

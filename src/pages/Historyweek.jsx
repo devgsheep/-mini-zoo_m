@@ -1,5 +1,6 @@
 import { ResponsiveBar } from "@nivo/bar";
 import moment from "moment";
+import "moment/locale/ko";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";

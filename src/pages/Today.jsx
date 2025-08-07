@@ -74,14 +74,30 @@ function Today() {
   const [dailyList, setDailyList] = useRecoilState(dailyListAtom);
 
   const handleClickDaily = () => {
-    const dailyList = {
+    const dailyRecord = {
       emotion: emotionState.emotion,
       value: emotionState.value,
       text: textState,
       date: selectedDate,
       image: todayImg,
     };
-    setDailyList(prev => [...prev, dailyList]);
+
+    // 같은 날짜의 기록 확인
+    const existingEmotion = dailyList.findIndex(
+      item =>
+        moment(item.date).format("YYYY-MM-DD") ===
+        moment(selectedDate).format("YYYY-MM-DD"),
+    );
+
+    if (existingEmotion >= 0) {
+      // 해당 날짜의 기록만 업데이트
+      const updatedEmotion = [...dailyList];
+      updatedEmotion[existingEmotion] = dailyRecord;
+      setDailyList(updatedEmotion);
+    } else {
+      // 없다면 기존 목록에 dailyRecord 추가
+      setDailyList(prev => [...prev, dailyRecord]);
+    }
     navigate("/history/daily");
   };
 

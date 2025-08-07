@@ -1,5 +1,6 @@
 import moment from "moment";
-import { useEffect, useState } from "react";
+import "moment/locale/ko";
+import { createContext, useEffect, useReducer, useState } from "react";
 import { CiClock2 } from "react-icons/ci";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -94,6 +95,10 @@ function Home() {
     navigate("/history/daily");
   };
 
+  const handleClickWeek = () => {
+    navigate("/history/week");
+  };
+
   const handleClickMonth = () => {
     navigate("/history/month");
   };
@@ -145,11 +150,9 @@ function Home() {
         introduction: "자기소개를 입력해주세요",
       });
       setUserState(true);
-
-      // setUserName(name);
-      // setUserEmail(email);
     }
   }, [socialuserInfo]);
+
   //jsx
   return (
     <Container theme={theme}>
@@ -176,7 +179,17 @@ function Home() {
               {emotionState.emotion && (
                 <div>
                   <HomeTopImg
-                    src={emotionImageMap[emotionState.emotion]}
+                    src={
+                      // 가장 최신감정에 맞는 이미지
+                      // 내림차순 기준 0번째 배열
+                      emotionImageMap[
+                        dailyList
+                          .slice()
+                          .sort(
+                            (a, b) => new Date(b.date) - new Date(a.date),
+                          )[0].emotion
+                      ]
+                    }
                     alt={`${emotionState.emotion} 이미지`}
                   />
                 </div>
@@ -196,31 +209,35 @@ function Home() {
             <div>
               {dailyList.length > 0 ? (
                 <RecordList>
-                  {dailyList.slice(0, 3).map((item, index) => (
-                    <RecordListItem
-                      onClick={handleClickDaily}
-                      key={index}
-                      theme={theme}
-                    >
-                      <RecordInfoWrapper>
-                        <RecordImage
-                          src={emotionImageSkyCircleMap[item.emotion]}
-                          alt="#"
-                        />
-                        <RecordTextContainer>
-                          <RecordTextTitle>
-                            {emotionTextMap[item.emotion]}
-                          </RecordTextTitle>
-                          <RecordTextDate>
-                            {moment(item.date).format("M/D(ddd)")}
-                          </RecordTextDate>
-                        </RecordTextContainer>
-                      </RecordInfoWrapper>
-                      <EmotionIconCircle emotion={item.emotion}>
-                        {emotionImgWrap[item.emotion]}
-                      </EmotionIconCircle>
-                    </RecordListItem>
-                  ))}
+                  {dailyList
+                    .slice() // 오류..떠서 복사본
+                    .sort((a, b) => new Date(b.date) - new Date(a.date)) // 내림차순 정렬
+                    .slice(0, 3)
+                    .map((item, index) => (
+                      <RecordListItem
+                        onClick={handleClickWeek}
+                        key={index}
+                        theme={theme}
+                      >
+                        <RecordInfoWrapper>
+                          <RecordImage
+                            src={emotionImageSkyCircleMap[item.emotion]}
+                            alt="#"
+                          />
+                          <RecordTextContainer>
+                            <RecordTextTitle>
+                              {emotionTextMap[item.emotion]}
+                            </RecordTextTitle>
+                            <RecordTextDate>
+                              {moment(item.date).format("M/D(ddd)")}
+                            </RecordTextDate>
+                          </RecordTextContainer>
+                        </RecordInfoWrapper>
+                        <EmotionIconCircle emotion={item.emotion}>
+                          {emotionImgWrap[item.emotion]}
+                        </EmotionIconCircle>
+                      </RecordListItem>
+                    ))}
                 </RecordList>
               ) : (
                 <RecordList>

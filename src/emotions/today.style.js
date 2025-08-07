@@ -173,9 +173,6 @@ export const TodayImgWrap = styled.div`
   overflow: hidden;
 `;
 export const TodayImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   cursor: pointer;
 `;
 export const TodayButtonWrap = styled.div`

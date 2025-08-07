@@ -1,6 +1,6 @@
 import moment from "moment";
 import "moment/locale/ko";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RecoilState, useRecoilState } from "recoil";
 import { emotionStateAtom } from "../atoms/emotionStateAtom";
@@ -71,11 +71,9 @@ function HistoryDaily() {
     tired: "./images/tired_panda.svg",
   };
 
-  const [selectedEmotion, setSelectedEmotion] = useState("happy");
-
   // 이미지 추가
   const [todayImg, setTodayImg] = useRecoilState(todayImgAtom);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(todayImg);
 
   const handleImageChange = e => {
     const file = e.target.files[0];
@@ -132,6 +130,7 @@ function HistoryDaily() {
 
   // 입력값 저장 (감정버튼)
   const [emotionState, setEmotionState] = useRecoilState(emotionStateAtom);
+  const [selectedEmotion, setSelectedEmotion] = useState(emotionState.emotion);
 
   const handleEmotionClick = emotion => {
     setEmotionState(prev => ({
@@ -312,7 +311,7 @@ function HistoryDaily() {
               min={1}
               max={10}
               step={1}
-              value={setSelectedEmotion.value}
+              value={emotionState.value}
               onChange={handleSliderChange}
               style={{ width: 326, top: "15px" }}
               theme={theme}

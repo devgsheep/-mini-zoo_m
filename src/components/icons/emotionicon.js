@@ -309,12 +309,10 @@ export const emotionImgWrap = {
   ),
 };
 
-export const EmotionIconCircle = () => {
-  const emotionState = useRecoilValue(emotionStateAtom);
-
+export const EmotionIconCircle = ({ emotion }) => {
   return (
-    <TodayEmotionCircle emotion={emotionState.emotion}>
-      {emotionImgWrap[emotionState.emotion]}
+    <TodayEmotionCircle emotion={emotion}>
+      {emotionImgWrap[emotion]}
     </TodayEmotionCircle>
   );
 };

@@ -4,10 +4,9 @@ import colors from "../styles/colors";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
-  background-color: #f0f6ff;
+  background-color: ${({ theme }) => colors[theme][100]};
   text-align: center;
   min-height: 852px;
-
   display: flex;
   flex-direction: column;
 `;
@@ -70,7 +69,7 @@ export const Week = styled.div`
   font-size: 12px;
   font-weight: 400;
   // 선택시
-  background-color: ${colors.blue[200]};
+  background-color: ${({ theme }) => colors[theme][200]};
   border-radius: 6px;
   color: ${colors.gray[700]};
   cursor: pointer;

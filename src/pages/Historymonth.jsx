@@ -105,7 +105,7 @@ function Historymonth() {
 
   // jsx
   return (
-    <Container>
+    <Container theme={theme}>
       <TopContainer>
         <SignDiv>히스토리</SignDiv>
       </TopContainer>
@@ -120,7 +120,7 @@ function Historymonth() {
                 <Week>주간</Week>
               </Link>
               <Link to="/history/month">
-                <Month>월간</Month>
+                <Month theme={theme}>월간</Month>
               </Link>
             </NavigationThree>
           </NavigationBoxStyle>
@@ -340,6 +340,7 @@ function Historymonth() {
           >
             <div style={historyWrap}>
               <StyledCalendar
+                theme={theme}
                 calendarType="gregory"
                 formatShortWeekday={formatShortWeekday}
                 formatDay={(locale, date) => moment(date).format("D")}

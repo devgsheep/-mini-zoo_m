@@ -158,7 +158,7 @@ function HistoryDaily() {
 
   // jsx
   return (
-    <Container>
+    <Container theme={theme}>
       <Header>
         <div>오늘의 감정</div>
         <DateStyle>
@@ -314,6 +314,7 @@ function HistoryDaily() {
               value={emotionState.value}
               onChange={handleSliderChange}
               style={{ width: 326, top: "15px" }}
+              theme={theme}
               // marks={marks}
             />
           </div>
@@ -331,6 +332,7 @@ function HistoryDaily() {
           <span>더 자세히 표현하고 싶다면? (선택사항)</span>
           <TextWrap>
             <TextArea
+              theme={theme}
               type="text"
               placeholder="오늘 하루는 어떠셨나요? 자유롭게 기록해보세요.."
               onChange={handleTextArea}
@@ -360,6 +362,7 @@ function HistoryDaily() {
         </TodayPotoWrap>
         <TodayButtonWrap>
           <TodayAddButton
+            theme={theme}
             type="primary"
             htmlType="submit"
             onClick={handleClickDaily}

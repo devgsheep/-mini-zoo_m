@@ -120,7 +120,7 @@ function Theme({ onClose }) {
             />
             <div>
               <ModeText>블루 테마</ModeText>
-              <EXText>밝고 산뜻한 기본 테마</EXText>
+              <EXText>심플한 기본 테마</EXText>
             </div>
           </ThemeRadioLabel>
 
@@ -136,7 +136,7 @@ function Theme({ onClose }) {
 
             <div>
               <ModeText>그린 테마</ModeText>
-              <EXText>눈이 편안한 어두운 테마</EXText>
+              <EXText>눈이 편안한 그린 테마</EXText>
             </div>
           </ThemeRadioLabel>
           <ThemeRadioLabel htmlFor="system">
@@ -150,7 +150,7 @@ function Theme({ onClose }) {
             />
             <div>
               <ModeText>옐로우 테마</ModeText>
-              <EXText>현재 기기의 설정에 따른 테마</EXText>
+              <EXText>밝고 산뜻한 옐로우 테마</EXText>
             </div>
           </ThemeRadioLabel>
         </ThemeRadioWrap>

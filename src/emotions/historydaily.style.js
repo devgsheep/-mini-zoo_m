@@ -4,7 +4,7 @@ import colors from "../styles/colors";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
-  background-color: #f0f6ff;
+  background-color: ${({ theme }) => colors[theme][100]};
   text-align: center;
   min-height: 852px;
 
@@ -61,7 +61,7 @@ export const Daily = styled.div`
   font-size: 12px;
   font-weight: 400;
   // 선택시
-  background-color: ${colors.blue[200]};
+  background-color: ${({ theme }) => colors[theme][200]};
   border-radius: 6px;
   color: ${colors.gray[700]};
   cursor: pointer;
@@ -244,8 +244,8 @@ export const Button = styled.button`
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  border: 1px solid ${colors.blue[300]};
-  background: ${colors.blue[300]};
+  border: none;
+  background: ${({ theme }) => colors[theme][300]};
   color: ${colors.gray[100]};
   /* Drop Shadow/100 */
   box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-025)
@@ -259,7 +259,7 @@ export const Button = styled.button`
   margin-top: 30px;
   cursor: pointer;
   :hover {
-    background: ${colors.blue[500]};
+    background: ${({ theme }) => colors[theme][500]};
   }
 `;
 

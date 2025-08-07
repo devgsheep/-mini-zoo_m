@@ -54,22 +54,13 @@ import { todayImgAtom } from "../atoms/todayImgAtom";
 import { selectedDateAtom } from "../atoms/selectedDateAtom";
 import { dailyListAtom } from "../atoms/dailyListAtom";
 import { userThemeAtom } from "../atoms/userThemeAtom";
+import { emotionImageMap } from "../components/icons/emotionimg";
 
 moment.locale("ko");
 
-function HistoryDaily() {
+function Today() {
   //js
   // 감정에 따른 동물 출력
-  const emotionImageMap = {
-    happy: "./images/happy_dog.svg",
-    sad: "./images/sad_cat.svg",
-    angry: "./images/angry_tiger.svg",
-    boring: "./images/boring_sloth.svg",
-    anxious: "./images/anxious_rabbit.svg",
-    disgust: "./images/disgust_dochi.svg",
-    embarrassed: "./images/embarrassed_raccoon.svg",
-    tired: "./images/tired_panda.svg",
-  };
 
   // 이미지 추가
   const [todayImg, setTodayImg] = useRecoilState(todayImgAtom);
@@ -375,4 +366,4 @@ function HistoryDaily() {
     </Container>
   );
 }
-export default HistoryDaily;
+export default Today;

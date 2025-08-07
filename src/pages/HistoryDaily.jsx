@@ -166,7 +166,9 @@ function HistoryDaily() {
         )}
       </ContentArea>
       {dailyList.length > 0 && (
-        <Button onClick={handleClickToday}>수정하기</Button>
+        <Button onClick={handleClickToday} theme={theme}>
+          수정하기
+        </Button>
       )}
       <Footer>
         <HistoryNavigation theme={theme} />

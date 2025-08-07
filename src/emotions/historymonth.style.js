@@ -201,8 +201,15 @@ export const StyledCalendar = styled(Calendar)`
     color: white;
     border-radius: 8px;
   }
+  .react-calendar__month-view__days__day--weekend {
+  }
+
   .react-calendar__tile {
     position: relative;
+  }
+
+  .react-calendar__tile--active {
+    background-color: ${({ theme }) => colors[theme][200]};
   }
 
   .react-calendar__tile.emotion-tile.react-calendar__tile--active {

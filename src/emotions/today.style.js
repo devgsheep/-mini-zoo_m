@@ -256,6 +256,9 @@ export const CalendarButton = styled.button`
   background-color: ${colors.white};
 `;
 export const CustomCalendar = styled(Calendar)`
+  .react-calendar {
+    border: none;
+  }
   .react-calendar__navigation {
     display: flex;
     height: 22px;
@@ -268,6 +271,9 @@ export const CustomCalendar = styled(Calendar)`
   }
   .react-calendar__navigation__label {
     font-size: 12px;
+  }
+  .react-calendar__tile--now:hover {
+    background-color: ${({ theme }) => colors[theme][100]};
   }
 `;
 

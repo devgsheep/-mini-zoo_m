@@ -181,6 +181,7 @@ function HistoryDaily() {
           {showCalendar && (
             <CalendarWrap>
               <CustomCalendar
+                theme={theme}
                 calendarType="gregory"
                 formatShortWeekday={formatShortWeekday}
                 formatDay={(locale, date) => moment(date).format("D")}

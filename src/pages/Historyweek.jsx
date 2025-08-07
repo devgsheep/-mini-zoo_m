@@ -150,7 +150,7 @@ function Historyweek() {
                   alignItems: "center",
                 }}
               >
-                <ChartWrap>
+                <ChartWrap theme={theme}>
                   <ResponsiveBar
                     data={data}
                     keys={["point"]}

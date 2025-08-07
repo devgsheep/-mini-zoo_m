@@ -9,6 +9,7 @@ import { getAccessToken, getMemberWithAccessToken } from "../kko/kkoapi";
 import colors from "../styles/colors";
 import { HomeNavigation } from "../components/navigation/Navigation";
 import { userThemeAtom } from "../atoms/userThemeAtom";
+import { CiClock2 } from "react-icons/ci";
 
 const Container = styled.div`
   background-color: ${({ theme }) => colors[theme][100]};
@@ -104,7 +105,7 @@ const RecordListItem = styled.li`
   padding: 15px 10px;
   background-color: #fff;
   margin: 0 22px;
-  border: 1px solid #bdd7ff;
+  border: 1px solid ${({ theme }) => colors[theme][200]};
   border-radius: 8px;
   cursor: pointer;
 `;
@@ -332,23 +333,17 @@ function Home() {
         </HomeTop>
         <HomeBottomSection>
           <HomeRecent>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-            >
-              <path
-                d="M8.99984 17.3332C4.39734 17.3332 0.666504 13.6023 0.666504 8.99984C0.666504 4.39734 4.39734 0.666504 8.99984 0.666504C13.6023 0.666504 17.3332 4.39734 17.3332 8.99984C17.3332 13.6023 13.6023 17.3332 8.99984 17.3332ZM8.99984 15.6665C10.7679 15.6665 12.4636 14.9641 13.7139 13.7139C14.9641 12.4636 15.6665 10.7679 15.6665 8.99984C15.6665 7.23173 14.9641 5.53603 13.7139 4.28579C12.4636 3.03555 10.7679 2.33317 8.99984 2.33317C7.23173 2.33317 5.53603 3.03555 4.28579 4.28579C3.03555 5.53603 2.33317 7.23173 2.33317 8.99984C2.33317 10.7679 3.03555 12.4636 4.28579 13.7139C5.53603 14.9641 7.23173 15.6665 8.99984 15.6665ZM9.83317 8.99984H13.1665V10.6665H8.1665V4.83317H9.83317V8.99984Z"
-                fill="#8AB9FF"
-              />
-            </svg>
+            <CiClock2
+              style={{
+                color: colors[theme][300],
+                fontSize: "20px",
+              }}
+            />
             <span>최근 기록</span>
           </HomeRecent>
           <div>
             <RecordList>
-              <RecordListItem onClick={handleClickDaily}>
+              <RecordListItem theme={theme} onClick={handleClickDaily}>
                 <RecordInfoWrapper>
                   <RecordImage src="./images/Untitled-1.png" alt="#" />
                   <RecordTextContainer>
@@ -371,7 +366,7 @@ function Home() {
                   </svg>
                 </RecordSvgWrap>
               </RecordListItem>
-              <RecordListItem onClick={handleClickDaily}>
+              <RecordListItem theme={theme} onClick={handleClickDaily}>
                 <RecordInfoWrapper>
                   <RecordImage src="./images/catsky.png" alt="#" />
                   <RecordTextContainer>
@@ -394,7 +389,7 @@ function Home() {
                   </svg>
                 </RecordSvgWrap>
               </RecordListItem>
-              <RecordListItem onClick={handleClickDaily}>
+              <RecordListItem theme={theme} onClick={handleClickDaily}>
                 <RecordInfoWrapper>
                   <RecordImage src="./images/tigersky.png" alt="#" />
                   <RecordTextContainer>

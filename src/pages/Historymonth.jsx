@@ -7,7 +7,7 @@ import {
   PiNumberCircleTwoFill,
 } from "react-icons/pi";
 import { Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { atom, useRecoilState, useSetRecoilState } from "recoil";
 import { barMonthData } from "../apis/bar_month_data";
 import { userThemeAtom } from "../atoms/userThemeAtom";
 import { HistoryNavigation } from "../components/navigation/Navigation";
@@ -38,6 +38,7 @@ import {
 } from "../emotions/historymonth.style";
 import colors from "../styles/colors";
 import { useEffect } from "react";
+import { topEmotionAtom } from "../atoms/topEmotionAtom";
 
 function Historymonth() {
   // js
@@ -107,6 +108,23 @@ function Historymonth() {
   useEffect(() => {
     moment.locale("ko");
   }, []);
+
+  // top1
+  const setTopEmotion = useSetRecoilState(topEmotionAtom);
+
+  const top1 = top3?.length
+    ? top3.reduce((prev, current) =>
+        prev.point > current.point ? prev : current,
+      )
+    : null;
+
+  useEffect(() => {
+    if (top1) {
+      setTopEmotion(top1);
+      // console.log(top1);
+    }
+  }, [top1]);
+
   // jsx
   return (
     <Container theme={theme}>

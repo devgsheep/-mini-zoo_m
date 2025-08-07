@@ -1,6 +1,6 @@
 import moment from "moment";
 import "moment/locale/ko";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { dailyListAtom } from "../atoms/dailyListAtom";

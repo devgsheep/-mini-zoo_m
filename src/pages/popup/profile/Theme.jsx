@@ -1,85 +1,19 @@
-import styled from "@emotion/styled";
-import colors from "../../../styles/colors";
-import "../../../css/radio.css";
-import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { userThemeAtom } from "../../../atoms/userThemeAtom";
-
-const AlertPopUpBox = styled.div`
-  width: 286px;
-  height: auto;
-  background-color: ${colors.white};
-  border-radius: 16px;
-  padding: 20px 20px 10px 20px;
-`;
-
-const Title = styled.p`
-  font-size: 16px;
-  font-weight: 700;
-  padding-bottom: 17px;
-`;
-
-const ModeText = styled.p`
-  font-size: 16px;
-`;
-
-const EXText = styled.p`
-  font-size: 10px;
-  font-weight: 400;
-  color: ${colors.gray[500]};
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-`;
-
-const ButtonWrap = styled.div`
-  display: flex;
-  width: 203px;
-  height: 21px;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ButtonOK = styled.button`
-  border: none;
-  background: none;
-  color: ${colors.blue[500]};
-  text-align: center;
-  font-size: 16px;
-  cursor: pointer;
-  width: 101px;
-`;
-const ButtonCC = styled.button`
-  border: none;
-  background: none;
-  text-align: center;
-  font-size: 16px;
-  cursor: pointer;
-  width: 101px;
-`;
-
-const Span = styled.span`
-  width: 1px;
-  height: 21px;
-  background: ${colors.gray[400]};
-`;
-const ThemeRadioLabel = styled.label`
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  cursor: pointer;
-`;
-const ThemeRadioWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-bottom: 20px;
-`;
+import "../../../css/radio.css";
+import {
+  AlertPopUpBox,
+  ButtonCC,
+  ButtonContainer,
+  ButtonOK,
+  ButtonWrap,
+  EXText,
+  ModeText,
+  Span,
+  ThemeRadioLabel,
+  ThemeRadioWrap,
+  Title,
+} from "../../../emotions/profile/theme.style";
 
 function Theme({ onClose }) {
   // js 자리

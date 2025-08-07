@@ -12,8 +12,10 @@ import {
 } from "../../../emotions/profile/logout.style";
 import { useRecoilState } from "recoil";
 import { userStateAtom } from "../../../atoms/userStateAtom";
+import { userThemeAtom } from "../../../atoms/userThemeAtom";
 
 function Logout({ onClose, handleLogout }) {
+  const [theme, setTheme] = useRecoilState(userThemeAtom);
   const [userState, setUserState] = useRecoilState(userStateAtom);
   // 네비게이터
   const navigate = useNavigate();
@@ -21,6 +23,7 @@ function Logout({ onClose, handleLogout }) {
     setUserState(false);
     handleLogout();
     navigate("/");
+    setTheme("blue");
   };
 
   return (

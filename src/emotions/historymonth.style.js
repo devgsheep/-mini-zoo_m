@@ -222,6 +222,9 @@ export const StyledCalendar = styled(Calendar)`
     justify-content: center;
     align-items: center;
   }
+  .react-calendar__tile--active:enabled:focus {
+    background: ${({ theme }) => colors[theme][400]};
+  }
 `;
 
 export const Footer = styled.div`

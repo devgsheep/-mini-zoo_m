@@ -54,7 +54,6 @@ moment.locale("ko");
 function Today() {
   //js
   // 감정에 따른 동물 출력
-
   // 이미지 추가
   const [todayImg, setTodayImg] = useRecoilState(todayImgAtom);
   const [selectedImage, setSelectedImage] = useState(todayImg);

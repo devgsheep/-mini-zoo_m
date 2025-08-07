@@ -56,8 +56,6 @@ function HistoryDaily() {
 
   const navigate = useNavigate();
 
-  // 하루에 한번만 등록하기
-
   const [todayImg, setTodayImg] = useRecoilState(todayImgAtom);
   const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
   const theme = userTheme;

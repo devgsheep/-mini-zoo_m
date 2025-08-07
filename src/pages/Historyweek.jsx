@@ -56,10 +56,6 @@ function Historyweek() {
   // 차트
   const [data, setData] = useState([]);
 
-  // useEffect(() => {
-  //   setData(barData);
-  // }, []);
-
   useEffect(() => {
     const transBarData = barData.map(item => ({
       ...item,

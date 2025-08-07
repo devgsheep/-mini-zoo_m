@@ -1,17 +1,6 @@
 import styled from "@emotion/styled";
 import colors from "../../../styles/colors";
 
-// const PersonalInfoPopUp = styled.div`
-//   display: flex;
-//   position: fixed;
-//   z-index: 99999;
-//   width: 394px;
-//   height: 100%;
-//   justify-content: center;
-//   align-items: center;
-//   background-color: rgba(0, 0, 0, 0.6);
-//   /* display: none; */
-// `;
 const PersonalInfoPopUpBox = styled.div`
   height: auto;
   width: 286px;

@@ -68,14 +68,3 @@ abbr[title] {
   text-decoration: none;
   border-bottom: none;
 }
-
-/* 테마 */
-/* body.theme-light {
-  background-color: #ffffff;
-  color: #000000;
-} */
-
-body.theme-dark {
-  background-color: #121212;
-  color: #ffffff;
-}

@@ -33,10 +33,10 @@ import {
   TitleP2,
   TopContainer,
 } from "../emotions/loginform.style";
+import { GoogleSvg, KaKaoSvg } from "../emotions/signform.style";
 import { getGoogleLoginLink } from "../google/googleapi";
 import { getKakaoLoginLink } from "../kko/kkoapi";
 import PasswordFind from "./popup/profile/PasswordFind";
-import { GoogleSvg, KaKaoSvg } from "../emotions/signform.style";
 
 function LoginForm() {
   // js

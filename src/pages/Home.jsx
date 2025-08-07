@@ -1,9 +1,23 @@
+import moment from "moment";
 import { useEffect, useState } from "react";
+import { CiClock2 } from "react-icons/ci";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { dailyListAtom } from "../atoms/dailyListAtom";
+import { emotionStateAtom } from "../atoms/emotionStateAtom";
+import { selectedDateAtom } from "../atoms/selectedDateAtom";
 import { userInfoAtom } from "../atoms/userInfoAtom";
 import { userStateAtom } from "../atoms/userStateAtom";
 import { userThemeAtom } from "../atoms/userThemeAtom";
+import {
+  EmotionIconCircle,
+  emotionImgWrap,
+} from "../components/icons/emotionicon";
+import {
+  emotionImageMap,
+  emotionImageSkyCircleMap,
+  emotionTextMap,
+} from "../components/icons/emotionimg";
 import { HomeNavigation } from "../components/navigation/Navigation";
 import {
   Container,
@@ -20,7 +34,6 @@ import {
   RecordInfoWrapper,
   RecordList,
   RecordListItem,
-  RecordSvgWrap,
   RecordTextContainer,
   RecordTextDate,
   RecordTextTitle,
@@ -34,20 +47,6 @@ import {
 } from "../emotions/home.style";
 import { getGoogleToken, getGoogleUserInfo } from "../google/googleapi";
 import { getAccessToken, getMemberWithAccessToken } from "../kko/kkoapi";
-import { emotionStateAtom } from "../atoms/emotionStateAtom";
-import {
-  EmotionIconCircle,
-  emotionImgWrap,
-} from "../components/icons/emotionicon";
-import {
-  emotionImageMap,
-  emotionImageSkyCircleMap,
-  emotionTextMap,
-} from "../components/icons/emotionimg";
-import moment from "moment";
-import { selectedDateAtom } from "../atoms/selectedDateAtom";
-import { dailyListAtom } from "../atoms/dailyListAtom";
-import { CiClock2 } from "react-icons/ci";
 import colors from "../styles/colors";
 
 function Home() {
@@ -77,11 +76,6 @@ function Home() {
   };
 
   console.log(dailyList);
-  // // 사용자 정보 관리
-  // const [socialuserInfo, setSocialUserInfo] = useState(null);
-  // // 카카오 인증키 알아내기
-  // const [URLSearchParams, setURLSearchParams] = useSearchParams();
-  // const kkoAuthCode = URLSearchParams.get("code");
   // // 카카오 인가 키를 받아서 엑세스 토큰을 요청한다.
   const getKkoAccessTokenCall = async () => {
     const accesskey = await getAccessToken(authCode);
@@ -104,17 +98,6 @@ function Home() {
     navigate("/history/month");
   };
 
-  // useEffect(() => {
-  //   if (kkoAuthCode) {
-  //     getAccessTokenCall();
-  //   } else {
-  //     return;
-  //   }
-  // }, [kkoAuthCode]);
-  // const userName =
-  //   socialuserInfo?.kakao_account?.profile?.nickname || socialuserInfo?.name || "OO";
-  // const userEmail =
-  //   socialuserInfo?.kakao_account?.email || socialuserInfo?.email || "example@email.com";
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const [userState, setUserState] = useRecoilState(userStateAtom);
   const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);

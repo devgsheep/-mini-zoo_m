@@ -5,16 +5,6 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { userThemeAtom } from "../../../atoms/userThemeAtom";
 
-// const AlertPopUp = styled.div`
-//   display: flex;
-//   position: fixed;
-//   z-index: 99999;
-//   width: 394px;
-//   height: 100%;
-//   justify-content: center;
-//   align-items: center;
-//   background-color: rgba(0, 0, 0, 0.6);
-// `;
 const AlertPopUpBox = styled.div`
   width: 286px;
   height: auto;

@@ -68,17 +68,12 @@ function SignForm() {
     // setUserInfo(user);
     localStorage.setItem("userInfo", JSON.stringify(user));
 
-    // console.log("values : ", values);
-    // console.log("userInfo : ", userInfo);
-    // console.log("setUserInfo : ", setUserInfo);
-
     handleClickLogin();
   };
 
   // 네비게이터
   const navigate = useNavigate();
 
-  // const handleClickSign = () => {
   //   navigate("/login");
   // };
   const handleClickLogin = () => {

@@ -76,7 +76,7 @@ function Historyweek() {
     setData(barData);
   }, []);
   return (
-    <Container>
+    <Container theme={theme}>
       <TopContainer>
         <SignDiv>히스토리</SignDiv>
       </TopContainer>
@@ -88,7 +88,7 @@ function Historyweek() {
                 <Daily>일간</Daily>
               </Link>
               <Link to="/history/week">
-                <Week>주간</Week>
+                <Week theme={theme}>주간</Week>
               </Link>
               <Link to="/history/month">
                 <Month>월간</Month>

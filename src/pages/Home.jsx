@@ -10,6 +10,9 @@ import colors from "../styles/colors";
 import { HomeNavigation } from "../components/navigation/Navigation";
 import { userThemeAtom } from "../atoms/userThemeAtom";
 
+const Container = styled.div`
+  background-color: ${({ theme }) => colors[theme][100]};
+`;
 const Header = styled.div`
   max-height: 47px;
   height: 100vw;
@@ -48,7 +51,7 @@ const HomeTopButton = styled.button`
   padding: 14px 60px;
   border: none;
   border-radius: 8px;
-  background-color: #8ab9ff;
+  background-color: ${({ theme }) => colors[theme][300]};
   color: #fff;
   line-height: 27px;
   cursor: pointer;
@@ -304,7 +307,7 @@ function Home() {
   }, [socialuserInfo]);
   //jsx
   return (
-    <div style={{ backgroundColor: "#F0F6FF" }}>
+    <Container theme={theme}>
       <Header>
         <img src="./images/logotxt.svg" alt="logo" />
       </Header>
@@ -318,7 +321,7 @@ function Home() {
             <span>오늘의 기분은 어때요?</span>
           </TopTitle>
           <TopButtonWrapper onClick={handleClickToday}>
-            <HomeTopButton>
+            <HomeTopButton theme={theme}>
               <MainText>오늘의 순간을 기록하세요</MainText>
               <SubText>동물 친구들과 함께 감정을 기록해보세요</SubText>
             </HomeTopButton>
@@ -440,7 +443,7 @@ function Home() {
       <Footer>
         <HomeNavigation theme={theme} />
       </Footer>
-    </div>
+    </Container>
   );
 }
 

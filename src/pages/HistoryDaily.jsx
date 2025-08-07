@@ -64,7 +64,7 @@ function HistoryDaily() {
   const theme = userTheme;
 
   return (
-    <Container>
+    <Container theme={theme}>
       <TopContainer>
         <SignDiv>히스토리</SignDiv>
       </TopContainer>
@@ -73,7 +73,7 @@ function HistoryDaily() {
           <NavigationBoxStyle>
             <NavigationThree>
               <Link to="/history/daily">
-                <Daily>일간</Daily>
+                <Daily theme={theme}>일간</Daily>
               </Link>
               <Link to="/history/week">
                 <Week>주간</Week>
@@ -165,7 +165,7 @@ function HistoryDaily() {
           </>
         ))}
       </ContentArea>
-      <Button onClick={handleClickToday}>수정하기</Button>
+      <Button theme={theme} onClick={handleClickToday} >수정하기</Button>
       <Footer>
         <HistoryNavigation theme={theme} />
       </Footer>

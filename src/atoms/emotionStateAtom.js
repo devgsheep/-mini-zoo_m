@@ -5,5 +5,7 @@ export const emotionStateAtom = atom({
   default: {
     emotion: "happy",
     value: 5,
+    date: new Date(),
+    text: "오늘은 기분이 꽤 괜찮았어 :)",
   },
 });

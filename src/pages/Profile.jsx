@@ -5,7 +5,7 @@ import { CiCircleAlert, CiCircleQuestion } from "react-icons/ci";
 import { GoSun } from "react-icons/go";
 import { IoHeart } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
 import { userInfoAtom } from "../atoms/userInfoAtom";
 import { userStateAtom } from "../atoms/userStateAtom";
 import { userThemeAtom } from "../atoms/userThemeAtom";
@@ -46,9 +46,12 @@ import Logout from "./popup/profile/Logout";
 import PersonalInfo from "./popup/profile/PersonalInfo";
 import Theme from "./popup/profile/Theme";
 import colors from "../styles/colors";
+import { topEmotionAtom } from "../atoms/topEmotionAtom";
+import { emotionmbti } from "../components/icons/emotionimg";
 
 function Profile() {
   //js
+  const topEmotion = useRecoilValue(topEmotionAtom);
 
   // 알람
   const [isAlartModalOpen, setIsAlartModalOpen] = useState(false);
@@ -143,8 +146,11 @@ function Profile() {
           </ProfileFeelDiv>
           <ProfileFeelAvg theme={theme}>
             <EmotionP>
-              평균적으로 불안하고 지친 감정이 많아요. 에너지 소비가 많아
-              지치시는 편이에요.
+              {topEmotion
+                ? ` ${emotionmbti[topEmotion.emotion] ?? ""}`
+                : "감정 데이터가 없습니다."}
+              {/* 평균적으로 불안하고 지친 감정이 많아요. 에너지 소비가 많아
+              지치시는 편이에요. */}
             </EmotionP>
           </ProfileFeelAvg>
         </ProfileFeel>

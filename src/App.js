@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import FirstForm from "./pages/FirstForm";
 import HistoryDaily from "./pages/HistoryDaily";
@@ -10,6 +11,9 @@ import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
 import SignForm from "./pages/SignForm";
 import Today from "./pages/Today";
+import { todayImgAtom } from "./atoms/todayImgAtom";
+import { emotionStateAtom } from "./atoms/emotionStateAtom";
+import { useRecoilValue } from "recoil";
 
 function App() {
   return (

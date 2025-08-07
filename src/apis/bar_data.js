@@ -31,9 +31,6 @@ export const barData = [
   },
   {
     date: "2025-08-13",
-    point: 2,
-    emotion: "anxious",
-    text: "불안감이 하루종일 따라다녔어.",
   },
   {
     date: "2025-08-14",

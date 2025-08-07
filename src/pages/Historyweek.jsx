@@ -56,9 +56,18 @@ function Historyweek() {
   // 차트
   const [data, setData] = useState([]);
 
+  // useEffect(() => {
+  //   setData(barData);
+  // }, []);
+
   useEffect(() => {
-    setData(barData);
+    const transBarData = barData.map(item => ({
+      ...item,
+      point: item.point || 0,
+    }));
+    setData(transBarData);
   }, []);
+
   return (
     <Container theme={theme}>
       <TopContainer>
@@ -181,23 +190,26 @@ function Historyweek() {
             </div>
           </ImgBoxStyle>
         </BoxWrap>
-        {barData.map((item, index) => (
-          <BoxWrap key={index}>
-            <BoxStyle onClick={handleClickToday}>
-              <DailyDate>{moment(item.date).format("M/D(ddd)")}</DailyDate>
-              <EmotionIconCircle emotion={item.emotion}>
-                {emotionImgWrap[item.emotion]}
-              </EmotionIconCircle>
-              <EmotionTextBox>
-                <EmotionTitle>
-                  <EmotionFill>{emotionMap[item.emotion]}</EmotionFill>
-                  <Span emotion={item.emotion}>강도 {item.point}</Span>
-                </EmotionTitle>
-                <Text>{item.text}</Text>
-              </EmotionTextBox>
-            </BoxStyle>
-          </BoxWrap>
-        ))}
+        {barData
+          // point의 값이 undefined가 아닌 경우에만 배열저장
+          .filter(item => item.point !== undefined && item.emotion)
+          .map((item, index) => (
+            <BoxWrap key={index}>
+              <BoxStyle onClick={handleClickToday}>
+                <DailyDate>{moment(item.date).format("M/D(ddd)")}</DailyDate>
+                <EmotionIconCircle emotion={item.emotion}>
+                  {emotionImgWrap[item.emotion]}
+                </EmotionIconCircle>
+                <EmotionTextBox>
+                  <EmotionTitle>
+                    <EmotionFill>{emotionMap[item.emotion]}</EmotionFill>
+                    <Span emotion={item.emotion}>강도 {item.point}</Span>
+                  </EmotionTitle>
+                  <Text>{item.text}</Text>
+                </EmotionTextBox>
+              </BoxStyle>
+            </BoxWrap>
+          ))}
       </ContentArea>
       <Footer>
         <HistoryNavigation theme={theme} />

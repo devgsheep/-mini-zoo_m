@@ -5,7 +5,7 @@ import { fonts } from "../styles/fonts";
 export const Container = styled.div`
   width: 394px;
   height: auto;
-  background: ${colors.blue[100]};
+  background: ${({ theme }) => colors[theme][100]};
 `;
 export const TopContainer = styled.div`
   width: 394px;

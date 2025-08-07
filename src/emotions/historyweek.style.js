@@ -243,7 +243,7 @@ export const Text = styled.p`
 `;
 
 export const ChartWrap = styled.div`
-  background-color: ${colors.blue[100]};
+  background-color: ${({ theme }) => colors[theme][100]};
   border-radius: 10px;
   height: 100%;
   width: 100%;

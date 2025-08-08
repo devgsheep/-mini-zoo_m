@@ -107,10 +107,11 @@ function ProfileEdit() {
 
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const [userState, setUserState] = useRecoilState(userStateAtom);
-  // 로그아웃 버튼 클릭시 사용자 정보 초기화
+  // 로그아웃 버튼 클릭시 사용자 로그인 정보 초기화
   const handleLogout = () => {
     setUserState(false);
   };
+
   // 게스트 로그인시 이용할수 없는 메뉴
   const handleNickNameEditClick = () => {
     if (userInfo.nickname === "게스트") {
@@ -152,6 +153,7 @@ function ProfileEdit() {
       );
     }
   };
+
   const [theme, setTheme] = useRecoilState(userThemeAtom);
 
   // jsx

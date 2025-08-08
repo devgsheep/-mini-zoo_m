@@ -78,19 +78,20 @@ function LoginForm() {
   const [userState, setUserState] = useRecoilState(userStateAtom);
 
   const handleGuestLogin = () => {
-    setUserState(true); // 게스트 로그인시 항목은 보이게끔 로그인으로 처리, 대신 유저의 정보는 초기값으로 세팅
+    setUserState(true);                           // 게스트 로그인시 항목은 보이게끔 로그인으로 처리, 대신 유저의 정보는 초기값으로 세팅
     setUserInfo({
       nickname: "게스트",
       email: "example@example.com",
       password: "",
       thumbnail_img: "/images/guest_img.png",
-      introduction: "",
+      introduction: "자기소개를 입력해주세요.",
     });
     handleClickHome();
   };
 
   // Form 에서 입력이 끝났을때, email 과 password 를 받고, 로컬에 저장된 userInfo 를 객체로 뜯어서 email 과 userData.email ,
   // password 와 userData.password 를 비교하여, 얼라트 창을 띄우고, 값이 모두 같으면 유저의 로그인상태를 true 로 변경시킨후 home 으로 이동시킴.
+
   const onFinish = values => {
     const { email, password } = values;
     const userData = JSON.parse(localStorage.getItem("userInfo"));
@@ -106,6 +107,7 @@ function LoginForm() {
       handleClickHome();
     }
   };
+  
   useEffect(() => {
     try {
       const saved = localStorage.getItem("userInfo");

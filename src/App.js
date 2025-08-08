@@ -1,21 +1,85 @@
-import { useEffect, useState } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import FirstForm from "./pages/FirstForm";
-import HistoryDaily from "./pages/HistoryDaily";
-import Historymonth from "./pages/Historymonth";
-import Historyweek from "./pages/Historyweek";
-import Home from "./pages/Home";
-import LoginForm from "./pages/LoginForm";
-import NotFound from "./pages/NotFound";
-import Profile from "./pages/Profile";
-import ProfileEdit from "./pages/ProfileEdit";
-import SignForm from "./pages/SignForm";
-import Today from "./pages/Today";
-import { todayImgAtom } from "./atoms/todayImgAtom";
-import { emotionStateAtom } from "./atoms/emotionStateAtom";
-import { useRecoilValue } from "recoil";
 import moment from "moment";
 import "moment/locale/ko";
+import { lazy, Suspense, useEffect } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import LoadingDiv from "./components/ui/LoadingDiv";
+
+const FirstForm = lazy(
+  () =>
+    new Promise(
+      resolve => setTimeout(() => resolve(import("./pages/FirstForm"))),
+      500,
+    ),
+);
+const SignForm = lazy(
+  () =>
+    new Promise(
+      resolve => setTimeout(() => resolve(import("./pages/SignForm"))),
+      500,
+    ),
+);
+const LoginForm = lazy(
+  () =>
+    new Promise(
+      resolve => setTimeout(() => resolve(import("./pages/LoginForm"))),
+      500,
+    ),
+);
+const Home = lazy(
+  () =>
+    new Promise(resolve =>
+      setTimeout(() => resolve(import("./pages/Home")), 500),
+    ),
+);
+const Today = lazy(
+  () =>
+    new Promise(
+      resolve => setTimeout(() => resolve(import("./pages/Today"))),
+      500,
+    ),
+);
+const HistoryDaily = lazy(
+  () =>
+    new Promise(
+      resolve => setTimeout(() => resolve(import("./pages/HistoryDaily"))),
+      500,
+    ),
+);
+const Historyweek = lazy(
+  () =>
+    new Promise(
+      resolve => setTimeout(() => resolve(import("./pages/Historyweek"))),
+      500,
+    ),
+);
+const Historymonth = lazy(
+  () =>
+    new Promise(
+      resolve => setTimeout(() => resolve(import("./pages/Historymonth"))),
+      500,
+    ),
+);
+const Profile = lazy(
+  () =>
+    new Promise(
+      resolve => setTimeout(() => resolve(import("./pages/Profile"))),
+      500,
+    ),
+);
+const ProfileEdit = lazy(
+  () =>
+    new Promise(
+      resolve => setTimeout(() => resolve(import("./pages/ProfileEdit"))),
+      500,
+    ),
+);
+const NotFound = lazy(
+  () =>
+    new Promise(
+      resolve => setTimeout(() => resolve(import("./pages/NotFound"))),
+      500,
+    ),
+);
 
 function App() {
   useEffect(() => {
@@ -24,57 +88,95 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path={"/"} element={<FirstForm>첫화면</FirstForm>} />
-        <Route path={"/sign"} element={<SignForm>가입하기</SignForm>} />
-        <Route path={"/login"} element={<LoginForm>로그인</LoginForm>} />
-        <Route path={"/home"} element={<Home>홈</Home>} />
-        <Route path={"/today"} element={<Today>오늘의기록</Today>} />
+        <Route
+          path={"/"}
+          element={
+            <Suspense fallback={<LoadingDiv />}>
+              <FirstForm>첫화면</FirstForm>
+            </Suspense>
+          }
+        />
+        <Route
+          path={"/sign"}
+          element={
+            <Suspense fallback={<LoadingDiv />}>
+              <SignForm>가입하기</SignForm>
+            </Suspense>
+          }
+        />
+        <Route
+          path={"/login"}
+          element={
+            <Suspense fallback={<LoadingDiv />}>
+              <LoginForm>로그인</LoginForm>
+            </Suspense>
+          }
+        />
+        <Route
+          path={"/home"}
+          element={
+            <Suspense fallback={<LoadingDiv />}>
+              <Home>홈</Home>
+            </Suspense>
+          }
+        />
+        <Route
+          path={"/today"}
+          element={
+            <Suspense fallback={<LoadingDiv />}>
+              <Today>오늘의기록</Today>
+            </Suspense>
+          }
+        />
         <Route
           path={"/history/daily"}
-          element={<HistoryDaily>히스토리:일간</HistoryDaily>}
+          element={
+            <Suspense fallback={<LoadingDiv />}>
+              <HistoryDaily>히스토리:일간</HistoryDaily>
+            </Suspense>
+          }
         />
         <Route
           path={"/history/week"}
-          element={<Historyweek>히스토리:주간</Historyweek>}
+          element={
+            <Suspense fallback={<LoadingDiv />}>
+              <Historyweek>히스토리:주간</Historyweek>
+            </Suspense>
+          }
         />
         <Route
           path={"/history/month"}
-          element={<Historymonth>히스토리:월간</Historymonth>}
+          element={
+            <Suspense fallback={<LoadingDiv />}>
+              <Historymonth>히스토리:월간</Historymonth>
+            </Suspense>
+          }
         />
-        <Route path={"/profile"} element={<Profile>프로필</Profile>} />
+        <Route
+          path={"/profile"}
+          element={
+            <Suspense fallback={<LoadingDiv />}>
+              <Profile>프로필</Profile>
+            </Suspense>
+          }
+        />
         <Route
           path={"/profile/edit"}
-          element={<ProfileEdit>프로필편집</ProfileEdit>}
+          element={
+            <Suspense fallback={<LoadingDiv />}>
+              <ProfileEdit>프로필편집</ProfileEdit>
+            </Suspense>
+          }
         />
-        {/* 팝업임시작업
-        <Route path={"/alart"} element={<Alart>알람</Alart>}></Route>
-        <Route path={"/theme"} element={<Theme>테마</Theme>}></Route>
         <Route
-          path={"/personalinfo"}
-          element={<PersonalInfo>개인정보처리방침</PersonalInfo>}
-        ></Route>
-        <Route path={"/ask"} element={<Ask>문의하기</Ask>}></Route>
-        <Route path={"/info"} element={<Info>정보</Info>}></Route>
-        <Route path={"/logout"} element={<Logout>로그아웃</Logout>}></Route>
-        <Route
-          path={"/nicknameedit"}
-          element={<NicknameEdit>프로필편집 및 한줄자기소개 수정</NicknameEdit>}
-        ></Route>
-        <Route
-          path={"/passwordchange"}
-          element={<PasswordChange>비밀번호수정</PasswordChange>}
-        ></Route>
-        <Route
-          path={"/profileimage"}
-          element={<ProfileImage>프로필 이미지 변경</ProfileImage>}
-        ></Route>
-        <Route
-          path={"/language"}
-          element={<Language>언어변경</Language>}
-        ></Route>
-        <Route path={"/resign"} element={<ReSign>회원탈퇴</ReSign>}></Route> */}
-        {/* 잘못된 경로 접근 처리 */}
-        <Route path="*" element={<NotFound />} />;
+          path="*"
+          element={
+            <Suspense fallback={<LoadingDiv />}>
+              <NotFound />
+            </Suspense>
+          }
+        />
+        ;
       </Routes>
     </Router>
   );

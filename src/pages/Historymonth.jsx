@@ -36,7 +36,7 @@ import {
   Wrap,
 } from "../emotions/historymonth.style";
 import colors from "../styles/colors";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { topEmotionAtom } from "../atoms/topEmotionAtom";
 
 function Historymonth() {
@@ -119,6 +119,8 @@ function Historymonth() {
       // console.log(top1);
     }
   }, [top1]);
+
+  const [activeStartDate, setActiveStartDate] = useState(new Date());
 
   // jsx
   return (
@@ -361,6 +363,9 @@ function Historymonth() {
                 calendarType="gregory"
                 formatShortWeekday={formatShortWeekday}
                 formatDay={(locale, date) => moment(date).format("D")}
+                onActiveStartDateChange={({ activeStartDate }) =>
+                  setActiveStartDate(activeStartDate)
+                }
                 tileContent={({ date, view }) => {
                   if (view === "month") {
                     const formattedDate = moment(date).format("YYYY-MM-DD");
@@ -391,7 +396,23 @@ function Historymonth() {
                   if (view === "month") {
                     const formattedDate = moment(date).format("YYYY-MM-DD");
                     const emotion = emotionMap[formattedDate];
-                    return emotion ? `emotion-tile emotion-${emotion}` : null;
+                    const classes = [];
+                    if (emotion) {
+                      classes.push("emotion-tile", `emotion-${emotion}`);
+                    }
+
+                    const currentMonth = activeStartDate.getMonth();
+                    const dateMonth = date.getMonth();
+
+                    if (date.getDay() === 6) {
+                      if (dateMonth === currentMonth) {
+                        classes.push("saturday"); // 현재 달 토요일
+                      } else {
+                        classes.push("saturday-other-month"); // 이전/다음 달 토요일
+                      }
+                    }
+
+                    return classes.length > 0 ? classes.join(" ") : null;
                   }
                   return null;
                 }}

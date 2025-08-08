@@ -1,11 +1,16 @@
 import { Modal } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsBell } from "react-icons/bs";
 import { CiCircleAlert, CiCircleQuestion } from "react-icons/ci";
 import { GoSun } from "react-icons/go";
 import { IoHeart } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { atom, useRecoilState, useRecoilValue } from "recoil";
+import {
+  atom,
+  useRecoilState,
+  useRecoilValue,
+  useResetRecoilState,
+} from "recoil";
 import { userInfoAtom } from "../atoms/userInfoAtom";
 import { userStateAtom } from "../atoms/userStateAtom";
 import { userThemeAtom } from "../atoms/userThemeAtom";
@@ -48,10 +53,11 @@ import Theme from "./popup/profile/Theme";
 import colors from "../styles/colors";
 import { topEmotionAtom } from "../atoms/topEmotionAtom";
 import { emotionmbti } from "../components/icons/emotionimg";
+import { barMonthData } from "../apis/bar_month_data";
 
 function Profile() {
   //js
-  const topEmotion = useRecoilValue(topEmotionAtom);
+  const top1 = useRecoilValue(topEmotionAtom);
 
   // 알람
   const [isAlartModalOpen, setIsAlartModalOpen] = useState(false);
@@ -146,8 +152,8 @@ function Profile() {
           </ProfileFeelDiv>
           <ProfileFeelAvg theme={theme}>
             <EmotionP>
-              {topEmotion
-                ? ` ${emotionmbti[topEmotion.emotion] ?? ""}`
+              {top1
+                ? ` ${emotionmbti[top1.emotion] ?? ""}`
                 : "감정 데이터가 없습니다."}
               {/* 평균적으로 불안하고 지친 감정이 많아요. 에너지 소비가 많아
               지치시는 편이에요. */}

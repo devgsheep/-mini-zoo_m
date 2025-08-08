@@ -159,6 +159,11 @@ function Today() {
       ...prev,
       emotion,
     }));
+
+    setCurrentEmotion(prev => ({
+      ...prev,
+      emotion,
+    }));
   };
 
   const handleSliderChange = value => {

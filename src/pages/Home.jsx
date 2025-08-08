@@ -187,8 +187,8 @@ function Home() {
                           .slice()
                           .sort(
                             (a, b) => new Date(b.date) - new Date(a.date),
-                          )[0].emotion
-                      ]
+                          )[0]?.emotion
+                      ] || "./images/happy_dog.svg"
                     }
                     alt={`${emotionState.emotion} 이미지`}
                   />

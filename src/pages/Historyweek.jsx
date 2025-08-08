@@ -2,7 +2,7 @@ import { ResponsiveBar } from "@nivo/bar";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { barData } from "../apis/bar_data";
 import { userThemeAtom } from "../atoms/userThemeAtom";
 import {
@@ -43,6 +43,10 @@ import {
 import colors from "../styles/colors";
 import "moment/locale/ko";
 import { emotionStateAtom } from "../atoms/emotionStateAtom";
+import { selectedDateAtom } from "../atoms/selectedDateAtom";
+import { dailyListAtom } from "../atoms/dailyListAtom";
+import { textStateAtom } from "../atoms/textStateAtom";
+import { WeekListAtom } from "../atoms/weekListAtom";
 
 function Historyweek() {
   // 기록
@@ -50,25 +54,26 @@ function Historyweek() {
   const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
   const [selectUserEmotion, setSelectUserEmotion] =
     useRecoilState(emotionStateAtom);
-  const [dailyList, setDailyList] = useState({});
-  const theme = userTheme;
+  const [weekState, setWeekState] = useRecoilState(WeekListAtom);
   const navigate = useNavigate();
+  const theme = userTheme;
+
+  // 주간 데이터 클릭시 Today 페이지로 이동
 
   const handleClickToday = index => {
-    const seleted = barData[index];
-    const dailyList = {
-      emotion: seleted.emotion,
-      value: seleted.point,
-      date: seleted.date,
-      text: seleted.text,
+    const selected = barData[index];
+    console.log("Selected barData:", selected); // 디버깅용
+    console.log("Selected emotion:", selected.emotion); // 감정값 확인
+    console.log("Selected value:", selected.value); // 강도값 확인
+    const WeekRecode = {
+      emotion: selected.emotion,
+      value: selected.value,
+      date: selected.date,
+      text: selected.text,
     };
-    setSelectUserEmotion(dailyList);
-
+    console.log("WeekRecord:", WeekRecode);
+    setWeekState(WeekRecode);
     navigate("/today");
-    // console.log(barData[0].date);
-    // console.log(barData.point);
-    // console.log(barData.emotion);
-    // console.log(barData.text);
   };
 
   // 차트
@@ -77,7 +82,7 @@ function Historyweek() {
   useEffect(() => {
     const transBarData = barData.map(item => ({
       ...item,
-      point: item.point || 0,
+      value: item.value || 0,
     }));
     setData(transBarData);
   }, []);
@@ -160,7 +165,7 @@ function Historyweek() {
                 <ChartWrap theme={theme}>
                   <ResponsiveBar
                     data={data}
-                    keys={["point"]}
+                    keys={["value"]}
                     indexBy="date"
                     groupMode="stacked"
                     padding={0.8}
@@ -205,8 +210,8 @@ function Historyweek() {
           </ImgBoxStyle>
         </BoxWrap>
         {barData
-          // point의 값이 undefined가 아닌 경우에만 배열저장
-          .filter(item => item.point !== undefined && item.emotion)
+          // value의 값이 undefined가 아닌 경우에만 배열저장
+          .filter(item => item.value !== undefined && item.emotion)
           .map((item, index) => (
             <BoxWrap key={index}>
               <BoxStyle onClick={() => handleClickToday(index)}>
@@ -217,7 +222,7 @@ function Historyweek() {
                 <EmotionTextBox>
                   <EmotionTitle>
                     <EmotionFill>{emotionMap[item.emotion]}</EmotionFill>
-                    <Span emotion={item.emotion}>강도 {item.point}</Span>
+                    <Span emotion={item.emotion}>강도 {item.value}</Span>
                   </EmotionTitle>
                   <Text>{item.text}</Text>
                 </EmotionTextBox>

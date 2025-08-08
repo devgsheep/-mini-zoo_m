@@ -45,13 +45,7 @@ import { TodayImg, TodayImgWrap } from "../emotions/today.style";
 import { useEffect } from "react";
 
 function HistoryDaily() {
-  // 수정하기 버튼
-  const handleClickToday = () => {
-    navigate("/today");
-  };
-
   const emotionState = useRecoilValue(emotionStateAtom);
-  const textState = useRecoilValue(textStateAtom);
   const selectedDate = useRecoilValue(selectedDateAtom);
   const dailyList = useRecoilValue(dailyListAtom);
 
@@ -59,6 +53,17 @@ function HistoryDaily() {
 
   const [todayImg, setTodayImg] = useRecoilState(todayImgAtom);
   const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
+
+  const currentDayRecord = dailyList.find(
+    item =>
+      moment(item.date).format("YYYY-MM-DD") === moment().format("YYYY-MM-DD"),
+  );
+
+  // 수정하기 버튼
+  const handleClickToday = () => {
+    navigate("/today");
+  };
+
   const theme = userTheme;
 
   return (
@@ -123,28 +128,30 @@ function HistoryDaily() {
             </div>
           </EmotionBoxStyle>
         </div>
-        {dailyList.length > 0 && (
+
+        {currentDayRecord && (
           <>
             <BoxWrap>
               <BoxStyle onClick={handleClickToday}>
                 <DailyDate>{moment(selectedDate).format("M/D(ddd)")}</DailyDate>
-                <EmotionIconCircle emotion={emotionState.emotion}>
-                  {emotionImgWrap[emotionState.emotion]}
+                <EmotionIconCircle emotion={currentDayRecord.emotion}>
+                  {emotionImgWrap[currentDayRecord.emotion]}
                 </EmotionIconCircle>
                 <EmotionTextBox>
                   <EmotionTitle>
                     <EmotionFill>
-                      {emotionMap[emotionState.emotion] || emotionState}
+                      {emotionMap[currentDayRecord.emotion] ||
+                        currentDayRecord.emotion}
                     </EmotionFill>
-                    <Span emotion={emotionState.emotion}>
-                      강도 {emotionState.value}
+                    <Span emotion={currentDayRecord.emotion}>
+                      강도 {currentDayRecord.value}
                     </Span>
                   </EmotionTitle>
-                  <Text>{textState}</Text>
+                  <Text>{currentDayRecord.text}</Text>
                 </EmotionTextBox>
               </BoxStyle>
             </BoxWrap>
-            {todayImg && (
+            {currentDayRecord.image && (
               <BoxWrap>
                 <ImgBoxStyle>
                   <div>
@@ -163,7 +170,7 @@ function HistoryDaily() {
           </>
         )}
       </ContentArea>
-      {dailyList.length > 0 && (
+      {currentDayRecord && (
         <Button theme={theme} onClick={handleClickToday}>
           수정하기
         </Button>

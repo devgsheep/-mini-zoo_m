@@ -2,7 +2,7 @@ import moment from "moment";
 import "moment/locale/ko";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { dailyListAtom } from "../atoms/dailyListAtom";
 import { emotionStateAtom } from "../atoms/emotionStateAtom";
 import { selectedDateAtom } from "../atoms/selectedDateAtom";
@@ -48,11 +48,13 @@ import {
   TodayText,
   TopImageWrapper,
 } from "../emotions/today.style";
+import { WeekListAtom } from "../atoms/weekListAtom";
 
 moment.locale("ko");
 
 function Today() {
-  //js
+  // js
+
   // 감정에 따른 동물 출력
   // 이미지 추가
   const [todayImg, setTodayImg] = useRecoilState(todayImgAtom);
@@ -72,7 +74,61 @@ function Today() {
   const navigate = useNavigate();
 
   const [dailyList, setDailyList] = useRecoilState(dailyListAtom);
+  const [textState, setTextState] = useRecoilState(textStateAtom);
+  const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
+  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateAtom);
+  // 입력값 저장 (감정버튼)
+  const [emotionState, setEmotionState] = useRecoilState(emotionStateAtom);
+  const [selectedEmotion, setSelectedEmotion] = useState(emotionState.emotion);
 
+  // WeekListAtomd에서 데이터 가져옴
+  const weekState = useRecoilValue(WeekListAtom);
+
+  const [showCalendar, setShowCalendar] = useState(false);
+  const weekName = ["일", "월", "화", "수", "목", "금", "토"];
+  const formatShortWeekday = (locale, date) => {
+    const idx = date.getDay();
+    // Date 객체에서 getDay 는 날짜가 0:일, 1:월, 2:화 ... 6:토
+    // console.log(idx);
+    return weekName[idx];
+  };
+
+  const handleDateChange = date => {
+    setSelectedDate(date);
+    setShowCalendar(false);
+  };
+
+  // 로컬상태의 펹비중인 감정 관리
+  const [currentEmotion, setCurrentEmotion] = useState({
+    emotion: "happy",
+    value: 5,
+  });
+
+  useEffect(() => {
+    if (
+      weekState &&
+      weekState.date &&
+      weekState.emotion &&
+      weekState.emotion !== "happy"
+    ) {
+      setCurrentEmotion({
+        emotion: weekState.emotion,
+        value: weekState.value || 5,
+      });
+      setTextState(weekState.text || "");
+      setSelectedDate(new Date(weekState.date));
+    } else {
+      setCurrentEmotion({
+        // 기본값일때는 기본값으로 초기화
+        emotion: "happy",
+        value: 5,
+      });
+      setTextState("");
+      setSelectedDate(new Date());
+    }
+  }, [weekState, setTextState, setSelectedDate]);
+
+  // 기록하기 버튼 클릭시에 dailyList 업데이트
   const handleClickDaily = () => {
     const dailyRecord = {
       emotion: emotionState.emotion,
@@ -98,25 +154,6 @@ function Today() {
     navigate("/history/daily");
   };
 
-  const [showCalendar, setShowCalendar] = useState(false);
-  const weekName = ["일", "월", "화", "수", "목", "금", "토"];
-  const formatShortWeekday = (locale, date) => {
-    const idx = date.getDay();
-    // Date 객체에서 getDay 는 날짜가 0:일, 1:월, 2:화 ... 6:토
-    // console.log(idx);
-    return weekName[idx];
-  };
-  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateAtom);
-
-  const handleDateChange = date => {
-    setSelectedDate(date);
-    setShowCalendar(false);
-  };
-
-  // 입력값 저장 (감정버튼)
-  const [emotionState, setEmotionState] = useRecoilState(emotionStateAtom);
-  const [selectedEmotion, setSelectedEmotion] = useState(emotionState.emotion);
-
   const handleEmotionClick = emotion => {
     setEmotionState(prev => ({
       ...prev,
@@ -129,16 +166,20 @@ function Today() {
       ...prev,
       value,
     }));
-  };
 
-  // 입력값 저장 (textarea)
-  const [textState, setTextState] = useRecoilState(textStateAtom);
+    setCurrentEmotion(prev => ({
+      ...prev,
+      value,
+    }));
+  };
 
   const handleTextArea = e => {
     const txt = e.target.value;
     setTextState(txt);
   };
-  const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
+
+  // 입력값 저장 (textarea)
+
   const theme = userTheme;
 
   // jsx
@@ -181,8 +222,8 @@ function Today() {
           {selectedEmotion && (
             <div>
               <HomeTopImg
-                src={emotionImageMap[selectedEmotion]}
-                alt={`${selectedEmotion} 이미지`}
+                src={emotionImageMap[currentEmotion.emotion]}
+                alt={`${currentEmotion.emotion} 이미지`}
               />
             </div>
           )}
@@ -297,7 +338,7 @@ function Today() {
               min={1}
               max={10}
               step={1}
-              value={emotionState.value}
+              value={currentEmotion.value}
               onChange={handleSliderChange}
               style={{ width: 326, top: "15px" }}
               theme={theme}

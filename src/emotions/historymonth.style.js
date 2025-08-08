@@ -184,7 +184,7 @@ export const ChartWrap = styled.div`
 `;
 
 export const StyledCalendar = styled(Calendar)`
-  border: none;
+  border: none !important;
   width: 100%;
 
   abbr {

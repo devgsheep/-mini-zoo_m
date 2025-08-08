@@ -33,14 +33,15 @@ function Theme({ onClose }) {
       <AlertPopUpBox>
         <Title>테마설정</Title>
         <ThemeRadioWrap>
-          <ThemeRadioLabel htmlFor="light">
+          <ThemeRadioLabel htmlFor="blue">
             <input
               type="radio"
-              id="light"
-              value="light"
+              id="blue"
+              value="blue"
               name="theme"
               className="custom-radio"
               onClick={() => handleClickTheme("blue")}
+              checked={userTheme === "blue"}
             />
             <div>
               <ModeText>블루 테마</ModeText>
@@ -48,14 +49,15 @@ function Theme({ onClose }) {
             </div>
           </ThemeRadioLabel>
 
-          <ThemeRadioLabel htmlFor="dark">
+          <ThemeRadioLabel htmlFor="green">
             <input
               type="radio"
-              id="dark"
-              value="dark"
+              id="green"
+              value="green"
               name="theme"
               className="custom-radio"
               onClick={() => handleClickTheme("green")}
+              checked={userTheme === "green"}
             />
 
             <div>
@@ -63,14 +65,15 @@ function Theme({ onClose }) {
               <EXText>눈이 편안한 그린 테마</EXText>
             </div>
           </ThemeRadioLabel>
-          <ThemeRadioLabel htmlFor="system">
+          <ThemeRadioLabel htmlFor="yellow">
             <input
               type="radio"
-              id="system"
-              value="system"
+              id="yellow"
+              value="yellow"
               name="theme"
               className="custom-radio"
               onClick={() => handleClickTheme("yellow")}
+              checked={userTheme === "yellow"}
             />
             <div>
               <ModeText>옐로우 테마</ModeText>

@@ -358,7 +358,7 @@ function Today() {
               type="text"
               placeholder="오늘 하루는 어떠셨나요? 자유롭게 기록해보세요.."
               onChange={handleTextArea}
-              value={textState}
+              value={weekState.text ? weekState.text : textState}
             />
           </TextWrap>
         </TodayText>

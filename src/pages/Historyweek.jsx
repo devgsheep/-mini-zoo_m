@@ -41,16 +41,33 @@ import {
   Wrap,
 } from "../emotions/historyweek.style";
 import colors from "../styles/colors";
+import { emotionStateAtom } from "../atoms/emotionStateAtom";
 
 function Historyweek() {
   // 기록
 
   const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
+  const [selectUserEmotion, setSelectUserEmotion] =
+    useRecoilState(emotionStateAtom);
+  const [dailyList, setDailyList] = useState({});
   const theme = userTheme;
   const navigate = useNavigate();
 
-  const handleClickToday = () => {
+  const handleClickToday = index => {
+    const seleted = barData[index];
+    const dailyList = {
+      emotion: seleted.emotion,
+      value: seleted.point,
+      date: seleted.date,
+      text: seleted.text,
+    };
+    setSelectUserEmotion(dailyList);
+
     navigate("/today");
+    // console.log(barData[0].date);
+    // console.log(barData.point);
+    // console.log(barData.emotion);
+    // console.log(barData.text);
   };
 
   // 차트
@@ -191,7 +208,7 @@ function Historyweek() {
           .filter(item => item.point !== undefined && item.emotion)
           .map((item, index) => (
             <BoxWrap key={index}>
-              <BoxStyle onClick={handleClickToday}>
+              <BoxStyle onClick={() => handleClickToday(index)}>
                 <DailyDate>{moment(item.date).format("M/D(ddd)")}</DailyDate>
                 <EmotionIconCircle emotion={item.emotion}>
                   {emotionImgWrap[item.emotion]}

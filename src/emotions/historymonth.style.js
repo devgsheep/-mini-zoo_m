@@ -225,6 +225,20 @@ export const StyledCalendar = styled(Calendar)`
   .react-calendar__tile--active:enabled:focus {
     background: ${({ theme }) => colors[theme][400]};
   }
+  /* .react-calendar__tile--now {
+    background: ${({ theme }) => colors[theme][400]};
+  } */
+
+  .react-calendar__tile--now:enabled:hover,
+  .react-calendar__tile--now:enabled:focus {
+    background: ${({ theme }) => colors[theme][200]};
+  }
+  .saturday {
+    color: blue;
+  }
+  .saturday-other-month {
+    color: #757575;
+  }
 `;
 
 export const Footer = styled.div`

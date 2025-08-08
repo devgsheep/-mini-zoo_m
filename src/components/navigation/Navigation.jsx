@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import colors from "../../styles/colors";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import { textStateAtom } from "../../atoms/textStateAtom";
+import { emotionStateAtom } from "../../atoms/emotionStateAtom";
 const NavigationBar = styled.ul`
   display: flex;
   width: 100%;

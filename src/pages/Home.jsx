@@ -74,8 +74,6 @@ function Home() {
       console.log(error);
     }
   };
-
-  console.log(dailyList);
   // // 카카오 인가 키를 받아서 엑세스 토큰을 요청한다.
   const getKkoAccessTokenCall = async () => {
     const accesskey = await getAccessToken(authCode);

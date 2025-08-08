@@ -62,16 +62,12 @@ function Historyweek() {
 
   const handleClickToday = index => {
     const selected = barData[index];
-    console.log("Selected barData:", selected); // 디버깅용
-    console.log("Selected emotion:", selected.emotion); // 감정값 확인
-    console.log("Selected value:", selected.value); // 강도값 확인
     const WeekRecode = {
       emotion: selected.emotion,
       value: selected.value,
       date: selected.date,
       text: selected.text,
     };
-    console.log("WeekRecord:", WeekRecode);
     setWeekState(WeekRecode);
     navigate("/today");
   };
@@ -80,11 +76,7 @@ function Historyweek() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const transBarData = barData.map(item => ({
-      ...item,
-      value: item.value || 0,
-    }));
-    setData(transBarData);
+    setData(barData);
   }, []);
 
   return (

@@ -1,7 +1,7 @@
 import moment from "moment";
 import "moment/locale/ko";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { dailyListAtom } from "../atoms/dailyListAtom";
 import { emotionStateAtom } from "../atoms/emotionStateAtom";
@@ -98,19 +98,14 @@ function Today() {
     setShowCalendar(false);
   };
 
-  // 로컬상태의 펹비중인 감정 관리
+  // 로컬상태의 편집중인 감정 관리
   const [currentEmotion, setCurrentEmotion] = useState({
     emotion: "happy",
     value: 5,
   });
 
   useEffect(() => {
-    if (
-      weekState &&
-      weekState.date &&
-      weekState.emotion &&
-      weekState.emotion !== "happy"
-    ) {
+    if (weekState && weekState.date && weekState.emotion) {
       setCurrentEmotion({
         emotion: weekState.emotion,
         value: weekState.value || 5,
@@ -182,8 +177,6 @@ function Today() {
     const txt = e.target.value;
     setTextState(txt);
   };
-
-  // 입력값 저장 (textarea)
 
   const theme = userTheme;
 

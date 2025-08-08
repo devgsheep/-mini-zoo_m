@@ -4,6 +4,7 @@ import colors from "../../styles/colors";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { textStateAtom } from "../../atoms/textStateAtom";
 import { emotionStateAtom } from "../../atoms/emotionStateAtom";
+import { WeekListAtom } from "../../atoms/weekListAtom";
 const NavigationBar = styled.ul`
   display: flex;
   width: 100%;
@@ -35,6 +36,7 @@ const NavItem = styled(Link)`
   cursor: pointer;
 `;
 function HomeNavigation({ theme }) {
+  const resetWeekState = useResetRecoilState(WeekListAtom);
   return (
     <>
       <NavigationBar>
@@ -53,7 +55,12 @@ function HomeNavigation({ theme }) {
           </svg>
           <span>홈</span>
         </NavItemFocus>
-        <NavItem to="/today">
+        <NavItem
+          to="/today"
+          onClick={() => {
+            resetWeekState();
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"
@@ -171,6 +178,7 @@ function TodayNavigation({ theme }) {
   );
 }
 function HistoryNavigation({ theme }) {
+  const resetWeekState = useResetRecoilState(WeekListAtom);
   return (
     <>
       <NavigationBar>
@@ -189,7 +197,12 @@ function HistoryNavigation({ theme }) {
           </svg>
           <span>홈</span>
         </NavItem>
-        <NavItem to="/today">
+        <NavItem
+          to="/today"
+          onClick={() => {
+            resetWeekState();
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"
@@ -239,6 +252,7 @@ function HistoryNavigation({ theme }) {
   );
 }
 function ProfileNavigation({ theme }) {
+  const resetWeekState = useResetRecoilState(WeekListAtom);
   return (
     <>
       <NavigationBar>
@@ -257,7 +271,12 @@ function ProfileNavigation({ theme }) {
           </svg>
           <span>홈</span>
         </NavItem>
-        <NavItem to="/today">
+        <NavItem
+          to="/today"
+          onClick={() => {
+            resetWeekState();
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"

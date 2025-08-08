@@ -11,6 +11,7 @@ import {
 
 function NicknameEdit({ onClose }) {
   //js
+
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const [nickname, setNickname] = useState(userInfo.nickname || "");
   const [introduction, setIntroduction] = useState(userInfo.introduction || "");
@@ -25,6 +26,7 @@ function NicknameEdit({ onClose }) {
     localStorage.setItem("userInfo", JSON.stringify(updatedUser));
     onClose();
   };
+  
   //jsx
   return (
     // <AlertPopUp>

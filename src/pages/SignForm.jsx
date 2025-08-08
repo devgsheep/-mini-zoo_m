@@ -56,6 +56,7 @@ function SignForm() {
       setMatch(pw === pwConfirm);
     }
   };
+  
   const onFinish = values => {
     const { nickname, email, password } = values;
     const user = {

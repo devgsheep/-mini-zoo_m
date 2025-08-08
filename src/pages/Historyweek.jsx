@@ -41,6 +41,7 @@ import {
   Wrap,
 } from "../emotions/historyweek.style";
 import colors from "../styles/colors";
+import "moment/locale/ko";
 
 function Historyweek() {
   // 기록

@@ -94,6 +94,10 @@ function Home() {
     navigate("/history/daily");
   };
 
+  const handleClickWeek = () => {
+    navigate("/history/week");
+  };
+
   const handleClickMonth = () => {
     navigate("/history/month");
   };
@@ -177,7 +181,15 @@ function Home() {
               {emotionState.emotion && (
                 <div>
                   <HomeTopImg
-                    src={emotionImageMap[emotionState.emotion]}
+                    src={
+                      emotionImageMap[
+                        dailyList
+                          .slice()
+                          .sort(
+                            (a, b) => new Date(b.date) - new Date(a.date),
+                          )[0].emotion
+                      ]
+                    }
                     alt={`${emotionState.emotion} 이미지`}
                   />
                 </div>
@@ -197,31 +209,35 @@ function Home() {
             <div>
               {dailyList.length > 0 ? (
                 <RecordList>
-                  {dailyList.slice(0, 3).map((item, index) => (
-                    <RecordListItem
-                      onClick={handleClickDaily}
-                      key={index}
-                      theme={theme}
-                    >
-                      <RecordInfoWrapper>
-                        <RecordImage
-                          src={emotionImageSkyCircleMap[item.emotion]}
-                          alt="#"
-                        />
-                        <RecordTextContainer>
-                          <RecordTextTitle>
-                            {emotionTextMap[item.emotion]}
-                          </RecordTextTitle>
-                          <RecordTextDate>
-                            {moment(item.date).format("M/D(ddd)")}
-                          </RecordTextDate>
-                        </RecordTextContainer>
-                      </RecordInfoWrapper>
-                      <EmotionIconCircle emotion={item.emotion}>
-                        {emotionImgWrap[item.emotion]}
-                      </EmotionIconCircle>
-                    </RecordListItem>
-                  ))}
+                  {dailyList
+                    .slice()
+                    .sort((a, b) => new Date(b.date) - new Date(a.date))
+                    .slice(0, 3)
+                    .map((item, index) => (
+                      <RecordListItem
+                        onClick={handleClickWeek}
+                        key={index}
+                        theme={theme}
+                      >
+                        <RecordInfoWrapper>
+                          <RecordImage
+                            src={emotionImageSkyCircleMap[item.emotion]}
+                            alt="#"
+                          />
+                          <RecordTextContainer>
+                            <RecordTextTitle>
+                              {emotionTextMap[item.emotion]}
+                            </RecordTextTitle>
+                            <RecordTextDate>
+                              {moment(item.date).format("M/D(ddd)")}
+                            </RecordTextDate>
+                          </RecordTextContainer>
+                        </RecordInfoWrapper>
+                        <EmotionIconCircle emotion={item.emotion}>
+                          {emotionImgWrap[item.emotion]}
+                        </EmotionIconCircle>
+                      </RecordListItem>
+                    ))}
                 </RecordList>
               ) : (
                 <RecordList>

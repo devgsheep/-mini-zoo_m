@@ -74,14 +74,27 @@ function Today() {
   const [dailyList, setDailyList] = useRecoilState(dailyListAtom);
 
   const handleClickDaily = () => {
-    const dailyList = {
+    const dailyRecord = {
       emotion: emotionState.emotion,
       value: emotionState.value,
       text: textState,
       date: selectedDate,
       image: todayImg,
     };
-    setDailyList(prev => [...prev, dailyList]);
+
+    const existingEmotion = dailyList.findIndex(
+      item =>
+        moment(item.date).format("YYYY-MM-DD") ===
+        moment(selectedDate).format("YYYY-MM-DD"),
+    );
+
+    if (existingEmotion >= 0) {
+      const updatedEmotion = [...dailyList];
+      updatedEmotion[existingEmotion] = dailyRecord;
+      setDailyList(updatedEmotion);
+    } else {
+      setDailyList(prev => [...prev, dailyRecord]);
+    }
     navigate("/history/daily");
   };
 

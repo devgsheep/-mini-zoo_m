@@ -15,7 +15,7 @@ export const barData = [
     date: "2025-08-10",
     value: 5,
     emotion: "disgust",
-    // 일부러 생략
+    text: "오늘 하루는 좀 예민한 날이였어.",
   },
   {
     date: "2025-08-11",
@@ -31,11 +31,14 @@ export const barData = [
   },
   {
     date: "2025-08-13",
+    value: 7,
+    emotion: "tired",
+    text: "피곤해서 집에서 푹 쉬고 싶은 날이었어.",
   },
   {
     date: "2025-08-14",
     value: 9,
-    emotion: "tired",
-    // 일부러 생략
+    emotion: "disgust",
+    text: "",
   },
 ];

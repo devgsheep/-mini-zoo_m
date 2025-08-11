@@ -4,7 +4,6 @@ import colors from "../styles/colors";
 import { Button, Checkbox, Form, Input } from "antd";
 
 export const Container = styled.div`
-  width: 394px;
   height: 100%;
   background-color: #f0f6ff;
   text-align: center;

@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import colors from "../styles/colors";
 
 export const Container = styled.div`
-  width: 394px;
   background-color: aliceblue;
   position: relative;
   display: flex;
@@ -11,6 +10,7 @@ export const Container = styled.div`
   align-items: center;
 `;
 export const TopContainer = styled.div`
+  width: 394px;
   display: flex;
   flex-direction: column;
   justify-content: center;

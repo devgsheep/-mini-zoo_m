@@ -1,5 +1,8 @@
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_KEY;
-const GOOGLE_REDIRECT_URI = "http://localhost:3000/home";
+const GOOGLE_REDIRECT_URI =
+  process.env.NODE_ENV === "production"
+    ? "https://mini-zoo-m.vercel.app/home"
+    : "http://localhost:3000/home";
 // 구글 로그인시 활용
 export const getGoogleLoginLink = () => {
   const googleURL = `https://accounts.google.com/o/oauth2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_REDIRECT_URI}&response_type=code&scope=openid email profile&state=google`;

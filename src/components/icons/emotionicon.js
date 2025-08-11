@@ -53,7 +53,7 @@ export const HappyIcon = props => (
         fill="white"
       />
     </svg>
-    <span>행복</span>
+    <span>기쁨</span>
   </TodayEmotionButton>
 );
 

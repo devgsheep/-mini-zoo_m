@@ -165,7 +165,7 @@ function Home() {
             <TopTitle>
               <span>
                 {userInfo.nickname}
-                님의 오늘 하루 어땟나요?
+                님의 오늘 하루 어땠나요?
               </span>
               <span>오늘의 기분은 어때요?</span>
             </TopTitle>

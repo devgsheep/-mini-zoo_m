@@ -1,7 +1,10 @@
 // git 에 key 값 공개금지
 const rest_api_key = process.env.REACT_APP_KKO_LOGIN_REST_API_KEY;
 // 카카오 로그인 성공시 이동할 URL
-const redirect_uri = "http://localhost:3000/home";
+const redirect_uri =
+  process.env.NODE_ENV === "production"
+    ? "https://mini-zoo-m.vercel.app/home"
+    : "http://localhost:3000/home";
 // 카카오 로그인시 API 호출 경로 : token 활용
 const auth_code_path = "https://kauth.kakao.com/oauth/authorize";
 // 카카오 로그인 이후 사용자 정보 API 경로

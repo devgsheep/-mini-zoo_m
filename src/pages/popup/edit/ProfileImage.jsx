@@ -20,15 +20,27 @@ function ProfileImage({ onClose }) {
       const updatedUser = { ...userInfo, thumbnail_img: imageURL };
       setUserInfo(updatedUser);
       localStorage.setItem("userInfo", JSON.stringify(updatedUser));
-      onClose();
     }
+  };
+  const handleSubmit = e => {
+    e.preventDefault();
+    onClose();
   };
   return (
     // <AlertPopUp>
     <>
       <AlertPopUpBox>
         <Title>프로필 이미지 변경</Title>
-        <form>
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <ImageGroup>
             <input
               type="file"

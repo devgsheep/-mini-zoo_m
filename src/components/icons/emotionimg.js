@@ -25,7 +25,7 @@ export const emotionTextMap = {
   sad: "마음이 울적했던 하루",
   angry: "화가났던 하루",
   boring: "지루했던 하루",
-  aiounxs: "불안했던 하루",
+  anxious: "불안했던 하루",
   disgust: "까칠했던 하루",
   embarrassed: "당황했던 하루",
   tired: "녹초가 된 하루",

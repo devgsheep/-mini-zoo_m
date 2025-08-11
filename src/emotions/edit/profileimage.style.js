@@ -60,7 +60,8 @@ export const ProfileImgEdit = () => {
     </Svg>
   );
 };
-export const Button = styled.div`
+export const Button = styled.button`
+  border: none;
   background-color: #247cff;
   width: 60px;
   padding: 10px;

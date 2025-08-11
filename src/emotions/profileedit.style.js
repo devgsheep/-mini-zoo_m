@@ -3,7 +3,7 @@ import colors from "../styles/colors";
 import { fonts } from "../styles/fonts";
 
 export const Container = styled.div`
-  width: 394px;
+  /* width: 394px; */
   height: auto;
   background: ${({ theme }) => colors[theme][100]};
 `;

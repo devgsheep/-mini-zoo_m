@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import colors from "../styles/colors";
 
 export const Container = styled.div`
-  width: 394px;
+  /* width: 394px; */
   height: auto;
   background-color: ${({ theme }) => colors[theme][100]};
 `;

@@ -11,7 +11,7 @@ const hexToRgba = (hex, alpha = 1) => {
 };
 
 export const Container = styled.div`
-  width: 394px;
+  /* width: 394px; */
   background-color: ${({ theme }) => colors[theme][100]};
   position: relative;
 `;

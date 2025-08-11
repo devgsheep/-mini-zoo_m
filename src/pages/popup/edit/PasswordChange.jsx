@@ -41,7 +41,7 @@ function PasswordChange({ onClose }) {
     const updatedUser = { ...userInfo, password: newpw };
     setUserInfo(updatedUser);
     localStorage.setItem("userInfo", JSON.stringify(updatedUser));
-    console.log(savedpw, inputpw, newpw);
+    // console.log(savedpw, inputpw, newpw);
     onClose();
   };
 

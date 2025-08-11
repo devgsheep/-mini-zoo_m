@@ -1,19 +1,19 @@
 import { Modal } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsBell } from "react-icons/bs";
 import { CiCircleAlert, CiCircleQuestion } from "react-icons/ci";
 import { GoSun } from "react-icons/go";
 import { IoHeart } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import {
-  atom,
   useRecoilState,
-  useRecoilValue,
-  useResetRecoilState,
+  useRecoilValue
 } from "recoil";
+import { topEmotionAtom } from "../atoms/topEmotionAtom";
 import { userInfoAtom } from "../atoms/userInfoAtom";
 import { userStateAtom } from "../atoms/userStateAtom";
 import { userThemeAtom } from "../atoms/userThemeAtom";
+import { emotionmbti } from "../components/icons/emotionimg";
 import { ProfileNavigation } from "../components/navigation/Navigation";
 import "../css/modal.css";
 import {
@@ -44,16 +44,13 @@ import {
   Text,
   TopContainer,
 } from "../emotions/profile.style";
+import colors from "../styles/colors";
 import Alart from "./popup/profile/Alart";
 import Ask from "./popup/profile/Ask";
 import Info from "./popup/profile/Info";
 import Logout from "./popup/profile/Logout";
 import PersonalInfo from "./popup/profile/PersonalInfo";
 import Theme from "./popup/profile/Theme";
-import colors from "../styles/colors";
-import { topEmotionAtom } from "../atoms/topEmotionAtom";
-import { emotionmbti } from "../components/icons/emotionimg";
-import { barMonthData } from "../apis/bar_month_data";
 
 function Profile() {
   //js

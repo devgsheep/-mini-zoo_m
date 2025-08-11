@@ -2,9 +2,7 @@ import moment from "moment";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { dailyListAtom } from "../atoms/dailyListAtom";
-import { emotionStateAtom } from "../atoms/emotionStateAtom";
 import { selectedDateAtom } from "../atoms/selectedDateAtom";
-import { textStateAtom } from "../atoms/textStateAtom";
 import { todayImgAtom } from "../atoms/todayImgAtom";
 import { userThemeAtom } from "../atoms/userThemeAtom";
 import {
@@ -42,10 +40,8 @@ import {
   Wrap,
 } from "../emotions/historydaily.style";
 import { TodayImg, TodayImgWrap } from "../emotions/today.style";
-import { useEffect } from "react";
 
 function HistoryDaily() {
-  const emotionState = useRecoilValue(emotionStateAtom);
   const selectedDate = useRecoilValue(selectedDateAtom);
   const dailyList = useRecoilValue(dailyListAtom);
 

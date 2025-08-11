@@ -22,7 +22,6 @@ function Theme({ onClose }) {
   const handleClickTheme = color => {
     setUserTheme(color);
   };
-  const theme = userTheme;
 
   // 테마설정
 

@@ -5,7 +5,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { dailyListAtom } from "../atoms/dailyListAtom";
 import { emotionStateAtom } from "../atoms/emotionStateAtom";
-import { selectedDateAtom } from "../atoms/selectedDateAtom";
 import { userInfoAtom } from "../atoms/userInfoAtom";
 import { userStateAtom } from "../atoms/userStateAtom";
 import { userThemeAtom } from "../atoms/userThemeAtom";
@@ -56,7 +55,6 @@ function Home() {
   const [searchParams] = useSearchParams();
 
   const emotionState = useRecoilValue(emotionStateAtom);
-  const selectedDate = useRecoilValue(selectedDateAtom);
   const dailyList = useRecoilValue(dailyListAtom);
 
   const authCode = searchParams.get("code");

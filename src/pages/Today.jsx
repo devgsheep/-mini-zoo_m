@@ -1,14 +1,15 @@
 import moment from "moment";
 import "moment/locale/ko";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { dailyListAtom } from "../atoms/dailyListAtom";
 import { emotionStateAtom } from "../atoms/emotionStateAtom";
 import { selectedDateAtom } from "../atoms/selectedDateAtom";
 import { textStateAtom } from "../atoms/textStateAtom";
 import { todayImgAtom } from "../atoms/todayImgAtom";
 import { userThemeAtom } from "../atoms/userThemeAtom";
+import { WeekListAtom } from "../atoms/weekListAtom";
 import {
   AngryIcon,
   AnxiousIcon,
@@ -48,7 +49,6 @@ import {
   TodayText,
   TopImageWrapper,
 } from "../emotions/today.style";
-import { WeekListAtom } from "../atoms/weekListAtom";
 
 moment.locale("ko");
 

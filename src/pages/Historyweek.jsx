@@ -1,10 +1,12 @@
 import { ResponsiveBar } from "@nivo/bar";
 import moment from "moment";
+import "moment/locale/ko";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { barData } from "../apis/bar_data";
 import { userThemeAtom } from "../atoms/userThemeAtom";
+import { WeekListAtom } from "../atoms/weekListAtom";
 import {
   EmotionIconCircle,
   emotionImgWrap,
@@ -41,19 +43,11 @@ import {
   Wrap,
 } from "../emotions/historyweek.style";
 import colors from "../styles/colors";
-import "moment/locale/ko";
-import { emotionStateAtom } from "../atoms/emotionStateAtom";
-import { selectedDateAtom } from "../atoms/selectedDateAtom";
-import { dailyListAtom } from "../atoms/dailyListAtom";
-import { textStateAtom } from "../atoms/textStateAtom";
-import { WeekListAtom } from "../atoms/weekListAtom";
 
 function Historyweek() {
   // 기록
 
   const [userTheme, setUserTheme] = useRecoilState(userThemeAtom);
-  const [selectUserEmotion, setSelectUserEmotion] =
-    useRecoilState(emotionStateAtom);
   const [weekState, setWeekState] = useRecoilState(WeekListAtom);
   const navigate = useNavigate();
   const theme = userTheme;

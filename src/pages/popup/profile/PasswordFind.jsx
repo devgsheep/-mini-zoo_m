@@ -16,7 +16,7 @@ function PasswordFind({ onClose }) {
   const [isMailOpen, setIsMailModalOpen] = useState(false);
 
   const onFinish = values => {
-    console.log(values);
+    // console.log(values);
     // PasswordFind 모달 열기
     onClose();
     // 메일전송 모달 열기

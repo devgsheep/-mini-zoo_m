@@ -9,7 +9,14 @@ import {
 function Mail({ onClose }) {
   return (
     <>
-      <AlertPopUpBox>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
         <MailCircle>
           <Svg
             xmlns="http://www.w3.org/2000/svg"
@@ -30,9 +37,9 @@ function Mail({ onClose }) {
             />
           </Svg>
         </MailCircle>
-        <Text>메일로 임시비밀번호가 발송되었습니다.</Text>
-        <Button onClick={onClose}>확인</Button>
-      </AlertPopUpBox>
+      </div>
+      <Text>메일로 임시비밀번호가 발송되었습니다.</Text>
+      <Button onClick={onClose}>확인</Button>
     </>
   );
 }

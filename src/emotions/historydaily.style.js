@@ -201,7 +201,7 @@ export const EmotionFill = styled.p`
 
 export const Span = styled.span`
   display: flex;
-  width: 31px;
+  width: 35px;
   height: 14px;
   padding: 3px 5px;
   justify-content: center;
